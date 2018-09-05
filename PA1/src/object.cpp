@@ -80,7 +80,16 @@ Object::~Object()
 void Object::Update(unsigned int dt)
 {
   angle += dt * M_PI/1000;
-  model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+  //set to rotate on y axis
+  glm::mat4 rotate_matrix = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+  
+  //place cube 8 out from x-axis (desired effect can also be achieved by placing 8 out from z-axis)
+  glm::mat4 translate_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(8.0, 0.0, 0.0));
+
+  //first contenate the rotation and tranlation matrix, this will cause the cube to orbit
+  //then contenate the result with the rotation matrix again, this will cause the cube to spin
+  model = rotate_matrix * translate_matrix ;
+  model *= rotate_matrix;
 }
 
 glm::mat4 Object::GetModel()

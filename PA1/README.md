@@ -1,5 +1,7 @@
 # PA1: Spinning Cube
 
+This project involved taking the given code which caused the cube to spin and modify it so that the cube rotates around the y-axis. This is done by multiplying the tranlation matrix (that sets the cube some distance away from the y-axis) by and the rotation matrix (set to make the cube spin on the y-axis) which causes the cube to rotate on the y-axis. To make the cube spin while rotating simple multiply the result of the previous calculation by the rotation matrix again. The project also required that the code be modified to read in the vertex and fragment shaders from seperate files. This is done by creating a seperate shaders folder in the PA1 directory. The shaders folder has text files that contain the information for the vertex and fragment shaders. To read in the shaders, the AddShader function in shader source file is modified to read in the file information of each shader into strings which are then copied over.
+
 # Dependencies, Building, and Running
 
 ## Dependency Instructions
@@ -19,38 +21,13 @@ brew install glew glm sdl2
 ```
 
 ## Building and Running
-To build this project there are two options. One is to use CMake which makes including new libraries easier, and handles new files added automatically to the src and include directory. CMake is a small new learning curve but makes things easier in the future.
-The second option is to use the provided Makefile which is used as usual.
+This project was built and run using a makefile in Linux/Ubuntu. To run the application, enter the following in the PA1 directory:
 
-Running the make in a separate directory will allow easy cleanup of the build data, and an easy way to prevent unnecessary data to be added to the git repository.  
+mkdir build  
+cd build  
+cp ../makefile .  
+make  
+./PA1 
 
-### CMake Instructions
-The building of the project is done using CMake, installation with apt-get or brew may be necessary. Later use with CMake and Shader files will be require the copy of a directory where those files are stored (ex. shaders). To do this in the ```add_custom_target``` function place 
-```cmake
-COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/shaders/ ${CMAKE_CURRENT_BINARY_DIR}/shaders
-```
-
-```bash
-mkdir build
-cd build
-cmake ..
-make
-./Tutorial
-```
-
-### Makefile Instructions 
-The makefile works as expected and must be updated with new files added in.
-
-```bash
-mkdir build
-cd build
-cp ../makefile .
-make
-./Tutorial
-```
-
-## Ubuntu.cse.unr.edu
-OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) website. To do so follow the build instructions, but when running the Tutorial executable use this line to execute.
-```bash
-/usr/NX/scripts/vgl/vglrun ./Tutorial
-```
+## Controls
+No controls are used for this project.

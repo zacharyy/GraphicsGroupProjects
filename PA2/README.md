@@ -31,10 +31,10 @@ make
 
 ## Controls
 
-1 - reverses cube spin
-2 - toggles cube spin
-lmb - reverses revolution
-rmb - toggles revolution
+1 - reverses cube spin  
+2 - toggles cube spin  
+lmb - reverses revolution  
+rmb - toggles revolution  
 
 # Extra Credit
-The extra credit was attempted using the imgui library, however I was unable to compile the files. Specifically, imgui_impl_opengl3.cpp gave me trouble as giving me the error: GL/gl3w.h: No such file or directory.
+The extra credit was attempted using the imgui library, however I was unable to compile the files. Specifically, imgui_impl_opengl3.cpp gave me trouble, giving me the error: GL/gl3w.h: No such file or directory.

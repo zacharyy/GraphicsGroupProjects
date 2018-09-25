@@ -10,6 +10,13 @@ Read through the Wiki on this repository to understand how each class works. Thi
 This is a simple colored triangle on the screen. To run this project ```cd PA0``` then follow the instructions in the README.md.
 
 ## PA1: Spinning Cube
-This is a cube that rotates in place on the screen. To run this project ```cd PA1``` then follow the instructions in the README.md.
+This is a cube that rotates and revolves on the screen. To run this project ```cd PA1``` then follow the instructions in the README.md.
 
+## PA2: Interaction: Menus, Keyboard, and Mouse
+This is a cube that rotates and revolves on the screen based on user input. To run this project ```cd PA1``` then follow the instructions in the README.md.
 
+## PA3: PA3 - Moons
+This is a cube that rotates and revolves on the screen with another smaller cube orbiting it. The cubes' rotation and revolution can be changed with user input. To run this project ```cd PA1``` then follow the instructions in the README.md.
+
+## PA4: Blender and Model Loading
+This is a model loader for obj files. To run this project ```cd PA1``` then follow the instructions in the README.md.

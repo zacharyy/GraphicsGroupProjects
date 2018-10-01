@@ -14,7 +14,7 @@ class Object
 
     glm::mat4 GetModel();
 
-    bool loadOBJ(const char * path);
+    void loadOBJ(const char * path);
   private:
     glm::mat4 model;
     std::vector<Vertex> Vertices;

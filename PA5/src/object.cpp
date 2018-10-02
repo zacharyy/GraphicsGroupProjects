@@ -11,11 +11,6 @@ Object::Object(std::string objectFileString)
   // Read our .obj file
   loadOBJ(input);
 
-  /*if(res == false)
-  {
-    std::cout << "Error: Failed to load object file." << std::endl;
-  }*/
-
   angle = 0.0f;
 
   glGenBuffers(1, &VB);
@@ -72,28 +67,13 @@ void Object::loadOBJ(const char * path)
   //Make Scene
   const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate);
 
-
-  /*
-  numVerts = mesh->mNumFaces*3; 
-  vertexArray = new float[mesh->mNumFaces*3*3];
-  normalArray = new float[mesh->mNumFaces*3*3];
-  uvArray = new float[mesh->mNumFaces*3*2];
-
-  std::vector m_Entries;
-  std::vector m_Textures;
-  m_Entries.resize(pScene->mNumMeshes);
-  m_Textures.resize(pScene->mNumMaterials);
-  */
   /*Make Verticies*/
-   //aiMesh *mesh;
   int meshNumber = scene->mNumMeshes;
   for(int i=0; i < meshNumber; i++)
   {
     aiMesh *mesh = scene->mMeshes[i];
-    //std::cout << i << std::endl;
     for (unsigned int j=0; j<mesh->mNumVertices; j++)
     {
-      //std::cout << "j: " << j << std::endl;
       const aiVector3D* pPos = &(mesh->mVertices[j]);
       //const aiVector3D* pNormal = &(mesh->mNormals[i]) : &Zero3D;
       //const aiVector3D* pTexCoord = mesh->HasTextureCoords(0) ? &(mesh->mTextureCoords[0][i]) : &Zero3D;
@@ -102,24 +82,19 @@ void Object::loadOBJ(const char * path)
                glm::vec2(pTexCoord->x, pTexCoord->y)
                Vector3f(pNormal->x, pNormal->y, pNormal->z));*/
 
-      const aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
+      /*aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
       aiColor4D diffuse;
       aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
       if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
       {
-        /*std::cout << diffuse.r << std::endl;
-        std::cout << diffuse.g << std::endl;
-        std::cout << diffuse.b << std::endl;*/
-        //if model don't no have default color get color, otherwise generate random colors
         if(diffuse.r != 0.6f && diffuse.g != 0.6f && diffuse.b != 0.6f)
         {
-          glm::vec3 color = glm::vec3(diffuse.r, diffuse.g, diffuse.b/*, diffuse.a*/);
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
           Vertex *temp = new Vertex(vec, color);
           Vertices.push_back(*temp);
         }
         else
-        {
+        {*/
           glm::vec3 color;
           color.x = double(rand()) / (double(RAND_MAX) + 1.0);
           color.y = double(rand()) / (double(RAND_MAX) + 1.0);
@@ -127,21 +102,23 @@ void Object::loadOBJ(const char * path)
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
           Vertex *temp = new Vertex(vec, color);
           Vertices.push_back(*temp);
-        }
+        /*}
       }
+      else
+      {
+          std::cout << "Failed to load vertex." << std::endl;
+      }*/
     }
 
     /*Make Faces*/
     for (unsigned int j=0; j < mesh->mNumFaces; j++) 
     {
-      //std::cout << "j: " << j << std::endl;
       const aiFace& Face = mesh->mFaces[j];
       assert(Face.mNumIndices == 3);
       Indices.push_back(Face.mIndices[0]);
       Indices.push_back(Face.mIndices[1]);
       Indices.push_back(Face.mIndices[2]);
     }
-    //m_Entries[Index].Init(Vertices, Indices);
   }
   //return true;
 }

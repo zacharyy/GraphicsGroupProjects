@@ -15,7 +15,7 @@ This is a cube that rotates and revolves on the screen. To run this project ```c
 ## PA2: Interaction: Menus, Keyboard, and Mouse
 This is a cube that rotates and revolves on the screen based on user input. To run this project ```cd PA2``` then follow the instructions in the README.md.
 
-## PA3: PA3 - Moons
+## PA3: Moons
 This is a cube that rotates and revolves on the screen with another smaller cube orbiting it. The cubes' rotation and revolution can be changed with user input. To run this project ```cd PA3``` then follow the instructions in the README.md.
 
 ## PA4: Blender and Model Loading

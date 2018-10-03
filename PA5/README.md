@@ -1,7 +1,7 @@
 # PA5: Assimp and Model Loading
 
 Group Members:  
-Dongjin Jia  
+Dongjun Jia  
 Ethan Park  
 Zachary Young 
 

@@ -82,7 +82,7 @@ void Object::loadOBJ(const char * path)
     {
       const aiVector3D* pPos = &(mesh->mVertices[j]);
       //const aiVector3D* pNormal = &(mesh->mNormals[i]) : &Zero3D;
-      //const aiVector3D* pTexCoord = mesh->HasTextureCoords(0) ? &(mesh->mTextureCoords[0][i]) : &Zero3D;
+      const aiVector3D* pTexCoord = &(mesh->mTextureCoords[0][i]);
 
       /*Vertex v(glm::vec3(pPos->x, pPos->y, pPos->z),
                glm::vec2(pTexCoord->x, pTexCoord->y)
@@ -106,7 +106,7 @@ void Object::loadOBJ(const char * path)
           color.y = double(rand()) / (double(RAND_MAX) + 1.0);
           color.z = double(rand()) / (double(RAND_MAX) + 1.0);
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
-          Vertex *temp = new Vertex(vec, color);
+          Vertex *temp = new Vertex(vec, color, glm::vec2(pTexCoord->x, pTexCoord->y));
           v.push_back(*temp);
         /*}
       }

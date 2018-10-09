@@ -82,19 +82,24 @@ void Object::loadOBJ(const char * path)
                glm::vec2(pTexCoord->x, pTexCoord->y)
                Vector3f(pNormal->x, pNormal->y, pNormal->z));*/
 
-      /*aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
+      aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
       aiColor4D diffuse;
       aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
+			//std::cout << diffuse.r << std::endl;
+			glm::vec3 color;
       if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
       {
-        if(diffuse.r != 0.6f && diffuse.g != 0.6f && diffuse.b != 0.6f)
+        if(diffuse.r != 0.6f || diffuse.g != 0.6f || diffuse.b != 0.6f)
         {
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
+					color.x = diffuse.r;
+					color.y = diffuse.g;
+					color.z = diffuse.b;
           Vertex *temp = new Vertex(vec, color);
           Vertices.push_back(*temp);
         }
         else
-        {*/
+        {
           glm::vec3 color;
           color.x = double(rand()) / (double(RAND_MAX) + 1.0);
           color.y = double(rand()) / (double(RAND_MAX) + 1.0);
@@ -102,9 +107,9 @@ void Object::loadOBJ(const char * path)
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
           Vertex *temp = new Vertex(vec, color);
           Vertices.push_back(*temp);
-        /*}
+        }
       }
-      else
+      /*else
       {
           std::cout << "Failed to load vertex." << std::endl;
       }*/

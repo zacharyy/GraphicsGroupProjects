@@ -1,9 +1,9 @@
 #include"mesh.h"
-Mesh::Mesh(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices/*, vector<Texture> textures*/)
+Mesh::Mesh(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices,std::string file)
 {
     this->Vertices = vertices;
     this->Indices = indices;
-    //this->textures = textures;
+		textureFileName = file;
 
     setupMesh();
 }
@@ -36,9 +36,9 @@ void Mesh::setupMesh()
 
     glBindVertexArray(0);*/
 
-	/*Magick::Blob blob;
+	Magick::Blob blob;
 	Magick::Image *image;
-	image = new Magick::Image("../objects/granite.jpg");
+	image = new Magick::Image(textureFileName.c_str());
 	image->write(&blob, "RGBA");
 
 	glGenTextures(1,&texture);
@@ -46,7 +46,7 @@ void Mesh::setupMesh()
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->columns(), image->rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, blob.data());
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	delete image;*/
+	delete image;
 
   glGenBuffers(1, &VBO);
   glBindBuffer(GL_ARRAY_BUFFER, VBO);

@@ -21,6 +21,7 @@ class Object
     std::vector<unsigned int> Indices;
     GLuint VB;
     GLuint IB;
+		GLuint texture;
 
     float angle;
 

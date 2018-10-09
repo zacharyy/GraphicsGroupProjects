@@ -8,6 +8,9 @@ Object::Object(std::string objectFileString)
   const char *input;
   input = objectFileString.c_str();
 
+	Magick::InitializeMagick(NULL);
+
+
   // Read our .obj file
   loadOBJ(input);
 
@@ -82,7 +85,7 @@ void Object::loadOBJ(const char * path)
     {
       const aiVector3D* pPos = &(mesh->mVertices[j]);
       //const aiVector3D* pNormal = &(mesh->mNormals[i]) : &Zero3D;
-      const aiVector3D* pTexCoord = &(mesh->mTextureCoords[0][i]);
+      const aiVector3D pTexCoord = mesh->mTextureCoords[0][j];
 
       /*Vertex v(glm::vec3(pPos->x, pPos->y, pPos->z),
                glm::vec2(pTexCoord->x, pTexCoord->y)
@@ -106,7 +109,7 @@ void Object::loadOBJ(const char * path)
           color.y = double(rand()) / (double(RAND_MAX) + 1.0);
           color.z = double(rand()) / (double(RAND_MAX) + 1.0);
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
-          Vertex *temp = new Vertex(vec, color, glm::vec2(pTexCoord->x, pTexCoord->y));
+          Vertex *temp = new Vertex(vec, color, glm::vec2(pTexCoord.x, pTexCoord.y));
           v.push_back(*temp);
         /*}
       }
@@ -125,7 +128,11 @@ void Object::loadOBJ(const char * path)
       ind.push_back(Face.mIndices[1]);
       ind.push_back(Face.mIndices[2]);
     }
-		meshes.push_back(Mesh(v,ind));
+		// Hard coded for buddha object
+		if(i == 0)
+			meshes.push_back(Mesh(v,ind,"../objects/granite.jpg"));
+		else
+			meshes.push_back(Mesh(v,ind,"../objects/checker.jpg"));
   }
   //return true;
 }

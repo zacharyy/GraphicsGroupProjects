@@ -23,3 +23,6 @@ This is a model loader for obj files. To run this project ```cd PA4``` then foll
 
 ## PA5: Assimp and Model Loading
 This is a model loader that loads model files using Assimp.  To run this project ```cd PA5``` then follow the instructions in the README.md.
+
+## PA6: Assimp Texture Loading
+The model loader from PA5 is now updated to load textures onto models.  To run this project ```cd PA6``` then follow the instructions in the README.md.

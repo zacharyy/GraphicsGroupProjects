@@ -45,13 +45,20 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
   }
 
   // Create the object
-	double earthDistance = 5;
+	double earthDistance = 8;
 	double earthSize = 1;
 	double earthOV = 1;
 	double earthRS = 1;
   m_sun = new Object("../objects/sphere.obj", "../objects/sun.jpg");
 	m_earth = new PlanetObject("../objects/sphere.obj", "../objects/earth.jpg",earthDistance,earthSize,earthOV,earthRS);
 	m_mars = new PlanetObject("../objects/sphere.obj", "../objects/mars.jpg",1.524 * earthDistance,0.542 * earthSize,0.809 * earthOV,0.972 * earthRS);
+	m_mercury = new PlanetObject("../objects/sphere.obj", "../objects/mercury.jpg",0.387 * earthDistance,0.382 * earthSize,1.591 * earthOV,0.017 * earthRS);
+	m_venus = new PlanetObject("../objects/sphere.obj", "../objects/venus.jpg",0.723 * earthDistance,0.949 * earthSize,1.174 * earthOV, -0.004 * earthRS);
+	m_jupiter = new PlanetObject("../objects/sphere.obj", "../objects/jupiter.jpg",5.203 * earthDistance,11.209 * earthSize,0.440 * earthOV,2.414 * earthRS);
+	m_saturn = new PlanetObject("../objects/sphere.obj", "../objects/saturn.jpg",9.582 * earthDistance,9.449 * earthSize,0.326 * earthOV,2.234 * earthRS);
+	m_uranus = new PlanetObject("../objects/sphere.obj", "../objects/uranus.jpg",19.201 * earthDistance,4.007 * earthSize,0.228 * earthOV,-1.39 * earthRS);
+	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.181 * earthOV,1.484 * earthRS);
+	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.158 * earthOV,-0.156 * earthRS);
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -118,6 +125,13 @@ void Graphics::Update(unsigned int dt)
   m_sun->Update(dt);
 	m_earth->Update(dt, glm::mat4(1.0));
 	m_mars->Update(dt, glm::mat4(1.0));
+	m_mercury->Update(dt, glm::mat4(1.0));
+	m_venus->Update(dt, glm::mat4(1.0));
+	m_jupiter->Update(dt, glm::mat4(1.0));
+	m_saturn->Update(dt, glm::mat4(1.0));
+	m_uranus->Update(dt, glm::mat4(1.0));
+	m_neptune->Update(dt, glm::mat4(1.0));
+	m_pluto->Update(dt, glm::mat4(1.0));
 }
 
 void Graphics::Render()
@@ -142,6 +156,27 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mars->GetModel()));
   m_mars->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mercury->GetModel()));
+  m_mercury->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_venus->GetModel()));
+  m_venus->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_jupiter->GetModel()));
+  m_jupiter->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_saturn->GetModel()));
+  m_saturn->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranus->GetModel()));
+  m_uranus->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mars->GetModel()));
+  m_neptune->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_pluto->GetModel()));
+  m_pluto->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();

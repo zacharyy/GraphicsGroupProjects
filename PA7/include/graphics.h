@@ -32,6 +32,13 @@ class Graphics
     Object *m_sun;
 		PlanetObject *m_earth;
 		PlanetObject *m_mars;
+		PlanetObject *m_mercury;
+		PlanetObject *m_venus;
+		PlanetObject *m_jupiter;
+		PlanetObject *m_saturn;
+		PlanetObject *m_uranus;
+		PlanetObject *m_neptune;
+		PlanetObject *m_pluto;
 };
 
 #endif /* GRAPHICS_H */

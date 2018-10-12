@@ -37,7 +37,7 @@ This project was built and run using a makefile in Linux/Ubuntu. As of publishin
 
 mkdir build  
 cd build  
-cp ../makefile .  
+cmake ..  
 make  
 ./PA6 ../objects/buddha.obj 
 

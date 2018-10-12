@@ -1,0 +1,10 @@
+				Distance From Sun		Diameter/Size			Orbital Velocity		Rotation Speed
+Mercury		0.387 * Earth			0.382 * Earth				1.591 * Earth			0.017 * Earth
+Venus			0.723 * Earth			0.949 * Earth				1.174 * Earth			-0.004 * Earth
+Mars			1.524 * Earth			0.532 * Earth				0.809 * Earth			0.972 * Earth
+Jupiter		5.203 * Earth			11.209 * Earth			0.440 * Earth			2.414 * Earth
+Saturn		9.582 * Earth			9.449 * Earth				0.326 * Earth			2.234 * Earth
+Uranus		19.201 * Earth		4.007 * Earth				0.228 * Earth			-1.390 * Earth
+Neptune		30.047 * Earth		3.883 * Earth				0.181 * Earth			1.484 * Earth	
+Pluto			39.481 * Earth		0.186 * Earth				0.158 * Earth			-0.156 * Earth
+Sun 						0						109 * Earth						0									?

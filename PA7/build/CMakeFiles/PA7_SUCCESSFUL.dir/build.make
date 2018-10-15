@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ethanpark/Desktop/CS480/cs480Park/PA7
+CMAKE_SOURCE_DIR = /home/djia/cs480Park/PA7
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ethanpark/Desktop/CS480/cs480Park/PA7/build
+CMAKE_BINARY_DIR = /home/djia/cs480Park/PA7/build
 
 # Utility rule file for PA7_SUCCESSFUL.
 
@@ -58,7 +58,7 @@ CMakeFiles/PA7_SUCCESSFUL: PA7
 	/usr/bin/cmake -E echo =====================
 	/usr/bin/cmake -E echo \ \ Compile\ complete!
 	/usr/bin/cmake -E echo =====================
-	/usr/bin/cmake -E echo /home/ethanpark/Desktop/CS480/cs480Park/PA7/build
+	/usr/bin/cmake -E echo /home/djia/cs480Park/PA7/build
 
 PA7_SUCCESSFUL: CMakeFiles/PA7_SUCCESSFUL
 PA7_SUCCESSFUL: CMakeFiles/PA7_SUCCESSFUL.dir/build.make
@@ -75,6 +75,6 @@ CMakeFiles/PA7_SUCCESSFUL.dir/clean:
 .PHONY : CMakeFiles/PA7_SUCCESSFUL.dir/clean
 
 CMakeFiles/PA7_SUCCESSFUL.dir/depend:
-	cd /home/ethanpark/Desktop/CS480/cs480Park/PA7/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ethanpark/Desktop/CS480/cs480Park/PA7 /home/ethanpark/Desktop/CS480/cs480Park/PA7 /home/ethanpark/Desktop/CS480/cs480Park/PA7/build /home/ethanpark/Desktop/CS480/cs480Park/PA7/build /home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles/PA7_SUCCESSFUL.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/djia/cs480Park/PA7/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/djia/cs480Park/PA7 /home/djia/cs480Park/PA7 /home/djia/cs480Park/PA7/build /home/djia/cs480Park/PA7/build /home/djia/cs480Park/PA7/build/CMakeFiles/PA7_SUCCESSFUL.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PA7_SUCCESSFUL.dir/depend
 

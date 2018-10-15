@@ -60,6 +60,10 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.181 * earthOV,1.484 * earthRS);
 	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.158 * earthOV,-0.156 * earthRS);
 
+//moons
+m_earthMoon = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",earthDistance,0.272 * earthSize,5*earthOV,0.214 *earthRS,m_earth);
+m_saturnRing = new MoonObject("../objects/ring.obj", "../objects/saturn_ring.png",9.582 * earthDistance,9.449 * earthSize,0.326 * earthOV,2.234 * earthRS, m_saturn);
+
   normalView = true;
   topDownView = false;
   UpdatedTDView = false;
@@ -144,7 +148,8 @@ void Graphics::Update(unsigned int dt)
 	m_uranus->Update(dt, glm::mat4(1.0));
 	m_neptune->Update(dt, glm::mat4(1.0));
 	m_pluto->Update(dt, glm::mat4(1.0));
-
+	m_earthMoon->Update(dt, glm::mat4(1.0));
+	m_saturnRing->Update(dt, glm::mat4(1.0));
   /*if statement that put camera in normal mode*/
   if(normalView == true)
   {
@@ -346,6 +351,12 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_pluto->GetModel()));
   m_pluto->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_earthMoon->GetModel()));
+  m_earthMoon->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_earthMoon->GetModel()));
+  m_saturnRing->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();

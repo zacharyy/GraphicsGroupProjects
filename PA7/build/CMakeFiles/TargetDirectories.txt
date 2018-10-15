@@ -1,4 +1,4 @@
-/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles/rebuild_cache.dir
-/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles/PA7_SUCCESSFUL.dir
-/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles/edit_cache.dir
-/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles/PA7.dir
+/home/djia/cs480Park/PA7/build/CMakeFiles/rebuild_cache.dir
+/home/djia/cs480Park/PA7/build/CMakeFiles/PA7_SUCCESSFUL.dir
+/home/djia/cs480Park/PA7/build/CMakeFiles/edit_cache.dir
+/home/djia/cs480Park/PA7/build/CMakeFiles/PA7.dir

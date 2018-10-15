@@ -51,6 +51,8 @@ class Graphics
 		PlanetObject *m_uranus;
 		PlanetObject *m_neptune;
 		PlanetObject *m_pluto;
+		MoonObject *m_earthMoon;
+		MoonObject *m_saturnRing;
 };
 
 #endif /* GRAPHICS_H */

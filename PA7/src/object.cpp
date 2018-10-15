@@ -40,7 +40,7 @@ void Object::Update(unsigned int dt)
   angle += (dt * M_PI/10000);
   //glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f * cos(angle/5), 0.0f,5.0f * sin(angle/5)));
   model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
-	model = glm::scale(model, glm::vec3(2, 2, 2));
+	model = glm::scale(model, glm::vec3(60, 60, 60));
 
 }
 

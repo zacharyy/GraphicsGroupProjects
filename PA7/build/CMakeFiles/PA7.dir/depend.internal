@@ -4,7 +4,7 @@
 CMakeFiles/PA7.dir/src/camera.cpp.o
  ../include/camera.h
  ../include/graphics_headers.h
- /home/djia/cs480Park/PA7/src/camera.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/camera.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -144,7 +144,7 @@ CMakeFiles/PA7.dir/src/engine.cpp.o
  ../include/planet_object.h
  ../include/shader.h
  ../include/window.h
- /home/djia/cs480Park/PA7/src/engine.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/engine.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -282,7 +282,7 @@ CMakeFiles/PA7.dir/src/graphics.cpp.o
  ../include/object.h
  ../include/planet_object.h
  ../include/shader.h
- /home/djia/cs480Park/PA7/src/graphics.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/graphics.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -422,7 +422,7 @@ CMakeFiles/PA7.dir/src/main.cpp.o
  ../include/planet_object.h
  ../include/shader.h
  ../include/window.h
- /home/djia/cs480Park/PA7/src/main.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/main.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -555,7 +555,7 @@ CMakeFiles/PA7.dir/src/main.cpp.o
 CMakeFiles/PA7.dir/src/mesh.cpp.o
  ../include/graphics_headers.h
  ../include/mesh.h
- /home/djia/cs480Park/PA7/src/mesh.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/mesh.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -689,7 +689,7 @@ CMakeFiles/PA7.dir/src/object.cpp.o
  ../include/graphics_headers.h
  ../include/mesh.h
  ../include/object.h
- /home/djia/cs480Park/PA7/src/object.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/object.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -824,7 +824,7 @@ CMakeFiles/PA7.dir/src/planet_object.cpp.o
  ../include/mesh.h
  ../include/object.h
  ../include/planet_object.h
- /home/djia/cs480Park/PA7/src/planet_object.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/planet_object.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -957,7 +957,7 @@ CMakeFiles/PA7.dir/src/planet_object.cpp.o
 CMakeFiles/PA7.dir/src/shader.cpp.o
  ../include/graphics_headers.h
  ../include/shader.h
- /home/djia/cs480Park/PA7/src/shader.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/shader.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -1089,4 +1089,4 @@ CMakeFiles/PA7.dir/src/shader.cpp.o
  /usr/include/x86_64-linux-gnu/ImageMagick-6/magick/magick-baseconfig.h
 CMakeFiles/PA7.dir/src/window.cpp.o
  ../include/window.h
- /home/djia/cs480Park/PA7/src/window.cpp
+ /home/zacharyy/Desktop/MergeFolder/cs480Park/PA7/src/window.cpp

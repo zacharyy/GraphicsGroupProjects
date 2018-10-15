@@ -2,7 +2,7 @@
 
 Graphics::Graphics()
 {
-
+	speedScaler = 1;
 }
 
 Graphics::~Graphics()
@@ -45,22 +45,20 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
   }
 
   // Create the object
-	double earthDistance = 8;
-	double earthSize = 1;
+	double earthDistance = 180;
+	double earthSize = 3;
 	double earthOV = 1;
-	double earthRS = 1;
-  m_sun = new Object("../objects/sphere.obj", "../objects/sun.jpg");
+	double earthRS = 365;
+ m_sun = new Object("../objects/sphere.obj", "../objects/sun.jpg");
 	m_earth = new PlanetObject("../objects/sphere.obj", "../objects/earth.jpg",earthDistance,earthSize,earthOV,earthRS);
-	m_mars = new PlanetObject("../objects/sphere.obj", "../objects/mars.jpg",1.524 * earthDistance,0.542 * earthSize,0.809 * earthOV,0.972 * earthRS);
-
-
-	m_mercury = new PlanetObject("../objects/sphere.obj", "../objects/mercury.jpg",0.387 * earthDistance,0.382 * earthSize,1.591 * earthOV,0.017 * earthRS);
-	m_venus = new PlanetObject("../objects/sphere.obj", "../objects/venus.jpg",0.723 * earthDistance,0.949 * earthSize,1.174 * earthOV, -0.004 * earthRS);
-	m_jupiter = new PlanetObject("../objects/sphere.obj", "../objects/jupiter.jpg",5.203 * earthDistance,11.209 * earthSize,0.440 * earthOV,2.414 * earthRS);
-	m_saturn = new PlanetObject("../objects/sphere.obj", "../objects/saturn.jpg",9.582 * earthDistance,9.449 * earthSize,0.326 * earthOV,2.234 * earthRS);
-	m_uranus = new PlanetObject("../objects/sphere.obj", "../objects/uranus.jpg",19.201 * earthDistance,4.007 * earthSize,0.228 * earthOV,-1.39 * earthRS);
-	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.181 * earthOV,1.484 * earthRS);
-	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.158 * earthOV,-0.156 * earthRS);
+	m_mars = new PlanetObject("../objects/sphere.obj", "../objects/mars.jpg",1.524 * earthDistance,0.542 * earthSize,0.5296 * earthOV,666.21);
+	m_mercury = new PlanetObject("../objects/sphere.obj", "../objects/mercury.jpg",0.387 * earthDistance,0.382 * earthSize,4.152 * earthOV,1.50);
+	m_venus = new PlanetObject("../objects/sphere.obj", "../objects/venus.jpg",0.723 * earthDistance,0.949 * earthSize,1.629 * earthOV, -0.9247);
+	m_jupiter = new PlanetObject("../objects/sphere.obj", "../objects/jupiter.jpg",5.203 * earthDistance,11.209 * earthSize,0.0843 * earthOV,10558);
+	m_saturn = new PlanetObject("../objects/sphere.obj", "../objects/saturn.jpg",9.582 * earthDistance,9.449 * earthSize,0.0339 * earthOV,23895);
+	m_uranus = new PlanetObject("../objects/sphere.obj", "../objects/uranus.jpg",19.201 * earthDistance,4.007 * earthSize,0.0119 * earthOV,-42005);
+	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.0061 * earthOV,89773);
+	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.0040 * earthOV,-19911);
 
 //moons
 m_earthMoon = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.384*earthDistance,0.272 * earthSize,earthOV,0.214 *earthRS,m_earth);
@@ -149,6 +147,7 @@ std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitD
 void Graphics::Update(unsigned int dt)
 {
   // Update the object
+	UpdateSpeed();
   m_sun->Update(dt);
 	m_earth->Update(dt, glm::mat4(1.0));
 	m_mars->Update(dt, glm::mat4(1.0));
@@ -324,7 +323,20 @@ void Graphics::Update(unsigned int dt)
   }
 
 }
-
+void Graphics::UpdateSpeed()
+{
+	m_mercury->speedScaler = speedScaler;
+	m_venus->speedScaler = speedScaler;
+	m_earth->speedScaler = speedScaler;
+	m_mars->speedScaler = speedScaler;
+	m_jupiter->speedScaler = speedScaler;
+	m_saturn->speedScaler = speedScaler;
+	m_uranus->speedScaler = speedScaler;
+	m_neptune->speedScaler = speedScaler;
+	m_pluto->speedScaler = speedScaler;
+	//m_earthMoon->speedScaler = speedScaler;
+	//m_saturnRing->speedScaler = speedScaler;
+}
 void Graphics::Render()
 {
   //clear the screen

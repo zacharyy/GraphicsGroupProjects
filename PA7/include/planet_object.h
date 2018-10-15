@@ -10,8 +10,9 @@ class PlanetObject : public Object {
 			double planetSize;
 			double orbitVelocity;
 			double rotationSpeed;
-			float angle;
-			float rotationAngle;
+			float orbitAngle;
+			float rotateAngle;
+			int speedScaler;
 	public:
 			/*function that will get a planet's size*/
 			double GetPlanetSize();
@@ -27,7 +28,7 @@ class MoonObject : public Object {
 			double orbitVelocity;
 			double rotationSpeed;
 			float angle;
-		        float rotationAngle;
+		  float rotationAngle;
 			PlanetObject* planet;
 
 };

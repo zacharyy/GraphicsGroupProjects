@@ -215,6 +215,15 @@ void Engine::Keyboard()
       m_graphics->UpdatedTDView = false;
       m_graphics->planetSelector = 9;
     }
+    else if(m_event.key.keysym.sym == SDLK_EQUALS)
+    {
+			if(m_graphics->speedScaler == 0) m_graphics->speedScaler = 1;
+      else m_graphics->speedScaler *= 2;
+    }
+    else if(m_event.key.keysym.sym == SDLK_MINUS)
+    {
+      m_graphics->speedScaler /= 2;
+    }
   }
 }
 

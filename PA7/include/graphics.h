@@ -18,7 +18,7 @@ class Graphics
     bool Initialize(int width, int height, string objectFileString);
     void Update(unsigned int dt);
     void Render();
-
+		void UpdateSpeed();
     /*camera variables*/
     bool normalView;
     bool topDownView;
@@ -30,6 +30,8 @@ class Graphics
     bool zoomInTDCamera;
     bool zoomOutTDCamera;
     int planetSelector;
+
+		int speedScaler;
 
   private:
     std::string ErrorString(GLenum error);

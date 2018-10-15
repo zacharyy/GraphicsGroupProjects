@@ -9,8 +9,8 @@ PlanetObject::PlanetObject(std::string objectFileString, std::string textureFile
 	std::cout << textureFile << std::endl;
   // Read our .obj file
   loadOBJ(input);
-  rotationAngle = 0.0f;
-  angle = 0.0f;
+  rotateAngle = 0.0f;
+  orbitAngle = 0.0f;
 	orbitDistance = oD;
 	planetSize = pS;
 	orbitVelocity = oV;
@@ -19,10 +19,11 @@ PlanetObject::PlanetObject(std::string objectFileString, std::string textureFile
 
 void PlanetObject::Update(unsigned int dt,glm::mat4 position)
 {
-  rotationAngle += dt * rotationSpeed/1000;
-	angle += (dt * orbitVelocity/1000);
-  glm::mat4 translate = glm::translate(position, glm::vec3(orbitDistance * cos(angle/3), 0.0f,orbitDistance*sin(angle/3)));
-  model = glm::rotate(translate, (rotationAngle), glm::vec3(0.0, 1.0, 0.0));
+	orbitAngle += ((speedScaler * orbitVelocity/(2*3.14159))*dt/(1000));
+	rotateAngle = (orbitAngle*rotationSpeed);
+	//std::cout << orbitAngle/(2*3.14159) << " " << rotateAngle/(2*3.14159) << " " << orbitVelocity << std::endl;
+	glm::mat4 translate = glm::translate(position, glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
+  model = glm::rotate(translate, (rotateAngle), glm::vec3(0.0, 1.0, 0.0));
   model = glm::scale(model, glm::vec3(planetSize, planetSize, planetSize));
 }
 
@@ -34,7 +35,7 @@ double PlanetObject::GetPlanetSize()
 
 glm::mat4 PlanetObject::GetPosition()
 {
-  return glm::translate(glm::mat4(1.0), glm::vec3(orbitDistance * cos(angle/3), 0.0f,orbitDistance*sin(angle/3)));
+  return glm::translate(glm::mat4(1.0), glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
 }
 
 

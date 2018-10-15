@@ -19,6 +19,18 @@ class Graphics
     void Update(unsigned int dt);
     void Render();
 
+    /*camera variables*/
+    bool normalView;
+    bool topDownView;
+    bool UpdatedTDView;
+    bool moveTDCameraUp;
+    bool moveTDCameraDown;
+    bool moveTDCameraLeft;
+    bool moveTDCameraRight;
+    bool zoomInTDCamera;
+    bool zoomOutTDCamera;
+    int planetSelector;
+
   private:
     std::string ErrorString(GLenum error);
 

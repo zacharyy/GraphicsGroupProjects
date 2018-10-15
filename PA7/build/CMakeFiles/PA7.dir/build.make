@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA7
+CMAKE_SOURCE_DIR = /home/ethanpark/Desktop/CS480/cs480Park/PA7
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA7/build
+CMAKE_BINARY_DIR = /home/ethanpark/Desktop/CS480/cs480Park/PA7/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/PA7.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/PA7.dir/flags.make
 
 CMakeFiles/PA7.dir/src/camera.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/camera.cpp.o: ../src/camera.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PA7.dir/src/camera.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/camera.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PA7.dir/src/camera.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/camera.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/camera.cpp
 
 CMakeFiles/PA7.dir/src/camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/camera.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/camera.cpp > CMakeFiles/PA7.dir/src/camera.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/camera.cpp > CMakeFiles/PA7.dir/src/camera.cpp.i
 
 CMakeFiles/PA7.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/camera.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/camera.cpp -o CMakeFiles/PA7.dir/src/camera.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/camera.cpp -o CMakeFiles/PA7.dir/src/camera.cpp.s
 
 CMakeFiles/PA7.dir/src/camera.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/PA7.dir/src/camera.cpp.o.provides.build: CMakeFiles/PA7.dir/src/camer
 
 CMakeFiles/PA7.dir/src/engine.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/engine.cpp.o: ../src/engine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PA7.dir/src/engine.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/engine.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PA7.dir/src/engine.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/engine.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/engine.cpp
 
 CMakeFiles/PA7.dir/src/engine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/engine.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/engine.cpp > CMakeFiles/PA7.dir/src/engine.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/engine.cpp > CMakeFiles/PA7.dir/src/engine.cpp.i
 
 CMakeFiles/PA7.dir/src/engine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/engine.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/engine.cpp -o CMakeFiles/PA7.dir/src/engine.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/engine.cpp -o CMakeFiles/PA7.dir/src/engine.cpp.s
 
 CMakeFiles/PA7.dir/src/engine.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/PA7.dir/src/engine.cpp.o.provides.build: CMakeFiles/PA7.dir/src/engin
 
 CMakeFiles/PA7.dir/src/graphics.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/graphics.cpp.o: ../src/graphics.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PA7.dir/src/graphics.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/graphics.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/graphics.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PA7.dir/src/graphics.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/graphics.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/graphics.cpp
 
 CMakeFiles/PA7.dir/src/graphics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/graphics.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/graphics.cpp > CMakeFiles/PA7.dir/src/graphics.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/graphics.cpp > CMakeFiles/PA7.dir/src/graphics.cpp.i
 
 CMakeFiles/PA7.dir/src/graphics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/graphics.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/graphics.cpp -o CMakeFiles/PA7.dir/src/graphics.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/graphics.cpp -o CMakeFiles/PA7.dir/src/graphics.cpp.s
 
 CMakeFiles/PA7.dir/src/graphics.cpp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/PA7.dir/src/graphics.cpp.o.provides.build: CMakeFiles/PA7.dir/src/gra
 
 CMakeFiles/PA7.dir/src/main.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PA7.dir/src/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/main.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PA7.dir/src/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/main.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/main.cpp
 
 CMakeFiles/PA7.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/main.cpp > CMakeFiles/PA7.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/main.cpp > CMakeFiles/PA7.dir/src/main.cpp.i
 
 CMakeFiles/PA7.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/main.cpp -o CMakeFiles/PA7.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/main.cpp -o CMakeFiles/PA7.dir/src/main.cpp.s
 
 CMakeFiles/PA7.dir/src/main.cpp.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/PA7.dir/src/main.cpp.o.provides.build: CMakeFiles/PA7.dir/src/main.cp
 
 CMakeFiles/PA7.dir/src/mesh.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/mesh.cpp.o: ../src/mesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PA7.dir/src/mesh.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/mesh.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/mesh.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PA7.dir/src/mesh.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/mesh.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/mesh.cpp
 
 CMakeFiles/PA7.dir/src/mesh.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/mesh.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/mesh.cpp > CMakeFiles/PA7.dir/src/mesh.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/mesh.cpp > CMakeFiles/PA7.dir/src/mesh.cpp.i
 
 CMakeFiles/PA7.dir/src/mesh.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/mesh.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/mesh.cpp -o CMakeFiles/PA7.dir/src/mesh.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/mesh.cpp -o CMakeFiles/PA7.dir/src/mesh.cpp.s
 
 CMakeFiles/PA7.dir/src/mesh.cpp.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/PA7.dir/src/mesh.cpp.o.provides.build: CMakeFiles/PA7.dir/src/mesh.cp
 
 CMakeFiles/PA7.dir/src/object.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/object.cpp.o: ../src/object.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PA7.dir/src/object.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/object.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/object.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PA7.dir/src/object.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/object.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/object.cpp
 
 CMakeFiles/PA7.dir/src/object.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/object.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/object.cpp > CMakeFiles/PA7.dir/src/object.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/object.cpp > CMakeFiles/PA7.dir/src/object.cpp.i
 
 CMakeFiles/PA7.dir/src/object.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/object.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/object.cpp -o CMakeFiles/PA7.dir/src/object.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/object.cpp -o CMakeFiles/PA7.dir/src/object.cpp.s
 
 CMakeFiles/PA7.dir/src/object.cpp.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/PA7.dir/src/object.cpp.o.provides.build: CMakeFiles/PA7.dir/src/objec
 
 CMakeFiles/PA7.dir/src/planet_object.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/planet_object.cpp.o: ../src/planet_object.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PA7.dir/src/planet_object.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/planet_object.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/planet_object.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PA7.dir/src/planet_object.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/planet_object.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/planet_object.cpp
 
 CMakeFiles/PA7.dir/src/planet_object.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/planet_object.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/planet_object.cpp > CMakeFiles/PA7.dir/src/planet_object.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/planet_object.cpp > CMakeFiles/PA7.dir/src/planet_object.cpp.i
 
 CMakeFiles/PA7.dir/src/planet_object.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/planet_object.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/planet_object.cpp -o CMakeFiles/PA7.dir/src/planet_object.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/planet_object.cpp -o CMakeFiles/PA7.dir/src/planet_object.cpp.s
 
 CMakeFiles/PA7.dir/src/planet_object.cpp.o.requires:
 
@@ -227,16 +227,16 @@ CMakeFiles/PA7.dir/src/planet_object.cpp.o.provides.build: CMakeFiles/PA7.dir/sr
 
 CMakeFiles/PA7.dir/src/shader.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/shader.cpp.o: ../src/shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PA7.dir/src/shader.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/shader.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PA7.dir/src/shader.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/shader.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/shader.cpp
 
 CMakeFiles/PA7.dir/src/shader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/shader.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/shader.cpp > CMakeFiles/PA7.dir/src/shader.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/shader.cpp > CMakeFiles/PA7.dir/src/shader.cpp.i
 
 CMakeFiles/PA7.dir/src/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/shader.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/shader.cpp -o CMakeFiles/PA7.dir/src/shader.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/shader.cpp -o CMakeFiles/PA7.dir/src/shader.cpp.s
 
 CMakeFiles/PA7.dir/src/shader.cpp.o.requires:
 
@@ -251,16 +251,16 @@ CMakeFiles/PA7.dir/src/shader.cpp.o.provides.build: CMakeFiles/PA7.dir/src/shade
 
 CMakeFiles/PA7.dir/src/window.cpp.o: CMakeFiles/PA7.dir/flags.make
 CMakeFiles/PA7.dir/src/window.cpp.o: ../src/window.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/PA7.dir/src/window.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/window.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/window.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/PA7.dir/src/window.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA7.dir/src/window.cpp.o -c /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/window.cpp
 
 CMakeFiles/PA7.dir/src/window.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA7.dir/src/window.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/window.cpp > CMakeFiles/PA7.dir/src/window.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/window.cpp > CMakeFiles/PA7.dir/src/window.cpp.i
 
 CMakeFiles/PA7.dir/src/window.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA7.dir/src/window.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA7/src/window.cpp -o CMakeFiles/PA7.dir/src/window.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/CS480/cs480Park/PA7/src/window.cpp -o CMakeFiles/PA7.dir/src/window.cpp.s
 
 CMakeFiles/PA7.dir/src/window.cpp.o.requires:
 
@@ -305,7 +305,7 @@ PA7: /usr/lib/x86_64-linux-gnu/libSDL2main.a
 PA7: /usr/lib/x86_64-linux-gnu/libSDL2.so
 PA7: /usr/lib/x86_64-linux-gnu/libMagick++-6.Q16.so
 PA7: CMakeFiles/PA7.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable PA7"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable PA7"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PA7.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -330,6 +330,6 @@ CMakeFiles/PA7.dir/clean:
 .PHONY : CMakeFiles/PA7.dir/clean
 
 CMakeFiles/PA7.dir/depend:
-	cd /home/zacharyy/Desktop/Graphics/cs480Park/PA7/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zacharyy/Desktop/Graphics/cs480Park/PA7 /home/zacharyy/Desktop/Graphics/cs480Park/PA7 /home/zacharyy/Desktop/Graphics/cs480Park/PA7/build /home/zacharyy/Desktop/Graphics/cs480Park/PA7/build /home/zacharyy/Desktop/Graphics/cs480Park/PA7/build/CMakeFiles/PA7.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ethanpark/Desktop/CS480/cs480Park/PA7/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ethanpark/Desktop/CS480/cs480Park/PA7 /home/ethanpark/Desktop/CS480/cs480Park/PA7 /home/ethanpark/Desktop/CS480/cs480Park/PA7/build /home/ethanpark/Desktop/CS480/cs480Park/PA7/build /home/ethanpark/Desktop/CS480/cs480Park/PA7/build/CMakeFiles/PA7.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PA7.dir/depend
 

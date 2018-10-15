@@ -87,6 +87,134 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
+
+    /*Controls for camera*/
+    //if n is pressed put camera in normal view mode
+    else if(m_event.key.keysym.sym == SDLK_n)
+    {
+      m_graphics->normalView = true;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 0;
+    }
+    //if t is pressed put camera in top down view mode
+    else if(m_event.key.keysym.sym == SDLK_t)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = true;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 0;
+    }
+
+    //if w is pressed move top down camera up
+    else if(m_event.key.keysym.sym == SDLK_w && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraUp = true;
+    }
+    //if a is pressed move top down camera left
+    else if(m_event.key.keysym.sym == SDLK_a && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraLeft = true;
+    }
+    //if s is pressed move top down camera down
+    else if(m_event.key.keysym.sym == SDLK_s && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraDown = true;
+    }
+    //if d is pressed move top down camera right
+    else if(m_event.key.keysym.sym == SDLK_d && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraRight = true;
+    }
+    //if e is pressed zoom top down camera in
+    else if(m_event.key.keysym.sym == SDLK_e && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->zoomInTDCamera = true;
+    }
+    //if q is pressed zoom top down camera out
+    else if(m_event.key.keysym.sym == SDLK_q && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->zoomOutTDCamera = true;
+    }
+
+    //if 1 is pressed show Mercury
+    else if(m_event.key.keysym.sym == SDLK_1)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 1;
+    }
+    //if 2 is pressed show Venus
+    else if(m_event.key.keysym.sym == SDLK_2)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 2;
+    }
+    //if 3 is pressed show Earth
+    else if(m_event.key.keysym.sym == SDLK_3)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 3;
+    }
+    //if 4 is pressed show Mars
+    else if(m_event.key.keysym.sym == SDLK_4)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 4;
+    }
+    //if 5 is pressed show Jupiter
+    else if(m_event.key.keysym.sym == SDLK_5)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 5;
+    }
+    //if 6 is pressed show Saturn
+    else if(m_event.key.keysym.sym == SDLK_6)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 6;
+    }
+    //if 7 is pressed show Uranus
+    else if(m_event.key.keysym.sym == SDLK_7)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 7;
+    }
+    //if 8 is pressed show Neptune
+    else if(m_event.key.keysym.sym == SDLK_8)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 8;
+    }
+    //if 9 is pressed show Pluto
+    else if(m_event.key.keysym.sym == SDLK_9)
+    {
+      m_graphics->normalView = false;
+      m_graphics->topDownView = false;
+      m_graphics->UpdatedTDView = false;
+      m_graphics->planetSelector = 9;
+    }
   }
 }
 

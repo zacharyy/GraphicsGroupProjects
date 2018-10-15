@@ -24,3 +24,9 @@ void PlanetObject::Update(unsigned int dt,glm::mat4 position)
   model = glm::rotate(translate, (angle), glm::vec3(0.0, 1.0, 0.0));
   model = glm::scale(model, glm::vec3(planetSize, planetSize, planetSize));
 }
+
+/*function that will get a planet's size*/
+double PlanetObject::GetPlanetSize()
+{
+	return planetSize;
+}

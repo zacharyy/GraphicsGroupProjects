@@ -59,6 +59,18 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 	m_uranus = new PlanetObject("../objects/sphere.obj", "../objects/uranus.jpg",19.201 * earthDistance,4.007 * earthSize,0.228 * earthOV,-1.39 * earthRS);
 	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.181 * earthOV,1.484 * earthRS);
 	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.158 * earthOV,-0.156 * earthRS);
+
+  normalView = true;
+  topDownView = false;
+  UpdatedTDView = false;
+  moveTDCameraUp = false;
+  moveTDCameraDown = false;
+  moveTDCameraLeft = false;
+  moveTDCameraRight = false;
+  zoomInTDCamera = false;
+  zoomOutTDCamera = false;
+  planetSelector = 0;
+
   // Set up the shaders
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -132,6 +144,163 @@ void Graphics::Update(unsigned int dt)
 	m_uranus->Update(dt, glm::mat4(1.0));
 	m_neptune->Update(dt, glm::mat4(1.0));
 	m_pluto->Update(dt, glm::mat4(1.0));
+
+  /*if statement that put camera in normal mode*/
+  if(normalView == true)
+  {
+    m_camera->NormalView();
+  }
+
+  /*if statement that put camera in top down mode*/
+  if(topDownView == true && UpdatedTDView != true)
+  {
+    m_camera->currentTDEyePosition = m_camera->defaultTDEyePosition;
+    m_camera->currentTDFocusPoint = m_camera->defaultTDFocusPoint;
+    m_camera->TopDownView();
+  }
+  
+  /*if statements that move camera in top down mode*/
+  if(moveTDCameraUp == true && UpdatedTDView == true)
+  {
+    m_camera->currentTDEyePosition.z -= 2;
+    m_camera->currentTDFocusPoint.z -= 2;
+    m_camera->TopDownViewUpdated(m_camera->currentTDEyePosition, m_camera->currentTDFocusPoint);
+    moveTDCameraUp = false;
+  }
+  if(moveTDCameraLeft == true && UpdatedTDView == true)
+  {
+    m_camera->currentTDEyePosition.x -= 2;
+    m_camera->currentTDFocusPoint.x -= 2;
+    m_camera->TopDownViewUpdated(m_camera->currentTDEyePosition, m_camera->currentTDFocusPoint);
+    moveTDCameraLeft = false;
+  }
+  if(moveTDCameraDown == true && UpdatedTDView == true)
+  {
+    m_camera->currentTDEyePosition.z += 2;
+    m_camera->currentTDFocusPoint.z += 2;
+    m_camera->TopDownViewUpdated(m_camera->currentTDEyePosition, m_camera->currentTDFocusPoint);
+    moveTDCameraDown = false;
+  }
+  if(moveTDCameraRight == true && UpdatedTDView == true)
+  {
+    m_camera->currentTDEyePosition.x += 2;
+    m_camera->currentTDFocusPoint.x += 2;
+    m_camera->TopDownViewUpdated(m_camera->currentTDEyePosition, m_camera->currentTDFocusPoint);
+    moveTDCameraRight = false;
+  }
+  if(zoomInTDCamera == true && UpdatedTDView == true)
+  {
+    m_camera->currentTDEyePosition.y -= 2;
+    m_camera->TopDownViewUpdated(m_camera->currentTDEyePosition, m_camera->currentTDFocusPoint);
+    zoomInTDCamera = false;
+  }  
+  if(zoomOutTDCamera == true && UpdatedTDView == true)
+  {
+    m_camera->currentTDEyePosition.y += 2;
+    m_camera->TopDownViewUpdated(m_camera->currentTDEyePosition, m_camera->currentTDFocusPoint);
+    zoomOutTDCamera = false;
+  }
+
+  /*switch statement that moves camera between planets*/
+  glm::mat4 temp;
+  glm::vec3 eyePosition;
+  glm::vec3 focusPoint;
+  // camera will be placed PlanetSize * planetCameraDistanceScale away from planet
+  int planetCameraDistanceScale = 5;
+  switch(planetSelector)
+  {
+    case 1:
+           temp = m_mercury->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_mercury->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_mercury->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_mercury->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 2:
+           temp = m_venus->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_venus->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_venus->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_venus->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 3:
+           temp = m_earth->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_earth->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_earth->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_earth->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 4:
+           temp = m_mars->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_mars->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_mars->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_mars->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 5:
+           temp = m_jupiter->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_jupiter->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_jupiter->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_jupiter->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 6:
+           temp = m_saturn->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_saturn->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_saturn->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_saturn->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 7:
+           temp = m_uranus->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_uranus->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_uranus->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_uranus->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 8:
+           temp = m_neptune->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_neptune->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_neptune->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_neptune->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+    case 9:
+           temp = m_pluto->GetModel();
+           eyePosition = glm::vec3(temp[3]);
+           eyePosition.x +=  m_pluto->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.y = m_pluto->GetPlanetSize() * planetCameraDistanceScale;
+           eyePosition.z +=  m_pluto->GetPlanetSize() * planetCameraDistanceScale;
+           focusPoint = glm::vec3(temp[3]);
+           //std::cout << focusPoint.x << endl;
+           m_camera->PlanetView(eyePosition, focusPoint);
+           break;
+  }
+
 }
 
 void Graphics::Render()
@@ -172,7 +341,7 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranus->GetModel()));
   m_uranus->Render();
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_mars->GetModel()));
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_neptune->GetModel()));
   m_neptune->Render();
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_pluto->GetModel()));

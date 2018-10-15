@@ -16,7 +16,7 @@ int main(int argc, char **argv)
   string objectFileString = argv[1];
 
   // Start an engine and run it then cleanup after
-  Engine *engine = new Engine("Project 6: Assimp with Textures", 800, 600);
+  Engine *engine = new Engine("Project 7: Solar System", 800, 600);
   if(!engine->Initialize(objectFileString))
   {
     printf("The engine failed to start.\n");

@@ -12,6 +12,17 @@ class Camera
     glm::mat4 GetProjection();
     glm::mat4 GetView();
   
+    /*functions that will change camera view*/
+    void NormalView();
+    void TopDownView();
+    void TopDownViewUpdated(glm::vec3 eyePosition, glm::vec3 focusPoint);
+    void PlanetView(glm::vec3 eyePosition, glm::vec3 focusPoint);
+    /*variables that will help move the camera in top down mode*/
+    glm::vec3 defaultTDEyePosition;
+    glm::vec3 defaultTDFocusPoint;
+    glm::vec3 currentTDEyePosition;
+    glm::vec3 currentTDFocusPoint;
+
   private:
     glm::mat4 projection;
     glm::mat4 view;

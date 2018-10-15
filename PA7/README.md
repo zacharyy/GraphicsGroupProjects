@@ -1,9 +1,4 @@
-# PA5: Assimp and Model Loading
-
-Group Members:  
-Dongjun Jia  
-Ethan Park  
-Zachary Young 
+# PA7: Solar System
 
 Group Members:  
 Dongjun Jia  
@@ -12,7 +7,7 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project builds of the previous Assimp model loading project with the loader now being able to load textures onto a model. This was done using ImageMagick, specifically magick++ which allows us to read in textures. This project also fixes problems with the previous project, namely loading for multiple mesh models. In order to achieve this, a new mesh class was added to assist in multiple mesh loading for this project. Because of this most of the set up for the models (such as model loading, texture loading, drawing) are now moved to the function of this class. The model loader can currently load multiple textures onto a single model, but the textures must be hard coded in object.cpp to achieve this. Rotation of the model on the x-axis was also added so its dimensions could better represented. Command line arguments are used to read in the name of files that contain models. These files are located in the objects directory of PA6. To run the appliction enter ./PA6 <filename>. For example, to load buddha.obj enter: ./PA6 ../objects/buddha.obj 
+
 
 # Dependencies, Building, and Running
 
@@ -33,18 +28,29 @@ brew install glew glm sdl2
 ```
 
 ## Building and Running
-This project was built and run using a makefile in Linux/Ubuntu. As of publishing this README, ImageMagick has not been installed on machines in the ECC, and as a result we have not been able to test the project in the ECC. To run the application using the buddha file, enter the following in the PA6 directory:
+This project was built and run using a cmake file in Linux/Ubuntu. To run the application, enter the following in the PA7 directory:
 
 mkdir build  
 cd build  
 cmake ..  
 make  
-./PA6 ../objects/buddha.obj 
-
-For any other model file simply add the file to the objects folder and change buddha.obj to the desired file. As mention before, textures are hard coded an must be changed in object.cpp
+./PA7 ../objects/sphere.obj 
 
 ## Controls
-No controls are used for this project.
+N	- normal viewing mode  
+T	- top down view mode  
+WASD	- move camera (top down view mode only)  
+e	- zoom in camera (top down view mode only)  
+q	- zoom out camera (top down view mode only)  
+1	- view Mercury  
+2	- view Venus  
+3	- view Earth  
+4	- view Mars  
+5	- view Jupiter  
+6	- view Saturn  
+7	- view Uranus  
+8	- view Neptune  
+9	- view Pluto 
 
 # Extra Credit
 No extra credit was given for this project.

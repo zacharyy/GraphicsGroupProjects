@@ -10,5 +10,7 @@ class PlanetObject : public Object {
 			double orbitVelocity;
 			double rotationSpeed;
 			float angle;
-
+	public:
+			/*function that will get a planet's size*/
+			double GetPlanetSize();
 };

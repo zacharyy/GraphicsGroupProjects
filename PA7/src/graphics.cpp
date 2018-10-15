@@ -46,6 +46,7 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 
   // Create the object
 	double earthDistance = 180;
+	double moonDistance = 10;
 	double earthSize = 3;
 	double earthOV = 1;
 	double earthRS = 365;
@@ -61,16 +62,16 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.0040 * earthOV,-19911);
 
 //moons
-m_earthMoon = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.384*earthDistance,0.272 * earthSize,earthOV,0.214 *earthRS,m_earth);
-m_marsMoon1 = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.13*earthDistance,0.1 * earthSize,0.88*earthOV,0.214 *earthRS,m_mars);
-m_marsMoon2 = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.2*earthDistance,0.05 * earthSize,0.1*earthOV,0.214 *earthRS,m_mars);
-m_jupiterMoon1 = new MoonObject("../objects/sphere.obj", "../objects/Io.jpg",2*earthDistance,0.287 * earthSize,0.58*earthOV,0.228 *earthRS,m_jupiter);
-m_jupiterMoon2 = new MoonObject("../objects/sphere.obj", "../objects/Europa.jpg",3.18*earthDistance,0.245*earthSize,0.46*earthOV,0.182 *earthRS,m_jupiter);
-m_jupiterMoon3 = new MoonObject("../objects/sphere.obj", "../objects/Ganymede.png",5*earthDistance,0.413* earthSize,0.365*earthOV,0.245 *earthRS,m_jupiter);
-m_jupiterMoon4 = new MoonObject("../objects/sphere.obj", "../objects/Callisto.jpg",8.9*earthDistance,0.378 * earthSize,0.275*earthOV,0.218 *earthRS,m_jupiter);
+m_earthMoon = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.384*moonDistance,0.272 * earthSize,earthOV,0.214 *earthRS,m_earth);
+m_marsMoon1 = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.13 * moonDistance,0.1 * earthSize,0.88*earthOV,0.214 *earthRS,m_mars);
+m_marsMoon2 = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.2 * moonDistance,0.05 * earthSize,0.1*earthOV,0.214 *earthRS,m_mars);
+m_jupiterMoon1 = new MoonObject("../objects/sphere.obj", "../objects/Io.jpg",2 * moonDistance,0.287 * earthSize,0.58*earthOV,0.228 *earthRS,m_jupiter);
+m_jupiterMoon2 = new MoonObject("../objects/sphere.obj", "../objects/Europa.jpg",3.18 * moonDistance,0.245*earthSize,0.46*earthOV,0.182 *earthRS,m_jupiter);
+m_jupiterMoon3 = new MoonObject("../objects/sphere.obj", "../objects/Ganymede.png",5 * moonDistance,0.413* earthSize,0.365*earthOV,0.245 *earthRS,m_jupiter);
+m_jupiterMoon4 = new MoonObject("../objects/sphere.obj", "../objects/Callisto.jpg",8.9 * moonDistance,0.378 * earthSize,0.275*earthOV,0.218 *earthRS,m_jupiter);
 m_saturnRing = new MoonObject("../objects/ring.obj", "../objects/saturn_ring.png",0, 3*earthSize,0,2.234 * earthRS, m_saturn);
-
-
+m_neptuneRing = new MoonObject("../objects/ring.obj", "../objects/neptune_ring.png",0,earthSize,0,2.234 * earthRS, m_neptune);
+m_uranusRing = new MoonObject("../objects/ring.obj", "../objects/uranus_ring.png",0,earthSize,0,2.234 * earthRS, m_uranus);
 
 std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitDistance<<std::endl;
   normalView = true;
@@ -166,6 +167,8 @@ void Graphics::Update(unsigned int dt)
 	m_jupiterMoon3->Update(dt, glm::mat4(1.0));
 	m_jupiterMoon4->Update(dt, glm::mat4(1.0));
 	m_saturnRing->Update(dt, glm::mat4(1.0));
+	m_neptuneRing->Update(dt, glm::mat4(1.0));
+	m_uranusRing->Update(dt, glm::mat4(1.0));
   /*if statement that put camera in normal mode*/
   if(normalView == true)
   {
@@ -404,6 +407,12 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_saturnRing->GetModel()));
   m_saturnRing->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_neptuneRing->GetModel()));
+  m_neptuneRing->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranusRing->GetModel()));
+  m_uranusRing->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();

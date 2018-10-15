@@ -62,6 +62,8 @@ class Graphics
 		MoonObject *m_jupiterMoon3;
 		MoonObject *m_jupiterMoon4;
 		MoonObject *m_saturnRing;
+		MoonObject *m_neptuneRing;
+		MoonObject *m_uranusRing;
 		MoonObject *m_uranusMoon1;
 		MoonObject *m_uranusMoon2;
 		MoonObject *m_uranusMoon3;

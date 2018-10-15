@@ -80,7 +80,7 @@ m_uranusMoon4 = new MoonObject("../objects/sphere.obj", "../objects/Titania.jpg"
 m_uranusMoon5 = new MoonObject("../objects/sphere.obj", "../objects/Oberon.jpg",3.6*earthDistance,0.236 * earthSize,0.106*earthOV,0.065 *earthRS,m_uranus);
 m_neptuneMoon = new MoonObject("../objects/sphere.obj", "../objects/triton.png",1*earthDistance,0.212 * earthSize,0.147*earthOV,0.123 *earthRS,m_neptune);
 */
-m_plutoMoon = new MoonObject("../objects/sphere.obj", "../objects/Charon.jpg",0.09*earthDistance,0.095 * earthSize,0.007*earthOV,0.053 *earthRS,m_pluto);
+m_plutoMoon = new MoonObject("../objects/sphere.obj", "../objects/Charon.jpg",0.009*earthDistance,0.095 * earthSize,0.007*earthOV,0.053 *earthRS,m_pluto);
 
 std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitDistance<<std::endl;
   normalView = true;

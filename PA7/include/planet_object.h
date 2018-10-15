@@ -3,14 +3,15 @@
 class PlanetObject : public Object {
 	public:
 			PlanetObject(std::string objectFileString, std::string textureFileString, double oD, double pS, double oV, double rS);
-	    void Update(unsigned int dt, glm::mat4 position);
-	    glm::mat4 GetPosition();
-	private:
+	    virtual void Update(unsigned int dt, glm::mat4 position);
+	    virtual glm::mat4 GetPosition();
+	
 			double orbitDistance;
 			double planetSize;
 			double orbitVelocity;
 			double rotationSpeed;
 			float angle;
+			float rotationAngle;
 	public:
 			/*function that will get a planet's size*/
 			double GetPlanetSize();
@@ -19,13 +20,14 @@ class PlanetObject : public Object {
 class MoonObject : public Object {
 	public:
             MoonObject(std::string objectFileString, std::string textureFileString, double oD, double pS, double oV, double rS, PlanetObject* planet);
-	    void Update(unsigned int dt, glm::mat4 position);
-	private:
+	    virtual void Update(unsigned int dt, glm::mat4 position);
+	
 			double orbitDistance;
 			double moonSize;
 			double orbitVelocity;
 			double rotationSpeed;
 			float angle;
+		        float rotationAngle;
 			PlanetObject* planet;
 
 };

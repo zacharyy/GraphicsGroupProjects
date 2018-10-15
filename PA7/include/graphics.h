@@ -51,8 +51,23 @@ class Graphics
 		PlanetObject *m_uranus;
 		PlanetObject *m_neptune;
 		PlanetObject *m_pluto;
+
 		MoonObject *m_earthMoon;
+		MoonObject *m_marsMoon1;
+		MoonObject *m_marsMoon2;
+		MoonObject *m_jupiterMoon1;
+		MoonObject *m_jupiterMoon2;
+		MoonObject *m_jupiterMoon3;
+		MoonObject *m_jupiterMoon4;
 		MoonObject *m_saturnRing;
+		MoonObject *m_uranusMoon1;
+		MoonObject *m_uranusMoon2;
+		MoonObject *m_uranusMoon3;
+		MoonObject *m_uranusMoon4;
+		MoonObject *m_uranusMoon5;
+		MoonObject *m_neptuneMoon1;
+		MoonObject *m_neptuneMoon2;
+		MoonObject *m_plutoMoon;
 };
 
 #endif /* GRAPHICS_H */

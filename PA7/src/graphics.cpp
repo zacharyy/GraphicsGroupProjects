@@ -454,6 +454,51 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_plutoMoon->GetModel()));
   m_plutoMoon->Render();
 
+  /*Drawing a circle code*/
+  /*I found 2 methods online but havent had a chance to test them (due to ecc displays not working properly on tuesday)
+Both pretty much involve drawing a circle with line segments with sin and cosine based on a radius
+  */
+
+  /*
+  //OPTION 1:
+  float x1, y1 ,x2 ,z1 ,z2;
+  float angle;
+  //change radius according to planet orbit radius
+  double radius=0.1;
+
+  x1 = 0.5;
+  y1 = 0.0;
+  z1 = 0.6;
+  glColor3f(1.0,1.0,0.6);
+
+  glBegin(GL_LINES);
+  glVertex3f(x1,y1,z1)
+  glVertex2f(x1,y1);
+
+  for (angle=1.0f;angle<361.0f;angle+=0.2)
+  {
+    x2 = x1+sin(angle)*radius;
+    z2 = z1+cos(angle)*radius;
+    glVertex2f(x2, y1, z2);
+  }
+
+  glEnd();
+  */
+
+  /***OR***/
+
+  /*
+  //OPTION 2:
+  glBegin(GL_LINES);
+  for ( float angle = 0; angle <= 2*3.142; angle+=3.142/30)
+  {
+    //radius in this case would be 100, can change this to radius of planet orbit
+    glVertex3f(100.0 * cos (angle) / 2, 0, 100.0 * sin (angle) / 2);
+    glVertex3f(100.0 * cos (angle + 3.142/30) / 2, 0, 100.0 * sin (angle + 3.142/30) / 2);
+  }
+  glEnd();
+  */
+
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

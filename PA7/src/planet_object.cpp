@@ -20,7 +20,7 @@ PlanetObject::PlanetObject(std::string objectFileString, std::string textureFile
 void PlanetObject::Update(unsigned int dt,glm::mat4 position)
 {
 	orbitAngle += ((speedScaler * orbitVelocity/(2*3.14159))*dt/(1000));
-	rotateAngle = (orbitAngle*rotationSpeed);
+	rotateAngle = -(orbitAngle*rotationSpeed);
 	//std::cout << orbitAngle/(2*3.14159) << " " << rotateAngle/(2*3.14159) << " " << orbitVelocity << std::endl;
 	glm::mat4 translate = glm::translate(position, glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
   model = glm::rotate(translate, (rotateAngle), glm::vec3(0.0, 1.0, 0.0));
@@ -59,7 +59,7 @@ MoonObject::MoonObject(std::string objectFileString, std::string textureFileStri
 
 void MoonObject::Update(unsigned int dt,glm::mat4 position)
 {
-	rotationAngle += dt * rotationSpeed/3000;
+	rotationAngle -= dt * rotationSpeed/3000;
 	angle += (dt * orbitVelocity/1000);
 	model = glm::translate( planet->GetPosition(), glm::vec3( orbitDistance * cos( angle ), 0.0f, orbitDistance * sin( angle ) ) ) * glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0)) * glm::scale( glm::mat4(1.0f), glm::vec3(moonSize));
 }

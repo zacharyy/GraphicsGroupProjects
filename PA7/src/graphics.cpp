@@ -71,7 +71,16 @@ m_jupiterMoon3 = new MoonObject("../objects/sphere.obj", "../objects/Ganymede.pn
 m_jupiterMoon4 = new MoonObject("../objects/sphere.obj", "../objects/Callisto.jpg",8.9 * moonDistance,0.378 * earthSize,0.275*earthOV,0.218 *earthRS,m_jupiter);
 m_saturnRing = new MoonObject("../objects/ring.obj", "../objects/saturn_ring.png",0, 3*earthSize,0,2.234 * earthRS, m_saturn);
 m_neptuneRing = new MoonObject("../objects/ring.obj", "../objects/neptune_ring.png",0,earthSize,0,2.234 * earthRS, m_neptune);
-m_uranusRing = new MoonObject("../objects/ring.obj", "../objects/uranus_ring.jpg",0,earthSize,0,2.234 * earthRS, m_uranus);
+m_uranusRing = new MoonObject("../objects/ring.obj", "../objects/uranus_ring.png",0,earthSize,0,2.234 * earthRS, m_uranus);
+/*
+m_uranusMoon1 = new MoonObject("../objects/sphere.obj", "../objects/Miranda.jpg",0.8*earthDistance,0.037 * earthSize,0.223*earthOV,0.017 *earthRS,m_uranus);
+m_uranusMoon2 = new MoonObject("../objects/sphere.obj", "../objects/Ariel.jpg",1.184*earthDistance,0.106*earthSize,0.185*earthOV, 0.05*earthRS,m_uranus);
+m_uranusMoon3 = new MoonObject("../objects/sphere.obj", "../objects/Umbriel.jpg",1.6*earthDistance,0.092* earthSize,0.157*earthOV,0.046 *earthRS,m_uranus);
+m_uranusMoon4 = new MoonObject("../objects/sphere.obj", "../objects/Titania.jpg",2.67*earthDistance,0.276 * earthSize,0.122*earthOV,0.069 *earthRS,m_uranus);
+m_uranusMoon5 = new MoonObject("../objects/sphere.obj", "../objects/Oberon.jpg",3.6*earthDistance,0.236 * earthSize,0.106*earthOV,0.065 *earthRS,m_uranus);
+m_neptuneMoon = new MoonObject("../objects/sphere.obj", "../objects/triton.png",1*earthDistance,0.212 * earthSize,0.147*earthOV,0.123 *earthRS,m_neptune);
+*/
+m_plutoMoon = new MoonObject("../objects/sphere.obj", "../objects/Charon.jpg",0.009*earthDistance,0.095 * earthSize,0.007*earthOV,0.053 *earthRS,m_pluto);
 
 std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitDistance<<std::endl;
   normalView = true;
@@ -169,6 +178,15 @@ void Graphics::Update(unsigned int dt)
 	m_saturnRing->Update(dt, glm::mat4(1.0));
 	m_neptuneRing->Update(dt, glm::mat4(1.0));
 	m_uranusRing->Update(dt, glm::mat4(1.0));
+/*
+	m_uranusMoon1->Update(dt, glm::mat4(1.0));
+	m_uranusMoon2->Update(dt, glm::mat4(1.0));
+	m_uranusMoon3->Update(dt, glm::mat4(1.0));
+	m_uranusMoon4->Update(dt, glm::mat4(1.0));
+	m_uranusMoon5->Update(dt, glm::mat4(1.0));
+	m_neptuneMoon->Update(dt, glm::mat4(1.0));
+*/
+	m_plutoMoon->Update(dt, glm::mat4(1.0));
   /*if statement that put camera in normal mode*/
   if(normalView == true)
   {
@@ -413,6 +431,28 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranusRing->GetModel()));
   m_uranusRing->Render();
+
+/*
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranusMoon1->GetModel()));
+  m_uranusMoon1->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranusMoon2->GetModel()));
+  m_uranusMoon2->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranusMoon3->GetModel()));
+  m_uranusMoon3->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranusMoon4->GetModel()));
+  m_uranusMoon4->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_uranusMoon5->GetModel()));
+  m_uranusMoon5->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_neptuneMoon->GetModel()));
+  m_neptuneMoon->Render();
+*/
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_plutoMoon->GetModel()));
+  m_plutoMoon->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();

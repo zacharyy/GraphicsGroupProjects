@@ -217,12 +217,12 @@ void Engine::Keyboard()
     }
     else if(m_event.key.keysym.sym == SDLK_EQUALS)
     {
-			if(m_graphics->speedScaler == 0) m_graphics->speedScaler = 1;
-      else m_graphics->speedScaler *= 2;
+			if(m_graphics->speedScaler == 0 || m_graphics->speedScaler  < 0.001) m_graphics->speedScaler = .001;
+      else if(m_graphics->speedScaler <= 1000000) m_graphics->speedScaler *= 2;
     }
     else if(m_event.key.keysym.sym == SDLK_MINUS)
     {
-      m_graphics->speedScaler /= 2;
+      if(m_graphics->speedScaler > 0) m_graphics->speedScaler /= 2;
     }
     else if(m_event.key.keysym.sym == SDLK_p)
     {

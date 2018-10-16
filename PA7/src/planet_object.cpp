@@ -1,6 +1,6 @@
 #include"planet_object.h"
 
-PlanetObject::PlanetObject(std::string objectFileString, std::string textureFileString, double oD, double pS, double oV, double rS)
+PlanetObject::PlanetObject(std::string objectFileString, std::string textureFileString, double oD, double pS, double oV, double rS, double sD)
 {
   const char *input;
   input = objectFileString.c_str();
@@ -15,14 +15,21 @@ PlanetObject::PlanetObject(std::string objectFileString, std::string textureFile
 	planetSize = pS;
 	orbitVelocity = oV;
 	rotationSpeed = rS;
+	scaledDistance = sD;
+	sizeScaler = false;
 }
 
 void PlanetObject::Update(unsigned int dt,glm::mat4 position)
 {
+	double distance;
+	if(sizeScaler)
+		distance = scaledDistance;
+	else
+		distance = orbitDistance;
 	orbitAngle += ((speedScaler * orbitVelocity/(2*3.14159))*dt/(1000));
 	rotateAngle = (orbitAngle*rotationSpeed);
 	//std::cout << orbitAngle/(2*3.14159) << " " << rotateAngle/(2*3.14159) << " " << orbitVelocity << std::endl;
-	glm::mat4 translate = glm::translate(position, glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
+	glm::mat4 translate = glm::translate(position, glm::vec3(distance * cos(orbitAngle), 0.0f,distance *sin(orbitAngle)));
   model = glm::rotate(translate, (rotateAngle), glm::vec3(0.0, 1.0, 0.0));
   model = glm::scale(model, glm::vec3(planetSize, planetSize, planetSize));
 }
@@ -35,7 +42,10 @@ double PlanetObject::GetPlanetSize()
 
 glm::mat4 PlanetObject::GetPosition()
 {
-  return glm::translate(glm::mat4(1.0), glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
+	if(sizeScaler)
+		return glm::translate(glm::mat4(1.0), glm::vec3(scaledDistance * cos(orbitAngle), 0.0f,scaledDistance*sin(orbitAngle)));
+	else
+  	return glm::translate(glm::mat4(1.0), glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
 }
 
 

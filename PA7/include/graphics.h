@@ -19,6 +19,7 @@ class Graphics
     void Update(unsigned int dt);
     void Render();
 		void UpdateSpeed();
+		void UpdateScale();
     /*camera variables*/
     bool normalView;
     bool topDownView;
@@ -31,7 +32,7 @@ class Graphics
     bool zoomOutTDCamera;
     int planetSelector;
 
-		int speedScaler;
+		double speedScaler;
 
   private:
     std::string ErrorString(GLenum error);

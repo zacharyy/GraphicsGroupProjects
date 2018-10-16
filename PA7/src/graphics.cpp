@@ -2,7 +2,7 @@
 
 Graphics::Graphics()
 {
-	speedScaler = 1;
+	speedScaler = .1;
 }
 
 Graphics::~Graphics()
@@ -51,15 +51,15 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 	double earthOV = 1;
 	double earthRS = 365;
  m_sun = new Object("../objects/sphere.obj", "../objects/sun.jpg");
-	m_earth = new PlanetObject("../objects/sphere.obj", "../objects/earth.jpg",earthDistance,earthSize,earthOV,earthRS);
-	m_mars = new PlanetObject("../objects/sphere.obj", "../objects/mars.jpg",1.524 * earthDistance,0.542 * earthSize,0.5296 * earthOV,666.21);
-	m_mercury = new PlanetObject("../objects/sphere.obj", "../objects/mercury.jpg",0.387 * earthDistance,0.382 * earthSize,4.152 * earthOV,1.50);
-	m_venus = new PlanetObject("../objects/sphere.obj", "../objects/venus.jpg",0.723 * earthDistance,0.949 * earthSize,1.629 * earthOV, -0.9247);
-	m_jupiter = new PlanetObject("../objects/sphere.obj", "../objects/jupiter.jpg",5.203 * earthDistance,11.209 * earthSize,0.0843 * earthOV,10558);
-	m_saturn = new PlanetObject("../objects/sphere.obj", "../objects/saturn.jpg",9.582 * earthDistance,9.449 * earthSize,0.0339 * earthOV,23895);
-	m_uranus = new PlanetObject("../objects/sphere.obj", "../objects/uranus.jpg",19.201 * earthDistance,4.007 * earthSize,0.0119 * earthOV,-42005);
-	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.0061 * earthOV,89773);
-	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.0040 * earthOV,-19911);
+	m_earth = new PlanetObject("../objects/sphere.obj", "../objects/earth.jpg",earthDistance,earthSize,earthOV,earthRS,130);
+	m_mars = new PlanetObject("../objects/sphere.obj", "../objects/mars.jpg",1.524 * earthDistance,0.542 * earthSize,0.5296 * earthOV,666.21,180);
+	m_mercury = new PlanetObject("../objects/sphere.obj", "../objects/mercury.jpg",0.387 * earthDistance,0.382 * earthSize,4.152 * earthOV,1.50, 75);
+	m_venus = new PlanetObject("../objects/sphere.obj", "../objects/venus.jpg",0.723 * earthDistance,0.949 * earthSize,1.629 * earthOV, -0.9247, 105);
+	m_jupiter = new PlanetObject("../objects/sphere.obj", "../objects/jupiter.jpg",5.203 * earthDistance,11.209 * earthSize,0.0843 * earthOV,10558,220);
+	m_saturn = new PlanetObject("../objects/sphere.obj", "../objects/saturn.jpg",9.582 * earthDistance,9.449 * earthSize,0.0339 * earthOV,23895,320);
+	m_uranus = new PlanetObject("../objects/sphere.obj", "../objects/uranusmap.jpg",19.201 * earthDistance,4.007 * earthSize,0.0119 * earthOV,-42005,420);
+	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.0061 * earthOV,89773,470);
+	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.0040 * earthOV,-19911,510);
 
 //moons
 m_earthMoon = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.384*moonDistance,0.272 * earthSize,earthOV,0.214 *earthRS,m_earth);
@@ -71,7 +71,7 @@ m_jupiterMoon3 = new MoonObject("../objects/sphere.obj", "../objects/Ganymede.pn
 m_jupiterMoon4 = new MoonObject("../objects/sphere.obj", "../objects/Callisto.jpg",8.9 * moonDistance,0.378 * earthSize,0.275*earthOV,0.218 *earthRS,m_jupiter);
 m_saturnRing = new MoonObject("../objects/ring.obj", "../objects/saturn_ring.png",0, 3*earthSize,0,2.234 * earthRS, m_saturn);
 m_neptuneRing = new MoonObject("../objects/ring.obj", "../objects/neptune_ring.png",0,earthSize,0,2.234 * earthRS, m_neptune);
-m_uranusRing = new MoonObject("../objects/ring.obj", "../objects/uranus_ring.png",0,earthSize,0,2.234 * earthRS, m_uranus);
+m_uranusRing = new MoonObject("../objects/ring.obj", "../objects/uranus_ring.jpg",0,earthSize,0,2.234 * earthRS, m_uranus);
 
 std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitDistance<<std::endl;
   normalView = true;
@@ -312,7 +312,7 @@ void Graphics::Update(unsigned int dt)
            focusPoint = glm::vec3(temp[3]);
            //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
-           break;
+           break;//The Rubric for this assignment is he
     case 9:
            temp = m_pluto->GetModel();
            eyePosition = glm::vec3(temp[3]);
@@ -422,7 +422,18 @@ void Graphics::Render()
     std::cout<< "Error initializing OpenGL! " << error << ", " << val << std::endl;
   }
 }
-
+void Graphics::UpdateScale()
+{
+	m_mercury->sizeScaler = !m_mercury->sizeScaler;
+	m_venus->sizeScaler = !m_venus->sizeScaler;
+	m_earth->sizeScaler = !m_earth->sizeScaler;
+	m_mars->sizeScaler = !m_mars->sizeScaler;
+	m_jupiter->sizeScaler = !m_jupiter->sizeScaler;
+	m_saturn->sizeScaler = !m_saturn->sizeScaler;
+	m_uranus->sizeScaler = !m_uranus->sizeScaler;
+	m_neptune->sizeScaler = !m_neptune->sizeScaler;
+	m_pluto->sizeScaler = !m_pluto->sizeScaler;
+}
 std::string Graphics::ErrorString(GLenum error)
 {
   if(error == GL_INVALID_ENUM)
@@ -454,4 +465,5 @@ std::string Graphics::ErrorString(GLenum error)
     return "None";
   }
 }
+
 

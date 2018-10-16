@@ -224,6 +224,10 @@ void Engine::Keyboard()
     {
       m_graphics->speedScaler /= 2;
     }
+    else if(m_event.key.keysym.sym == SDLK_p)
+    {
+      m_graphics->UpdateScale();
+    }
   }
 }
 

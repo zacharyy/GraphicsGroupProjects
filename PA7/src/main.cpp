@@ -5,6 +5,7 @@
 
 int main(int argc, char **argv)
 {
+/*
   // Check if user entered input correctly
   if(argc != 2)
   {
@@ -12,11 +13,12 @@ int main(int argc, char **argv)
     cout << "Please enter using following format: ./PA5 <object filename>" << endl;
     return 0;
   }
+*/
   //save object file input into string
-  string objectFileString = argv[1];
+  string objectFileString;// = argv[1];
 
   // Start an engine and run it then cleanup after
-  Engine *engine = new Engine("Project 7: Solar System", 800, 600);
+  Engine *engine = new Engine("Project 7: Solar System", 1920, 1080);
   if(!engine->Initialize(objectFileString))
   {
     printf("The engine failed to start.\n");

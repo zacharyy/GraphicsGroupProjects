@@ -7,7 +7,7 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project build of off all previous projects from this course as it involves creating a simulation of the Solar System using affine trasformations to manipulate planets and moons, model loading to load in planets and moons, texture loading to add detail to planets and moons, and user interaction that can change aspects of the simulation. Data such as orbit velocity, rotation speed, diameter, and other data necessary to simulate the movement of planets and moons are stored in a new class called planet_object. planet_object is a child class of the object class used in previous projects but contains additional functions such as Update() which overrides the Update() function from the object class and GetPlanetSize() which returns the size of the planet when called. It also contains data for moons as well as a seperate update function for moons. To run the appliction enter ./PA7
+This project builds off of all previous projects from this course as it involves creating a simulation of the Solar System using affine trasformations to manipulate planets and moons, model loading to load in planets and moons, texture loading to add detail to planets and moons, and user interaction that can change aspects of the simulation. Data such as orbit velocity, rotation speed, diameter, and other data necessary to simulate the movement of planets and moons are stored in a new class called planet_object. planet_object is a child class of the object class used in previous projects but contains additional functions such as Update() which overrides the Update() function from the object class and GetPlanetSize() which returns the size of the planet when called. It also contains data for moons as well as a seperate update function for moons. To run the appliction enter ./PA7
 
 # Dependencies, Building, and Running
 
@@ -51,9 +51,9 @@ q	- zoom out camera (top down view mode only)
 7	- view Uranus  
 8	- view Neptune  
 9	- view Pluto  
-+	- speed up simulation
--	- slow down simulation
-p	- change scale of Solar System
+"+"	- speed up simulation  
+"-"	- slow down simulation  
+p	- change scale of Solar System  
 
 # Extra Credit
-Live adjustment of simulation was implemented in this project, the =/+ button will increase the simulation speed by a factor of 2 while -/_ will decrease the speed by a factor of 2. The option to go from actual data to scaled view and vise versa was also added and can be done by pressing p. Rings were also added on Uranus and Neptune.
+Live adjustment of simulation speed was implemented in this project, the =/+ key will increase the simulation speed by a factor of 2 while the -/_ key will decrease the speed by a factor of 2. The option to go from actual data to scaled view and vise versa was also added and can be done by pressing p. Rings were also added on Uranus and Neptune.

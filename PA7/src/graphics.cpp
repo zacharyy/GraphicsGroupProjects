@@ -50,7 +50,7 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 	double earthSize = 3;
 	double earthOV = 1;
 	double earthRS = 365;
- m_sun = new Object("../objects/sphere.obj", "../objects/sun.jpg");
+ 	m_sun = new Object("../objects/sphere.obj", "../objects/sun.jpg");
 	m_earth = new PlanetObject("../objects/sphere.obj", "../objects/earth.jpg",earthDistance,earthSize,earthOV,earthRS,130);
 	m_mars = new PlanetObject("../objects/sphere.obj", "../objects/mars.jpg",1.524 * earthDistance,0.542 * earthSize,0.5296 * earthOV,666.21,180);
 	m_mercury = new PlanetObject("../objects/sphere.obj", "../objects/mercury.jpg",0.387 * earthDistance,0.382 * earthSize,4.152 * earthOV,1.50, 75);
@@ -82,7 +82,7 @@ m_neptuneMoon = new MoonObject("../objects/sphere.obj", "../objects/triton.png",
 */
 m_plutoMoon = new MoonObject("../objects/sphere.obj", "../objects/Charon.jpg",0.009*earthDistance,0.095 * earthSize,0.007*earthOV,0.053 *earthRS,m_pluto);
 
-std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitDistance<<std::endl;
+//std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitDistance<<std::endl;
   normalView = true;
   topDownView = false;
   UpdatedTDView = false;
@@ -346,6 +346,7 @@ void Graphics::Update(unsigned int dt)
 }
 void Graphics::UpdateSpeed()
 {
+	m_sun->speedScaler = speedScaler;
 	m_mercury->speedScaler = speedScaler;
 	m_venus->speedScaler = speedScaler;
 	m_earth->speedScaler = speedScaler;
@@ -472,33 +473,35 @@ Both pretty much involve drawing a circle with line segments with sin and cosine
   glColor3f(1.0,1.0,0.6);
 
   glBegin(GL_LINES);
-  glVertex3f(x1,y1,z1)
+  glVertex3f(x1,y1,z1);
   glVertex2f(x1,y1);
 
   for (angle=1.0f;angle<361.0f;angle+=0.2)
   {
     x2 = x1+sin(angle)*radius;
     z2 = z1+cos(angle)*radius;
-    glVertex2f(x2, y1, z2);
+    glVertex3f(x2, y1, z2);
   }
 
   glEnd();
-  */
+  
 
   /***OR***/
 
-  /*
+  
   //OPTION 2:
-  glBegin(GL_LINES);
+	/*glColor3f(0, 1.0, 0); // Set constant vertex state outside of glBegin-glEnd.
+  //glBegin(GL_LINE_STRIP);
   for ( float angle = 0; angle <= 2*3.142; angle+=3.142/30)
   {
     //radius in this case would be 100, can change this to radius of planet orbit
     glVertex3f(100.0 * cos (angle) / 2, 0, 100.0 * sin (angle) / 2);
     glVertex3f(100.0 * cos (angle + 3.142/30) / 2, 0, 100.0 * sin (angle + 3.142/30) / 2);
-  }
-  glEnd();
-  */
+  }*/
+  //glEnd();
+ 
 
+    //glFlush();
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

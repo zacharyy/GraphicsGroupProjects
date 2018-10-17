@@ -6,7 +6,7 @@ PlanetObject::PlanetObject(std::string objectFileString, std::string textureFile
   input = objectFileString.c_str();
 	
 	textureFile = textureFileString;
-	std::cout << textureFile << std::endl;
+	//std::cout << textureFile << std::endl;
   // Read our .obj file
   loadOBJ(input);
   rotateAngle = 0.0f;
@@ -26,7 +26,7 @@ void PlanetObject::Update(unsigned int dt,glm::mat4 position)
 		distance = scaledDistance;
 	else
 		distance = orbitDistance;
-	orbitAngle += ((speedScaler * orbitVelocity/(2*3.14159))*dt/(1000));
+	orbitAngle += ((speedScaler * orbitVelocity/(2*M_PI))*dt/(1000));
 	rotateAngle = -(orbitAngle*rotationSpeed);
 	//std::cout << orbitAngle/(2*3.14159) << " " << rotateAngle/(2*3.14159) << " " << orbitVelocity << std::endl;
 	glm::mat4 translate = glm::translate(position, glm::vec3(distance * cos(orbitAngle), 0.0f,distance *sin(orbitAngle)));
@@ -55,7 +55,7 @@ MoonObject::MoonObject(std::string objectFileString, std::string textureFileStri
   input = objectFileString.c_str();
 	
 	textureFile = textureFileString;
-	std::cout << textureFile << std::endl;
+	//std::cout << textureFile << std::endl;
   // Read our .obj file
   loadOBJ(input);
   rotationAngle = 0.0f;

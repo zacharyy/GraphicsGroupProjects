@@ -18,6 +18,8 @@ class Object
     void loadOBJ(const char * path);
 		std::string textureFile;
     glm::mat4 model;
+		double speedScaler;
+		bool sizeScaler;
   private:
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;

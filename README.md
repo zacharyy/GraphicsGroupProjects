@@ -26,3 +26,6 @@ This is a model loader that loads model files using Assimp.  To run this project
 
 ## PA6: Assimp Texture Loading
 The model loader from PA5 is now updated to load textures onto models.  To run this project ```cd PA6``` then follow the instructions in the README.md.
+
+## PA7: Solar System
+This is a simulation of the Solar System made by using the knowlege gained from previous projects.  To run this project ```cd PA7``` then follow the instructions in the README.md.

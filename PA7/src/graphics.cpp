@@ -83,6 +83,8 @@ m_neptuneMoon = new MoonObject("../objects/sphere.obj", "../objects/triton.png",
 m_plutoMoon = new MoonObject("../objects/sphere.obj", "../objects/Charon.jpg",0.009*earthDistance,0.095 * earthSize,0.007*earthOV,0.053 *earthRS,m_pluto);
 
 //std::cout<<m_earthMoon->planet->orbitDistance<<' '<<m_saturnRing->planet->orbitDistance<<std::endl;
+
+  /*Set camera control variables (normal view is initially set)*/
   normalView = true;
   topDownView = false;
   UpdatedTDView = false;
@@ -187,13 +189,14 @@ void Graphics::Update(unsigned int dt)
 	m_neptuneMoon->Update(dt, glm::mat4(1.0));
 */
 	m_plutoMoon->Update(dt, glm::mat4(1.0));
-  /*if statement that put camera in normal mode*/
+  /*if statement that put camera in normal mode with the NormalView function*/
   if(normalView == true)
   {
     m_camera->NormalView();
   }
 
-  /*if statement that put camera in top down mode*/
+  /*if statement that put camera in top down mode with the TopDownView() function*/
+  /*the eye position and focus point of the camera are reset to default values*/
   if(topDownView == true && UpdatedTDView != true)
   {
     m_camera->currentTDEyePosition = m_camera->defaultTDEyePosition;
@@ -202,6 +205,9 @@ void Graphics::Update(unsigned int dt)
   }
   
   /*if statements that move camera in top down mode*/
+  //each statement checks whether the key corresponding to the movement has been pressed
+  //and the UpdatedTDView variable is true, UpdatedTDView is needed so the camera doesn't snap
+  //to the default top down camera position each time the update function is called
   if(moveTDCameraUp == true && UpdatedTDView == true)
   {
     m_camera->currentTDEyePosition.z -= 2;
@@ -243,14 +249,16 @@ void Graphics::Update(unsigned int dt)
     zoomOutTDCamera = false;
   }
 
+  glm::mat4 temp; //temp variable that will hold a planet model
+  glm::vec3 eyePosition; //variable that will set the eye position of the camera
+  glm::vec3 focusPoint; //variable that will set the focus point of the camera
+  int planetCameraDistanceScale = 5; // camera will be placed PlanetSize * planetCameraDistanceScale away from planet
   /*switch statement that moves camera between planets*/
-  glm::mat4 temp;
-  glm::vec3 eyePosition;
-  glm::vec3 focusPoint;
-  // camera will be placed PlanetSize * planetCameraDistanceScale away from planet
-  int planetCameraDistanceScale = 5;
   switch(planetSelector)
   {
+    //for each case, the model for each planet is set to the temp matrix, 
+    //the eye position and focus point are set based on the model location,
+    //and the new eye position and focus point are passed to PlanetView() to update the camera
     case 1:
            temp = m_mercury->GetModel();
            eyePosition = glm::vec3(temp[3]);
@@ -268,7 +276,6 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_venus->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_venus->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
            break;
     case 3:
@@ -278,7 +285,6 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_earth->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_earth->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
            break;
     case 4:
@@ -288,7 +294,6 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_mars->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_mars->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
            break;
     case 5:
@@ -298,7 +303,6 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_jupiter->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_jupiter->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
            break;
     case 6:
@@ -308,7 +312,6 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_saturn->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_saturn->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
            break;
     case 7:
@@ -318,7 +321,6 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_uranus->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_uranus->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
            break;
     case 8:
@@ -328,9 +330,8 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_neptune->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_neptune->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
-           break;//The Rubric for this assignment is he
+           break;
     case 9:
            temp = m_pluto->GetModel();
            eyePosition = glm::vec3(temp[3]);
@@ -338,7 +339,6 @@ void Graphics::Update(unsigned int dt)
            eyePosition.y = m_pluto->GetPlanetSize() * planetCameraDistanceScale;
            eyePosition.z +=  m_pluto->GetPlanetSize() * planetCameraDistanceScale;
            focusPoint = glm::vec3(temp[3]);
-           //std::cout << focusPoint.x << endl;
            m_camera->PlanetView(eyePosition, focusPoint);
            break;
   }
@@ -455,53 +455,6 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_plutoMoon->GetModel()));
   m_plutoMoon->Render();
 
-  /*Drawing a circle code*/
-  /*I found 2 methods online but havent had a chance to test them (due to ecc displays not working properly on tuesday)
-Both pretty much involve drawing a circle with line segments with sin and cosine based on a radius
-  */
-
-  /*
-  //OPTION 1:
-  float x1, y1 ,x2 ,z1 ,z2;
-  float angle;
-  //change radius according to planet orbit radius
-  double radius=0.1;
-
-  x1 = 0.5;
-  y1 = 0.0;
-  z1 = 0.6;
-  glColor3f(1.0,1.0,0.6);
-
-  glBegin(GL_LINES);
-  glVertex3f(x1,y1,z1);
-  glVertex2f(x1,y1);
-
-  for (angle=1.0f;angle<361.0f;angle+=0.2)
-  {
-    x2 = x1+sin(angle)*radius;
-    z2 = z1+cos(angle)*radius;
-    glVertex3f(x2, y1, z2);
-  }
-
-  glEnd();
-  
-
-  /***OR***/
-
-  
-  //OPTION 2:
-	/*glColor3f(0, 1.0, 0); // Set constant vertex state outside of glBegin-glEnd.
-  //glBegin(GL_LINE_STRIP);
-  for ( float angle = 0; angle <= 2*3.142; angle+=3.142/30)
-  {
-    //radius in this case would be 100, can change this to radius of planet orbit
-    glVertex3f(100.0 * cos (angle) / 2, 0, 100.0 * sin (angle) / 2);
-    glVertex3f(100.0 * cos (angle + 3.142/30) / 2, 0, 100.0 * sin (angle + 3.142/30) / 2);
-  }*/
-  //glEnd();
- 
-
-    //glFlush();
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

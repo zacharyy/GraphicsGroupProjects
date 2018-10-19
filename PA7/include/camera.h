@@ -17,11 +17,12 @@ class Camera
     void TopDownView();
     void TopDownViewUpdated(glm::vec3 eyePosition, glm::vec3 focusPoint);
     void PlanetView(glm::vec3 eyePosition, glm::vec3 focusPoint);
+
     /*variables that will help move the camera in top down mode*/
-    glm::vec3 defaultTDEyePosition;
-    glm::vec3 defaultTDFocusPoint;
-    glm::vec3 currentTDEyePosition;
-    glm::vec3 currentTDFocusPoint;
+    glm::vec3 defaultTDEyePosition; //default eye position of the top down camera
+    glm::vec3 defaultTDFocusPoint; //default focus point of the top down camera
+    glm::vec3 currentTDEyePosition; //updated eye position of the top down camera
+    glm::vec3 currentTDFocusPoint; //updated focus point of the top down camera
 
   private:
     glm::mat4 projection;

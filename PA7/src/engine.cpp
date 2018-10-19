@@ -105,44 +105,6 @@ void Engine::Keyboard()
       m_graphics->UpdatedTDView = false;
       m_graphics->planetSelector = 0;
     }
-
-    //if w is pressed move top down camera up
-    else if(m_event.key.keysym.sym == SDLK_w && m_graphics->topDownView == true)
-    {
-        m_graphics->UpdatedTDView = true;
-	m_graphics->moveTDCameraUp = true;
-    }
-    //if a is pressed move top down camera left
-    else if(m_event.key.keysym.sym == SDLK_a && m_graphics->topDownView == true)
-    {
-        m_graphics->UpdatedTDView = true;
-	m_graphics->moveTDCameraLeft = true;
-    }
-    //if s is pressed move top down camera down
-    else if(m_event.key.keysym.sym == SDLK_s && m_graphics->topDownView == true)
-    {
-        m_graphics->UpdatedTDView = true;
-	m_graphics->moveTDCameraDown = true;
-    }
-    //if d is pressed move top down camera right
-    else if(m_event.key.keysym.sym == SDLK_d && m_graphics->topDownView == true)
-    {
-        m_graphics->UpdatedTDView = true;
-	m_graphics->moveTDCameraRight = true;
-    }
-    //if e is pressed zoom top down camera in
-    else if(m_event.key.keysym.sym == SDLK_e && m_graphics->topDownView == true)
-    {
-        m_graphics->UpdatedTDView = true;
-	m_graphics->zoomInTDCamera = true;
-    }
-    //if q is pressed zoom top down camera out
-    else if(m_event.key.keysym.sym == SDLK_q && m_graphics->topDownView == true)
-    {
-        m_graphics->UpdatedTDView = true;
-	m_graphics->zoomOutTDCamera = true;
-    }
-
     //if 1 is pressed show Mercury
     else if(m_event.key.keysym.sym == SDLK_1)
     {
@@ -215,9 +177,47 @@ void Engine::Keyboard()
       m_graphics->UpdatedTDView = false;
       m_graphics->planetSelector = 9;
     }
+    //controls for camera movement
+    //if w is pressed move top down camera up
+    else if(m_event.key.keysym.sym == SDLK_w && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraUp = true;
+    }
+    //if a is pressed move top down camera left
+    else if(m_event.key.keysym.sym == SDLK_a && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraLeft = true;
+    }
+    //if s is pressed move top down camera down
+    else if(m_event.key.keysym.sym == SDLK_s && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraDown = true;
+    }
+    //if d is pressed move top down camera right
+    else if(m_event.key.keysym.sym == SDLK_d && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->moveTDCameraRight = true;
+    }
+    //if e is pressed zoom top down camera in
+    else if(m_event.key.keysym.sym == SDLK_e && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->zoomInTDCamera = true;
+    }
+    //if q is pressed zoom top down camera out
+    else if(m_event.key.keysym.sym == SDLK_q && m_graphics->topDownView == true)
+    {
+        m_graphics->UpdatedTDView = true;
+	m_graphics->zoomOutTDCamera = true;
+    }
+    /*Simulation Controls*/
     else if(m_event.key.keysym.sym == SDLK_EQUALS)
     {
-			if(m_graphics->speedScaler == 0 || m_graphics->speedScaler  < 0.001) m_graphics->speedScaler = .001;
+      if(m_graphics->speedScaler == 0 || m_graphics->speedScaler  < 0.001) m_graphics->speedScaler = .001;
       else if(m_graphics->speedScaler <= 1000000) m_graphics->speedScaler *= 2;
     }
     else if(m_event.key.keysym.sym == SDLK_MINUS)

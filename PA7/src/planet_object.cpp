@@ -2,15 +2,15 @@
 
 PlanetObject::PlanetObject(std::string objectFileString, std::string textureFileString, double oD, double pS, double oV, double rS, double sD)
 {
-  const char *input;
-  input = objectFileString.c_str();
+	const char *input;
+	input = objectFileString.c_str();
 	
 	textureFile = textureFileString;
 	//std::cout << textureFile << std::endl;
-  // Read our .obj file
-  loadOBJ(input);
-  rotateAngle = 0.0f;
-  orbitAngle = 0.0f;
+	// Read our .obj file
+	loadOBJ(input);
+	rotateAngle = 0.0f;
+	orbitAngle = 0.0f;
 	orbitDistance = oD;
 	planetSize = pS;
 	orbitVelocity = oV;
@@ -34,7 +34,7 @@ void PlanetObject::Update(unsigned int dt,glm::mat4 position)
   model = glm::scale(model, glm::vec3(planetSize, planetSize, planetSize));
 }
 
-/*function that will get a planet's size*/
+/*function that will return a planet's size*/
 double PlanetObject::GetPlanetSize()
 {
 	return planetSize;
@@ -45,21 +45,21 @@ glm::mat4 PlanetObject::GetPosition()
 	if(sizeScaler)
 		return glm::translate(glm::mat4(1.0), glm::vec3(scaledDistance * cos(orbitAngle), 0.0f,scaledDistance*sin(orbitAngle)));
 	else
-  	return glm::translate(glm::mat4(1.0), glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
+		return glm::translate(glm::mat4(1.0), glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
 }
 
 
 MoonObject::MoonObject(std::string objectFileString, std::string textureFileString, double oD, double pS, double oV, double rS, PlanetObject* pl)
 {
-  const char *input;
-  input = objectFileString.c_str();
+	const char *input;
+	input = objectFileString.c_str();
 	
 	textureFile = textureFileString;
 	//std::cout << textureFile << std::endl;
-  // Read our .obj file
-  loadOBJ(input);
-  rotationAngle = 0.0f;
-  angle = 0.0f;
+	// Read our .obj file
+	loadOBJ(input);
+	rotationAngle = 0.0f;
+	angle = 0.0f;
 	orbitDistance = oD;
 	moonSize = pS;
 	orbitVelocity = oV;

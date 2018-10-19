@@ -13,13 +13,20 @@ using namespace std;
 class Graphics
 {
   public:
+		// Constructor
     Graphics();
+		// Destructor
     ~Graphics();
+		// Initialize the graphics
     bool Initialize(int width, int height, string objectFileString);
+		// Graphics update function that calls objects updates
     void Update(unsigned int dt);
+		// Render the objects
     void Render();
 
+		// Update the speed
     void UpdateSpeed();
+		// Update the scale
     void UpdateScale();
     
     /*camera variables*/
@@ -36,6 +43,7 @@ class Graphics
     bool zoomInTDCamera;
     bool zoomOutTDCamera;
 
+		//variable for speed of simulation
     double speedScaler;
 
   private:
@@ -48,6 +56,7 @@ class Graphics
     GLint m_viewMatrix;
     GLint m_modelMatrix;
 
+		// Objects for the planets, sun, and moon
     Object *m_sun;
     PlanetObject *m_earth;
     PlanetObject *m_mars;

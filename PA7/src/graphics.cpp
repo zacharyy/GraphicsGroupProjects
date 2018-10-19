@@ -44,12 +44,13 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
     return false;
   }
 
-  // Create the object
+  // Set earth variables and other planets are based on earths values
 	double earthDistance = 180;
 	double moonDistance = 10;
 	double earthSize = 3;
 	double earthOV = 1;
 	double earthRS = 365;
+	// Create the planets and sun
  	m_sun = new Object("../objects/sphere.obj", "../objects/sun.jpg");
 	m_earth = new PlanetObject("../objects/sphere.obj", "../objects/earth.jpg",earthDistance,earthSize,earthOV,earthRS,130);
 	m_mars = new PlanetObject("../objects/sphere.obj", "../objects/mars.jpg",1.524 * earthDistance,0.542 * earthSize,0.5296 * earthOV,666.21,180);
@@ -61,7 +62,7 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 	m_neptune = new PlanetObject("../objects/sphere.obj", "../objects/neptune.jpg",30.047 * earthDistance,3.883 * earthSize,0.0061 * earthOV,89773,470);
 	m_pluto = new PlanetObject("../objects/sphere.obj", "../objects/pluto.jpg",39.481 * earthDistance,0.186 * earthSize,0.0040 * earthOV,-19911,510);
 
-//moons
+//Create the moons and rings
 m_earthMoon = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.384*moonDistance,0.272 * earthSize,earthOV,0.214 *earthRS,m_earth);
 m_marsMoon1 = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.13 * moonDistance,0.1 * earthSize,0.88*earthOV,0.214 *earthRS,m_mars);
 m_marsMoon2 = new MoonObject("../objects/sphere.obj", "../objects/earth_moon.jpg",0.2 * moonDistance,0.05 * earthSize,0.1*earthOV,0.214 *earthRS,m_mars);
@@ -158,7 +159,7 @@ m_plutoMoon = new MoonObject("../objects/sphere.obj", "../objects/Charon.jpg",0.
 
 void Graphics::Update(unsigned int dt)
 {
-  // Update the object
+  // Update the objects
 	UpdateSpeed();
   m_sun->Update(dt);
 	m_earth->Update(dt, glm::mat4(1.0));
@@ -346,6 +347,7 @@ void Graphics::Update(unsigned int dt)
 }
 void Graphics::UpdateSpeed()
 {
+	// update the speed scaler of the planets
 	m_sun->speedScaler = speedScaler;
 	m_mercury->speedScaler = speedScaler;
 	m_venus->speedScaler = speedScaler;
@@ -465,6 +467,7 @@ void Graphics::Render()
 }
 void Graphics::UpdateScale()
 {
+	// Update the size scaler of the objects
 	m_mercury->sizeScaler = !m_mercury->sizeScaler;
 	m_venus->sizeScaler = !m_venus->sizeScaler;
 	m_earth->sizeScaler = !m_earth->sizeScaler;

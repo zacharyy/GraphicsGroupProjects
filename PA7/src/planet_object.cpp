@@ -21,6 +21,7 @@ PlanetObject::PlanetObject(std::string objectFileString, std::string textureFile
 
 void PlanetObject::Update(unsigned int dt,glm::mat4 position)
 {
+	// Update the planet model over time depending on if its scaled and the speed of the simulation
 	double distance;
 	if(sizeScaler)
 		distance = scaledDistance;
@@ -39,7 +40,7 @@ double PlanetObject::GetPlanetSize()
 {
 	return planetSize;
 }
-
+// Return the position of the planet
 glm::mat4 PlanetObject::GetPosition()
 {
 	if(sizeScaler)
@@ -48,7 +49,7 @@ glm::mat4 PlanetObject::GetPosition()
 		return glm::translate(glm::mat4(1.0), glm::vec3(orbitDistance * cos(orbitAngle), 0.0f,orbitDistance*sin(orbitAngle)));
 }
 
-
+// Constructor for moon objects
 MoonObject::MoonObject(std::string objectFileString, std::string textureFileString, double oD, double pS, double oV, double rS, PlanetObject* pl)
 {
 	const char *input;
@@ -66,7 +67,7 @@ MoonObject::MoonObject(std::string objectFileString, std::string textureFileStri
 	rotationSpeed = rS;
 	planet = pl;
 }
-
+// Update the moon objects over time
 void MoonObject::Update(unsigned int dt,glm::mat4 position)
 {
 	rotationAngle -= dt * rotationSpeed/3000;

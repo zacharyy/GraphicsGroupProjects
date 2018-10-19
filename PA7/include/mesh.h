@@ -8,7 +8,9 @@ class Mesh {
 
         //vector<Texture> textures;
         /*  Functions  */
+				// Constructor
         Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::string file);
+				// Draw the mesh
         void Draw();
     private:
         /*  Render data  */
@@ -17,5 +19,6 @@ class Mesh {
 				GLuint texture;
 				std::string textureFileName;
         /*  Functions    */
+				// Set up the mesh
         void setupMesh();
 };

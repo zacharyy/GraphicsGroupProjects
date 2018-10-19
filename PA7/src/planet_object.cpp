@@ -72,5 +72,7 @@ void MoonObject::Update(unsigned int dt,glm::mat4 position)
 {
 	rotationAngle -= dt * rotationSpeed/3000;
 	angle += (dt * orbitVelocity/1000);
+	
+	//rotate around planet
 	model = glm::translate( planet->GetPosition(), glm::vec3( orbitDistance * cos( angle ), 0.0f, orbitDistance * sin( angle ) ) ) * glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0)) * glm::scale( glm::mat4(1.0f), glm::vec3(moonSize));
 }

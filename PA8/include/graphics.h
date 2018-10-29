@@ -30,6 +30,7 @@ class Graphics
 
     Object *m_ball;
     Object *m_board;
+    Object *m_cylinder;
 
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;
@@ -39,6 +40,7 @@ class Graphics
 
     btRigidBody *ballRigidBody;
     btRigidBody *boardRigidBody;
+		btRigidBody *cylinderRigidBody;
 };
 
 #endif /* GRAPHICS_H */

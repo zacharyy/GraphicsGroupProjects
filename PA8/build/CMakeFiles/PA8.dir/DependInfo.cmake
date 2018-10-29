@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/camera.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/camera.cpp.o"
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/engine.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/engine.cpp.o"
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/graphics.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/graphics.cpp.o"
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/main.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/main.cpp.o"
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/mesh.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/mesh.cpp.o"
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/object.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/object.cpp.o"
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/shader.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/shader.cpp.o"
-  "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/src/window.cpp" "/nfs/home/ethanpark/Desktop/temp/computer-graphics-master/PA8/build/CMakeFiles/PA8.dir/src/window.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/camera.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/camera.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/engine.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/engine.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/graphics.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/graphics.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/main.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/main.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/mesh.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/mesh.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/object.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/object.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/shader.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/shader.cpp.o"
+  "/home/zacharyy/Desktop/CS480/cs480Park/PA8/src/window.cpp" "/home/zacharyy/Desktop/CS480/cs480Park/PA8/build/CMakeFiles/PA8.dir/src/window.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -27,7 +27,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/lib/include"
   "../include"
   "/usr/include/SDL2"
-  "/usr/include/ImageMagick-6"
   "/usr/include/x86_64-linux-gnu/ImageMagick-6"
   "/usr/include/bullet"
   )

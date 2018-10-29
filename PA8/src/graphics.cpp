@@ -2,7 +2,7 @@
 
 Graphics::Graphics()
 {
-
+	Magick::InitializeMagick(NULL);
 }
 
 Graphics::~Graphics()
@@ -62,15 +62,15 @@ bool Graphics::Initialize(int width, int height)
   solver = new btSequentialImpulseConstraintSolver();
 
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-  dynamicsWorld->setGravity(btVector3(0,-9.81,0));
+  dynamicsWorld->setGravity(btVector3(0,-0.001,0));
 
   /*Create Objects*/
   /*not sure what to set btVector3 to so its set to 0 by default*/
   //Create the ball
-  objTriMesh = new btTriangleMesh();
-  m_ball = new Object("sphere.obj", "sun.jpg", objTriMesh);
+  btTriangleMesh* objTriMesh = new btTriangleMesh();
+  m_ball = new Object("../objects/ball.obj", "../objects/sun.jpg", objTriMesh);
   btCollisionShape *ballShape = new btConvexTriangleMeshShape(objTriMesh, true); 
-  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, 0)));
   btScalar ballMass = 1;
   btVector3 ballInertia(0, 0, 0);
 
@@ -81,10 +81,10 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(ballRigidBody);
 
   // Create the board
-  btTriangleMesh* objTriMesh = new btTriangleMesh();
-  m_board = new Object("box.obj", "granite.jpg", objTriMesh);
-  btCollisionShape *boardShape = new btBvhTriangleMeshShape(objTriMesh, true);
-  btDefaultMotionState* boardMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btTriangleMesh* objTriMesh2 = new btTriangleMesh();
+  m_board = new Object("../objects/board.obj", "../objects/checker.jpg", objTriMesh2);
+  btCollisionShape *boardShape = new btBvhTriangleMeshShape(objTriMesh2, true);
+  btDefaultMotionState* boardMotionState = new btDefaultMotionState(btTransform(btQuaternion(0.1, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar boardMass = 0; //setting mass to 0 makes it static
   btVector3 boardInertia(0, 0, 0);
 
@@ -93,6 +93,21 @@ bool Graphics::Initialize(int width, int height)
   boardRigidBody = new btRigidBody(boardRigidBodyCI);
   boardRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(boardRigidBody);
+
+  // Create the cylinder
+  btTriangleMesh* objTriMesh3 = new btTriangleMesh();
+  m_cylinder = new Object("../objects/cylinder.obj", "../objects/granite.jpg", objTriMesh3);
+  btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh3, true);
+  btDefaultMotionState* cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 5)));
+  btScalar cylinderMass = 0; //setting mass to 0 makes it static
+  btVector3 cylinderInertia(0, 0, 0);
+
+  cylinderShape->calculateLocalInertia(cylinderMass, cylinderInertia);
+  btRigidBody::btRigidBodyConstructionInfo cylinderRigidBodyCI(cylinderMass, cylinderMotionState, cylinderShape, cylinderInertia);
+  cylinderRigidBody = new btRigidBody(cylinderRigidBodyCI);
+  cylinderRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(cylinderRigidBody);
+
 
   // Set up the shaders
   m_shader = new Shader();
@@ -167,6 +182,12 @@ void Graphics::Update(unsigned int dt)
   boardRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_board->model = glm::make_mat4(m);
+
+  cylinderRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_cylinder->model = glm::make_mat4(m);
+
+
 }
 
 void Graphics::Render()
@@ -188,6 +209,9 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_board->GetModel()));
   m_board->Render();
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+  m_cylinder->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();

@@ -6,18 +6,18 @@
 int main(int argc, char **argv)
 {
   // Check if user entered input correctly
-  if(argc != 2)
+  /*if(argc != 2)
   {
     cout << "Error: Incorrect input." << endl;
     cout << "Please enter using following format: ./PA5 <object filename>" << endl;
     return 0;
-  }
+  }*/
   //save object file input into string
-  string objectFileString = argv[1];
+  //string objectFileString = argv[1];
 
   // Start an engine and run it then cleanup after
-  Engine *engine = new Engine("Project 6: Assimp with Textures", 800, 600);
-  if(!engine->Initialize(objectFileString))
+  Engine *engine = new Engine("Project 8: Bullet", 800, 600);
+  if(!engine->Initialize())
   {
     printf("The engine failed to start.\n");
     delete engine;

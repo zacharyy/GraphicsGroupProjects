@@ -7,10 +7,20 @@ Graphics::Graphics()
 
 Graphics::~Graphics()
 {
+  delete dynamicsWorld;
+  delete solver;
+  delete collisionConfiguration;
+  delete dispatcher;
+  delete broadphase;
 
+  dynamicsWorld = NULL;
+  solver = NULL;
+  collisionConfiguration = NULL;
+  dispatcher = NULL;
+  broadphase = NULL;
 }
 
-bool Graphics::Initialize(int width, int height, string objectFileString)
+bool Graphics::Initialize(int width, int height)
 {
   // Used for the linux OS
   #if !defined(__APPLE__) && !defined(MACOSX)
@@ -44,8 +54,45 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
     return false;
   }
 
-  // Create the object
-  m_board = new Object(objectFileString);
+  /*Bullet*/
+  /*Initialize and create physics world*/
+  broadphase = new btDbvtBroadphase();
+  collisionConfiguration = new btDefaultCollisionConfiguration();
+  dispatcher = new btCollisionDispatcher(collisionConfiguration);
+  solver = new btSequentialImpulseConstraintSolver();
+
+  dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+  dynamicsWorld->setGravity(btVector3(0,-9.81,0));
+
+  /*Create Objects*/
+  /*not sure what to set btVector3 to so its set to 0 by default*/
+  //Create the ball
+  objTriMesh = new btTriangleMesh();
+  m_ball = new Object("sphere.obj", "sun.jpg", objTriMesh);
+  btCollisionShape *ballShape = new btConvexTriangleMeshShape(objTriMesh, true); 
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btScalar ballMass = 1;
+  btVector3 ballInertia(0, 0, 0);
+
+  ballShape->calculateLocalInertia(ballMass, ballInertia);
+  btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(ballMass, ballMotionState, ballShape, ballInertia);
+  ballRigidBody = new btRigidBody(ballRigidBodyCI);
+  ballRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(ballRigidBody);
+
+  // Create the board
+  btTriangleMesh* objTriMesh = new btTriangleMesh();
+  m_board = new Object("box.obj", "granite.jpg", objTriMesh);
+  btCollisionShape *boardShape = new btBvhTriangleMeshShape(objTriMesh, true);
+  btDefaultMotionState* boardMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btScalar boardMass = 0; //setting mass to 0 makes it static
+  btVector3 boardInertia(0, 0, 0);
+
+  boardShape->calculateLocalInertia(boardMass, boardInertia);
+  btRigidBody::btRigidBodyConstructionInfo boardRigidBodyCI(boardMass, boardMotionState, boardShape, boardInertia);
+  boardRigidBody = new btRigidBody(boardRigidBodyCI);
+  boardRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(boardRigidBody);
 
   // Set up the shaders
   m_shader = new Shader();
@@ -109,8 +156,17 @@ bool Graphics::Initialize(int width, int height, string objectFileString)
 
 void Graphics::Update(unsigned int dt)
 {
-  // Update the object
-  m_board->Update(dt);
+  btTransform trans;
+  btScalar m[16];
+  dynamicsWorld->stepSimulation(dt, 10);
+
+  ballRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_ball->model = glm::make_mat4(m);
+
+  boardRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_board->model = glm::make_mat4(m);
 }
 
 void Graphics::Render()
@@ -126,7 +182,10 @@ void Graphics::Render()
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
-  // Render the object
+  // Render the objects
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
+  m_ball->Render();
+
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_board->GetModel()));
   m_board->Render();
 

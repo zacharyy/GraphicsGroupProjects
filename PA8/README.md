@@ -33,7 +33,7 @@ mkdir build
 cd build  
 cmake ..  
 make  
-./PA8 ../objects/buddha.obj 
+./PA8 
 
 For any other model file simply add the file to the objects folder and change buddha.obj to the desired file. As mention before, textures are hard coded an must be changed in object.cpp
 

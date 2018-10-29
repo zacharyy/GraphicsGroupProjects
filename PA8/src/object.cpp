@@ -1,20 +1,26 @@
 #include "object.h"
 #include <cstdlib>
 #include <ctime>
+Object::Object()
+{
 
-Object::Object(std::string objectFileString)
+}
+Object::Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh)
 {  
 
   const char *input;
   input = objectFileString.c_str();
+	
+	textureFile = textureFileString;
 
 	Magick::InitializeMagick(NULL);
 
 
   // Read our .obj file
-  loadOBJ(input);
+  loadOBJ(input, triMesh);
 
   angle = 0.0f;
+	speedScaler = 0.001;
 /*
   glGenBuffers(1, &VB);
   glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -24,7 +30,6 @@ Object::Object(std::string objectFileString)
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);*/
 }
-
 Object::~Object()
 {
   Vertices.clear();
@@ -33,10 +38,10 @@ Object::~Object()
 
 void Object::Update(unsigned int dt)
 {
-  angle += dt * M_PI/5000;
-  //model = glm::translate( glm::mat4(1.0f),glm::vec3(8.0*sin(angle), 0.0, 8.0*cos(angle)));
-  model = glm::scale(glm::vec3(1.0, 1.0, 1.0));   
-  model = glm::rotate( model, (angle*2), glm::vec3(1.0f, 0.0f, 0.0f));
+  angle += ((speedScaler * 10/(2*M_PI)*dt/1000));
+  //glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f * cos(angle/5), 0.0f,5.0f * sin(angle/5)));
+  model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+	model = glm::scale(model, glm::vec3(60, 60, 60));
 
 }
 
@@ -47,32 +52,18 @@ glm::mat4 Object::GetModel()
 
 void Object::Render()
 {
-	for(int i = 0; i < 2; i++)
-	{
-  	/*glEnableVertexAttribArray(0);
-  	glEnableVertexAttribArray(1);
-
-  	glBindBuffer(GL_ARRAY_BUFFER, VB);
-  	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-  	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,color));
-
-  	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-
-  	glDrawElements(GL_TRIANGLES, meshes[i].Indices.size(), GL_UNSIGNED_INT, 0);
-
-  	glDisableVertexAttribArray(0);
-  	glDisableVertexAttribArray(1);*/
-		meshes[i].Draw();
-	}
+	meshes[0].Draw();
 }
 
 /*Function that will load object files*/
-void Object::loadOBJ(const char * path)
+void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
 {
   //Create Importer
   Assimp::Importer importer;
   //Make Scene
-  const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate);
+  const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+
+  btVector3 triArray[3];
 
   /*Make Verticies*/
   int meshNumber = scene->mNumMeshes;
@@ -123,17 +114,24 @@ void Object::loadOBJ(const char * path)
     for (unsigned int j=0; j < mesh->mNumFaces; j++) 
     {
       const aiFace& Face = mesh->mFaces[j];
+
+      for (int jindex = 0; jindex < 3; jindex++)
+      {
+        aiVector3D position = scene->mMeshes[0]->mVertices[Face.mIndices[jindex]];
+        triArray[jindex] = btVector3(position.x, position.y, position.z);
+        Indices.push_back( Face.mIndices[jindex] );
+      }
+      triMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
+
       assert(Face.mNumIndices == 3);
       ind.push_back(Face.mIndices[0]);
       ind.push_back(Face.mIndices[1]);
       ind.push_back(Face.mIndices[2]);
     }
-		// Hard coded for buddha object
-		if(i == 0)
-			meshes.push_back(Mesh(v,ind,"../objects/granite.jpg"));
-		else
-			meshes.push_back(Mesh(v,ind,"../objects/checker.jpg"));
-  }
+
+		// Hard coded sun texture
+		meshes.push_back(Mesh(v,ind,textureFile.c_str()));
+	}	
   //return true;
 }
 

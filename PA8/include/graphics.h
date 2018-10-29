@@ -14,7 +14,7 @@ class Graphics
   public:
     Graphics();
     ~Graphics();
-    bool Initialize(int width, int height, string objectFileString);
+    bool Initialize(int width, int height);
     void Update(unsigned int dt);
     void Render();
 
@@ -28,7 +28,17 @@ class Graphics
     GLint m_viewMatrix;
     GLint m_modelMatrix;
 
+    Object *m_ball;
     Object *m_board;
+
+    btBroadphaseInterface *broadphase;
+    btDefaultCollisionConfiguration *collisionConfiguration;
+    btCollisionDispatcher *dispatcher;
+    btSequentialImpulseConstraintSolver *solver;
+    btDiscreteDynamicsWorld *dynamicsWorld;
+
+    btRigidBody *ballRigidBody;
+    btRigidBody *boardRigidBody;
 };
 
 #endif /* GRAPHICS_H */

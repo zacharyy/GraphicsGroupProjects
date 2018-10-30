@@ -1,4 +1,4 @@
-# PA6: Assimp Texture Loading
+# PA8: Bullet
 Group Members:  
 Dongjun Jia  
 Ethan Park  
@@ -6,12 +6,12 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project builds off the previous Assimp model loading project with the loader now being able to load textures onto a model. This was done using ImageMagick, specifically magick++ which allows us to read in textures. This project also fixes problems with the previous project, namely loading for multiple mesh models. In order to achieve this, a new mesh class was added to assist in multiple mesh loading for this project. Because of this most of the set up for the models (such as model loading, texture loading, drawing) are now moved to the function of this class. The model loader can currently load multiple textures onto a single model, but the textures must be hard coded in object.cpp to achieve this. Rotation of the model on the x-axis was also added so its dimensions could better represented. Command line arguments are used to read in the name of files that contain models. These files are located in the objects directory of PA6. To run the appliction enter ./PA6 <filename>. For example, to load buddha.obj enter: ./PA6 ../objects/buddha.obj 
+This project involves using bullet to apply physics to objects. To achieve this, this project involves loading a simple board that contains a cylinder, cube, and sphere. The board and cylindar are statuc objects while the cube and sphere are dynamic objects. Use of the bullet physics are demonstated by allowing the user to move the cube and interact with the sphere. Users can use the the cube to push the sphere into other objects such as the cylinder and board walls which the sphere will bounce off of. This project also uses knowlege learned from previous projects such as texture and model loading. To run the appliction enter ./PA8
 
 # Dependencies, Building, and Running
 
 ## Dependency Instructions
-For operating systems to run this project, installation of these five programs are required [GLEW](http://glew.sourceforge.net/), [GLM](http://glm.g-truc.net/0.9.7/index.html), [SDL2](https://wiki.libsdl.org/Tutorials), [Assimp](http://assimp.sourceforge.net/main_downloads.html), and [ImageMagick](https://sourceforge.net/projects/imagemagick/).
+For operating systems to run this project, installation of these six programs are required [GLEW](http://glew.sourceforge.net/), [GLM](http://glm.g-truc.net/0.9.7/index.html), [SDL2](https://wiki.libsdl.org/Tutorials), [Assimp](http://assimp.sourceforge.net/main_downloads.html), [ImageMagick](https://sourceforge.net/projects/imagemagick/), and [Bullet](https://pybullet.org/wordpress/).
 
 This project uses OpenGL 3.3. Some computers, such as virtual machines in the ECC, can not run this version. In in order to run OpenGL 2.7 follow the instructions at [Using OpenGL 2.7](https://github.com/HPC-Vis/computer-graphics/wiki/Using-OpenGL-2.7)
 
@@ -27,7 +27,7 @@ brew install glew glm sdl2
 ```
 
 ## Building and Running
-This project was built and run using cmake in Linux/Ubuntu. To run the application using the buddha file, enter the following in the PA6 directory:
+This project was built and run using cmake in Linux/Ubuntu. To run the application enter the following in the PA8 directory:
 
 mkdir build  
 cd build  
@@ -35,10 +35,11 @@ cmake ..
 make  
 ./PA8 
 
-For any other model file simply add the file to the objects folder and change buddha.obj to the desired file. As mention before, textures are hard coded an must be changed in object.cpp
-
 ## Controls
-No controls are used for this project.
+W	- move cube up
+A	- move cube left
+S	- move cube down
+D	- move cube right
 
 # Extra Credit
-No extra credit was given for this project.
+Triangle meshes for the board, cylinder, and cube are loaded into Bullet instead of primitive objects.

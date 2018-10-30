@@ -29,3 +29,6 @@ The model loader from PA5 is now updated to load textures onto models.  To run t
 
 ## PA7: Solar System
 This is a simulation of the Solar System made by using the knowlege gained from previous projects.  To run this project ```cd PA7``` then follow the instructions in the README.md.
+
+## PA8: Bullet
+This is a simulation of a board, cylinder, cube, and sphere in which the cube can be moved with user input and can push the sphere which will bounce off the cylinder and the walls of the board.  To run this project ```cd PA8``` then follow the instructions in the README.md.

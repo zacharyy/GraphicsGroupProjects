@@ -87,6 +87,26 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
+
+    if (m_event.key.keysym.sym == SDLK_w)
+    {
+      m_graphics->newtrans.getOrigin() += btVector3(0,0,0.1);
+    }
+
+    if (m_event.key.keysym.sym == SDLK_s)
+    {
+      m_graphics->newtrans.getOrigin() -= btVector3(0,0,0.1);
+    }
+
+    if (m_event.key.keysym.sym == SDLK_a)
+    {
+      m_graphics->newtrans.getOrigin() += btVector3(0.1,0,0);
+    }
+
+    if (m_event.key.keysym.sym == SDLK_d)
+    {
+      m_graphics->newtrans.getOrigin() -= btVector3(0.1,0,0);
+    }
   }
 }
 

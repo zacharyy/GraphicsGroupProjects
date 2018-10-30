@@ -17,6 +17,7 @@ class Graphics
     bool Initialize(int width, int height);
     void Update(unsigned int dt);
     void Render();
+    btTransform newtrans;
 
   private:
     std::string ErrorString(GLenum error);
@@ -29,9 +30,13 @@ class Graphics
     GLint m_modelMatrix;
 
     Object *m_ball;
-    Object *m_board;
+    Object *m_front;
+    Object *m_back;
+    Object *m_left;
+    Object *m_right;
+    Object *m_bottom;
     Object *m_cylinder;
-
+    Object *m_cube;
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;
     btCollisionDispatcher *dispatcher;
@@ -41,6 +46,12 @@ class Graphics
     btRigidBody *ballRigidBody;
     btRigidBody *boardRigidBody;
 		btRigidBody *cylinderRigidBody;
+		btRigidBody *cubeRigidBody;
+		btRigidBody *backRigidBody;
+		btRigidBody *frontRigidBody;
+		btRigidBody *leftRigidBody;
+		btRigidBody *rightRigidBody;
+		btRigidBody *bottomRigidBody;
 };
 
 #endif /* GRAPHICS_H */

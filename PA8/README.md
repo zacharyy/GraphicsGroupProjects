@@ -36,10 +36,10 @@ make
 ./PA8 
 
 ## Controls
-W	- move cube up
-A	- move cube left
-S	- move cube down
-D	- move cube right
+W	- move cube up  
+A	- move cube left  
+S	- move cube down  
+D	- move cube right  
 
 # Extra Credit
 Triangle meshes for the board, cylinder, and cube are loaded into Bullet instead of primitive objects.

@@ -5,7 +5,7 @@ Object::Object()
 {
 
 }
-Object::Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh)
+Object::Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh, bool useTriMesh)
 {  
 
   const char *input;
@@ -15,7 +15,7 @@ Object::Object(std::string objectFileString, std::string textureFileString, btTr
 
 
   // Read our .obj file
-  loadOBJ(input, triMesh);
+  loadOBJ(input, triMesh, useTriMesh);
 
   angle = 0.0f;
 	speedScaler = 0.001;
@@ -54,7 +54,7 @@ void Object::Render()
 }
 
 /*Function that will load object files*/
-void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
+void Object::loadOBJ(const char * path, btTriangleMesh* triMesh, bool useTriMesh)
 {
   //Create Importer
   Assimp::Importer importer;
@@ -98,9 +98,7 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
           color.y = double(rand()) / (double(RAND_MAX) + 1.0);
           color.z = double(rand()) / (double(RAND_MAX) + 1.0);
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
-					//Seg faults right now..
-					//glm::vec3 normal = glm::vec3(mesh->mNormals[j].x,mesh->mNormals[j].y,mesh->mNormals[j].z);
-          Vertex *temp = new Vertex(vec, color/*normal*/ , glm::vec2(pTexCoord.x, pTexCoord.y));
+          Vertex *temp = new Vertex(vec, color, glm::vec2(pTexCoord.x, pTexCoord.y));
           v.push_back(*temp);
         /*}
       }
@@ -114,15 +112,16 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
     for (unsigned int j=0; j < mesh->mNumFaces; j++) 
     {
       const aiFace& Face = mesh->mFaces[j];
-
-      for (int jindex = 0; jindex < 3; jindex++)
+      if(useTriMesh)
       {
-        aiVector3D position = scene->mMeshes[0]->mVertices[Face.mIndices[jindex]];
-        triArray[jindex] = btVector3(position.x, position.y, position.z);
-        Indices.push_back( Face.mIndices[jindex] );
+        for (int jindex = 0; jindex < 3; jindex++)
+        {
+          aiVector3D position = scene->mMeshes[0]->mVertices[Face.mIndices[jindex]];
+          triArray[jindex] = btVector3(position.x, position.y, position.z);
+          Indices.push_back( Face.mIndices[jindex] );
+        }
+        triMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
       }
-      triMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
-
       assert(Face.mNumIndices == 3);
       ind.push_back(Face.mIndices[0]);
       ind.push_back(Face.mIndices[1]);
@@ -132,4 +131,3 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
 	}	
   //return true;
 }
-

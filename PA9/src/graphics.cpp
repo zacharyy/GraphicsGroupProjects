@@ -62,31 +62,14 @@ bool Graphics::Initialize(int width, int height)
   solver = new btSequentialImpulseConstraintSolver();
 
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-  dynamicsWorld->setGravity(btVector3(0,-1,0));
+  dynamicsWorld->setGravity(btVector3(0,-9.81,0));
 
   /*Create Objects*/
-  /*not sure what to set btVector3 to so its set to 0 by default*/
-  //Create the ball
-  btTriangleMesh* objTriMesh = new btTriangleMesh();
-  m_ball = new Object("../objects/ball.obj", "../objects/sun.jpg", objTriMesh);
-  btCollisionShape *ballShape = new btSphereShape(1); 
-  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, -4)));
-  btScalar ballMass = 10;
-  btVector3 ballInertia(0, 0, 0);
 
-  ballShape->calculateLocalInertia(ballMass, ballInertia);
-  btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(ballMass, ballMotionState, ballShape, ballInertia);
-  ballRigidBody = new btRigidBody(ballRigidBodyCI);
-  ballRigidBody->setRestitution (0.5);
-ballRigidBody->setFriction (0);
-  ballRigidBody->setActivationState(DISABLE_DEACTIVATION);
-ballRigidBody->setAngularFactor(btVector3(0,0,0));
-
-  dynamicsWorld->addRigidBody(ballRigidBody);
-
+  //Create Board
   // Create the Front
   btTriangleMesh* objTriMeshF = new btTriangleMesh();
-  m_front = new Object("../objects/front.obj", "../objects/checker.jpg", objTriMeshF);
+  m_front = new Object("../objects/front.obj", "../objects/checker.jpg", objTriMeshF, 1);
   btCollisionShape *frontShape = new btBvhTriangleMeshShape(objTriMeshF, true);
   btDefaultMotionState* frontMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar frontMass = 0; //setting mass to 0 makes it static
@@ -100,9 +83,9 @@ frontRigidBody->setRestitution (0.5);
   frontRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(frontRigidBody);
 
-	//Create the back
+  //Create the back
   btTriangleMesh* objTriMeshB = new btTriangleMesh();
-  m_back = new Object("../objects/back.obj", "../objects/checker.jpg", objTriMeshB);
+  m_back = new Object("../objects/back.obj", "../objects/checker.jpg", objTriMeshB, 1);
   btCollisionShape *backShape = new btBvhTriangleMeshShape(objTriMeshB, true);
   btDefaultMotionState* backMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar backMass = 0; //setting mass to 0 makes it static
@@ -116,7 +99,7 @@ backRigidBody->setRestitution (0.5);
   dynamicsWorld->addRigidBody(backRigidBody);
 	//Create the left
   btTriangleMesh* objTriMeshL = new btTriangleMesh();
-  m_left = new Object("../objects/left.obj", "../objects/checker.jpg", objTriMeshL);
+  m_left = new Object("../objects/left.obj", "../objects/checker.jpg", objTriMeshL, 1);
   btCollisionShape *leftShape = new btBvhTriangleMeshShape(objTriMeshL, true);
   btDefaultMotionState* leftMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar leftMass = 0; //setting mass to 0 makes it static
@@ -131,7 +114,7 @@ leftRigidBody->setRestitution (0.5);
 
 	//Create the right
   btTriangleMesh* objTriMeshR = new btTriangleMesh();
-  m_right = new Object("../objects/right.obj", "../objects/checker.jpg", objTriMeshR);
+  m_right = new Object("../objects/right.obj", "../objects/checker.jpg", objTriMeshR, 1);
   btCollisionShape *rightShape = new btBvhTriangleMeshShape(objTriMeshR, true);
   btDefaultMotionState* rightMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar rightMass = 0; //setting mass to 0 makes it static
@@ -147,7 +130,7 @@ rightRigidBody->setRestitution (0.5);
 
 	//Create the bottom
   btTriangleMesh* objTriMeshBot = new btTriangleMesh();
-  m_bottom = new Object("../objects/bottom.obj", "../objects/checker.jpg", objTriMeshBot);
+  m_bottom = new Object("../objects/bottom.obj", "../objects/checker.jpg", objTriMeshBot, 1);
   btCollisionShape *bottomShape = new btBvhTriangleMeshShape(objTriMeshBot, true);
   btDefaultMotionState* bottomMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar bottomMass = 0; //setting mass to 0 makes it static
@@ -163,8 +146,9 @@ rightRigidBody->setRestitution (0.5);
 
   // Create the cylinder
   btTriangleMesh* objTriMesh3 = new btTriangleMesh();
-  m_cylinder = new Object("../objects/cylinder.obj", "../objects/granite.jpg", objTriMesh3);
-  btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh3, true);
+  m_cylinder = new Object("../objects/cylinder.obj", "../objects/granite.jpg", objTriMesh3, 0);
+  btCollisionShape *cylinderShape = new btCylinderShape(btVector3(5, 1.5, 5));
+  //btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh3, true);
   btDefaultMotionState* cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, 5)));
   btScalar cylinderMass = 0; //setting mass to 0 makes it static
   btVector3 cylinderInertia(0, 0, 0);
@@ -176,20 +160,70 @@ cylinderRigidBody->setRestitution (0.8);
   cylinderRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(cylinderRigidBody);
 
+  //Create the ball
+  btTriangleMesh* objTriMesh = new btTriangleMesh();
+  m_ball = new Object("../objects/ball.obj", "../objects/sun.jpg", objTriMesh, 0);
+  btCollisionShape *ballShape = new btSphereShape(1); 
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, -4)));
+  btScalar ballMass = 1;
+  btVector3 ballInertia(0, 0, 0);
+
+  ballShape->calculateLocalInertia(ballMass, ballInertia);
+  btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(ballMass, ballMotionState, ballShape, ballInertia);
+  ballRigidBody = new btRigidBody(ballRigidBodyCI);
+  ballRigidBody->setRestitution (0.5);
+  ballRigidBody->setActivationState(DISABLE_DEACTIVATION);
+
+  dynamicsWorld->addRigidBody(ballRigidBody);
+
  // Create the cube
-  btTriangleMesh* objTriMesh4 = new btTriangleMesh();
-  m_cube = new Object("../objects/cube.obj", "../objects/granite.jpg", objTriMesh4);
+  /*btTriangleMesh* objTriMesh4 = new btTriangleMesh();
+  m_cube = new Object("../objects/cube.obj", "../objects/granite.jpg", objTriMesh4, 1);
   btCollisionShape *cubeShape = new btBvhTriangleMeshShape(objTriMesh4, true);
   btDefaultMotionState* cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -5)));
   btScalar cubeMass = 1; //mass of kinematic object is 0
   btVector3 cubeInertia(0, 0, 0);
+
    cubeShape->calculateLocalInertia(cubeMass, cubeInertia);
   btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(cubeMass, cubeMotionState, cubeShape, cubeInertia);
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
   cubeRigidBody->getMotionState()->getWorldTransform(newtrans);
   cubeRigidBody->setCollisionFlags(cubeRigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
   cubeRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(cubeRigidBody);*/
+
+  btTriangleMesh* objTriMesh4 = new btTriangleMesh();
+  m_cube = new Object("../objects/cube.obj", "../objects/granite.jpg", objTriMesh4, 0);
+  btCollisionShape *cubeShape = new btBoxShape(btVector3(1, 1, 1));
+  //btCollisionShape *cubeShape = new btBvhTriangleMeshShape(objTriMesh4, true);
+  btDefaultMotionState* cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -5)));
+  btScalar cubeMass = 1; 
+  btVector3 cubeInertia(0, 0, 0);
+
+  cubeShape->calculateLocalInertia(cubeMass, cubeInertia);
+  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(cubeMass, cubeMotionState, cubeShape, cubeInertia);
+  cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
+  //cubeRigidBody->setRestitution (0.5);
+  cubeRigidBody->setActivationState(DISABLE_DEACTIVATION);
+
   dynamicsWorld->addRigidBody(cubeRigidBody);
+
+  /*
+  btTriangleMesh* objTriMesh = new btTriangleMesh();
+  m_ball = new Object("../objects/ball.obj", "../objects/sun.jpg", objTriMesh, 0);
+  btCollisionShape *ballShape = new btSphereShape(.5); 
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, -4)));
+  float ballMass = 1;
+  btVector3 ballInertia(0, 0, 0);
+
+  ballShape->calculateLocalInertia(1, ballInertia);
+  btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ballShape, ballInertia);
+  ballRigidBody = new btRigidBody(ballRigidBodyCI);
+  ballRigidBody->setRestitution (0.5);
+  ballRigidBody->setActivationState(DISABLE_DEACTIVATION);
+
+  dynamicsWorld->addRigidBody(ballRigidBody);
+  */
 
   // Set up the shaders
   m_shader = new Shader();
@@ -260,7 +294,7 @@ void Graphics::Update(unsigned int dt)
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
-	//std::cout<<trans.getOrigin().getX()<<trans.getOrigin().getY()<<trans.getOrigin().getZ() << std::endl;
+  //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
 
   cylinderRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -268,9 +302,14 @@ void Graphics::Update(unsigned int dt)
 
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);
   //trans.getOrigin() += btVector3(0,0,0.1);
-  cubeRigidBody->getMotionState()->setWorldTransform(newtrans);
-  newtrans.getOpenGLMatrix(m);
+  
+  //cubeRigidBody->applyCentralImpulse(btVector3(.4,0,0.4));
+  cubeRigidBody->getMotionState()->getWorldTransform(trans);
+
+  trans.getOpenGLMatrix(m);
   m_cube->model = glm::make_mat4(m);
+  //m_cube->model[3].y = 1.0f;
+  std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
 }
 
 void Graphics::Render()

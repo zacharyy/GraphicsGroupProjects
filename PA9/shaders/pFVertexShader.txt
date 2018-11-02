@@ -4,7 +4,6 @@ layout (location = 0) in vec4 vPosition;
 layout (location = 1) in vec3 vNormal;
 layout (location = 2) in vec2 v_texture;
 
-smooth out vec4 color; 
 smooth out vec2 texture;
 out vec3 fN;
 out vec3 fE;

@@ -1,4 +1,5 @@
 #include"graphics_headers.h"
+#include "shader.h"
 #include <vector>
 class Mesh {
     public:
@@ -9,7 +10,7 @@ class Mesh {
         //vector<Texture> textures;
         /*  Functions  */
         Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::string file);
-        void Draw();
+        void Draw(Shader *m_shader);
     private:
         /*  Render data  */
         unsigned int VAO, VBO, EBO;

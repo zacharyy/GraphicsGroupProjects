@@ -284,6 +284,13 @@ cylinderRigidBody->setRestitution (0.8);
     return false;
   }
 
+  m_LightPosition = m_shader->GetUniformLocation("LightPosition");
+  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_LightPosition not found\n");
+    return false;
+  }
+
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
@@ -315,7 +322,7 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_cube->model = glm::make_mat4(m);
   //m_cube->model[3].y = 1.0f;
-  std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
+  //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
 }
 
 void Graphics::Render()
@@ -330,32 +337,32 @@ void Graphics::Render()
   // Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
-  glUniform4fv(2, 1, glm::value_ptr(glm::vec4(0.0, 100.0, -100.0, 0))); 
+  glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, -100.0, 0))); 
 
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
-  m_ball->Render();
+  m_ball->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
-  m_cylinder->Render();
+  m_cylinder->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  m_cube->Render();
+  m_cube->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
-  m_front->Render();
+  m_front->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_back->GetModel()));
-  m_back->Render();
+  m_back->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_left->GetModel()));
-  m_left->Render();
+  m_left->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_right->GetModel()));
-  m_right->Render();
+  m_right->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_bottom->GetModel()));
-  m_bottom->Render();
+  m_bottom->Render(m_shader);
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

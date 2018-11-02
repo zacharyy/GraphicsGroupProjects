@@ -38,6 +38,7 @@ class Graphics
     GLint m_projectionMatrix;
     GLint m_viewMatrix;
     GLint m_modelMatrix;
+    GLint m_LightPosition;
 
     Object *m_ball;
     Object *m_front;

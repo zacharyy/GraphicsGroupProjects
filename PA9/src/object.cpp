@@ -1,4 +1,5 @@
 #include "object.h"
+#include "shader.h"
 #include <cstdlib>
 #include <ctime>
 Object::Object()
@@ -48,9 +49,9 @@ glm::mat4 Object::GetModel()
   return model;
 }
 
-void Object::Render()
+void Object::Render(Shader *m_shader)
 {
-	meshes[0].Draw();
+	meshes[0].Draw(m_shader);
 }
 
 /*Function that will load object files*/

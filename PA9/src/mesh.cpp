@@ -32,28 +32,29 @@ void Mesh::setupMesh()
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 }
 
-void Mesh::Draw() 
+void Mesh::Draw(Shader *m_shader) 
 {
-		glUniform4fv(0,1,glm::value_ptr(glm::vec4(Vertices[0].ambient.x, Vertices[0].ambient.y, Vertices[0].ambient.z, 1)));
-		glUniform4fv(1,1,glm::value_ptr(glm::vec4(Vertices[0].diffuse.x, Vertices[0].diffuse.y, Vertices[0].diffuse.z, 1)));
-		glUniform1f(3,10.0);
-		glUniform4fv(4,1,glm::value_ptr(glm::vec4(Vertices[0].specular.x, Vertices[0].specular.y, Vertices[0].specular.z, 1)));
-		glEnableVertexAttribArray(0);
-  	glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
+	glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(Vertices[0].ambient.x, Vertices[0].ambient.y, Vertices[0].ambient.z, 0)));
+	glUniform4fv(m_shader->GetUniformLocation("DiffuseProduct"),1,glm::value_ptr(glm::vec4(Vertices[0].diffuse.x, Vertices[0].diffuse.y, Vertices[0].diffuse.z, 0)));
+	glUniform1f(m_shader->GetUniformLocation("ShininessProduct"),10.0);
+	glUniform4fv(m_shader->GetUniformLocation("SpecularProduct"),1,glm::value_ptr(glm::vec4(Vertices[0].specular.x, Vertices[0].specular.y, Vertices[0].specular.z, 0)));
 
-  	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-  	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,normal));
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
-  	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,normal));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,texture));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-  	glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
-  	glDisableVertexAttribArray(0);
-  	glDisableVertexAttribArray(1);
-  	glDisableVertexAttribArray(2);
+ 	glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 } 

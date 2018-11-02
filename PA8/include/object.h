@@ -8,14 +8,14 @@ class Object
 {
   public:
 		Object();
-    Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh);
+    Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh, bool useTriMesh);
     ~Object();
     void Update(unsigned int dt);
     void Render();
 
     glm::mat4 GetModel();
 
-    void loadOBJ(const char * path, btTriangleMesh* triMesh);
+    void loadOBJ(const char * path, btTriangleMesh* triMesh, bool useTriMesh);
 		std::string textureFile;
     glm::mat4 model;
 		double speedScaler;

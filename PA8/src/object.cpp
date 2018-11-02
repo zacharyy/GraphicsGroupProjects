@@ -5,7 +5,7 @@ Object::Object()
 {
 
 }
-Object::Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh)
+Object::Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh, bool useTriMesh)
 {  
 
   const char *input;
@@ -15,7 +15,7 @@ Object::Object(std::string objectFileString, std::string textureFileString, btTr
 
 
   // Read our .obj file
-  loadOBJ(input, triMesh);
+  loadOBJ(input, triMesh, useTriMesh);
 
   angle = 0.0f;
 	speedScaler = 0.001;
@@ -54,7 +54,7 @@ void Object::Render()
 }
 
 /*Function that will load object files*/
-void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
+void Object::loadOBJ(const char * path, btTriangleMesh* triMesh, bool useTriMesh)
 {
   //Create Importer
   Assimp::Importer importer;
@@ -112,15 +112,16 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
     for (unsigned int j=0; j < mesh->mNumFaces; j++) 
     {
       const aiFace& Face = mesh->mFaces[j];
-
-      for (int jindex = 0; jindex < 3; jindex++)
+      if(useTriMesh)
       {
-        aiVector3D position = scene->mMeshes[0]->mVertices[Face.mIndices[jindex]];
-        triArray[jindex] = btVector3(position.x, position.y, position.z);
-        Indices.push_back( Face.mIndices[jindex] );
+        for (int jindex = 0; jindex < 3; jindex++)
+        {
+          aiVector3D position = scene->mMeshes[0]->mVertices[Face.mIndices[jindex]];
+          triArray[jindex] = btVector3(position.x, position.y, position.z);
+          Indices.push_back( Face.mIndices[jindex] );
+        }
+        triMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
       }
-      triMesh->addTriangle(triArray[0], triArray[1], triArray[2]);
-
       assert(Face.mNumIndices == 3);
       ind.push_back(Face.mIndices[0]);
       ind.push_back(Face.mIndices[1]);

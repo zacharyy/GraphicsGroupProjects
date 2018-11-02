@@ -98,7 +98,9 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
           color.y = double(rand()) / (double(RAND_MAX) + 1.0);
           color.z = double(rand()) / (double(RAND_MAX) + 1.0);
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
-          Vertex *temp = new Vertex(vec, color, glm::vec2(pTexCoord.x, pTexCoord.y));
+					//Seg faults right now..
+					//glm::vec3 normal = glm::vec3(mesh->mNormals[j].x,mesh->mNormals[j].y,mesh->mNormals[j].z);
+          Vertex *temp = new Vertex(vec, color/*normal*/ , glm::vec2(pTexCoord.x, pTexCoord.y));
           v.push_back(*temp);
         /*}
       }

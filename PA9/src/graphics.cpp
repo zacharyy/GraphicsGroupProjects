@@ -337,7 +337,10 @@ void Graphics::Render()
   // Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
-  glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, -100.0, 1))); 
+
+	//Lighting
+  glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, -100.0, 1)));
+	glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(.1,.1,.1, 1))); 
 
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));

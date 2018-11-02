@@ -34,7 +34,6 @@ void Mesh::setupMesh()
 
 void Mesh::Draw(Shader *m_shader) 
 {
-	glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(Vertices[0].ambient.x, Vertices[0].ambient.y, Vertices[0].ambient.z, 1)));
 	glUniform4fv(m_shader->GetUniformLocation("DiffuseProduct"),1,glm::value_ptr(glm::vec4(Vertices[0].diffuse.x, Vertices[0].diffuse.y, Vertices[0].diffuse.z, 0)));
 	glUniform1f(m_shader->GetUniformLocation("ShininessProduct"),10.0);
 	glUniform4fv(m_shader->GetUniformLocation("SpecularProduct"),1,glm::value_ptr(glm::vec4(Vertices[0].specular.x, Vertices[0].specular.y, Vertices[0].specular.z, 0)));

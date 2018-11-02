@@ -222,6 +222,12 @@ cylinderRigidBody->setRestitution (0.8);
 
   // Locate the projection matrix in the shader
   m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
+/*
+	cout << m_shader->GetUniformLocation("AmbientProduct") << endl;
+	cout << m_shader->GetUniformLocation("DiffuseProduct") << endl;
+	cout << m_shader->GetUniformLocation("LightPosition") << endl;
+	cout << m_shader->GetUniformLocation("Shininess") << endl;
+	cout << m_shader->GetUniformLocation("SpecularProduct") << endl;*/
   if (m_projectionMatrix == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_projectionMatrix not found\n");
@@ -285,6 +291,7 @@ void Graphics::Render()
   // Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
+  glUniform4fv(2, 1, glm::value_ptr(glm::vec4(0.0, 100.0, -100.0, 0))); 
 
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));

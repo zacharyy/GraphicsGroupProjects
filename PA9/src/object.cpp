@@ -56,10 +56,11 @@ void Object::Render()
 /*Function that will load object files*/
 void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
 {
+	//std::cout << textureFile << std::endl;
   //Create Importer
   Assimp::Importer importer;
   //Make Scene
-  const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+  const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenSmoothNormals);
 
   btVector3 triArray[3];
 
@@ -80,10 +81,14 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
                glm::vec2(pTexCoord->x, pTexCoord->y)
                Vector3f(pNormal->x, pNormal->y, pNormal->z));*/
 
-      /*aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
-      aiColor4D diffuse;
-      aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-      if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
+      aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
+      aiColor3D diffuse;
+			aiColor3D ambient;
+			aiColor3D specular;
+      mtl->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
+      mtl->Get(AI_MATKEY_COLOR_AMBIENT, ambient);
+      mtl->Get(AI_MATKEY_COLOR_SPECULAR, specular);
+     /* if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
       {
         if(diffuse.r != 0.6f && diffuse.g != 0.6f && diffuse.b != 0.6f)
         {
@@ -92,15 +97,15 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh)
           Vertices.push_back(*temp);
         }
         else
-        {*/
+        {
           glm::vec3 color;
           color.x = double(rand()) / (double(RAND_MAX) + 1.0);
           color.y = double(rand()) / (double(RAND_MAX) + 1.0);
-          color.z = double(rand()) / (double(RAND_MAX) + 1.0);
+          color.z = double(rand()) / (double(RAND_MAX) + 1.0);*/
           glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
-					//Seg faults right now..
-					//glm::vec3 normal = glm::vec3(mesh->mNormals[j].x,mesh->mNormals[j].y,mesh->mNormals[j].z);
-          Vertex *temp = new Vertex(vec, color/*normal*/ , glm::vec2(pTexCoord.x, pTexCoord.y));
+				
+					glm::vec3 normal = glm::vec3(mesh->mNormals[j].x,mesh->mNormals[j].y,mesh->mNormals[j].z);
+          Vertex *temp = new Vertex(vec, normal , glm::vec2(pTexCoord.x, pTexCoord.y), glm::vec3(diffuse.r, diffuse.g, diffuse.b), glm::vec3(ambient.r, ambient.g, ambient.b), glm::vec3(specular.r, specular.g, specular.b));
           v.push_back(*temp);
         /*}
       }

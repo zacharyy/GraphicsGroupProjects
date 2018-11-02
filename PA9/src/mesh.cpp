@@ -15,7 +15,7 @@ void Mesh::setupMesh()
 	Magick::Image *image;
 	image = new Magick::Image(textureFileName.c_str());
 	image->write(&blob, "RGBA");
-
+	
 	glGenTextures(1,&texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->columns(), image->rows(), 0, GL_RGBA, GL_UNSIGNED_BYTE, blob.data());
@@ -34,6 +34,10 @@ void Mesh::setupMesh()
 
 void Mesh::Draw() 
 {
+		glUniform4fv(0,1,glm::value_ptr(glm::vec4(Vertices[0].ambient.x, Vertices[0].ambient.y, Vertices[0].ambient.z, 1)));
+		glUniform4fv(1,1,glm::value_ptr(glm::vec4(Vertices[0].diffuse.x, Vertices[0].diffuse.y, Vertices[0].diffuse.z, 1)));
+		glUniform1f(3,10.0);
+		glUniform4fv(4,1,glm::value_ptr(glm::vec4(Vertices[0].specular.x, Vertices[0].specular.y, Vertices[0].specular.z, 1)));
 		glEnableVertexAttribArray(0);
   	glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);

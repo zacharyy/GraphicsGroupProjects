@@ -19,6 +19,16 @@ class Graphics
     void Render();
     btTransform newtrans;
 
+    btRigidBody *ballRigidBody;
+    btRigidBody *boardRigidBody;
+		btRigidBody *cylinderRigidBody;
+		btRigidBody *cubeRigidBody;
+		btRigidBody *backRigidBody;
+		btRigidBody *frontRigidBody;
+		btRigidBody *leftRigidBody;
+		btRigidBody *rightRigidBody;
+		btRigidBody *bottomRigidBody;
+
   private:
     std::string ErrorString(GLenum error);
 
@@ -43,15 +53,6 @@ class Graphics
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld;
 
-    btRigidBody *ballRigidBody;
-    btRigidBody *boardRigidBody;
-		btRigidBody *cylinderRigidBody;
-		btRigidBody *cubeRigidBody;
-		btRigidBody *backRigidBody;
-		btRigidBody *frontRigidBody;
-		btRigidBody *leftRigidBody;
-		btRigidBody *rightRigidBody;
-		btRigidBody *bottomRigidBody;
 };
 
 #endif /* GRAPHICS_H */

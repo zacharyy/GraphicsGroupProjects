@@ -4,7 +4,7 @@ layout (location = 0) in vec4 vPosition;
 layout (location = 1) in vec3 vNormal;
 layout (location = 2) in vec2 v_texture;
 
-smooth out vec4 color; 
+out vec4 color; 
 smooth out vec2 texture;
 
 uniform mat4 projectionMatrix;
@@ -20,7 +20,7 @@ uniform float Shininess;
 void main(void)
 {
 	// Transform vertex position into eye coordinates
-	vec3 pos = (viewMatrix * modelMatrix * vPosition).xyz;
+	vec3 pos = ((projectionMatrix *viewMatrix * modelMatrix) * vPosition).xyz;
 
 	vec3 L = normalize( LightPosition.xyz - pos );
 

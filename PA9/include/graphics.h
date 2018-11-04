@@ -21,13 +21,18 @@ class Graphics
 
     btRigidBody *ballRigidBody;
     btRigidBody *boardRigidBody;
-		btRigidBody *cylinderRigidBody;
-		btRigidBody *cubeRigidBody;
-		btRigidBody *backRigidBody;
-		btRigidBody *frontRigidBody;
-		btRigidBody *leftRigidBody;
-		btRigidBody *rightRigidBody;
-		btRigidBody *bottomRigidBody;
+    btRigidBody *cylinderRigidBody;
+    btRigidBody *cubeRigidBody;
+    btRigidBody *backRigidBody;
+    btRigidBody *frontRigidBody;
+    btRigidBody *leftRigidBody;
+    btRigidBody *rightRigidBody;
+    btRigidBody *bottomRigidBody;
+
+   void UpdateShader(int newLightingType);
+
+   int lightingType;
+   int newLightingType;
 
   private:
     std::string ErrorString(GLenum error);

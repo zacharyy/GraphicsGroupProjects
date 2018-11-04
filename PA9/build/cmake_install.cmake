@@ -1,4 +1,4 @@
-# Install script for directory: /home/zacharyy/Desktop/Graphics/cs480Park/PA9
+# Install script for directory: /home/ethanpark/Desktop/temp/computer-graphics-master/PA9a
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/zacharyy/Desktop/Graphics/cs480Park/PA9/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

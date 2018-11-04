@@ -107,6 +107,14 @@ void Engine::Keyboard()
     {
       m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1,0,0));
     }
+    if (m_event.key.keysym.sym == SDLK_v)
+    {
+      m_graphics->newLightingType = 0;
+    }
+    if (m_event.key.keysym.sym == SDLK_f)
+    {
+      m_graphics->newLightingType = 1;
+    }
   }
 }
 

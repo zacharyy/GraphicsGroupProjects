@@ -54,82 +54,82 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA9
+CMAKE_SOURCE_DIR = /home/ethanpark/Desktop/temp/computer-graphics-master/PA9a
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA9/build
+CMAKE_BINARY_DIR = /home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/PA8_SUCCESSFUL.dir
+# Target rules for target CMakeFiles/PA9_SUCCESSFUL.dir
 
 # All Build rule for target.
-CMakeFiles/PA8_SUCCESSFUL.dir/all: CMakeFiles/PA8.dir/all
-	$(MAKE) -f CMakeFiles/PA8_SUCCESSFUL.dir/build.make CMakeFiles/PA8_SUCCESSFUL.dir/depend
-	$(MAKE) -f CMakeFiles/PA8_SUCCESSFUL.dir/build.make CMakeFiles/PA8_SUCCESSFUL.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA9/build/CMakeFiles --progress-num= "Built target PA8_SUCCESSFUL"
-.PHONY : CMakeFiles/PA8_SUCCESSFUL.dir/all
+CMakeFiles/PA9_SUCCESSFUL.dir/all: CMakeFiles/PA9.dir/all
+	$(MAKE) -f CMakeFiles/PA9_SUCCESSFUL.dir/build.make CMakeFiles/PA9_SUCCESSFUL.dir/depend
+	$(MAKE) -f CMakeFiles/PA9_SUCCESSFUL.dir/build.make CMakeFiles/PA9_SUCCESSFUL.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build/CMakeFiles --progress-num= "Built target PA9_SUCCESSFUL"
+.PHONY : CMakeFiles/PA9_SUCCESSFUL.dir/all
 
 # Include target in all.
-all: CMakeFiles/PA8_SUCCESSFUL.dir/all
+all: CMakeFiles/PA9_SUCCESSFUL.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/PA8_SUCCESSFUL.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zacharyy/Desktop/Graphics/cs480Park/PA9/build/CMakeFiles 9
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/PA8_SUCCESSFUL.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zacharyy/Desktop/Graphics/cs480Park/PA9/build/CMakeFiles 0
-.PHONY : CMakeFiles/PA8_SUCCESSFUL.dir/rule
+CMakeFiles/PA9_SUCCESSFUL.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build/CMakeFiles 9
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/PA9_SUCCESSFUL.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build/CMakeFiles 0
+.PHONY : CMakeFiles/PA9_SUCCESSFUL.dir/rule
 
 # Convenience name for target.
-PA8_SUCCESSFUL: CMakeFiles/PA8_SUCCESSFUL.dir/rule
+PA9_SUCCESSFUL: CMakeFiles/PA9_SUCCESSFUL.dir/rule
 
-.PHONY : PA8_SUCCESSFUL
-
-# clean rule for target.
-CMakeFiles/PA8_SUCCESSFUL.dir/clean:
-	$(MAKE) -f CMakeFiles/PA8_SUCCESSFUL.dir/build.make CMakeFiles/PA8_SUCCESSFUL.dir/clean
-.PHONY : CMakeFiles/PA8_SUCCESSFUL.dir/clean
+.PHONY : PA9_SUCCESSFUL
 
 # clean rule for target.
-clean: CMakeFiles/PA8_SUCCESSFUL.dir/clean
+CMakeFiles/PA9_SUCCESSFUL.dir/clean:
+	$(MAKE) -f CMakeFiles/PA9_SUCCESSFUL.dir/build.make CMakeFiles/PA9_SUCCESSFUL.dir/clean
+.PHONY : CMakeFiles/PA9_SUCCESSFUL.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/PA9_SUCCESSFUL.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/PA8.dir
+# Target rules for target CMakeFiles/PA9.dir
 
 # All Build rule for target.
-CMakeFiles/PA8.dir/all:
-	$(MAKE) -f CMakeFiles/PA8.dir/build.make CMakeFiles/PA8.dir/depend
-	$(MAKE) -f CMakeFiles/PA8.dir/build.make CMakeFiles/PA8.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA9/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target PA8"
-.PHONY : CMakeFiles/PA8.dir/all
+CMakeFiles/PA9.dir/all:
+	$(MAKE) -f CMakeFiles/PA9.dir/build.make CMakeFiles/PA9.dir/depend
+	$(MAKE) -f CMakeFiles/PA9.dir/build.make CMakeFiles/PA9.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target PA9"
+.PHONY : CMakeFiles/PA9.dir/all
 
 # Include target in all.
-all: CMakeFiles/PA8.dir/all
+all: CMakeFiles/PA9.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/PA8.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zacharyy/Desktop/Graphics/cs480Park/PA9/build/CMakeFiles 9
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/PA8.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zacharyy/Desktop/Graphics/cs480Park/PA9/build/CMakeFiles 0
-.PHONY : CMakeFiles/PA8.dir/rule
+CMakeFiles/PA9.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build/CMakeFiles 9
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/PA9.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethanpark/Desktop/temp/computer-graphics-master/PA9a/build/CMakeFiles 0
+.PHONY : CMakeFiles/PA9.dir/rule
 
 # Convenience name for target.
-PA8: CMakeFiles/PA8.dir/rule
+PA9: CMakeFiles/PA9.dir/rule
 
-.PHONY : PA8
-
-# clean rule for target.
-CMakeFiles/PA8.dir/clean:
-	$(MAKE) -f CMakeFiles/PA8.dir/build.make CMakeFiles/PA8.dir/clean
-.PHONY : CMakeFiles/PA8.dir/clean
+.PHONY : PA9
 
 # clean rule for target.
-clean: CMakeFiles/PA8.dir/clean
+CMakeFiles/PA9.dir/clean:
+	$(MAKE) -f CMakeFiles/PA9.dir/build.make CMakeFiles/PA9.dir/clean
+.PHONY : CMakeFiles/PA9.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/PA9.dir/clean
 
 .PHONY : clean
 

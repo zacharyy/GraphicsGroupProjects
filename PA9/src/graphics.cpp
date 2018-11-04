@@ -225,7 +225,10 @@ cylinderRigidBody->setRestitution (0.8);
   dynamicsWorld->addRigidBody(ballRigidBody);
   */
 
-  // Set up the shaders
+  // Set up the shader
+  lightingType = 0;
+  newLightingType = 0;
+
   m_shader = new Shader();
   if(!m_shader->Initialize())
   {
@@ -234,14 +237,14 @@ cylinderRigidBody->setRestitution (0.8);
   }
 
   // Add the vertex shader
-  if(!m_shader->AddShader(GL_VERTEX_SHADER))
+  if(!m_shader->AddShader(GL_VERTEX_SHADER, lightingType))
   {
     printf("Vertex Shader failed to Initialize\n");
     return false;
   }
 
   // Add the fragment shader
-  if(!m_shader->AddShader(GL_FRAGMENT_SHADER))
+  if(!m_shader->AddShader(GL_FRAGMENT_SHADER, lightingType))
   {
     printf("Fragment Shader failed to Initialize\n");
     return false;
@@ -300,6 +303,11 @@ cylinderRigidBody->setRestitution (0.8);
 
 void Graphics::Update(unsigned int dt)
 {
+  if(lightingType != newLightingType)
+  {
+    UpdateShader(newLightingType);
+  }
+
   btTransform trans;
   btScalar m[16];
   dynamicsWorld->stepSimulation(dt, 10);
@@ -405,5 +413,16 @@ std::string Graphics::ErrorString(GLenum error)
   {
     return "None";
   }
+}
+
+void Graphics::UpdateShader(int newLightingType)
+{
+  m_shader->Initialize();
+  m_shader->AddShader(GL_VERTEX_SHADER, newLightingType);
+  m_shader->AddShader(GL_FRAGMENT_SHADER, newLightingType);		      
+  m_shader->Finalize();
+  m_shader->Enable();
+
+  lightingType = newLightingType;
 }
 

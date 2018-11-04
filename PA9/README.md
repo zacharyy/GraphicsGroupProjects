@@ -33,7 +33,7 @@ mkdir build
 cd build  
 cmake ..  
 make  
-./PA8 
+./PA9 
 
 ## Controls
 W	- move cube up  

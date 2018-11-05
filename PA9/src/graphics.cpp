@@ -3,6 +3,11 @@
 Graphics::Graphics()
 {
 	Magick::InitializeMagick(NULL);
+
+	ambientValue = .2;
+	cubeSpecular = .5;
+	cylSpecular = .5;
+	ballSpecular = .5;
 }
 
 Graphics::~Graphics()
@@ -162,7 +167,7 @@ cylinderRigidBody->setRestitution (0.8);
 
   //Create the ball
   btTriangleMesh* objTriMesh = new btTriangleMesh();
-  m_ball = new Object("../objects/ball.obj", "../objects/sun.jpg", objTriMesh, 0);
+  m_ball = new Object("../objects/ball.obj", "../objects/metalball.png", objTriMesh, 0);
   btCollisionShape *ballShape = new btSphereShape(1); 
   btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, -4)));
   btScalar ballMass = 1;
@@ -347,9 +352,9 @@ void Graphics::Render()
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
   //Lighting
-  glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
-  //glUniform4fv(m_shader->GetUniformLocation("LightPosition"), 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
-  glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(.2,.2,.2, 1))); 
+  //glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
+  glUniform4fv(m_shader->GetUniformLocation("LightPosition"), 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
+  glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(ambientValue,ambientValue,ambientValue, 1))); 
 
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
@@ -357,35 +362,35 @@ void Graphics::Render()
   glUniform4f(m_shader->GetUniformLocation("SpecularProduct"), 1,1,1,1);
   glUniform1f(m_shader->GetUniformLocation("Shininess"), 10);*/
   //UpdateLighting();
-  m_ball->Render(m_shader);
+  m_ball->Render(m_shader, ballSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
   //UpdateLighting();
-  m_cylinder->Render(m_shader);
+  m_cylinder->Render(m_shader, cylSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   //UpdateLighting();
-  m_cube->Render(m_shader);
+  m_cube->Render(m_shader, cubeSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
   //UpdateLighting();
-  m_front->Render(m_shader);
+  m_front->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_back->GetModel()));
   //UpdateLighting();
-  m_back->Render(m_shader);
+  m_back->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_left->GetModel()));
   //UpdateLighting();
-  m_left->Render(m_shader);
+  m_left->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_right->GetModel()));
   //UpdateLighting();
-  m_right->Render(m_shader);
+  m_right->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_bottom->GetModel()));
   //UpdateLighting();
-  m_bottom->Render(m_shader);
+  m_bottom->Render(m_shader, .5);
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

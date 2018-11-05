@@ -11,7 +11,7 @@ class Object
     Object(std::string objectFileString, std::string textureFileString, btTriangleMesh* triMesh, bool useTriMesh);
     ~Object();
     void Update(unsigned int dt);
-    void Render(Shader *m_shader);
+    void Render(Shader *m_shader, float);
 
     glm::mat4 GetModel();
 

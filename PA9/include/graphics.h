@@ -34,7 +34,10 @@ class Graphics
 
    int lightingType;
    int newLightingType;
-
+   float ambientValue;
+   float cubeSpecular;
+   float cylSpecular;
+   float ballSpecular;
   private:
     std::string ErrorString(GLenum error);
 
@@ -59,6 +62,8 @@ class Graphics
     btCollisionDispatcher *dispatcher;
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld;
+
+
 
 };
 

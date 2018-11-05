@@ -10,7 +10,7 @@ class Mesh {
         //vector<Texture> textures;
         /*  Functions  */
         Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::string file);
-        void Draw(Shader *m_shader);
+        void Draw(Shader *m_shader, float);
     private:
         /*  Render data  */
         unsigned int VAO, VBO, EBO;

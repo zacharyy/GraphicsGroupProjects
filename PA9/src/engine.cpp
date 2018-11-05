@@ -115,6 +115,40 @@ void Engine::Keyboard()
     {
       m_graphics->newLightingType = 1;
     }
+    if (m_event.key.keysym.sym == SDLK_n)
+    {
+			m_graphics->ambientValue += .1;
+    }
+    if (m_event.key.keysym.sym == SDLK_m)
+    {
+			m_graphics->ambientValue -= .1;
+    }
+		// ball specular
+    if (m_event.key.keysym.sym == SDLK_t)
+    {
+			m_graphics->ballSpecular += .1;
+    }    if (m_event.key.keysym.sym == SDLK_y)
+    {
+			m_graphics->ballSpecular -= .1;
+    }
+		// cube specular
+    if (m_event.key.keysym.sym == SDLK_u)
+    {
+			m_graphics->cubeSpecular += .1;
+    } 
+		if (m_event.key.keysym.sym == SDLK_i)
+    {
+			m_graphics->cubeSpecular -= .1;
+    }	
+		// cylinder specular
+    if (m_event.key.keysym.sym == SDLK_o)
+    {
+			m_graphics->cylSpecular += .1;
+    }
+    if (m_event.key.keysym.sym == SDLK_p)
+    {
+			m_graphics->cylSpecular -= .1;
+    }
   }
 }
 

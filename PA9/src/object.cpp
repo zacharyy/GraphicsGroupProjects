@@ -49,9 +49,9 @@ glm::mat4 Object::GetModel()
   return model;
 }
 
-void Object::Render(Shader *m_shader)
+void Object::Render(Shader *m_shader, float specular)
 {
-	meshes[0].Draw(m_shader);
+	meshes[0].Draw(m_shader, specular);
 }
 
 /*Function that will load object files*/

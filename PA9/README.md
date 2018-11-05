@@ -40,6 +40,15 @@ W	- move cube up
 A	- move cube left  
 S	- move cube down  
 D	- move cube right  
-
+F - use per fragment lighting
+V - use per vertex lighting
+T - increase specular of ball
+Y - decrese specular of ball
+U - increase specular of cube
+I - decrease specular of cube
+O - increase specular of cylinder
+P - decrease specular of cylinder
+N - increase ambient light
+M - decrease ambient light
 # Extra Credit
 Triangle meshes for the board, cylinder, and cube are loaded into Bullet instead of primitive objects.

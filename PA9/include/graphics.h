@@ -48,6 +48,8 @@ class Graphics
     GLint m_viewMatrix;
     GLint m_modelMatrix;
     GLint m_LightPosition;
+    GLint m_cutOff;
+    GLint m_spotLight;
 
     Object *m_ball;
     Object *m_front;

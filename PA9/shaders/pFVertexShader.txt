@@ -8,6 +8,7 @@ smooth out vec2 texture;
 out vec3 fN;
 out vec3 fE;
 out vec3 fL;
+out vec3 v_pos;
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -31,4 +32,5 @@ void main(void)
 	gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v; 
 
 	texture = v_texture;
+	v_pos = vec3(modelMatrix * v_position);
 }

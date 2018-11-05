@@ -299,6 +299,20 @@ cylinderRigidBody->setRestitution (0.8);
     return false;
   }
 
+  m_cutOff = m_shader->GetUniformLocation("cutOff");
+  if (m_cutOff == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_LightPosition not found\n");
+    return false;
+  }
+
+  m_spotLight = m_shader->GetUniformLocation("SpotLight");
+  if (m_spotLight == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("m_LightPosition not found\n");
+    return false;
+  }
+
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
@@ -355,6 +369,10 @@ void Graphics::Render()
   //glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
   glUniform4fv(m_shader->GetUniformLocation("LightPosition"), 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
   glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(ambientValue,ambientValue,ambientValue, 1))); 
+  glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( 5.0f ) ) );
+
+  glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+  glUniform3f( m_spotLight, tmpVec.x, tmpVec.y, tmpVec.z );
 
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));

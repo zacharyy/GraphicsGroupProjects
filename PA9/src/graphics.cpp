@@ -356,27 +356,35 @@ void Graphics::Render()
   /*glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"), 1,1,1,1);
   glUniform4f(m_shader->GetUniformLocation("SpecularProduct"), 1,1,1,1);
   glUniform1f(m_shader->GetUniformLocation("Shininess"), 10);*/
+  //UpdateLighting();
   m_ball->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
+  //UpdateLighting();
   m_cylinder->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  //UpdateLighting();
   m_cube->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
+  //UpdateLighting();
   m_front->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_back->GetModel()));
+  //UpdateLighting();
   m_back->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_left->GetModel()));
+  //UpdateLighting();
   m_left->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_right->GetModel()));
+  //UpdateLighting();
   m_right->Render(m_shader);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_bottom->GetModel()));
+  //UpdateLighting();
   m_bottom->Render(m_shader);
   // Get any errors from OpenGL
   auto error = glGetError();
@@ -430,3 +438,12 @@ void Graphics::UpdateShader(int newLightingType)
   lightingType = newLightingType;
 }
 
+
+void Graphics::UpdateLighting()
+{
+  glUniform4f(m_shader->GetUniformLocation("LightPosition"), 0,2,0,0);
+  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"), .2,.2,.2,1);
+  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"), .2, .2, .2,1);
+  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"), 1, 1, 1,1);
+  glUniform1f(m_shader->GetUniformLocation("Shininess"), .0005);
+}

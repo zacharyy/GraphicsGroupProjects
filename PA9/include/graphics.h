@@ -30,6 +30,7 @@ class Graphics
     btRigidBody *bottomRigidBody;
 
    void UpdateShader(int newLightingType);
+   void UpdateLighting();
 
    int lightingType;
    int newLightingType;

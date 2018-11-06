@@ -8,6 +8,8 @@ Graphics::Graphics()
 	cubeSpecular = .5;
 	cylSpecular = .5;
 	ballSpecular = .5;
+	cutOffAngle = 5.0;
+	brightness = 0;
 }
 
 Graphics::~Graphics()
@@ -135,8 +137,8 @@ rightRigidBody->setRestitution (0.5);
 
 	//Create the bottom
   btTriangleMesh* objTriMeshBot = new btTriangleMesh();
-  m_bottom = new Object("../objects/bottom.obj", "../objects/checker.jpg", objTriMeshBot, 1);
-  btCollisionShape *bottomShape = new btBvhTriangleMeshShape(objTriMeshBot, true);
+  m_bottom = new Object("../objects/bottom.obj", "../objects/checker.jpg", objTriMeshBot, 0);
+  btCollisionShape *bottomShape = new btBoxShape(btVector3(12,0.3,20));
   btDefaultMotionState* bottomMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar bottomMass = 0; //setting mass to 0 makes it static
   btVector3 bottomInertia(0, 0, 0);
@@ -293,7 +295,7 @@ cylinderRigidBody->setRestitution (0.8);
   }
 
   m_LightPosition = m_shader->GetUniformLocation("LightPosition");
-  if (m_modelMatrix == INVALID_UNIFORM_LOCATION) 
+  if (m_LightPosition == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_LightPosition not found\n");
     return false;
@@ -302,14 +304,21 @@ cylinderRigidBody->setRestitution (0.8);
   m_cutOff = m_shader->GetUniformLocation("cutOff");
   if (m_cutOff == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_LightPosition not found\n");
+    printf("m_cutOff not found\n");
     return false;
   }
 
   m_spotLight = m_shader->GetUniformLocation("SpotLight");
   if (m_spotLight == INVALID_UNIFORM_LOCATION) 
   {
-    printf("m_LightPosition not found\n");
+    printf("m_spotLight not found\n");
+    return false;
+  }
+
+  brightness = m_shader->GetUniformLocation("Brightness");
+  if (brightness == INVALID_UNIFORM_LOCATION) 
+  {
+    printf("brightness not found\n");
     return false;
   }
 
@@ -369,11 +378,12 @@ void Graphics::Render()
   //glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
   glUniform4fv(m_shader->GetUniformLocation("LightPosition"), 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
   glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(ambientValue,ambientValue,ambientValue, 1))); 
-  glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( 5.0f ) ) );
+  glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( cutOffAngle ) ) );
 
   glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
   glUniform3f( m_spotLight, tmpVec.x, tmpVec.y, tmpVec.z );
 
+  glUniform1f(m_shader->GetUniformLocation("Brightness"), 5.0+brightness);std::cout<<cutOffAngle<<brightness;
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
   /*glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"), 1,1,1,1);

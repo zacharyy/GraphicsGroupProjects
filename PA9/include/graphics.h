@@ -38,6 +38,8 @@ class Graphics
    float cubeSpecular;
    float cylSpecular;
    float ballSpecular;
+   float cutOffAngle;
+   float brightness;
   private:
     std::string ErrorString(GLenum error);
 

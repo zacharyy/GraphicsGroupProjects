@@ -149,6 +149,24 @@ void Engine::Keyboard()
     {
 			m_graphics->cylSpecular -= .1;
     }
+		//cut off angle of spot light
+    if (m_event.key.keysym.sym == SDLK_j)
+    {
+			m_graphics->cutOffAngle += .5;
+    }
+    if (m_event.key.keysym.sym == SDLK_k)
+    {
+			m_graphics->cutOffAngle -= .5;
+    }
+		//brightness of spot light
+    if (m_event.key.keysym.sym == SDLK_z)
+    {
+			m_graphics->cutOffAngle += .3;
+    }
+    if (m_event.key.keysym.sym == SDLK_x)
+    {
+			m_graphics->cutOffAngle -= .3;
+    }
   }
 }
 

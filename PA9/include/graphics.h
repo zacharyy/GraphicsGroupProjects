@@ -30,7 +30,6 @@ class Graphics
     btRigidBody *bottomRigidBody;
 
    void UpdateShader(int newLightingType);
-   void UpdateLighting();
 
    int lightingType;
    int newLightingType;
@@ -40,6 +39,7 @@ class Graphics
    float ballSpecular;
    float cutOffAngle;
    float brightness;
+
   private:
     std::string ErrorString(GLenum error);
 
@@ -66,9 +66,6 @@ class Graphics
     btCollisionDispatcher *dispatcher;
     btSequentialImpulseConstraintSolver *solver;
     btDiscreteDynamicsWorld *dynamicsWorld;
-
-
-
 };
 
 #endif /* GRAPHICS_H */

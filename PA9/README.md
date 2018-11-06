@@ -1,4 +1,4 @@
-# PA8: Bullet
+# PA9: Lighting
 Group Members:  
 Dongjun Jia  
 Ethan Park  
@@ -6,7 +6,7 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project involves using bullet to apply physics to objects. To achieve this, this project involves loading a simple board that contains a cylinder, cube, and sphere. The board and cylindar are statuc objects while the cube and sphere are dynamic objects. Use of the bullet physics are demonstated by allowing the user to move the cube and interact with the sphere. Users can use the the cube to push the sphere into other objects such as the cylinder and board walls which the sphere will bounce off of. This project also uses knowlege learned from previous projects such as texture and model loading. To run the appliction enter ./PA8
+This project builds off of the previous project, PA8, and adds lighting to the simulation. This project as a result also fixes many issues that PA8 had such as the cube not being a dynamic object, the ball not rolling properly, and the colliders for objects being inaccurate. Features added to PA9 were per vertex and per fragement lighting with the option to swtich between them in real time. A spotlight was also added that follows the sphere and has controls that can change its size and brightness. It should be noted that for per vertex lighting, the bottom of the board only consists of 2 triange meshes, meaning that spotlight lighting for the board only occurs at the board's corners when using per vertex lighting. Finally, controls to adjust the ambient light as well as the specular light of each individual object on the board were added to the simulation. To run the appliction enter ./PA9
 
 # Dependencies, Building, and Running
 
@@ -27,7 +27,7 @@ brew install glew glm sdl2
 ```
 
 ## Building and Running
-This project was built and run using cmake in Linux/Ubuntu. To run the application enter the following in the PA8 directory:
+This project was built and run using cmake in Linux/Ubuntu. To run the application enter the following in the PA9 directory:
 
 mkdir build  
 cd build  
@@ -40,19 +40,24 @@ W	- move cube up
 A	- move cube left  
 S	- move cube down  
 D	- move cube right  
-F - use per fragment lighting
-V - use per vertex lighting
-T - increase specular of ball
-Y - decrese specular of ball
-U - increase specular of cube
-I - decrease specular of cube
-O - increase specular of cylinder
-P - decrease specular of cylinder
-N - increase ambient light
-M - decrease ambient light
-J - increase the size of spotlight
-K - decrease the size of spotlight
-Z - increase the brightness of spotlight
-X - decrease the brightness of spotlight
+
+F 	- use per fragment lighting  
+V 	- use per vertex lighting  
+
+T 	- increase specular light of the ball  
+Y 	- decrese specular light of the ball  
+U 	- increase specular light of the cube  
+I 	- decrease specular light of the cube  
+O 	- increase specular light of the cylinder  
+P 	- decrease specular light of the cylinder  
+
+N 	- increase ambient light  
+M 	- decrease ambient light  
+
+J 	- increase the size of spotlight  
+K 	- decrease the size of spotlight  
+Z 	- increase the brightness of spotlight  
+X 	- decrease the brightness of spotlight  
+
 # Extra Credit
-Triangle meshes for the board, cylinder, and cube are loaded into Bullet instead of primitive objects.
+No extra credit was given for this project.

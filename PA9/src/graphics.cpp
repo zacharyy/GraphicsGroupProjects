@@ -104,7 +104,8 @@ frontRigidBody->setRestitution (0.5);
 backRigidBody->setRestitution (0.5);
   backRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(backRigidBody);
-	//Create the left
+  
+  //Create the left
   btTriangleMesh* objTriMeshL = new btTriangleMesh();
   m_left = new Object("../objects/left.obj", "../objects/red.png", objTriMeshL, 1);
   btCollisionShape *leftShape = new btBvhTriangleMeshShape(objTriMeshL, true);
@@ -115,11 +116,11 @@ backRigidBody->setRestitution (0.5);
   leftShape->calculateLocalInertia(leftMass, leftInertia);
   btRigidBody::btRigidBodyConstructionInfo leftRigidBodyCI(leftMass, leftMotionState, leftShape, leftInertia);
   leftRigidBody = new btRigidBody(leftRigidBodyCI);
-leftRigidBody->setRestitution (0.5);
+  leftRigidBody->setRestitution (0.5);
   leftRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(leftRigidBody);
 
-	//Create the right
+  //Create the right
   btTriangleMesh* objTriMeshR = new btTriangleMesh();
   m_right = new Object("../objects/right.obj", "../objects/red.png", objTriMeshR, 1);
   btCollisionShape *rightShape = new btBvhTriangleMeshShape(objTriMeshR, true);
@@ -135,7 +136,7 @@ rightRigidBody->setRestitution (0.5);
   dynamicsWorld->addRigidBody(rightRigidBody);
 
 
-	//Create the bottom
+  //Create the bottom
   btTriangleMesh* objTriMeshBot = new btTriangleMesh();
   m_bottom = new Object("../objects/bottom.obj", "../objects/red.png", objTriMeshBot, 0);
   btCollisionShape *bottomShape = new btBoxShape(btVector3(12,0.3,20));
@@ -183,22 +184,7 @@ cylinderRigidBody->setRestitution (0.8);
 
   dynamicsWorld->addRigidBody(ballRigidBody);
 
- // Create the cube
-  /*btTriangleMesh* objTriMesh4 = new btTriangleMesh();
-  m_cube = new Object("../objects/cube.obj", "../objects/granite.jpg", objTriMesh4, 1);
-  btCollisionShape *cubeShape = new btBvhTriangleMeshShape(objTriMesh4, true);
-  btDefaultMotionState* cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -5)));
-  btScalar cubeMass = 1; //mass of kinematic object is 0
-  btVector3 cubeInertia(0, 0, 0);
-
-   cubeShape->calculateLocalInertia(cubeMass, cubeInertia);
-  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(cubeMass, cubeMotionState, cubeShape, cubeInertia);
-  cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
-  cubeRigidBody->getMotionState()->getWorldTransform(newtrans);
-  cubeRigidBody->setCollisionFlags(cubeRigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-  cubeRigidBody->setActivationState(DISABLE_DEACTIVATION);
-  dynamicsWorld->addRigidBody(cubeRigidBody);*/
-
+  // Create the cube
   btTriangleMesh* objTriMesh4 = new btTriangleMesh();
   m_cube = new Object("../objects/cube.obj", "../objects/portalCube.jpeg", objTriMesh4, 0);
   btCollisionShape *cubeShape = new btBoxShape(btVector3(1, 1, 1));
@@ -210,27 +196,9 @@ cylinderRigidBody->setRestitution (0.8);
   cubeShape->calculateLocalInertia(cubeMass, cubeInertia);
   btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(cubeMass, cubeMotionState, cubeShape, cubeInertia);
   cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
-  //cubeRigidBody->setRestitution (0.5);
   cubeRigidBody->setActivationState(DISABLE_DEACTIVATION);
 
   dynamicsWorld->addRigidBody(cubeRigidBody);
-
-  /*
-  btTriangleMesh* objTriMesh = new btTriangleMesh();
-  m_ball = new Object("../objects/ball.obj", "../objects/sun.jpg", objTriMesh, 0);
-  btCollisionShape *ballShape = new btSphereShape(.5); 
-  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, -4)));
-  float ballMass = 1;
-  btVector3 ballInertia(0, 0, 0);
-
-  ballShape->calculateLocalInertia(1, ballInertia);
-  btRigidBody::btRigidBodyConstructionInfo ballRigidBodyCI(1, ballMotionState, ballShape, ballInertia);
-  ballRigidBody = new btRigidBody(ballRigidBodyCI);
-  ballRigidBody->setRestitution (0.5);
-  ballRigidBody->setActivationState(DISABLE_DEACTIVATION);
-
-  dynamicsWorld->addRigidBody(ballRigidBody);
-  */
 
   // Set up the shader
   lightingType = 0;
@@ -266,12 +234,7 @@ cylinderRigidBody->setRestitution (0.8);
 
   // Locate the projection matrix in the shader
   m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
-/*
-	cout << m_shader->GetUniformLocation("AmbientProduct") << endl;
-	cout << m_shader->GetUniformLocation("DiffuseProduct") << endl;
-	cout << m_shader->GetUniformLocation("LightPosition") << endl;
-	cout << m_shader->GetUniformLocation("Shininess") << endl;
-	cout << m_shader->GetUniformLocation("SpecularProduct") << endl;*/
+
   if (m_projectionMatrix == INVALID_UNIFORM_LOCATION) 
   {
     printf("m_projectionMatrix not found\n");
@@ -343,7 +306,6 @@ void Graphics::Update(unsigned int dt)
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
-  //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
 
   cylinderRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -357,7 +319,6 @@ void Graphics::Update(unsigned int dt)
 
   trans.getOpenGLMatrix(m);
   m_cube->model = glm::make_mat4(m);
-  //m_cube->model[3].y = 1.0f;
   //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
 }
 
@@ -373,9 +334,8 @@ void Graphics::Render()
   // Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
-	cout << brightness << endl;
+
   //Lighting
-  //glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
   glUniform4fv(m_shader->GetUniformLocation("LightPosition"), 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
   glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(ambientValue,ambientValue,ambientValue, 1))); 
   glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( cutOffAngle ) ) );
@@ -383,41 +343,31 @@ void Graphics::Render()
   glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
   glUniform3fv( m_spotLight,1, glm::value_ptr(glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z)));
 
-  glUniform1f(m_shader->GetUniformLocation("Brightness"), 5.0+brightness);//std::cout<<cutOffAngle<<brightness;
+  glUniform1f(m_shader->GetUniformLocation("Brightness"), 5.0+brightness);
+  
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
-  /*glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"), 1,1,1,1);
-  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"), 1,1,1,1);
-  glUniform1f(m_shader->GetUniformLocation("Shininess"), 10);*/
-  //UpdateLighting();
   m_ball->Render(m_shader, ballSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cylinder->GetModel()));
-  //UpdateLighting();
   m_cylinder->Render(m_shader, cylSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  //UpdateLighting();
   m_cube->Render(m_shader, cubeSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
-  //UpdateLighting();
   m_front->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_back->GetModel()));
-  //UpdateLighting();
   m_back->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_left->GetModel()));
-  //UpdateLighting();
   m_left->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_right->GetModel()));
-  //UpdateLighting();
   m_right->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_bottom->GetModel()));
-  //UpdateLighting();
   m_bottom->Render(m_shader, .5);
   // Get any errors from OpenGL
   auto error = glGetError();
@@ -470,18 +420,8 @@ void Graphics::UpdateShader(int newLightingType)
 
   lightingType = newLightingType;
 
-	m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
-	m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
-	m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
-	m_spotLight = m_shader->GetUniformLocation("SpotLight");
-}
-
-
-void Graphics::UpdateLighting()
-{
-  glUniform4f(m_shader->GetUniformLocation("LightPosition"), 0,2,0,0);
-  glUniform4f(m_shader->GetUniformLocation("AmbientProduct"), .2,.2,.2,1);
-  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"), .2, .2, .2,1);
-  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"), 1, 1, 1,1);
-  glUniform1f(m_shader->GetUniformLocation("Shininess"), .0005);
+  m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
+  m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
+  m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
+  m_spotLight = m_shader->GetUniformLocation("SpotLight");
 }

@@ -38,11 +38,6 @@ void Mesh::Draw(Shader *m_shader, float specular)
 	glUniform1f(m_shader->GetUniformLocation("Shininess"),10.0);
 	glUniform4fv(m_shader->GetUniformLocation("SpecularProduct"),1,glm::value_ptr(glm::vec4(specular, specular, specular, 1)));
 
-/*
-  glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"), .5, .5, .5,1);
-  glUniform4f(m_shader->GetUniformLocation("SpecularProduct"), specular.x, specular.y, specular.z,1);
-  glUniform1f(m_shader->GetUniformLocation("Shininess"), 10);*/
-
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);

@@ -50,5 +50,9 @@ O - increase specular of cylinder
 P - decrease specular of cylinder
 N - increase ambient light
 M - decrease ambient light
+J - increase the size of spotlight
+K - decrease the size of spotlight
+Z - increase the brightness of spotlight
+X - decrease the brightness of spotlight
 # Extra Credit
 Triangle meshes for the board, cylinder, and cube are loaded into Bullet instead of primitive objects.

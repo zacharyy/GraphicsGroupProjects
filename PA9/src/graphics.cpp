@@ -76,7 +76,7 @@ bool Graphics::Initialize(int width, int height)
   //Create Board
   // Create the Front
   btTriangleMesh* objTriMeshF = new btTriangleMesh();
-  m_front = new Object("../objects/front.obj", "../objects/checker.jpg", objTriMeshF, 1);
+  m_front = new Object("../objects/front.obj", "../objects/red.png", objTriMeshF, 1);
   btCollisionShape *frontShape = new btBvhTriangleMeshShape(objTriMeshF, true);
   btDefaultMotionState* frontMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar frontMass = 0; //setting mass to 0 makes it static
@@ -92,7 +92,7 @@ frontRigidBody->setRestitution (0.5);
 
   //Create the back
   btTriangleMesh* objTriMeshB = new btTriangleMesh();
-  m_back = new Object("../objects/back.obj", "../objects/checker.jpg", objTriMeshB, 1);
+  m_back = new Object("../objects/back.obj", "../objects/red.png", objTriMeshB, 1);
   btCollisionShape *backShape = new btBvhTriangleMeshShape(objTriMeshB, true);
   btDefaultMotionState* backMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar backMass = 0; //setting mass to 0 makes it static
@@ -106,7 +106,7 @@ backRigidBody->setRestitution (0.5);
   dynamicsWorld->addRigidBody(backRigidBody);
 	//Create the left
   btTriangleMesh* objTriMeshL = new btTriangleMesh();
-  m_left = new Object("../objects/left.obj", "../objects/checker.jpg", objTriMeshL, 1);
+  m_left = new Object("../objects/left.obj", "../objects/red.png", objTriMeshL, 1);
   btCollisionShape *leftShape = new btBvhTriangleMeshShape(objTriMeshL, true);
   btDefaultMotionState* leftMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar leftMass = 0; //setting mass to 0 makes it static
@@ -121,7 +121,7 @@ leftRigidBody->setRestitution (0.5);
 
 	//Create the right
   btTriangleMesh* objTriMeshR = new btTriangleMesh();
-  m_right = new Object("../objects/right.obj", "../objects/checker.jpg", objTriMeshR, 1);
+  m_right = new Object("../objects/right.obj", "../objects/red.png", objTriMeshR, 1);
   btCollisionShape *rightShape = new btBvhTriangleMeshShape(objTriMeshR, true);
   btDefaultMotionState* rightMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar rightMass = 0; //setting mass to 0 makes it static
@@ -137,7 +137,7 @@ rightRigidBody->setRestitution (0.5);
 
 	//Create the bottom
   btTriangleMesh* objTriMeshBot = new btTriangleMesh();
-  m_bottom = new Object("../objects/bottom.obj", "../objects/checker.jpg", objTriMeshBot, 0);
+  m_bottom = new Object("../objects/bottom.obj", "../objects/red.png", objTriMeshBot, 0);
   btCollisionShape *bottomShape = new btBoxShape(btVector3(12,0.3,20));
   btDefaultMotionState* bottomMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar bottomMass = 0; //setting mass to 0 makes it static
@@ -200,7 +200,7 @@ cylinderRigidBody->setRestitution (0.8);
   dynamicsWorld->addRigidBody(cubeRigidBody);*/
 
   btTriangleMesh* objTriMesh4 = new btTriangleMesh();
-  m_cube = new Object("../objects/cube.obj", "../objects/granite.jpg", objTriMesh4, 0);
+  m_cube = new Object("../objects/cube.obj", "../objects/portalCube.jpeg", objTriMesh4, 0);
   btCollisionShape *cubeShape = new btBoxShape(btVector3(1, 1, 1));
   //btCollisionShape *cubeShape = new btBvhTriangleMeshShape(objTriMesh4, true);
   btDefaultMotionState* cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -5)));
@@ -381,7 +381,7 @@ void Graphics::Render()
   glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( cutOffAngle ) ) );
 
   glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
-  glUniform3f( m_spotLight, tmpVec.x, tmpVec.y, tmpVec.z );
+  glUniform3fv( m_spotLight,1, glm::value_ptr(glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z)));
 
   glUniform1f(m_shader->GetUniformLocation("Brightness"), 5.0+brightness);std::cout<<cutOffAngle<<brightness;
   // Render the objects
@@ -469,6 +469,11 @@ void Graphics::UpdateShader(int newLightingType)
   m_shader->Enable();
 
   lightingType = newLightingType;
+
+	m_modelMatrix = m_shader->GetUniformLocation("modelMatrix");
+	m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
+	m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
+	m_spotLight = m_shader->GetUniformLocation("SpotLight");
 }
 
 

@@ -45,7 +45,7 @@ void main(void)
 
 //spot light
 	vec3 lightloc = vec3(SpotLight.x,SpotLight.y+30,SpotLight.z);
-	float radius = cutOff * distance(SpotLight, lightloc);
+	float radius = cutOff * distance(SpotLight.xyz, lightloc.xyz);
 	float xAxis = v_pos.x;
 	float zAxis = v_pos.z;
 	if (xAxis>=SpotLight.x-radius && xAxis<=SpotLight.x+radius && zAxis>=SpotLight.z-radius && zAxis<=SpotLight.z+radius )

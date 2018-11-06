@@ -18,8 +18,7 @@ uniform vec4 LightPosition;
 uniform float Shininess;
 uniform vec3 SpotLight;
 uniform float cutOff;
-
-
+uniform float Brightness;
 void main(void)
 {
 	vec3 N = normalize( (viewMatrix * modelMatrix) * vec4(fN, 0.0) ).xyz;
@@ -50,8 +49,8 @@ void main(void)
 	float zAxis = v_pos.z;
 	if (xAxis>=SpotLight.x-radius && xAxis<=SpotLight.x+radius && zAxis>=SpotLight.z-radius && zAxis<=SpotLight.z+radius )
 	{
-		diffuse*=5;
-		specular*=5;
+		diffuse*=Brightness;
+		specular*=Brightness;
 	}
 	
 	gl_FragColor = (ambient + diffuse + specular);

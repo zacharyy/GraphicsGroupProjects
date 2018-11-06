@@ -373,7 +373,7 @@ void Graphics::Render()
   // Send in the projection and view to the shader
   glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection())); 
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
-
+	cout << brightness << endl;
   //Lighting
   //glUniform4fv(m_LightPosition, 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
   glUniform4fv(m_shader->GetUniformLocation("LightPosition"), 1, glm::value_ptr(glm::vec4(100.0, 100.0, 100.0, 1)));
@@ -383,7 +383,7 @@ void Graphics::Render()
   glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
   glUniform3fv( m_spotLight,1, glm::value_ptr(glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z)));
 
-  glUniform1f(m_shader->GetUniformLocation("Brightness"), 5.0+brightness);std::cout<<cutOffAngle<<brightness;
+  glUniform1f(m_shader->GetUniformLocation("Brightness"), 5.0+brightness);//std::cout<<cutOffAngle<<brightness;
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
   /*glUniform4f(m_shader->GetUniformLocation("DiffuseProduct"), 1,1,1,1);

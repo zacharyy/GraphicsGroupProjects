@@ -161,11 +161,11 @@ void Engine::Keyboard()
 		//brightness of spot light
     if (m_event.key.keysym.sym == SDLK_z)
     {
-			m_graphics->cutOffAngle += .3;
+			m_graphics->brightness += .3;
     }
     if (m_event.key.keysym.sym == SDLK_x)
     {
-			m_graphics->cutOffAngle -= .3;
+			m_graphics->brightness -= .3;
     }
   }
 }

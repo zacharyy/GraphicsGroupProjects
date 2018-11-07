@@ -49,14 +49,14 @@ void main(void)
 	if( dot(L, N) < 0.0 ) specular = vec4(0.0, 0.0, 0.0, 1.0);
 
 //spot light
-	vec3 lightloc = vec3(SpotLight.x,SpotLight.y+30,SpotLight.z);
-	float radius = cutOff * distance(SpotLight, lightloc);
-	float xAxis = (modelMatrix * vPosition).x;
-	float zAxis = (modelMatrix * vPosition).z;
-	if (xAxis>=SpotLight.x-radius && xAxis<=SpotLight.x+radius && zAxis>=SpotLight.z-radius && zAxis<=SpotLight.z+radius )
+	vec3 v_pos = (modelMatrix * vPosition).xyz;
+	float length = distance(v_pos.xz, SpotLight.xz);
+	float degree = atan(length,30);
+
+	if(degree<cutOff)
 	{
-		diffuse*=Brightness;
-		specular*=Brightness;
+			diffuse*=Brightness;
+			specular*=Brightness;
 	}
 
 

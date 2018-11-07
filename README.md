@@ -34,4 +34,4 @@ This is a simulation of the Solar System made by using the knowlege gained from 
 This is a simulation of a board, cylinder, cube, and sphere in which the cube can be moved with user input and can push the sphere which will bounce off the cylinder and the walls of the board.  To run this project ```cd PA8``` then follow the instructions in the README.md.
 
 ## PA9: Bullet
-This is the simulation from PA8, now with lighting.  To run this project ```cd PA8``` then follow the instructions in the README.md.
+This is the simulation from PA8, now with lighting.  To run this project ```cd PA9``` then follow the instructions in the README.md.

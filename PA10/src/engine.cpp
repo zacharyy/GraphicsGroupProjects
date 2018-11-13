@@ -76,6 +76,7 @@ void Engine::Run()
 
 void Engine::Keyboard()
 {
+	static bool ballLaunched = false;
   if(m_event.type == SDL_QUIT)
   {
     m_running = false;
@@ -90,22 +91,27 @@ void Engine::Keyboard()
 
     if (m_event.key.keysym.sym == SDLK_w)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,1));
+      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,1));
     }
 
     if (m_event.key.keysym.sym == SDLK_s)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1));
+     // m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1));
     }
 
     if (m_event.key.keysym.sym == SDLK_a)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(1,0,0));
+      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(1,0,0));
     }
 
     if (m_event.key.keysym.sym == SDLK_d)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1,0,0));
+      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1,0,0));
+    }
+    if (m_event.key.keysym.sym == SDLK_1 && !ballLaunched)
+    {
+      m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
+			ballLaunched = true;
     }
     if (m_event.key.keysym.sym == SDLK_v)
     {
@@ -161,12 +167,13 @@ void Engine::Keyboard()
 		//brightness of spot light
     if (m_event.key.keysym.sym == SDLK_z)
     {
-			m_graphics->brightness += .3;
+			m_graphics->brightness += .2;
     }
     if (m_event.key.keysym.sym == SDLK_x)
     {
-			m_graphics->brightness -= .3;
+			m_graphics->brightness -= .2;
     }
+
   }
 }
 

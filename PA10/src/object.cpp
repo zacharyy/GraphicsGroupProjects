@@ -37,11 +37,9 @@ Object::~Object()
 
 void Object::Update(unsigned int dt)
 {
-  angle += ((speedScaler * 10/(2*M_PI)*dt/1000));
-  //glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f * cos(angle/5), 0.0f,5.0f * sin(angle/5)));
-  model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
-	model = glm::scale(model, glm::vec3(1, 1, 1));
-
+    	model = translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+    	model = rotate(model, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+    	model = translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
 }
 
 glm::mat4 Object::GetModel()

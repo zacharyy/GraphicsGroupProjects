@@ -69,7 +69,7 @@ bool Graphics::Initialize(int width, int height)
   solver = new btSequentialImpulseConstraintSolver();
 
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-  dynamicsWorld->setGravity(btVector3(0,-9.81,0));
+  dynamicsWorld->setGravity(btVector3(0,-9.81,-0.1));
 
   /*Create Objects*/
 
@@ -264,7 +264,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* objTriMesh = new btTriangleMesh();
   m_ball = new Object("../objects/ball.obj", "../objects/metalball.png", objTriMesh, 0);
   btCollisionShape *ballShape = new btSphereShape(1); 
-  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, -4)));
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-10, 2, -4)));
   btScalar ballMass = 1;
   btVector3 ballInertia(0, 0, 0);
 
@@ -276,7 +276,7 @@ bool Graphics::Initialize(int width, int height)
 
   dynamicsWorld->addRigidBody(ballRigidBody);
 
-  // Create the cube
+ /* // Create the cube
   btTriangleMesh* objTriMesh4 = new btTriangleMesh();
   m_cube = new Object("../objects/cube.obj", "../objects/portalCube.jpeg", objTriMesh4, 0);
   btCollisionShape *cubeShape = new btBoxShape(btVector3(1, 1, 1));
@@ -291,6 +291,31 @@ bool Graphics::Initialize(int width, int height)
   cubeRigidBody->setActivationState(DISABLE_DEACTIVATION);
 
   dynamicsWorld->addRigidBody(cubeRigidBody);
+*/
+	// Create paddle 1
+  btTriangleMesh* paddle1TriMesh = new btTriangleMesh();
+  m_paddle1 = new Object("../objects/triangles.obj", "../objects/red.png", paddle1TriMesh, 1);
+  btCollisionShape *paddle1Shape = new btBvhTriangleMeshShape(paddle1TriMesh, true);
+  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5, 1, -12)));
+
+  paddle1Shape->calculateLocalInertia(trianglesMass, dividerInertia);
+  btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI(trianglesMass, paddle1MotionState, paddle1Shape, trianglesInertia);
+  paddle1RigidBody = new btRigidBody(paddle1RigidBodyCI);
+  paddle1RigidBody->setRestitution (0.5);
+  paddle1RigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(paddle1RigidBody);
+	// Create paddle 2
+  btTriangleMesh* paddle2TriMesh = new btTriangleMesh();
+  m_paddle2 = new Object("../objects/triangles.obj", "../objects/red.png", paddle2TriMesh, 1);
+  btCollisionShape *paddle2Shape = new btBvhTriangleMeshShape(paddle2TriMesh, true);
+  btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-3, 1, -12)));
+
+  paddle2Shape->calculateLocalInertia(trianglesMass, trianglesInertia);
+  btRigidBody::btRigidBodyConstructionInfo paddle2RigidBodyCI(trianglesMass, paddle2MotionState, paddle2Shape, trianglesInertia);
+  paddle2RigidBody = new btRigidBody(paddle2RigidBodyCI);
+  paddle2RigidBody->setRestitution (0.5);
+  paddle2RigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(paddle2RigidBody);
 
   // Set up the shader
   lightingType = 0;
@@ -446,14 +471,30 @@ void Graphics::Update(unsigned int dt)
   curveRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_triangles->model = glm::make_mat4(m);
+
+	btQuaternion quat;
+	static float angle = 0.01;
+	angle += .01;
+	quat.setEuler(angle,0.0,0.0);
+  paddle1RigidBody->getMotionState()->getWorldTransform(trans);
+  //model = translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+  //model = rotate(model, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+  //model = translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+	//trans.setRotation(quat);
+  trans.getOpenGLMatrix(m);
+  m_paddle1->model = glm::make_mat4(m);
+
+  paddle2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_paddle2->model = glm::make_mat4(m);
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);
   //trans.getOrigin() += btVector3(0,0,0.1);
   
   //cubeRigidBody->applyCentralImpulse(btVector3(.4,0,0.4));
-  cubeRigidBody->getMotionState()->getWorldTransform(trans);
+  //cubeRigidBody->getMotionState()->getWorldTransform(trans);
 
-  trans.getOpenGLMatrix(m);
-  m_cube->model = glm::make_mat4(m);
+  //trans.getOpenGLMatrix(m);
+  //m_cube->model = glm::make_mat4(m);
   //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
 }
 
@@ -496,8 +537,8 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_eye2->GetModel()));
   m_eye2->Render(m_shader, cylSpecular);
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  m_cube->Render(m_shader, cubeSpecular);
+  //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
+  //m_cube->Render(m_shader, cubeSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
   m_front->Render(m_shader, .5);
@@ -522,6 +563,13 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_bottom->GetModel()));
   m_bottom->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_paddle1->GetModel()));
+  m_paddle1->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_paddle2->GetModel()));
+  m_paddle2->Render(m_shader, .5);
+
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

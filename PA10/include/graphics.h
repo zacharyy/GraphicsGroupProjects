@@ -35,7 +35,8 @@ class Graphics
     btRigidBody *curveRigidBody;
     btRigidBody *dividerRigidBody;
     btRigidBody *trianglesRigidBody;
-
+		btRigidBody *paddle1RigidBody;
+		btRigidBody *paddle2RigidBody;
 
    void UpdateShader(int newLightingType);
 
@@ -48,6 +49,8 @@ class Graphics
    float cutOffAngle;
    float brightness;
 
+		float paddle1Rot;
+		float paddle2Rot;
   private:
     std::string ErrorString(GLenum error);
 
@@ -70,7 +73,8 @@ class Graphics
     Object *m_topCurve;
     Object *m_divider;
     Object *m_triangles;
- 
+ 		Object *m_paddle1;
+ 		Object *m_paddle2;
     Object *m_cheek1;
     Object *m_cheek2;
     Object *m_eye1;

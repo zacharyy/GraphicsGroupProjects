@@ -198,6 +198,32 @@ bool Graphics::Initialize(int width, int height)
   trianglesRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(trianglesRigidBody);
 
+	// Create left divider
+  btTriangleMesh* leftDividerMesh = new btTriangleMesh();
+  m_leftDivider = new Object("../objects/leftdivider.obj", "../objects/red.png", leftDividerMesh, 1);
+  btCollisionShape *leftDividerShape = new btBvhTriangleMeshShape(leftDividerMesh, true);
+  btDefaultMotionState* leftDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+
+  leftDividerShape->calculateLocalInertia(trianglesMass, dividerInertia);
+  btRigidBody::btRigidBodyConstructionInfo leftDividerRigidBodyCI(trianglesMass, leftDividerMotionState, leftDividerShape, trianglesInertia);
+  leftDividerRigidBody = new btRigidBody(leftDividerRigidBodyCI);
+  leftDividerRigidBody->setRestitution (0.5);
+  leftDividerRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(leftDividerRigidBody);
+
+	// Create right divider
+  btTriangleMesh* rightDividerMesh = new btTriangleMesh();
+  m_rightDivider = new Object("../objects/rightdivider.obj", "../objects/red.png", rightDividerMesh, 1);
+  btCollisionShape *rightDividerShape = new btBvhTriangleMeshShape(rightDividerMesh, true);
+  btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+
+  rightDividerShape->calculateLocalInertia(trianglesMass, dividerInertia);
+  btRigidBody::btRigidBodyConstructionInfo rightDividerRigidBodyCI(trianglesMass, rightDividerMotionState, rightDividerShape, trianglesInertia);
+  rightDividerRigidBody = new btRigidBody(rightDividerRigidBodyCI);
+  rightDividerRigidBody->setRestitution (0.5);
+  rightDividerRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(rightDividerRigidBody);
+
   // Create the cylinder bumper cheek1
   btTriangleMesh* objTriMesh3 = new btTriangleMesh();
   m_cheek1 = new Object("../objects/cheek.obj", "../objects/cheek.jpg", objTriMesh3, 0);
@@ -299,7 +325,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* paddle1TriMesh = new btTriangleMesh();
   m_paddle1 = new Object("../objects/leftflipper.obj", "../objects/red.png", paddle1TriMesh, 1);
   btCollisionShape *paddle1Shape = new btBvhTriangleMeshShape(paddle1TriMesh, true);
-  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5, 1, -13)));
+  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5, 1, -13.8)));
 
   paddle1Shape->calculateLocalInertia(paddleMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI(paddleMass, paddle1MotionState, paddle1Shape, trianglesInertia);
@@ -312,7 +338,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* paddle2TriMesh = new btTriangleMesh();
   m_paddle2 = new Object("../objects/rightflipper.obj", "../objects/red.png", paddle2TriMesh, 1);
   btCollisionShape *paddle2Shape = new btBvhTriangleMeshShape(paddle2TriMesh, true);
-  btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-3, 1, -13)));
+  btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-1.25, 1, -13.8)));
 
   paddle2Shape->calculateLocalInertia(paddleMass, trianglesInertia);
   btRigidBody::btRigidBodyConstructionInfo paddle2RigidBodyCI(paddleMass, paddle2MotionState, paddle2Shape, trianglesInertia);
@@ -490,6 +516,14 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_triangles->model = glm::make_mat4(m);
 
+  curveRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_rightDivider->model = glm::make_mat4(m);
+
+  curveRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_leftDivider->model = glm::make_mat4(m);
+
 	btQuaternion quat;
 	//quat.setEuler(paddle1Rot,0.0,0.0);
   paddle1RigidBody->getMotionState()->getWorldTransform(trans);
@@ -587,6 +621,12 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_plunger->GetModel()));
   m_plunger->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_rightDivider->GetModel()));
+  m_rightDivider->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_leftDivider->GetModel()));
+  m_leftDivider->Render(m_shader, .5);
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

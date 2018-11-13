@@ -38,7 +38,8 @@ class Graphics
 		btRigidBody *paddle1RigidBody;
 		btRigidBody *paddle2RigidBody;
 		btRigidBody *plungerRigidBody;
-
+		btRigidBody *leftDividerRigidBody;
+		btRigidBody *rightDividerRigidBody;
    void UpdateShader(int newLightingType);
 
    int lightingType;
@@ -82,6 +83,8 @@ class Graphics
     Object *m_eye2;
     Object *m_cube;
 		Object *m_plunger;
+		Object *m_rightDivider;
+		Object *m_leftDivider;
 
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;

@@ -91,7 +91,8 @@ void Engine::Keyboard()
 
     if (m_event.key.keysym.sym == SDLK_w)
     {
-      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,1));
+			// Probably change this so its actually the plunger hitting the ball, maybe give plunger a linear velocity to push the ball and that linear velocity gets bigger the longer the button is held down
+      m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
     }
 
     if (m_event.key.keysym.sym == SDLK_s)
@@ -101,19 +102,15 @@ void Engine::Keyboard()
 
     if (m_event.key.keysym.sym == SDLK_a)
     {
-      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(1,0,0));
-				m_graphics->paddle1Rot += .01;
+				//m_graphics->paddle1Rot += .3;
+				//Need to rotate to top then stop then start rotating back down to starting position unless button is held
+				m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,0.1,0));
     }
 
     if (m_event.key.keysym.sym == SDLK_d)
     {
-      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1,0,0));
-			m_graphics->paddle2Rot += .01;
-    }
-    if (m_event.key.keysym.sym == SDLK_1 && !ballLaunched)
-    {
-      m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
-			ballLaunched = true;
+			//m_graphics->paddle2Rot -= .3;
+				m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,-0.1,0));
     }
     if (m_event.key.keysym.sym == SDLK_v)
     {

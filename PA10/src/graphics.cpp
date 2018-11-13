@@ -582,6 +582,8 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_paddle2->GetModel()));
   m_paddle2->Render(m_shader, .5);
 
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_plunger->GetModel()));
+  m_plunger->Render(m_shader, .5);
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

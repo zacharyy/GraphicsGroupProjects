@@ -104,13 +104,23 @@ void Engine::Keyboard()
     {
 				//m_graphics->paddle1Rot += .3;
 				//Need to rotate to top then stop then start rotating back down to starting position unless button is held
-				m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,0.1,0));
+				btQuaternion quat;
+				btScalar z,y,x;
+				quat = m_graphics->paddle1RigidBody->getOrientation();
+				quat.getEulerZYX(z,y,x);
+				if(y > -1.4)
+					m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,1,0));
     }
 
     if (m_event.key.keysym.sym == SDLK_d)
     {
 			//m_graphics->paddle2Rot -= .3;
-				m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,-0.1,0));
+				btQuaternion quat;
+				btScalar z,y,x;
+				quat = m_graphics->paddle2RigidBody->getOrientation();
+				quat.getEulerZYX(z,y,x);
+				if(y < 1.4)
+					m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,-1,0));
     }
     if (m_event.key.keysym.sym == SDLK_v)
     {

@@ -546,15 +546,32 @@ void Graphics::Update(unsigned int dt)
   m_plunger->model = glm::make_mat4(m);
 
 	btQuaternion quat;
-	//quat.setEuler(paddle1Rot,0.0,0.0);
+	btScalar z,y,x;
+	quat = paddle1RigidBody->getOrientation();
+	quat.getEulerZYX(z,y,x);
+	//cout << z << " " << y << " " << x << endl;
+	if(y < -1.4 && y > -1.8)
+	{
+		paddle1RigidBody->setAngularVelocity(btVector3(0,0,0));
+	}
+	//cout << "Paddle2 angle" << quat.getAngle() << endl;
+	//if(quat.getAngle() > 1) quat.setEuler(0,1,0);
   paddle1RigidBody->getMotionState()->getWorldTransform(trans);
-	//trans.setRotation(quat);
+	trans.setRotation(quat);
   trans.getOpenGLMatrix(m);
   m_paddle1->model = glm::make_mat4(m);
 
-	//quat.setEuler(paddle2Rot,0.0,0.0);
+	quat = paddle2RigidBody->getOrientation();
+	quat.getEulerZYX(z,y,x);
+	//cout << z << " " << y << " " << x << endl;
+	if(y > 1.4 && y < 1.8)
+	{
+		paddle2RigidBody->setAngularVelocity(btVector3(0,0,0));
+	}
+	//cout << "Paddle2 angle" << quat.getAngle() << endl;
+	//if(quat.getAngle() > 1) quat.setEuler(0,1,0);
   paddle2RigidBody->getMotionState()->getWorldTransform(trans);
-	//trans.setRotation(quat);
+	trans.setRotation(quat);
   trans.getOpenGLMatrix(m);
   m_paddle2->model = glm::make_mat4(m);
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);

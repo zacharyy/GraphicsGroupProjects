@@ -541,6 +541,10 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_tail->model = glm::make_mat4(m);
 
+  curveRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_plunger->model = glm::make_mat4(m);
+
 	btQuaternion quat;
 	//quat.setEuler(paddle1Rot,0.0,0.0);
   paddle1RigidBody->getMotionState()->getWorldTransform(trans);

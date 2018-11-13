@@ -40,6 +40,7 @@ class Graphics
 		btRigidBody *plungerRigidBody;
 		btRigidBody *leftDividerRigidBody;
 		btRigidBody *rightDividerRigidBody;
+		btRigidBody *tailRigidBody;
    void UpdateShader(int newLightingType);
 
    int lightingType;
@@ -85,6 +86,7 @@ class Graphics
 		Object *m_plunger;
 		Object *m_rightDivider;
 		Object *m_leftDivider;
+		Object *m_tail;
 
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;

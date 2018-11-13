@@ -224,6 +224,19 @@ bool Graphics::Initialize(int width, int height)
   rightDividerRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(rightDividerRigidBody);
 
+	// Create tail?
+  btTriangleMesh* tailDividerMesh = new btTriangleMesh();
+  m_tail = new Object("../objects/tail.obj", "../objects/red.png", tailDividerMesh, 1);
+  btCollisionShape *tailShape = new btBvhTriangleMeshShape(tailDividerMesh, true);
+  btDefaultMotionState* tailMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+
+  tailShape->calculateLocalInertia(trianglesMass, dividerInertia);
+  btRigidBody::btRigidBodyConstructionInfo tailRigidBodyCI(trianglesMass, tailMotionState, tailShape, trianglesInertia);
+  tailRigidBody = new btRigidBody(tailRigidBodyCI);
+  tailRigidBody->setRestitution (0.5);
+  tailRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(tailRigidBody);
+
   // Create the cylinder bumper cheek1
   btTriangleMesh* objTriMesh3 = new btTriangleMesh();
   m_cheek1 = new Object("../objects/cheek.obj", "../objects/cheek.jpg", objTriMesh3, 0);
@@ -524,6 +537,10 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_leftDivider->model = glm::make_mat4(m);
 
+  curveRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_tail->model = glm::make_mat4(m);
+
 	btQuaternion quat;
 	//quat.setEuler(paddle1Rot,0.0,0.0);
   paddle1RigidBody->getMotionState()->getWorldTransform(trans);
@@ -627,6 +644,9 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_leftDivider->GetModel()));
   m_leftDivider->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_tail->GetModel()));
+  m_tail->Render(m_shader, .5);
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

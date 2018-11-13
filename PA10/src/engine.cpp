@@ -102,11 +102,13 @@ void Engine::Keyboard()
     if (m_event.key.keysym.sym == SDLK_a)
     {
       //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(1,0,0));
+				m_graphics->paddle1Rot += .01;
     }
 
     if (m_event.key.keysym.sym == SDLK_d)
     {
       //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1,0,0));
+			m_graphics->paddle2Rot += .01;
     }
     if (m_event.key.keysym.sym == SDLK_1 && !ballLaunched)
     {

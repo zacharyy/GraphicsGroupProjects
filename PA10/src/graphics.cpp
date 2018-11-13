@@ -10,6 +10,8 @@ Graphics::Graphics()
 	ballSpecular = .5;
 	cutOffAngle = 5.0;
 	brightness = 0;
+	paddle1Rot = 0;
+	paddle2Rot = 0;
 }
 
 Graphics::~Graphics()
@@ -294,9 +296,9 @@ bool Graphics::Initialize(int width, int height)
 */
 	// Create paddle 1
   btTriangleMesh* paddle1TriMesh = new btTriangleMesh();
-  m_paddle1 = new Object("../objects/triangles.obj", "../objects/red.png", paddle1TriMesh, 1);
+  m_paddle1 = new Object("../objects/leftflipper.obj", "../objects/red.png", paddle1TriMesh, 1);
   btCollisionShape *paddle1Shape = new btBvhTriangleMeshShape(paddle1TriMesh, true);
-  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5, 1, -12)));
+  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
 
   paddle1Shape->calculateLocalInertia(trianglesMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI(trianglesMass, paddle1MotionState, paddle1Shape, trianglesInertia);
@@ -306,9 +308,9 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(paddle1RigidBody);
 	// Create paddle 2
   btTriangleMesh* paddle2TriMesh = new btTriangleMesh();
-  m_paddle2 = new Object("../objects/triangles.obj", "../objects/red.png", paddle2TriMesh, 1);
+  m_paddle2 = new Object("../objects/rightflipper.obj", "../objects/red.png", paddle2TriMesh, 1);
   btCollisionShape *paddle2Shape = new btBvhTriangleMeshShape(paddle2TriMesh, true);
-  btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-3, 1, -12)));
+  btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
 
   paddle2Shape->calculateLocalInertia(trianglesMass, trianglesInertia);
   btRigidBody::btRigidBodyConstructionInfo paddle2RigidBodyCI(trianglesMass, paddle2MotionState, paddle2Shape, trianglesInertia);
@@ -316,6 +318,19 @@ bool Graphics::Initialize(int width, int height)
   paddle2RigidBody->setRestitution (0.5);
   paddle2RigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(paddle2RigidBody);
+
+	// Create plunger
+  btTriangleMesh* plungerTriMesh = new btTriangleMesh();
+  m_plunger = new Object("../objects/plunger.obj", "../objects/red.png", plungerTriMesh, 1);
+  btCollisionShape *plungerShape = new btBvhTriangleMeshShape(plungerTriMesh, true);
+  btDefaultMotionState* plungerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
+
+  paddle2Shape->calculateLocalInertia(trianglesMass, trianglesInertia);
+  btRigidBody::btRigidBodyConstructionInfo plungerRigidBodyCI(trianglesMass, plungerMotionState, plungerShape, trianglesInertia);
+  plungerRigidBody = new btRigidBody(plungerRigidBodyCI);
+  plungerRigidBody->setRestitution (0.5);
+  plungerRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(plungerRigidBody);
 
   // Set up the shader
   lightingType = 0;
@@ -473,18 +488,15 @@ void Graphics::Update(unsigned int dt)
   m_triangles->model = glm::make_mat4(m);
 
 	btQuaternion quat;
-	static float angle = 0.01;
-	angle += .01;
-	quat.setEuler(angle,0.0,0.0);
+	quat.setEuler(paddle1Rot,0.0,0.0);
   paddle1RigidBody->getMotionState()->getWorldTransform(trans);
-  //model = translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
-  //model = rotate(model, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-  //model = translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
-	//trans.setRotation(quat);
+	trans.setRotation(quat);
   trans.getOpenGLMatrix(m);
   m_paddle1->model = glm::make_mat4(m);
 
+	quat.setEuler(paddle2Rot,0.0,0.0);
   paddle2RigidBody->getMotionState()->getWorldTransform(trans);
+	trans.setRotation(quat);
   trans.getOpenGLMatrix(m);
   m_paddle2->model = glm::make_mat4(m);
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);

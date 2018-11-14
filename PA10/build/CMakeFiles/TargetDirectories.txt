@@ -1,4 +1,0 @@
-/home/zacharyy/Desktop/CS480/cs480Park/PA10/build/CMakeFiles/edit_cache.dir
-/home/zacharyy/Desktop/CS480/cs480Park/PA10/build/CMakeFiles/rebuild_cache.dir
-/home/zacharyy/Desktop/CS480/cs480Park/PA10/build/CMakeFiles/PA9_SUCCESSFUL.dir
-/home/zacharyy/Desktop/CS480/cs480Park/PA10/build/CMakeFiles/PA9.dir

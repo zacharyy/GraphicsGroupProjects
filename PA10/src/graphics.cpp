@@ -12,7 +12,8 @@ Graphics::Graphics()
 	brightness = 0;
 	paddle1Rot = 3;
 	paddle2Rot = 3;
-
+	score = 0;
+	collides = false;
 	ballsLeft = 2;
 	cout << "Balls left: 3" << endl;
 	endOfGame = false;
@@ -400,6 +401,22 @@ bool Graphics::Initialize(int width, int height)
   plungerRigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(plungerRigidBody);
 
+  // Create splash board
+  btTriangleMesh* splashboardTriMesh = new btTriangleMesh();
+  m_splashboard = new Object("../objects/splashboard.obj", "../objects/splashboard.jpg", splashboardTriMesh, 1);
+  btCollisionShape *splashShape = new btBvhTriangleMeshShape(splashboardTriMesh, true);
+  btDefaultMotionState* splashMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btScalar splashMass = 1; 
+
+  paddle2Shape->calculateLocalInertia(splashMass, trianglesInertia);
+  btRigidBody::btRigidBodyConstructionInfo splashRigidBodyCI(splashMass, splashMotionState, splashShape, trianglesInertia);
+  splashboardRigidBody = new btRigidBody(splashRigidBodyCI);
+  splashboardRigidBody->setRestitution (0.5);
+  splashboardRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  splashboardRigidBody->setLinearFactor(btVector3(0,0,0));
+  dynamicsWorld->addRigidBody(splashboardRigidBody);
+
+
   basePlungerPower = 1.5;
   plungerPowerMuliplier = 1.0;
   usingPlunger = false;
@@ -591,6 +608,10 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_plunger->model = glm::make_mat4(m);
 
+  splashboardRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_splashboard->model = glm::make_mat4(m);
+
 	btQuaternion quat;
 	btScalar z,y,x;
 	quat = paddle1RigidBody->getOrientation();
@@ -650,6 +671,7 @@ void Graphics::Update(unsigned int dt)
   }
 
   ballPosition = ballRigidBody->getCenterOfMassPosition();
+  UpdateScore();
   //cout << ballPosition.z() << endl;
   if(ballPosition.z() <= -18.8)
   {
@@ -668,6 +690,7 @@ void Graphics::Update(unsigned int dt)
     {
       endOfGame = true;
       cout << "GAME OVER" << endl;
+      cout << playerName <<"'s Score: "<<score<<endl;
 
       cout << "Press R to Restart" << endl;
     }
@@ -770,6 +793,9 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_tail->GetModel()));
   m_tail->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_splashboard->GetModel()));
+  m_splashboard->Render(m_shader, .5);
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )
@@ -838,4 +864,52 @@ void Graphics::ResetGame()
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
   reset = false;
+}
+
+void Graphics::UpdateScore(){
+  btVector3 tmp;
+  tmp = ballRigidBody->getCenterOfMassPosition();
+  glm::vec2 ball = glm::vec2(tmp.x(),tmp.z());
+  tmp = cheek1RigidBody->getCenterOfMassPosition();
+  glm::vec2 cheek1 = glm::vec2(tmp.x(),tmp.z());
+  tmp = cheek2RigidBody->getCenterOfMassPosition();
+  glm::vec2 cheek2 = glm::vec2(tmp.x(),tmp.z());
+  tmp = eye1RigidBody->getCenterOfMassPosition();
+  glm::vec2 eye1 = glm::vec2(tmp.x(),tmp.z());
+  tmp = eye2RigidBody->getCenterOfMassPosition();
+  glm::vec2 eye2 = glm::vec2(tmp.x(),tmp.z());
+
+  if(glm::distance(ball,cheek1)<=2.05 && collides ==false )
+  {
+	score+=100;std::cout<<"score:"<<score<<endl;
+	collides = true;
+	return;
+  }
+
+  if(glm::distance(ball,cheek2)<=2.05 && collides ==false )
+  {
+	score+=100;std::cout<<"score:"<<score<<endl;
+	collides = true;
+	return;
+  }
+
+  if(glm::distance(ball,eye1)<=1.55 && collides ==false )
+  {
+	score+=200;std::cout<<"score:"<<score<<endl;
+	collides = true;
+	return;
+  }
+
+  if(glm::distance(ball,eye2)<=1.55 && collides ==false )
+  {
+	score+=200;std::cout<<"score:"<<score<<endl;
+	collides = true;
+	return;
+  }
+
+  if(glm::distance(ball,cheek1)>2.05 && glm::distance(ball,cheek2)>2.05 && glm::distance(ball,eye1)>1.55 && glm::distance(ball,eye2)>1.55 && collides == true)
+  {
+	collides = false;
+	return;
+  }
 }

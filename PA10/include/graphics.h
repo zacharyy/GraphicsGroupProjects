@@ -54,6 +54,13 @@ class Graphics
 
 		float paddle1Rot;
 		float paddle2Rot;
+
+  btVector3 plungerPosition;
+  float basePlungerPower;
+  float plungerPowerMuliplier;
+  bool usingPlunger;
+  bool setMultiplier;
+
   private:
     std::string ErrorString(GLenum error);
 

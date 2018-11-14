@@ -366,13 +366,19 @@ bool Graphics::Initialize(int width, int height)
   m_plunger = new Object("../objects/plunger.obj", "../objects/red.png", plungerTriMesh, 1);
   btCollisionShape *plungerShape = new btBvhTriangleMeshShape(plungerTriMesh, true);
   btDefaultMotionState* plungerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
+  btScalar plungerMass = 1; 
 
-  paddle2Shape->calculateLocalInertia(trianglesMass, trianglesInertia);
-  btRigidBody::btRigidBodyConstructionInfo plungerRigidBodyCI(trianglesMass, plungerMotionState, plungerShape, trianglesInertia);
+  paddle2Shape->calculateLocalInertia(plungerMass, trianglesInertia);
+  btRigidBody::btRigidBodyConstructionInfo plungerRigidBodyCI(plungerMass, plungerMotionState, plungerShape, trianglesInertia);
   plungerRigidBody = new btRigidBody(plungerRigidBodyCI);
   plungerRigidBody->setRestitution (0.5);
   plungerRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  plungerRigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(plungerRigidBody);
+
+  basePlungerPower = 1.5;
+  plungerPowerMuliplier = 1.0;
+  usingPlunger = false;
 
   // Set up the shader
   lightingType = 0;
@@ -541,7 +547,7 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_tail->model = glm::make_mat4(m);
 
-  curveRigidBody->getMotionState()->getWorldTransform(trans);
+  plungerRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_plunger->model = glm::make_mat4(m);
 
@@ -549,7 +555,7 @@ void Graphics::Update(unsigned int dt)
 	btScalar z,y,x;
 	quat = paddle1RigidBody->getOrientation();
 	quat.getEulerZYX(z,y,x);
-	cout << z << " " << y << " " << x << endl;
+	//cout << z << " " << y << " " << x << endl;
 	if(y < -1.4 && y > -1.8 && paddle1RigidBody->getAngularVelocity() > 0)
 	{
 		paddle1RigidBody->setAngularVelocity(btVector3(0,0,0));
@@ -583,6 +589,25 @@ void Graphics::Update(unsigned int dt)
   //trans.getOpenGLMatrix(m);
   //m_cube->model = glm::make_mat4(m);
   //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
+
+
+  plungerPosition = plungerRigidBody->getCenterOfMassPosition();
+  if(usingPlunger == false && plungerPosition.z() <= 0)
+  {
+    float z = basePlungerPower*plungerPowerMuliplier + 0.5;
+    //sanity check to make sure z is not negative
+    if(z < 0)
+    {
+      z *= -1.0;
+    }
+    cout << z << endl;
+    plungerRigidBody->setLinearVelocity(btVector3(0,0,z));
+  }
+  else if(usingPlunger == false && plungerPosition.z() >= 0)
+  {
+    //cout << plungerPosition.z()  << endl;
+    plungerRigidBody->setLinearVelocity(btVector3(0,0,0));
+  }
 }
 
 void Graphics::Render()

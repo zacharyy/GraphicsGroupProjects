@@ -97,7 +97,20 @@ void Engine::Keyboard()
 
     if (m_event.key.keysym.sym == SDLK_s)
     {
-     // m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1));
+      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1));
+      //starts at z() = 0
+      //m_graphics->plungerPosition = m_graphics->plungerRigidBody->getCenterOfMassPosition();
+      //cout << m_graphics->plungerPosition.z()  << endl;
+      if( m_graphics->plungerPosition.z() >= -2.5)
+      {
+        m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,-.2));
+        m_graphics->plungerPowerMuliplier = -1.0 * m_graphics->plungerPosition.z();
+      }
+      else
+      {
+        m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,0));
+      }
+      m_graphics->usingPlunger = true;
     }
 
     if (m_event.key.keysym.sym == SDLK_a)
@@ -182,10 +195,9 @@ void Engine::Keyboard()
     {
 			m_graphics->brightness -= .2;
     }
-
   }
-	else if (m_event.type == SDL_KEYUP)
-	{
+  else if (m_event.type == SDL_KEYUP)
+  {
     if (m_event.key.keysym.sym == SDLK_a)
     {
 			btQuaternion quat;
@@ -205,8 +217,11 @@ void Engine::Keyboard()
 			if(y > 0.0)
 				m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,.1,0));
     }
-
-	}
+    if (m_event.key.keysym.sym == SDLK_s)
+    {
+      m_graphics->usingPlunger = false;
+    }
+  }
 }
 
 unsigned int Engine::getDT()

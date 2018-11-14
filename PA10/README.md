@@ -6,7 +6,7 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project builds off of previous projects and simulates a pinball table. Each game will have 3 balls, after which the player has the option of reseting the game. For each bumper the pinball hits, the player recieves 100 points. The power of the plugner changes depending on how far it is pulled back. The simulation has both per vertex and per fragment lighting with the option to swtich between them in real time. A spotlight was also added that follows the pinball and has controls that can change its size and brightness. Controls to adjust the ambient light as well as the specular light of the bumpers and the flippers were added to the simulation. Finally, controls to change the camera to a top down, front, and back view were added. To run the appliction go to the PA10 directory, follow the build instructions, and enter ./PA10
+This project builds off of previous projects and simulates a pinball table. Each game will have 3 balls, after which the player has the option of reseting the game. For each bumper the pinball hits, the player recieves 100 points. The power of the plugner changes depending on how far it is pulled back. The simulation has both per vertex and per fragment lighting with the option to swtich between them in real time. A spotlight was also added that follows the pinball and has controls that can change its size and brightness. Controls to adjust the ambient light as well as the specular light of the pinball, bumpers, and the flippers were added to the simulation. Finally, controls to change the camera to a top down, front, and back view were added. To run the appliction go to the PA10 directory, follow the build instructions, and enter ./PA10
 
 # Dependencies, Building, and Running
 
@@ -36,7 +36,7 @@ make
 ./PA10 
 
 ## Controls
-S(hold)	- use plunger  
+S (hold)	- use plunger  
 
 A	- use right flipper  
 D	- use left flipper  

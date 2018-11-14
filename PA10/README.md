@@ -1,4 +1,4 @@
-# PA9: Lighting
+# PA10: Pinball
 Group Members:  
 Dongjun Jia  
 Ethan Park  
@@ -6,7 +6,7 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project builds off of the previous project, PA8, and adds lighting to the simulation. This project as a result also fixes many issues that PA8 had such as the cube not being a dynamic object, the ball not rolling properly, and the colliders for objects being inaccurate. Features added to PA9 were per vertex and per fragement lighting with the option to swtich between them in real time. A spotlight was also added that follows the sphere and has controls that can change its size and brightness. It should be noted that for per vertex lighting, the bottom of the board only consists of 2 triange meshes, meaning that spotlight lighting for the board only occurs at the board's corners when using per vertex lighting. Finally, controls to adjust the ambient light as well as the specular light of each individual object on the board were added to the simulation. To run the appliction enter ./PA9
+This project builds off of previous projects and simulates a pinball table. Each game will have 3 balls, after which the player has the option of reseting the game. For each bumper the pinball hits, the player recieves 100 points. The power of the plugner changes depending on how far it is pulled back. The simulation has both per vertex and per fragment lighting with the option to swtich between them in real time. A spotlight was also added that follows the pinball and has controls that can change its size and brightness. Finally, controls to adjust the ambient light as well as the specular light of the bumpers and the flippers were added to the simulation. To run the appliction go to the PA10 directory, follow the build instructions, and enter ./PA10
 
 # Dependencies, Building, and Running
 
@@ -27,29 +27,31 @@ brew install glew glm sdl2
 ```
 
 ## Building and Running
-This project was built and run using cmake in Linux/Ubuntu. To run the application enter the following in the PA9 directory:
+This project was built and run using cmake in Linux/Ubuntu. To run the application enter the following in the PA10 directory:
 
 mkdir build  
 cd build  
 cmake ..  
 make  
-./PA9 
+./PA10 
 
 ## Controls
-W	- move cube up  
-A	- move cube left  
-S	- move cube down  
-D	- move cube right  
+S(hold)	- use plunger  
+
+A	- use right flipper  
+D	- use left flipper  
+
+R	- reset game
 
 F 	- use per fragment lighting  
 V 	- use per vertex lighting  
 
 T 	- increase specular light of the ball  
 Y 	- decrese specular light of the ball  
-U 	- increase specular light of the cube  
-I 	- decrease specular light of the cube  
-O 	- increase specular light of the cylinder  
-P 	- decrease specular light of the cylinder  
+U 	- increase specular light of the flippers  
+I 	- decrease specular light of the flippers  
+O 	- increase specular light of the bumpers  
+P 	- decrease specular light of the bumpers  
 
 N 	- increase ambient light  
 M 	- decrease ambient light  
@@ -60,4 +62,5 @@ Z 	- increase the brightness of spotlight
 X 	- decrease the brightness of spotlight  
 
 # Extra Credit
-No extra credit was given for this project.
+Plunger intensity changes depending on how far back the pulled. A spotlight follows the ball with the ability to change its radius and intensity.
+

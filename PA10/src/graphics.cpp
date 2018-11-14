@@ -5,8 +5,8 @@ Graphics::Graphics()
 	Magick::InitializeMagick(NULL);
 
 	ambientValue = .2;
-	cubeSpecular = .5;
-	cylSpecular = .5;
+	bumperSpecular = .5;
+	flipperSpecular = .5;
 	ballSpecular = .5;
 	cutOffAngle = 5.0;
 	brightness = 0;
@@ -740,16 +740,17 @@ void Graphics::Render()
   m_ball->Render(m_shader, ballSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cheek1->GetModel()));
-  m_cheek1->Render(m_shader, cylSpecular);
+  m_cheek1->Render(m_shader, bumperSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cheek2->GetModel()));
-  m_cheek2->Render(m_shader, cylSpecular);
+  m_cheek2->Render(m_shader, bumperSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_eye1->GetModel()));
-  m_eye1->Render(m_shader, cylSpecular);
+  m_eye1->Render(m_shader, bumperSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_eye2->GetModel()));
-  m_eye2->Render(m_shader, cylSpecular);
+  m_eye2->Render(m_shader, bumperSpecular);
+
 
   //glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   //m_cube->Render(m_shader, cubeSpecular);
@@ -779,10 +780,10 @@ void Graphics::Render()
   m_bottom->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_paddle1->GetModel()));
-  m_paddle1->Render(m_shader, .5);
+  m_paddle1->Render(m_shader, flipperSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_paddle2->GetModel()));
-  m_paddle2->Render(m_shader, .5);
+  m_paddle2->Render(m_shader, flipperSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_plunger->GetModel()));
   m_plunger->Render(m_shader, .5);

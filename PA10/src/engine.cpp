@@ -91,12 +91,12 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
-
+/*
     if (m_event.key.keysym.sym == SDLK_w)
     {
 			// Probably change this so its actually the plunger hitting the ball, maybe give plunger a linear velocity to push the ball and that linear velocity gets bigger the longer the button is held down
       m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
-    }
+    }*/
 
     if (m_event.key.keysym.sym == SDLK_s)
     {
@@ -167,23 +167,23 @@ void Engine::Keyboard()
     {
 			m_graphics->ballSpecular -= .1;
     }
-		// cube specular
+		// flipper specular
     if (m_event.key.keysym.sym == SDLK_u)
     {
-			m_graphics->cubeSpecular += .1;
+			m_graphics->flipperSpecular += .1;
     } 
 		if (m_event.key.keysym.sym == SDLK_i)
     {
-			m_graphics->cubeSpecular -= .1;
+			m_graphics->flipperSpecular -= .1;
     }	
-		// cylinder specular
+		// bumper specular
     if (m_event.key.keysym.sym == SDLK_o)
     {
-			m_graphics->cylSpecular += .1;
+			m_graphics->bumperSpecular += .1;
     }
     if (m_event.key.keysym.sym == SDLK_p)
     {
-			m_graphics->cylSpecular -= .1;
+			m_graphics->bumperSpecular -= .1;
     }
 		//cut off angle of spot light
     if (m_event.key.keysym.sym == SDLK_j)

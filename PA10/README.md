@@ -61,9 +61,9 @@ K 	- decrease the size of spotlight
 Z 	- increase the brightness of spotlight  
 X 	- decrease the brightness of spotlight  
 
-,	- top down view
-.	- front view
-/	- back view
+,	- top down view  
+.	- front view  
+/	- back view  
 
 # Extra Credit
 Plunger intensity changes depending on how far back the pulled. A spotlight follows the ball with the ability to change its radius and intensity.

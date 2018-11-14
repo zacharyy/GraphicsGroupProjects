@@ -44,6 +44,7 @@ class Graphics
     btRigidBody *tailRigidBody;
 
    void UpdateShader(int newLightingType);
+   void ResetGame();
 
    int lightingType;
    int newLightingType;
@@ -66,6 +67,8 @@ class Graphics
   bool setMultiplier;
 
   int ballsLeft;
+  bool endOfGame;
+  bool reset;
 
   private:
     std::string ErrorString(GLenum error);

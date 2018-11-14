@@ -12,6 +12,11 @@ Graphics::Graphics()
 	brightness = 0;
 	paddle1Rot = 3;
 	paddle2Rot = 3;
+
+	ballsLeft = 2;
+	cout << "Balls left: 3" << endl;
+	endOfGame = false;
+	reset = false;
 }
 
 Graphics::~Graphics()
@@ -626,16 +631,39 @@ void Graphics::Update(unsigned int dt)
 
   ballPosition = ballRigidBody->getCenterOfMassPosition();
   //cout << ballPosition.z() << endl;
-  if(ballPosition.z() <= -18.865)
+  if(ballPosition.z() <= -18.8)
   {
-        cout << "here" << endl;
-        trans.setOrigin(btVector3(-10, 2, -4));
+    if(ballsLeft > 0)
+    {
+      trans.setOrigin(btVector3(-10, 2, -6));
 	ballsLeft--;
         ballRigidBody->setWorldTransform(trans);
         ballRigidBody->getMotionState()->getWorldTransform(trans);
         trans.getOpenGLMatrix(m);
         m_ball->model = glm::make_mat4(m);
+        //cout << ballsLeft << endl;
         //ballRigidBody->setWorldTransform();
+    }
+    else if(endOfGame == false)
+    {
+      endOfGame = true;
+      cout << "GAME OVER" << endl;
+
+      cout << "Press R to Restart" << endl;
+    }
+  }
+
+  if(reset == true)
+  {
+    trans.setOrigin(btVector3(-10, 2, -6));
+    ballRigidBody->setWorldTransform(trans);
+    ballRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_ball->model = glm::make_mat4(m);
+    ballsLeft = 2;
+    cout << "Balls left: 3" << endl;
+    endOfGame = false;
+    reset = false;
   }
 }
 
@@ -777,4 +805,17 @@ void Graphics::UpdateShader(int newLightingType)
   m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
   m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
   m_spotLight = m_shader->GetUniformLocation("SpotLight");
+}
+
+void Graphics::ResetGame()
+{
+  btTransform trans;
+  btScalar m[16];
+  trans.setOrigin(btVector3(-10, 2, -6));
+  ballsLeft--;
+  ballRigidBody->setWorldTransform(trans);
+  ballRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_ball->model = glm::make_mat4(m);
+  reset = false;
 }

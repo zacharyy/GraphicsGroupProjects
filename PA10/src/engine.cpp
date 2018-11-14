@@ -135,6 +135,11 @@ void Engine::Keyboard()
 				if(y < 1.4)
 					m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,-1,0));
     }
+    //press r to restart
+    if (m_event.key.keysym.sym == SDLK_r)
+    {
+      m_graphics->reset = true;
+    }
     if (m_event.key.keysym.sym == SDLK_v)
     {
       m_graphics->newLightingType = 0;
@@ -220,6 +225,7 @@ void Engine::Keyboard()
     if (m_event.key.keysym.sym == SDLK_s)
     {
       m_graphics->usingPlunger = false;
+      cout << "Balls left: " << m_graphics->ballsLeft << endl;
     }
   }
 }

@@ -32,15 +32,17 @@ class Graphics
     btRigidBody *leftRigidBody;
     btRigidBody *rightRigidBody;
     btRigidBody *bottomRigidBody;
+    btRigidBody *splashBoardRigidBody;
     btRigidBody *curveRigidBody;
     btRigidBody *dividerRigidBody;
     btRigidBody *trianglesRigidBody;
-		btRigidBody *paddle1RigidBody;
-		btRigidBody *paddle2RigidBody;
-		btRigidBody *plungerRigidBody;
-		btRigidBody *leftDividerRigidBody;
-		btRigidBody *rightDividerRigidBody;
-		btRigidBody *tailRigidBody;
+    btRigidBody *paddle1RigidBody;
+    btRigidBody *paddle2RigidBody;
+    btRigidBody *plungerRigidBody;
+    btRigidBody *leftDividerRigidBody;
+    btRigidBody *rightDividerRigidBody;
+    btRigidBody *tailRigidBody;
+
    void UpdateShader(int newLightingType);
 
    int lightingType;
@@ -55,11 +57,15 @@ class Graphics
 		float paddle1Rot;
 		float paddle2Rot;
 
+  btVector3 ballPosition;
+
   btVector3 plungerPosition;
   float basePlungerPower;
   float plungerPowerMuliplier;
   bool usingPlunger;
   bool setMultiplier;
+
+  int ballsLeft;
 
   private:
     std::string ErrorString(GLenum error);
@@ -81,19 +87,20 @@ class Graphics
     Object *m_right;
     Object *m_bottom;
     Object *m_topCurve;
+    Object *m_splashBoard;
     Object *m_divider;
     Object *m_triangles;
- 		Object *m_paddle1;
- 		Object *m_paddle2;
+    Object *m_paddle1;
+    Object *m_paddle2;
     Object *m_cheek1;
     Object *m_cheek2;
     Object *m_eye1;
     Object *m_eye2;
     Object *m_cube;
-		Object *m_plunger;
-		Object *m_rightDivider;
-		Object *m_leftDivider;
-		Object *m_tail;
+    Object *m_plunger;
+    Object *m_rightDivider;
+    Object *m_leftDivider;
+    Object *m_tail;
 
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;

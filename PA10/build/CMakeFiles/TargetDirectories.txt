@@ -1,4 +1,4 @@
-/home/zacharyy/Desktop/Graphics/cs480Park/PA10/build/CMakeFiles/rebuild_cache.dir
-/home/zacharyy/Desktop/Graphics/cs480Park/PA10/build/CMakeFiles/edit_cache.dir
-/home/zacharyy/Desktop/Graphics/cs480Park/PA10/build/CMakeFiles/PA9_SUCCESSFUL.dir
-/home/zacharyy/Desktop/Graphics/cs480Park/PA10/build/CMakeFiles/PA9.dir
+/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/rebuild_cache.dir
+/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/edit_cache.dir
+/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9_SUCCESSFUL.dir
+/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir

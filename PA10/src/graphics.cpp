@@ -78,7 +78,7 @@ bool Graphics::Initialize(int width, int height)
   //Create Board
   // Create the Front
   btTriangleMesh* objTriMeshF = new btTriangleMesh();
-  m_front = new Object("../objects/front.obj", "../objects/red.png", objTriMeshF, 1);
+  m_front = new Object("../objects/front.obj", "../objects/wood.jpg", objTriMeshF, 1);
   btCollisionShape *frontShape = new btBvhTriangleMeshShape(objTriMeshF, true);
   btDefaultMotionState* frontMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar frontMass = 0; //setting mass to 0 makes it static
@@ -94,7 +94,7 @@ bool Graphics::Initialize(int width, int height)
 
   //Create the back
   btTriangleMesh* objTriMeshB = new btTriangleMesh();
-  m_back = new Object("../objects/back.obj", "../objects/red.png", objTriMeshB, 1);
+  m_back = new Object("../objects/back.obj", "../objects/wood.jpg", objTriMeshB, 1);
   btCollisionShape *backShape = new btBvhTriangleMeshShape(objTriMeshB, true);
   btDefaultMotionState* backMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar backMass = 0; //setting mass to 0 makes it static
@@ -109,7 +109,7 @@ bool Graphics::Initialize(int width, int height)
   
   //Create the left
   btTriangleMesh* objTriMeshL = new btTriangleMesh();
-  m_left = new Object("../objects/left.obj", "../objects/red.png", objTriMeshL, 1);
+  m_left = new Object("../objects/left.obj", "../objects/wood.jpg", objTriMeshL, 1);
   btCollisionShape *leftShape = new btBvhTriangleMeshShape(objTriMeshL, true);
   btDefaultMotionState* leftMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar leftMass = 0; //setting mass to 0 makes it static
@@ -124,7 +124,7 @@ bool Graphics::Initialize(int width, int height)
 
   //Create the right
   btTriangleMesh* objTriMeshR = new btTriangleMesh();
-  m_right = new Object("../objects/right.obj", "../objects/red.png", objTriMeshR, 1);
+  m_right = new Object("../objects/right.obj", "../objects/wood.jpg", objTriMeshR, 1);
   btCollisionShape *rightShape = new btBvhTriangleMeshShape(objTriMeshR, true);
   btDefaultMotionState* rightMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar rightMass = 0; //setting mass to 0 makes it static
@@ -155,7 +155,7 @@ bool Graphics::Initialize(int width, int height)
 
   //Create the top curve
   btTriangleMesh* objTriMeshCurve = new btTriangleMesh();
-  m_topCurve = new Object("../objects/topcurve.obj", "../objects/red.png", objTriMeshCurve, 1);
+  m_topCurve = new Object("../objects/topcurve.obj", "../objects/wood.jpg", objTriMeshCurve, 1);
   btCollisionShape *curveShape = new btBvhTriangleMeshShape(objTriMeshCurve, true);
   btDefaultMotionState* curveMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
   btScalar curveMass = 0; //setting mass to 0 makes it static
@@ -168,9 +168,24 @@ bool Graphics::Initialize(int width, int height)
   curveRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(curveRigidBody);
 
+  //Create the SplashBoard
+  btTriangleMesh* objTriMeshSplashBoard = new btTriangleMesh();
+  m_splashBoard = new Object("../objects/splashboard.obj", "../objects/splashboard.jpg", objTriMeshSplashBoard, 1);
+  btCollisionShape *splashBoardShape = new btBvhTriangleMeshShape(objTriMeshSplashBoard, true);
+  btDefaultMotionState* splashBoardMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
+  btScalar splashBoardMass = 0; //setting mass to 0 makes it static
+  btVector3 splashBoardInertia(0, 0, 0);
+
+  splashBoardShape->calculateLocalInertia(splashBoardMass, splashBoardInertia);
+  btRigidBody::btRigidBodyConstructionInfo splashBoardRigidBodyCI(splashBoardMass, splashBoardMotionState, splashBoardShape, splashBoardInertia);
+  splashBoardRigidBody = new btRigidBody(splashBoardRigidBodyCI);
+  splashBoardRigidBody->setRestitution (0.5);
+  splashBoardRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(splashBoardRigidBody);
+
   //Create the divider
   btTriangleMesh* objTriMeshDivider = new btTriangleMesh();
-  m_divider = new Object("../objects/divider.obj", "../objects/red.png", objTriMeshDivider, 1);
+  m_divider = new Object("../objects/divider.obj", "../objects/wood.jpg", objTriMeshDivider, 1);
   btCollisionShape *dividerShape = new btBvhTriangleMeshShape(objTriMeshDivider, true);
   btDefaultMotionState* dividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
   btScalar dividerMass = 0; //setting mass to 0 makes it static
@@ -185,7 +200,7 @@ bool Graphics::Initialize(int width, int height)
 
   //Create the triangles
   btTriangleMesh* objTriMeshTriangles = new btTriangleMesh();
-  m_triangles = new Object("../objects/triangles.obj", "../objects/red.png", objTriMeshTriangles, 1);
+  m_triangles = new Object("../objects/triangles.obj", "../objects/wood.jpg", objTriMeshTriangles, 1);
   btCollisionShape *trianglesShape = new btBvhTriangleMeshShape(objTriMeshTriangles, true);
   btDefaultMotionState* trianglesMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
   btScalar trianglesMass = 0; //setting mass to 0 makes it static
@@ -200,7 +215,7 @@ bool Graphics::Initialize(int width, int height)
 
 	// Create left divider
   btTriangleMesh* leftDividerMesh = new btTriangleMesh();
-  m_leftDivider = new Object("../objects/leftdivider.obj", "../objects/red.png", leftDividerMesh, 1);
+  m_leftDivider = new Object("../objects/leftdivider.obj", "../objects/wood.jpg", leftDividerMesh, 1);
   btCollisionShape *leftDividerShape = new btBvhTriangleMeshShape(leftDividerMesh, true);
   btDefaultMotionState* leftDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 
@@ -213,7 +228,7 @@ bool Graphics::Initialize(int width, int height)
 
 	// Create right divider
   btTriangleMesh* rightDividerMesh = new btTriangleMesh();
-  m_rightDivider = new Object("../objects/rightdivider.obj", "../objects/red.png", rightDividerMesh, 1);
+  m_rightDivider = new Object("../objects/rightdivider.obj", "../objects/wood.jpg", rightDividerMesh, 1);
   btCollisionShape *rightDividerShape = new btBvhTriangleMeshShape(rightDividerMesh, true);
   btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 
@@ -226,7 +241,7 @@ bool Graphics::Initialize(int width, int height)
 
 	// Create tail?
   btTriangleMesh* tailDividerMesh = new btTriangleMesh();
-  m_tail = new Object("../objects/tail.obj", "../objects/red.png", tailDividerMesh, 1);
+  m_tail = new Object("../objects/tail.obj", "../objects/wood.jpg", tailDividerMesh, 1);
   btCollisionShape *tailShape = new btBvhTriangleMeshShape(tailDividerMesh, true);
   btDefaultMotionState* tailMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 
@@ -303,8 +318,8 @@ bool Graphics::Initialize(int width, int height)
 
   //Create the ball
   btTriangleMesh* objTriMesh = new btTriangleMesh();
-  m_ball = new Object("../objects/ball.obj", "../objects/metalball.png", objTriMesh, 0);
-  btCollisionShape *ballShape = new btSphereShape(1); 
+  m_ball = new Object("../objects/ball.obj", "../objects/ball.png", objTriMesh, 0);
+  btCollisionShape *ballShape = new btSphereShape(.5); 
   btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-10, 2, -4)));
   btScalar ballMass = 1;
   btVector3 ballInertia(0, 0, 0);
@@ -336,7 +351,7 @@ bool Graphics::Initialize(int width, int height)
   btScalar paddleMass = 1; 
 	// Create paddle 1
   btTriangleMesh* paddle1TriMesh = new btTriangleMesh();
-  m_paddle1 = new Object("../objects/leftflipper.obj", "../objects/red.png", paddle1TriMesh, 1);
+  m_paddle1 = new Object("../objects/leftflipper.obj", "../objects/wood.jpg", paddle1TriMesh, 1);
   btCollisionShape *paddle1Shape = new btBvhTriangleMeshShape(paddle1TriMesh, true);
   btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5, 1, -13.8)));
 
@@ -349,7 +364,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(paddle1RigidBody);
 	// Create paddle 2
   btTriangleMesh* paddle2TriMesh = new btTriangleMesh();
-  m_paddle2 = new Object("../objects/rightflipper.obj", "../objects/red.png", paddle2TriMesh, 1);
+  m_paddle2 = new Object("../objects/rightflipper.obj", "../objects/wood.jpg", paddle2TriMesh, 1);
   btCollisionShape *paddle2Shape = new btBvhTriangleMeshShape(paddle2TriMesh, true);
   btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-1.25, 1, -13.8)));
 
@@ -363,7 +378,7 @@ bool Graphics::Initialize(int width, int height)
 
 	// Create plunger
   btTriangleMesh* plungerTriMesh = new btTriangleMesh();
-  m_plunger = new Object("../objects/plunger.obj", "../objects/red.png", plungerTriMesh, 1);
+  m_plunger = new Object("../objects/plunger.obj", "../objects/wood.jpg", plungerTriMesh, 1);
   btCollisionShape *plungerShape = new btBvhTriangleMeshShape(plungerTriMesh, true);
   btDefaultMotionState* plungerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
   btScalar plungerMass = 1; 
@@ -535,11 +550,11 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_triangles->model = glm::make_mat4(m);
 
-  curveRigidBody->getMotionState()->getWorldTransform(trans);
+  rightDividerRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_rightDivider->model = glm::make_mat4(m);
 
-  curveRigidBody->getMotionState()->getWorldTransform(trans);
+  leftDividerRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_leftDivider->model = glm::make_mat4(m);
 
@@ -600,13 +615,27 @@ void Graphics::Update(unsigned int dt)
     {
       z *= -1.0;
     }
-    cout << z << endl;
+    //cout << z << endl;
     plungerRigidBody->setLinearVelocity(btVector3(0,0,z));
   }
   else if(usingPlunger == false && plungerPosition.z() >= 0)
   {
     //cout << plungerPosition.z()  << endl;
     plungerRigidBody->setLinearVelocity(btVector3(0,0,0));
+  }
+
+  ballPosition = ballRigidBody->getCenterOfMassPosition();
+  //cout << ballPosition.z() << endl;
+  if(ballPosition.z() <= -18.865)
+  {
+        cout << "here" << endl;
+        trans.setOrigin(btVector3(-10, 2, -4));
+	ballsLeft--;
+        ballRigidBody->setWorldTransform(trans);
+        ballRigidBody->getMotionState()->getWorldTransform(trans);
+        trans.getOpenGLMatrix(m);
+        m_ball->model = glm::make_mat4(m);
+        //ballRigidBody->setWorldTransform();
   }
 }
 

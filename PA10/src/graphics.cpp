@@ -549,8 +549,8 @@ void Graphics::Update(unsigned int dt)
 	btScalar z,y,x;
 	quat = paddle1RigidBody->getOrientation();
 	quat.getEulerZYX(z,y,x);
-	//cout << z << " " << y << " " << x << endl;
-	if(y < -1.4 && y > -1.8)
+	cout << z << " " << y << " " << x << endl;
+	if(y < -1.4 && y > -1.8 && paddle1RigidBody->getAngularVelocity() > 0)
 	{
 		paddle1RigidBody->setAngularVelocity(btVector3(0,0,0));
 	}
@@ -564,7 +564,7 @@ void Graphics::Update(unsigned int dt)
 	quat = paddle2RigidBody->getOrientation();
 	quat.getEulerZYX(z,y,x);
 	//cout << z << " " << y << " " << x << endl;
-	if(y > 1.4 && y < 1.8)
+	if(y > 1.4 && y < 1.8 && paddle2RigidBody->getAngularVelocity() < 0)
 	{
 		paddle2RigidBody->setAngularVelocity(btVector3(0,0,0));
 	}

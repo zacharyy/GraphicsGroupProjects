@@ -184,6 +184,29 @@ void Engine::Keyboard()
     }
 
   }
+	else if (m_event.type == SDL_KEYUP)
+	{
+    if (m_event.key.keysym.sym == SDLK_a)
+    {
+			btQuaternion quat;
+			btScalar z,y,x;
+			quat = m_graphics->paddle1RigidBody->getOrientation();
+			quat.getEulerZYX(z,y,x);
+			if(y < 0.0)
+				m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,-.1,0));
+    }
+
+    if (m_event.key.keysym.sym == SDLK_d)
+    {
+			btQuaternion quat;
+			btScalar z,y,x;
+			quat = m_graphics->paddle2RigidBody->getOrientation();
+			quat.getEulerZYX(z,y,x);
+			if(y > 0.0)
+				m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,.1,0));
+    }
+
+	}
 }
 
 unsigned int Engine::getDT()

@@ -90,45 +90,45 @@ SDL2/SDL.h
 string
 -
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/camera.cpp
+/home/djia/cs480Park/PA10/src/camera.cpp
 camera.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/camera.h
+/home/djia/cs480Park/PA10/src/camera.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/engine.cpp
+/home/djia/cs480Park/PA10/src/engine.cpp
 engine.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/engine.h
+/home/djia/cs480Park/PA10/src/engine.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/graphics.cpp
+/home/djia/cs480Park/PA10/src/graphics.cpp
 graphics.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/graphics.h
+/home/djia/cs480Park/PA10/src/graphics.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/main.cpp
+/home/djia/cs480Park/PA10/src/main.cpp
 iostream
 -
 engine.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/engine.h
+/home/djia/cs480Park/PA10/src/engine.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/mesh.cpp
+/home/djia/cs480Park/PA10/src/mesh.cpp
 mesh.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/mesh.h
+/home/djia/cs480Park/PA10/src/mesh.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/object.cpp
+/home/djia/cs480Park/PA10/src/object.cpp
 object.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/object.h
+/home/djia/cs480Park/PA10/src/object.h
 shader.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/shader.h
+/home/djia/cs480Park/PA10/src/shader.h
 cstdlib
 -
 ctime
 -
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/shader.cpp
+/home/djia/cs480Park/PA10/src/shader.cpp
 shader.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/shader.h
+/home/djia/cs480Park/PA10/src/shader.h
 fstream
 -
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/window.cpp
+/home/djia/cs480Park/PA10/src/window.cpp
 window.h
 -
 

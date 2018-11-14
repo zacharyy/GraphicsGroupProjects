@@ -217,7 +217,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* leftDividerMesh = new btTriangleMesh();
   m_leftDivider = new Object("../objects/leftdivider.obj", "../objects/wood.jpg", leftDividerMesh, 1);
   btCollisionShape *leftDividerShape = new btBvhTriangleMeshShape(leftDividerMesh, true);
-  btDefaultMotionState* leftDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btDefaultMotionState* leftDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0.5)));
 
   leftDividerShape->calculateLocalInertia(trianglesMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo leftDividerRigidBodyCI(trianglesMass, leftDividerMotionState, leftDividerShape, trianglesInertia);
@@ -230,7 +230,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* rightDividerMesh = new btTriangleMesh();
   m_rightDivider = new Object("../objects/rightdivider.obj", "../objects/wood.jpg", rightDividerMesh, 1);
   btCollisionShape *rightDividerShape = new btBvhTriangleMeshShape(rightDividerMesh, true);
-  btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0.5)));
 
   rightDividerShape->calculateLocalInertia(trianglesMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo rightDividerRigidBodyCI(trianglesMass, rightDividerMotionState, rightDividerShape, trianglesInertia);

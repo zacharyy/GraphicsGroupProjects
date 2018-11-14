@@ -70,6 +70,9 @@ class Graphics
   bool endOfGame;
   bool reset;
 
+	bool topDownView;
+	bool frontView;
+	bool backView;
   private:
     std::string ErrorString(GLenum error);
 

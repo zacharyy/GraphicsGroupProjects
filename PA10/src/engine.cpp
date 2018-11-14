@@ -120,7 +120,7 @@ void Engine::Keyboard()
 				btQuaternion quat;
 				btScalar z,y,x;
 				quat = m_graphics->paddle1RigidBody->getOrientation();
-				quat.getEulerZYX(z,y,x);
+				//quat.getEulerZYX(z,y,x);
 				if(y > -1.4)
 					m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,1,0));
     }
@@ -131,7 +131,7 @@ void Engine::Keyboard()
 				btQuaternion quat;
 				btScalar z,y,x;
 				quat = m_graphics->paddle2RigidBody->getOrientation();
-				quat.getEulerZYX(z,y,x);
+				//quat.getEulerZYX(z,y,x);
 				if(y < 1.4)
 					m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,-1,0));
     }
@@ -200,6 +200,24 @@ void Engine::Keyboard()
     {
 			m_graphics->brightness -= .2;
     }
+    if (m_event.key.keysym.sym == SDLK_COMMA)
+    {
+			m_graphics->topDownView = true;
+			m_graphics->frontView = false;
+			m_graphics->backView = false;
+    }
+    if (m_event.key.keysym.sym == SDLK_PERIOD)
+    {
+			m_graphics->topDownView = false;
+			m_graphics->frontView = true;
+			m_graphics->backView = false;
+    }
+    if (m_event.key.keysym.sym == SDLK_SLASH)
+    {
+			m_graphics->topDownView = false;
+			m_graphics->frontView = false;
+			m_graphics->backView = true;
+    }
   }
   else if (m_event.type == SDL_KEYUP)
   {
@@ -208,7 +226,7 @@ void Engine::Keyboard()
 			btQuaternion quat;
 			btScalar z,y,x;
 			quat = m_graphics->paddle1RigidBody->getOrientation();
-			quat.getEulerZYX(z,y,x);
+			//quat.getEulerZYX(z,y,x);
 			if(y < 0.0)
 				m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,-.1,0));
     }
@@ -218,7 +236,7 @@ void Engine::Keyboard()
 			btQuaternion quat;
 			btScalar z,y,x;
 			quat = m_graphics->paddle2RigidBody->getOrientation();
-			quat.getEulerZYX(z,y,x);
+			//quat.getEulerZYX(z,y,x);
 			if(y > 0.0)
 				m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,.1,0));
     }

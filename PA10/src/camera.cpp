@@ -26,7 +26,10 @@ bool Camera::Initialize(int w, int h)
                                  100.0f); //Distance to the far plane, 
   return true;
 }
-
+void Camera::UpdateView(glm::vec3 eyePosition, glm::vec3 focusPoint)
+{
+	view = glm::lookAt(eyePosition, focusPoint, glm::vec3(0.0,1.0,0.0));
+}
 glm::mat4 Camera::GetProjection()
 {
   return projection;

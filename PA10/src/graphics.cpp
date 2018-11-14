@@ -17,6 +17,10 @@ Graphics::Graphics()
 	cout << "Balls left: 3" << endl;
 	endOfGame = false;
 	reset = false;
+
+	frontView = true;
+	backView = false;
+	topDownView = false;
 }
 
 Graphics::~Graphics()
@@ -494,6 +498,22 @@ bool Graphics::Initialize(int width, int height)
 
 void Graphics::Update(unsigned int dt)
 {
+	// Camera update
+  if(topDownView == true)
+  {
+    m_camera->UpdateView(glm::vec3(0.0, 50.0, -1.0), glm::vec3(0.0, 0.0, 0.0));
+  }
+	else if(frontView == true)
+	{
+    m_camera->UpdateView(glm::vec3(0.0, 30.0, -30.0), glm::vec3(0.0, 0.0, 0.0));
+	}
+	else if(backView == true)
+	{
+    m_camera->UpdateView(glm::vec3(0.0, 30.0, 30.0), glm::vec3(0.0, 0.0, 0.0));
+	}
+
+
+
   if(lightingType != newLightingType)
   {
     UpdateShader(newLightingType);
@@ -574,7 +594,7 @@ void Graphics::Update(unsigned int dt)
 	btQuaternion quat;
 	btScalar z,y,x;
 	quat = paddle1RigidBody->getOrientation();
-	quat.getEulerZYX(z,y,x);
+	//quat.getEulerZYX(z,y,x);
 	//cout << z << " " << y << " " << x << endl;
 	if(y < -1.4 && y > -1.8 && paddle1RigidBody->getAngularVelocity() > 0)
 	{
@@ -588,7 +608,7 @@ void Graphics::Update(unsigned int dt)
   m_paddle1->model = glm::make_mat4(m);
 
 	quat = paddle2RigidBody->getOrientation();
-	quat.getEulerZYX(z,y,x);
+	//quat.getEulerZYX(z,y,x);
 	//cout << z << " " << y << " " << x << endl;
 	if(y > 1.4 && y < 1.8 && paddle2RigidBody->getAngularVelocity() < 0)
 	{

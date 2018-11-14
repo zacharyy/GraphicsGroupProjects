@@ -52,8 +52,8 @@ class Graphics
    int lightingType;
    int newLightingType;
    float ambientValue;
-   float cubeSpecular;
-   float cylSpecular;
+   float bumperSpecular;
+   float flipperSpecular;
    float ballSpecular;
    float cutOffAngle;
    float brightness;

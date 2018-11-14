@@ -66,5 +66,5 @@ X 	- decrease the brightness of spotlight
 /	- back view  
 
 # Extra Credit
-Plunger intensity changes depending on how far back the pulled. A spotlight follows the ball with the ability to change its radius and intensity.
+Plunger intensity changes depending on how far back it is pulled. A spotlight follows the ball with the ability to change its radius and intensity.
 

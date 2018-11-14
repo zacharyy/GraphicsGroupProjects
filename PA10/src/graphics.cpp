@@ -526,7 +526,7 @@ void Graphics::Update(unsigned int dt)
 	}
 	else if(backView == true)
 	{
-    m_camera->UpdateView(glm::vec3(0.0, 30.0, 30.0), glm::vec3(0.0, 0.0, 0.0));
+    m_camera->UpdateView(glm::vec3(0.0, 40.0, 20.0), glm::vec3(0.0, 0.0, 0.0));
 	}
 
 
@@ -617,11 +617,12 @@ void Graphics::Update(unsigned int dt)
 	quat = paddle1RigidBody->getOrientation();
 	//quat.getEulerZYX(z,y,x);
 	//cout << z << " " << y << " " << x << endl;
-	if(y < -1.4 && y > -1.8 && paddle1RigidBody->getAngularVelocity() > 0)
+	y = quat.getAngle();
+	if((y < 2 && y > 1.2 && paddle1RigidBody->getAngularVelocity().getY() > 0) || (y < 3.2 && y > 3 && paddle1RigidBody->getAngularVelocity().getY() < 0))
 	{
 		paddle1RigidBody->setAngularVelocity(btVector3(0,0,0));
 	}
-	//cout << "Paddle2 angle" << quat.getAngle() << endl;
+	//cout << "Paddle1 angle" << quat.getAngle() << endl;
 	//if(quat.getAngle() > 1) quat.setEuler(0,1,0);
   paddle1RigidBody->getMotionState()->getWorldTransform(trans);
 	trans.setRotation(quat);
@@ -631,7 +632,8 @@ void Graphics::Update(unsigned int dt)
 	quat = paddle2RigidBody->getOrientation();
 	//quat.getEulerZYX(z,y,x);
 	//cout << z << " " << y << " " << x << endl;
-	if(y > 1.4 && y < 1.8 && paddle2RigidBody->getAngularVelocity() < 0)
+	y = quat.getAngle();
+	if((y > 1.2 && y < 2 && paddle2RigidBody->getAngularVelocity().getY() < 0) || ( y > 3 && paddle2RigidBody->getAngularVelocity().getY() > 0))
 	{
 		paddle2RigidBody->setAngularVelocity(btVector3(0,0,0));
 	}

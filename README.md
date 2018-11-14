@@ -2,7 +2,7 @@
 ## This is for use at the University of Nevada, Reno CS 480/680 Graphics Class
 Any students in that class follow the instructions at [**Github Setup**](https://github.com/HPC-Vis/computer-graphics/wiki/Github-Setup) to begin. This is part of the first assignment in the class and necessary for turning in assignments throughout the semester.
 
-Read through the Wiki on this repository to understand how each class works. This Wiki focuses on the code in PA1.
+Read through the Wiki on this repository to understand how each class works.
 
 # Projects
 
@@ -35,3 +35,7 @@ This is a simulation of a board, cylinder, cube, and sphere in which the cube ca
 
 ## PA9: Bullet
 This is the simulation from PA8, now with lighting.  To run this project ```cd PA9``` then follow the instructions in the README.md.
+
+## PA10: Pinball
+This is the simulation of a pinball table with options to adjust the lighting and camera.  To run this project ```cd PA10``` then follow the instructions in the README.md.
+

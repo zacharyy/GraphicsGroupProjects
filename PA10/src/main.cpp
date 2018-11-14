@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 #include "engine.h"
 
 
@@ -16,7 +16,10 @@ int main(int argc, char **argv)
   //string objectFileString = argv[1];
 
   // Start an engine and run it then cleanup after
-  Engine *engine = new Engine("Project 9: Lighting", 800, 600);
+  string playerName;
+  std::cout<<"Enter your name: ";
+  std::cin>>playerName;
+  Engine *engine = new Engine("Project 10: Pinball", playerName, 800, 600);
   if(!engine->Initialize())
   {
     printf("The engine failed to start.\n");

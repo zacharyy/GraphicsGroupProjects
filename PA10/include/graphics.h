@@ -18,6 +18,7 @@ class Graphics
     void Update(unsigned int dt);
     void Render();
     btTransform newtrans;
+    string playerName;
 
     btRigidBody *ballRigidBody;
     btRigidBody *boardRigidBody;
@@ -42,9 +43,11 @@ class Graphics
     btRigidBody *leftDividerRigidBody;
     btRigidBody *rightDividerRigidBody;
     btRigidBody *tailRigidBody;
+    btRigidBody *splashboardRigidBody;
 
    void UpdateShader(int newLightingType);
    void ResetGame();
+   void UpdateScore();
 
    int lightingType;
    int newLightingType;
@@ -72,7 +75,8 @@ class Graphics
 
   private:
     std::string ErrorString(GLenum error);
-
+    int score;
+    bool collides;
     Camera *m_camera;
     Shader *m_shader;
 
@@ -104,6 +108,7 @@ class Graphics
     Object *m_rightDivider;
     Object *m_leftDivider;
     Object *m_tail;
+    Object *m_splashboard;
 
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;

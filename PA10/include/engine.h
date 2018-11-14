@@ -10,8 +10,8 @@
 class Engine
 {
   public:
-    Engine(string name, int width, int height);
-    Engine(string name);
+    Engine(string name, string pn, int width, int height);
+    Engine(string name, string pn);
     ~Engine();
     bool Initialize();
     void Run();
@@ -27,7 +27,7 @@ class Engine
     int m_WINDOW_HEIGHT;
     bool m_FULLSCREEN;
     SDL_Event m_event;
-
+    string playerName;
     Graphics *m_graphics;
     unsigned int m_DT;
     long long m_currentTimeMillis;

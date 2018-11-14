@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/camera.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/camera.cpp.o"
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/engine.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/engine.cpp.o"
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/graphics.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/graphics.cpp.o"
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/main.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/main.cpp.o"
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/mesh.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/mesh.cpp.o"
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/object.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/object.cpp.o"
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/shader.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/shader.cpp.o"
-  "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/src/window.cpp" "/home/ethanpark/Desktop/temp/computer-graphics-master/PA10/build/CMakeFiles/PA9.dir/src/window.cpp.o"
+  "/home/djia/cs480Park/PA10/src/camera.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/camera.cpp.o"
+  "/home/djia/cs480Park/PA10/src/engine.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/engine.cpp.o"
+  "/home/djia/cs480Park/PA10/src/graphics.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/graphics.cpp.o"
+  "/home/djia/cs480Park/PA10/src/main.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/main.cpp.o"
+  "/home/djia/cs480Park/PA10/src/mesh.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/mesh.cpp.o"
+  "/home/djia/cs480Park/PA10/src/object.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/object.cpp.o"
+  "/home/djia/cs480Park/PA10/src/shader.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/shader.cpp.o"
+  "/home/djia/cs480Park/PA10/src/window.cpp" "/home/djia/cs480Park/PA10/build/CMakeFiles/PA9.dir/src/window.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

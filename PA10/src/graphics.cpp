@@ -1,15 +1,17 @@
 #include "graphics.h"
+#include <SDL2/SDL.h>
+
 
 Graphics::Graphics()
 {
 	Magick::InitializeMagick(NULL);
-
 	ambientValue = .2;
 	bumperSpecular = .5;
 	flipperSpecular = .5;
 	ballSpecular = .5;
 	cutOffAngle = 5.0;
-	brightness = 0;
+	brightness[0] = 5;
+	for(int i = 1; i < 5; i++) brightness[i] = 1;
 	paddle1Rot = 3;
 	paddle2Rot = 3;
 	score = 0;
@@ -29,7 +31,6 @@ Graphics::Graphics()
 	moveCameraRight = false;
 	zoomInCamera = false;
 	zoomOutCamera = false;
-
 	std::ifstream inputStream;
 	inputStream.open("../config/top10.txt");
 	string name;
@@ -524,12 +525,12 @@ bool Graphics::Initialize(int width, int height)
     return false;
   }
 
-  brightness = m_shader->GetUniformLocation("Brightness");
+  /*brightness = m_shader->GetUniformLocation("Brightness");
   if (brightness == INVALID_UNIFORM_LOCATION) 
   {
     printf("brightness not found\n");
     return false;
-  }
+  }*/
 
   //enable depth testing
   glEnable(GL_DEPTH_TEST);
@@ -914,10 +915,25 @@ void Graphics::Render()
   glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(ambientValue,ambientValue,ambientValue, 1))); 
   glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( cutOffAngle ) ) );
 
+	glm::vec3 array[5];
   glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
-  glUniform3fv( m_spotLight,1, glm::value_ptr(glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z)));
+	array[0] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
 
-  glUniform1f(m_shader->GetUniformLocation("Brightness"), 5.0+brightness);
+	tmpVec = m_cheek1->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+	array[1] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
+
+	tmpVec = m_cheek2->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+	array[2] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
+
+	tmpVec = m_eye1->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+	array[3] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
+
+	tmpVec = m_eye2->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+	array[4] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);	
+
+  glUniform3fv( m_spotLight,5, glm::value_ptr(array[0]));
+
+  glUniform1fv(m_shader->GetUniformLocation("Brightness"),5, brightness);
   
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
@@ -1066,18 +1082,27 @@ void Graphics::UpdateScore(){
   glm::vec2 eye1 = glm::vec2(tmp.x(),tmp.z());
   tmp = eye2RigidBody->getCenterOfMassPosition();
   glm::vec2 eye2 = glm::vec2(tmp.x(),tmp.z());
-
+	static int numFrames = 0;
+	numFrames--;
+	if(numFrames <= 0)
+		for(int i = 1; i <5; i++)
+		{
+			brightness[i] = 1;
+		}
   if(glm::distance(ball,cheek1)<=2.05 && collides ==false )
   {
 	score+=100;std::cout<<"score: "<<score<<endl;
 	collides = true;
+	brightness[1] = 5;
+	numFrames = 30;
 	return;
   }
-
   if(glm::distance(ball,cheek2)<=2.05 && collides ==false )
   {
 	score+=100;std::cout<<"score: "<<score<<endl;
 	collides = true;
+	brightness[2] = 5;
+	numFrames = 30;
 	return;
   }
 
@@ -1085,6 +1110,8 @@ void Graphics::UpdateScore(){
   {
 	score+=200;std::cout<<"score: "<<score<<endl;
 	collides = true;
+	brightness[3] = 5;
+	numFrames = 30;
 	return;
   }
 
@@ -1092,6 +1119,8 @@ void Graphics::UpdateScore(){
   {
 	score+=200;std::cout<<"score: "<<score<<endl;
 	collides = true;
+	brightness[4] = 5;
+	numFrames = 30;
 	return;
   }
 

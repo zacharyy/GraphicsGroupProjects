@@ -1,5 +1,30 @@
 
 #include "engine.h"
+/*
+struct AudioData
+{
+Uint8* position;
+Uint32 length;
+};
+
+void audioCallback(void* userData, Uint8* stream, int streamLength)
+{
+AudioData* audio = (AudioData*)userData;
+
+if (audio->length == 0)
+{
+return;
+}
+
+Uint32 length = (Uint32)streamLength;
+
+length = (length > audio->length ? audio->length : length);
+
+SDL_memcpy(stream, audio->position, length);
+
+audio->position += length;
+audio->length -= length;
+}*/
 
 Engine::Engine(string name, string pn, int width, int height)
 {
@@ -29,6 +54,38 @@ Engine::~Engine()
 
 bool Engine::Initialize()
 {
+	// Audio Stuff
+	/*SDL_Init(SDL_INIT_AUDIO);
+
+	SDL_AudioSpec wavSpec;
+	Uint8* wavStart;
+	Uint32 wavLength;
+	string filePath = "../objects/ding.wav";
+
+	if(SDL_LoadWAV("ding.wav", &wavSpec, &wavStart, &wavLength) == NULL)
+	{
+	cerr << "Error: file could not be loaded as an audio file." << endl;
+	}
+
+	AudioData audio;
+	audio.position = wavStart;
+	audio.length = wavLength;
+	wavSpec.callback = audioCallback;
+	wavSpec.userdata = &audio;
+
+	SDL_AudioDeviceID audioDevice;
+	audioDevice = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, SDL_AUDIO_ALLOW_ANY_CHANGE);
+
+	if (audioDevice == 0)
+	{
+		cerr << "Error: " << SDL_GetError() << endl;
+	}
+	SDL_PauseAudioDevice(audioDevice, 0);
+
+	while (audio.length > 0)
+	{
+		SDL_Delay(100);
+	}*/
   // Start a window
   m_window = new Window();
   if(!m_window->Initialize(m_WINDOW_NAME, &m_WINDOW_WIDTH, &m_WINDOW_HEIGHT))
@@ -104,6 +161,7 @@ void Engine::Keyboard()
       //starts at z() = 0
       //m_graphics->plungerPosition = m_graphics->plungerRigidBody->getCenterOfMassPosition();
       //cout << m_graphics->plungerPosition.z()  << endl;
+      //m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
       if( m_graphics->plungerPosition.z() >= -2.5)
       {
         m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,-.2));
@@ -197,11 +255,11 @@ void Engine::Keyboard()
 		//brightness of spot light
     if (m_event.key.keysym.sym == SDLK_z)
     {
-			m_graphics->brightness += .2;
+			m_graphics->brightness[0] += .2;
     }
     if (m_event.key.keysym.sym == SDLK_x)
     {
-			m_graphics->brightness -= .2;
+			m_graphics->brightness[0] -= .2;
     }
 
     /*Camera Controls*/

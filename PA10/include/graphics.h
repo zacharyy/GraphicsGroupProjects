@@ -57,7 +57,7 @@ class Graphics
    float flipperSpecular;
    float ballSpecular;
    float cutOffAngle;
-   float brightness;
+   float brightness[5];
 
 		float paddle1Rot;
 		float paddle2Rot;

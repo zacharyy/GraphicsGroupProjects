@@ -1,8 +1,8 @@
 Ethan 1200
+fsd 600
+Billy 200
+dsfs 200
 Ethan 100
-NONE 0
-NONE 0
-NONE 0
 NONE 0
 NONE 0
 NONE 0

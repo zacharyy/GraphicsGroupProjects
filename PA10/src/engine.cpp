@@ -6,14 +6,14 @@ Engine::Engine(string name, string pn, int width, int height)
   m_WINDOW_NAME = name;
   m_WINDOW_WIDTH = width;
   m_WINDOW_HEIGHT = height;
-  playerName = pn;
+  //playerName = pn;
   m_FULLSCREEN = false;
 }
 
 Engine::Engine(string name, string pn)
 {
   m_WINDOW_NAME = name;
-  playerName = pn;
+  //playerName = pn;
   m_WINDOW_HEIGHT = 0;
   m_WINDOW_WIDTH = 0;
   m_FULLSCREEN = true;
@@ -39,7 +39,7 @@ bool Engine::Initialize()
 
   // Start the graphics
   m_graphics = new Graphics();
-  m_graphics->playerName = playerName;
+  //m_graphics->playerName = playerName;
   if(!m_graphics->Initialize(m_WINDOW_WIDTH, m_WINDOW_HEIGHT))
   {
     printf("The graphics failed to initialize.\n");

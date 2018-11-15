@@ -17,8 +17,8 @@ int main(int argc, char **argv)
 
   // Start an engine and run it then cleanup after
   string playerName;
-  std::cout<<"Enter your name: ";
-  std::cin>>playerName;
+  //std::cout<<"Enter your name: ";
+  //std::cin>>playerName;
   Engine *engine = new Engine("Project 10: Pinball", playerName, 800, 600);
   if(!engine->Initialize())
   {

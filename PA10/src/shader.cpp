@@ -1,5 +1,5 @@
 #include "shader.h"
-#include <fstream>
+
 //https://github.com/g-truc/glm/blob/master/manual.md
 Shader::Shader()
 {

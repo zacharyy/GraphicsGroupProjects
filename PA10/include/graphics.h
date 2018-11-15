@@ -18,7 +18,7 @@ class Graphics
     void Update(unsigned int dt);
     void Render();
     btTransform newtrans;
-    string playerName;
+    //string playerName;
 
     btRigidBody *ballRigidBody;
     btRigidBody *boardRigidBody;
@@ -48,6 +48,7 @@ class Graphics
    void UpdateShader(int newLightingType);
    void ResetGame();
    void UpdateScore();
+   void OutputTop10();
 
    int lightingType;
    int newLightingType;
@@ -76,6 +77,15 @@ class Graphics
 	bool topDownView;
 	bool frontView;
 	bool backView;
+
+    struct PlayerInfo
+    {
+      string name;
+      int score;
+    };
+
+    PlayerInfo top10[10];
+
   private:
     std::string ErrorString(GLenum error);
     int score;

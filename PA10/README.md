@@ -47,7 +47,7 @@ F 	- use per fragment lighting
 V 	- use per vertex lighting  
 
 T 	- increase specular light of the ball  
-Y 	- decrese specular light of the ball  
+Y 	- decrease specular light of the ball  
 U 	- increase specular light of the flippers  
 I 	- decrease specular light of the flippers  
 O 	- increase specular light of the bumpers  

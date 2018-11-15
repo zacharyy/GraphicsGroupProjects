@@ -15,13 +15,26 @@ Graphics::Graphics()
 	score = 0;
 	collides = false;
 	ballsLeft = 2;
-	cout << "Balls left: 3" << endl;
 	endOfGame = false;
 	reset = false;
 
 	frontView = true;
 	backView = false;
 	topDownView = false;
+
+	std::ifstream inputStream;
+	inputStream.open("../config/top10.txt");
+	string name;
+	int score;
+	for(int i=0; i<10; i++)
+	{
+		inputStream >> name;
+		inputStream >> score;
+		top10[i].name = name;
+		top10[i].score = score;
+	}
+        inputStream.close();
+	//std::ifstream input("../config/top10.txt");
 }
 
 Graphics::~Graphics()
@@ -421,6 +434,10 @@ bool Graphics::Initialize(int width, int height)
   plungerPowerMuliplier = 1.0;
   usingPlunger = false;
 
+  cout << "High Scores: " << endl;
+  OutputTop10();
+  cout << "Balls left: 3" << endl;
+
   // Set up the shader
   lightingType = 0;
   newLightingType = 0;
@@ -692,7 +709,67 @@ void Graphics::Update(unsigned int dt)
     {
       endOfGame = true;
       cout << "GAME OVER" << endl;
-      cout << playerName <<"'s Score: "<<score<<endl;
+      cout << endl;
+      cout << "High Scores: " << endl;
+      OutputTop10();
+      cout << "Your Score: "<< score <<endl;
+      //cout << playerName <<"'s Score: "<<score<<endl;
+
+      for(int i=0; i<10; i++)
+      {
+        if(score > top10[i].score)
+	{
+          char answer;
+	  cout << "Add score to scoreboard? (Y/N): ";
+          cin >> answer;
+          if(answer == 'Y' || answer == 'y')
+          {
+            std::ofstream outputStream;
+            outputStream.open("../config/top10.txt");
+            string name;
+            string tempName;
+            int tempScore;
+            cout << "Enter Your Name : ";
+	    cin >> name;
+            for(; i<10; i++)
+            {
+	      tempName = top10[i].name;
+              top10[i].name = name;
+              name = tempName;
+
+
+              tempScore = top10[i].score;
+              top10[i].score = score;
+              score = tempScore;
+
+            }
+            for(int i=0; i<10; i++)
+            {
+              outputStream << top10[i].name << " ";
+              outputStream << top10[i].score << endl;
+            }
+            /*inputStream >> name;
+            inputStream >> score;
+            top10[i].name = name;
+            top10[i].score = score;*/
+            outputStream.close();
+
+            cout << "New High Scores:" << endl;
+            OutputTop10();
+
+            break;
+          }
+          else if(answer == 'N' || answer == 'n')
+          {
+            break;
+          }
+          else
+          {
+            cout << "Invalid input, enter Y for yes or N for no." << endl;
+            i--;
+          }       
+	}
+      }
 
       cout << "Press R to Restart" << endl;
     }
@@ -867,6 +944,7 @@ void Graphics::ResetGame()
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
   reset = false;
+  score = 0;
 }
 
 void Graphics::UpdateScore(){
@@ -884,28 +962,28 @@ void Graphics::UpdateScore(){
 
   if(glm::distance(ball,cheek1)<=2.05 && collides ==false )
   {
-	score+=100;std::cout<<"score:"<<score<<endl;
+	score+=100;std::cout<<"score: "<<score<<endl;
 	collides = true;
 	return;
   }
 
   if(glm::distance(ball,cheek2)<=2.05 && collides ==false )
   {
-	score+=100;std::cout<<"score:"<<score<<endl;
+	score+=100;std::cout<<"score: "<<score<<endl;
 	collides = true;
 	return;
   }
 
   if(glm::distance(ball,eye1)<=1.55 && collides ==false )
   {
-	score+=200;std::cout<<"score:"<<score<<endl;
+	score+=200;std::cout<<"score: "<<score<<endl;
 	collides = true;
 	return;
   }
 
   if(glm::distance(ball,eye2)<=1.55 && collides ==false )
   {
-	score+=200;std::cout<<"score:"<<score<<endl;
+	score+=200;std::cout<<"score: "<<score<<endl;
 	collides = true;
 	return;
   }
@@ -915,4 +993,14 @@ void Graphics::UpdateScore(){
 	collides = false;
 	return;
   }
+}
+
+void Graphics::OutputTop10()
+{
+  for(int i=0; i<10; i++)
+  {
+    cout << top10[i].name << '\t' << '\t';
+    cout << top10[i].score << endl;
+  }
+  cout << endl;
 }

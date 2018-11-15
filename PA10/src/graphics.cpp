@@ -128,7 +128,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* objTriMeshB = new btTriangleMesh();
   m_back = new Object("../objects/back.obj", "../objects/wood.jpg", objTriMeshB, 1);
   btCollisionShape *backShape = new btBvhTriangleMeshShape(objTriMeshB, true);
-  btDefaultMotionState* backMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+  btDefaultMotionState* backMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, -0.2)));
   btScalar backMass = 0; //setting mass to 0 makes it static
   btVector3 backInertia(0, 0, 0);
 
@@ -187,7 +187,7 @@ bool Graphics::Initialize(int width, int height)
 
   //Create the top curve
   btTriangleMesh* objTriMeshCurve = new btTriangleMesh();
-  m_topCurve = new Object("../objects/topcurve.obj", "../objects/wood.jpg", objTriMeshCurve, 1);
+  m_topCurve = new Object("../objects/topcurve.obj", "../objects/ears.jpg", objTriMeshCurve, 1);
   btCollisionShape *curveShape = new btBvhTriangleMeshShape(objTriMeshCurve, true);
   btDefaultMotionState* curveMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
   btScalar curveMass = 0; //setting mass to 0 makes it static
@@ -249,7 +249,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* leftDividerMesh = new btTriangleMesh();
   m_leftDivider = new Object("../objects/leftdivider.obj", "../objects/wood.jpg", leftDividerMesh, 1);
   btCollisionShape *leftDividerShape = new btBvhTriangleMeshShape(leftDividerMesh, true);
-  btDefaultMotionState* leftDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0.5)));
+  btDefaultMotionState* leftDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-0.5, 0, 0.15)));
 
   leftDividerShape->calculateLocalInertia(trianglesMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo leftDividerRigidBodyCI(trianglesMass, leftDividerMotionState, leftDividerShape, trianglesInertia);
@@ -262,7 +262,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* rightDividerMesh = new btTriangleMesh();
   m_rightDivider = new Object("../objects/rightdivider.obj", "../objects/wood.jpg", rightDividerMesh, 1);
   btCollisionShape *rightDividerShape = new btBvhTriangleMeshShape(rightDividerMesh, true);
-  btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0.5)));
+  btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0.3)));
 
   rightDividerShape->calculateLocalInertia(trianglesMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo rightDividerRigidBodyCI(trianglesMass, rightDividerMotionState, rightDividerShape, trianglesInertia);
@@ -273,7 +273,7 @@ bool Graphics::Initialize(int width, int height)
 
 	// Create tail?
   btTriangleMesh* tailDividerMesh = new btTriangleMesh();
-  m_tail = new Object("../objects/tail.obj", "../objects/wood.jpg", tailDividerMesh, 1);
+  m_tail = new Object("../objects/tail.obj", "../objects/tail.jpg", tailDividerMesh, 1);
   btCollisionShape *tailShape = new btBvhTriangleMeshShape(tailDividerMesh, true);
   btDefaultMotionState* tailMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 
@@ -286,7 +286,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Create the cylinder bumper cheek1
   btTriangleMesh* objTriMesh3 = new btTriangleMesh();
-  m_cheek1 = new Object("../objects/cheek.obj", "../objects/cheek.jpg", objTriMesh3, 0);
+  m_cheek1 = new Object("../objects/cheek.obj", "../objects/cheek2.jpg", objTriMesh3, 0);
   btCollisionShape *cylinderShape = new btCylinderShape(btVector3(1.5, 1.5, 1.5));
   //btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh3, true);
   btDefaultMotionState* cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(7, 1, 2)));
@@ -302,7 +302,7 @@ bool Graphics::Initialize(int width, int height)
 
   // Create the cylinder bumper cheek2
   btTriangleMesh* objTriMesh5 = new btTriangleMesh();
-  m_cheek2 = new Object("../objects/cheek.obj", "../objects/cheek.jpg", objTriMesh5, 0);
+  m_cheek2 = new Object("../objects/cheek.obj", "../objects/cheek2.jpg", objTriMesh5, 0);
   btCollisionShape *cylinderShape2 = new btCylinderShape(btVector3(1.5, 1.5, 1.5));
   //btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh5, true);
   btDefaultMotionState* cylinderMotionState2 = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-4.5, 1, 2)));
@@ -385,7 +385,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* paddle1TriMesh = new btTriangleMesh();
   m_paddle1 = new Object("../objects/leftflipper.obj", "../objects/wood.jpg", paddle1TriMesh, 1);
   btCollisionShape *paddle1Shape = new btBvhTriangleMeshShape(paddle1TriMesh, true);
-  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5, 1, -13.8)));
+  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5., 1, -13.8)));
 
   paddle1Shape->calculateLocalInertia(paddleMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI(paddleMass, paddle1MotionState, paddle1Shape, trianglesInertia);
@@ -410,7 +410,7 @@ bool Graphics::Initialize(int width, int height)
 
 	// Create plunger
   btTriangleMesh* plungerTriMesh = new btTriangleMesh();
-  m_plunger = new Object("../objects/plunger.obj", "../objects/wood.jpg", plungerTriMesh, 1);
+  m_plunger = new Object("../objects/plunger.obj", "../objects/metalball.png", plungerTriMesh, 1);
   btCollisionShape *plungerShape = new btBvhTriangleMeshShape(plungerTriMesh, true);
   btDefaultMotionState* plungerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0)));
   btScalar plungerMass = 1; 
@@ -986,7 +986,7 @@ void Graphics::Render()
   m_paddle2->Render(m_shader, flipperSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_plunger->GetModel()));
-  m_plunger->Render(m_shader, .5);
+  m_plunger->Render(m_shader, 5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_rightDivider->GetModel()));
   m_rightDivider->Render(m_shader, .5);

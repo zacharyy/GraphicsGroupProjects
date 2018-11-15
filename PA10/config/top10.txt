@@ -1,10 +1,10 @@
+pikachu 2300
+pinballking 1800
+pig 1800
 Ethan 1200
+uknowho 1200
 fsd 600
 Billy 200
 dsfs 200
 Ethan 100
-NONE 0
-NONE 0
-NONE 0
-NONE 0
-NONE 0
+100 0

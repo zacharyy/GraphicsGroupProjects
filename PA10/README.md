@@ -70,5 +70,5 @@ Q	- zoom out camera
 E	- zoom in camera
 
 # Extra Credit
-Plunger intensity changes depending on how far back it is pulled. A spotlight follows the ball with the ability to change its radius and intensity. The game keeps track of the top 10 scores with the option for the player to enter a new score into the database.
+Plunger intensity changes depending on how far back it is pulled. A spotlight follows the ball with the ability to change its radius and intensity. The game keeps track of the top 10 scores with the option for the player to enter a new score into the database. The cylinders/bumbers light up when collided with.
 

@@ -22,6 +22,14 @@ Graphics::Graphics()
 	backView = false;
 	topDownView = false;
 
+        UpdatedView = false;
+	moveCameraUp = false;
+	moveCameraDown = false;
+	moveCameraLeft = false;
+	moveCameraRight = false;
+	zoomInCamera = false;
+	zoomOutCamera = false;
+
 	std::ifstream inputStream;
 	inputStream.open("../config/top10.txt");
 	string name;
@@ -536,17 +544,116 @@ void Graphics::Update(unsigned int dt)
   if(topDownView == true)
   {
     m_camera->UpdateView(glm::vec3(0.0, 50.0, -1.0), glm::vec3(0.0, 0.0, 0.0));
+    m_camera->currentEyePosition = glm::vec3(0.0, 50.0, -1.0);
+    m_camera->currentFocusPoint = glm::vec3(0.0, 0.0, 0.0);
+    topDownView = false;
+    reverseControls = false;
+    UpdatedView = false;
   }
-	else if(frontView == true)
-	{
+  else if(frontView == true)
+  {
     m_camera->UpdateView(glm::vec3(0.0, 30.0, -30.0), glm::vec3(0.0, 0.0, 0.0));
-	}
-	else if(backView == true)
-	{
+    m_camera->currentEyePosition = glm::vec3(0.0, 30.0, -30.0);
+    m_camera->currentFocusPoint = glm::vec3(0.0, 0.0, 0.0);
+    frontView = false;
+    reverseControls = false;
+    UpdatedView = false;
+  }
+  else if(backView == true)
+  {
     m_camera->UpdateView(glm::vec3(0.0, 40.0, 20.0), glm::vec3(0.0, 0.0, 0.0));
-	}
+    m_camera->currentEyePosition = glm::vec3(0.0, 40.0, 20.0);
+    m_camera->currentFocusPoint = glm::vec3(0.0, 0.0, 0.0);
+    backView = false;
+    reverseControls = true;
+    UpdatedView = false;
+  }
 
-
+  /*if statements that move camera in top down mode*/
+  //each statement checks whether the key corresponding to the movement has been pressed
+  //and the UpdatedTDView variable is true, UpdatedTDView is needed so the camera doesn't snap
+  //to the default top down camera position each time the update function is called
+  //reverse if camera is in back view
+  if(moveCameraUp == true && UpdatedView == true)
+  {
+    if(reverseControls == true)
+    {
+      m_camera->currentEyePosition.z -= .2;
+      m_camera->currentFocusPoint.z -= .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraUp = false;
+    }
+    else
+    {
+      m_camera->currentEyePosition.z += .2;
+      m_camera->currentFocusPoint.z += .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraUp = false;
+    }
+  }
+  if(moveCameraLeft == true && UpdatedView == true)
+  {
+    if(reverseControls == true)
+    {
+      m_camera->currentEyePosition.x -= .2;
+      m_camera->currentFocusPoint.x -= .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraLeft = false;
+    }
+    else
+    {
+      m_camera->currentEyePosition.x += .2;
+      m_camera->currentFocusPoint.x += .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraLeft = false;
+    }
+  }
+  if(moveCameraDown == true && UpdatedView == true)
+  {
+    if(reverseControls == true)
+    {
+      m_camera->currentEyePosition.z += .2;
+      m_camera->currentFocusPoint.z += .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraDown = false;
+    }
+    else
+    {
+      m_camera->currentEyePosition.z -= .2;
+      m_camera->currentFocusPoint.z -= .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraDown = false;
+    }
+  }
+  if(moveCameraRight == true && UpdatedView == true)
+  {
+    if(reverseControls == true)
+    {
+      m_camera->currentEyePosition.x += .2;
+      m_camera->currentFocusPoint.x += .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraRight = false;
+    }
+    else
+    {
+      m_camera->currentEyePosition.x -= .2;
+      m_camera->currentFocusPoint.x -= .2;
+      m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+      moveCameraRight = false;
+    }
+  }
+  if(zoomInCamera == true && UpdatedView == true)
+  {
+    m_camera->currentEyePosition.y -= .2;
+    m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+    zoomInCamera = false;
+  }  
+  if(zoomOutCamera == true && UpdatedView == true)
+  {
+    m_camera->currentEyePosition.y += .2;
+    m_camera->UpdateView(m_camera->currentEyePosition, m_camera->currentFocusPoint);
+    zoomOutCamera = false;
+  }
 
   if(lightingType != newLightingType)
   {

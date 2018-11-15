@@ -98,7 +98,7 @@ void Engine::Keyboard()
       m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
     }*/
 
-    if (m_event.key.keysym.sym == SDLK_s)
+    if (m_event.key.keysym.sym == SDLK_SPACE)
     {
       //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1));
       //starts at z() = 0
@@ -116,7 +116,7 @@ void Engine::Keyboard()
       m_graphics->usingPlunger = true;
     }
 
-    if (m_event.key.keysym.sym == SDLK_a)
+    if (m_event.key.keysym.sym == SDLK_LSHIFT)
     {
 				//m_graphics->paddle1Rot += .3;
 				//Need to rotate to top then stop then start rotating back down to starting position unless button is held
@@ -128,7 +128,7 @@ void Engine::Keyboard()
 					m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,1,0));
     }
 
-    if (m_event.key.keysym.sym == SDLK_d)
+    if (m_event.key.keysym.sym == SDLK_RSHIFT)
     {
 			//m_graphics->paddle2Rot -= .3;
 				btQuaternion quat;
@@ -203,6 +203,44 @@ void Engine::Keyboard()
     {
 			m_graphics->brightness -= .2;
     }
+
+    /*Camera Controls*/
+    //if w is pressed move top down camera up
+    else if(m_event.key.keysym.sym == SDLK_w)
+    {
+        m_graphics->UpdatedView = true;
+	m_graphics->moveCameraUp = true;
+    }
+    //if a is pressed move top down camera left
+    else if(m_event.key.keysym.sym == SDLK_a)
+    {
+        m_graphics->UpdatedView = true;
+	m_graphics->moveCameraLeft = true;
+    }
+    //if s is pressed move top down camera down
+    else if(m_event.key.keysym.sym == SDLK_s)
+    {
+        m_graphics->UpdatedView = true;
+	m_graphics->moveCameraDown = true;
+    }
+    //if d is pressed move top down camera right
+    else if(m_event.key.keysym.sym == SDLK_d)
+    {
+        m_graphics->UpdatedView = true;
+	m_graphics->moveCameraRight = true;
+    }
+    //if e is pressed zoom top down camera in
+    else if(m_event.key.keysym.sym == SDLK_e)
+    {
+        m_graphics->UpdatedView = true;
+	m_graphics->zoomInCamera = true;
+    }
+    //if q is pressed zoom top down camera out
+    else if(m_event.key.keysym.sym == SDLK_q)
+    {
+        m_graphics->UpdatedView = true;
+	m_graphics->zoomOutCamera = true;
+    }
     if (m_event.key.keysym.sym == SDLK_COMMA)
     {
 			m_graphics->topDownView = true;
@@ -224,7 +262,7 @@ void Engine::Keyboard()
   }
   else if (m_event.type == SDL_KEYUP)
   {
-    if (m_event.key.keysym.sym == SDLK_a)
+    if (m_event.key.keysym.sym == SDLK_LSHIFT)
     {
 			btQuaternion quat;
 			btScalar z,y,x;
@@ -234,7 +272,7 @@ void Engine::Keyboard()
 				m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,-1,0));
     }
 
-    if (m_event.key.keysym.sym == SDLK_d)
+    if (m_event.key.keysym.sym == SDLK_RSHIFT)
     {
 			btQuaternion quat;
 			btScalar z,y,x;
@@ -243,7 +281,7 @@ void Engine::Keyboard()
 			if(y < 3)
 				m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,1,0));
     }
-    if (m_event.key.keysym.sym == SDLK_s)
+    if (m_event.key.keysym.sym == SDLK_SPACE)
     {
       m_graphics->usingPlunger = false;
       cout << "Balls left: " << m_graphics->ballsLeft << endl;

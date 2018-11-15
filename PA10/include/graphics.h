@@ -74,9 +74,18 @@ class Graphics
   bool endOfGame;
   bool reset;
 
-	bool topDownView;
-	bool frontView;
-	bool backView;
+    bool topDownView;
+    bool frontView;
+    bool backView;
+
+    bool UpdatedView;
+    bool moveCameraUp;
+    bool moveCameraDown;
+    bool moveCameraLeft;
+    bool moveCameraRight;
+    bool zoomInCamera;
+    bool zoomOutCamera;
+    bool reverseControls;
 
     struct PlayerInfo
     {

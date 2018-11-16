@@ -46,7 +46,6 @@ class Graphics
     btRigidBody *splashboardRigidBody;
 
    void UpdateShader(int newLightingType);
-   void ResetGame();
    void UpdateScore();
    void OutputTop10();
 

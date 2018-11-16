@@ -1,6 +1,6 @@
 #include "graphics.h"
 #include <SDL2/SDL.h>
-
+#include <iomanip> //iomanip for scoreboard formatting
 
 Graphics::Graphics()
 {
@@ -262,7 +262,7 @@ bool Graphics::Initialize(int width, int height)
   btTriangleMesh* rightDividerMesh = new btTriangleMesh();
   m_rightDivider = new Object("../objects/rightdivider.obj", "../objects/wood.jpg", rightDividerMesh, 1);
   btCollisionShape *rightDividerShape = new btBvhTriangleMeshShape(rightDividerMesh, true);
-  btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0.3)));
+  btDefaultMotionState* rightDividerMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(0, 0, 0.15)));
 
   rightDividerShape->calculateLocalInertia(trianglesMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo rightDividerRigidBodyCI(trianglesMass, rightDividerMotionState, rightDividerShape, trianglesInertia);
@@ -271,7 +271,7 @@ bool Graphics::Initialize(int width, int height)
   rightDividerRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(rightDividerRigidBody);
 
-	// Create tail?
+	// Create tail
   btTriangleMesh* tailDividerMesh = new btTriangleMesh();
   m_tail = new Object("../objects/tail.obj", "../objects/tail.jpg", tailDividerMesh, 1);
   btCollisionShape *tailShape = new btBvhTriangleMeshShape(tailDividerMesh, true);
@@ -361,31 +361,14 @@ bool Graphics::Initialize(int width, int height)
   ballRigidBody = new btRigidBody(ballRigidBodyCI);
   ballRigidBody->setRestitution (0.5);
   ballRigidBody->setActivationState(DISABLE_DEACTIVATION);
-
   dynamicsWorld->addRigidBody(ballRigidBody);
 
- /* // Create the cube
-  btTriangleMesh* objTriMesh4 = new btTriangleMesh();
-  m_cube = new Object("../objects/cube.obj", "../objects/portalCube.jpeg", objTriMesh4, 0);
-  btCollisionShape *cubeShape = new btBoxShape(btVector3(1, 1, 1));
-  //btCollisionShape *cubeShape = new btBvhTriangleMeshShape(objTriMesh4, true);
-  btDefaultMotionState* cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -5)));
-  btScalar cubeMass = 1; 
-  btVector3 cubeInertia(0, 0, 0);
-
-  cubeShape->calculateLocalInertia(cubeMass, cubeInertia);
-  btRigidBody::btRigidBodyConstructionInfo cubeRigidBodyCI(cubeMass, cubeMotionState, cubeShape, cubeInertia);
-  cubeRigidBody = new btRigidBody(cubeRigidBodyCI);
-  cubeRigidBody->setActivationState(DISABLE_DEACTIVATION);
-
-  dynamicsWorld->addRigidBody(cubeRigidBody);
-*/
   btScalar paddleMass = 1; 
-	// Create paddle 1
+  // Create paddle 1
   btTriangleMesh* paddle1TriMesh = new btTriangleMesh();
   m_paddle1 = new Object("../objects/leftflipper.obj", "../objects/wood.jpg", paddle1TriMesh, 1);
   btCollisionShape *paddle1Shape = new btBvhTriangleMeshShape(paddle1TriMesh, true);
-  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5., 1, -13.8)));
+  btDefaultMotionState* paddle1MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5, 1, -13.8)));
 
   paddle1Shape->calculateLocalInertia(paddleMass, dividerInertia);
   btRigidBody::btRigidBodyConstructionInfo paddle1RigidBodyCI(paddleMass, paddle1MotionState, paddle1Shape, trianglesInertia);
@@ -394,11 +377,12 @@ bool Graphics::Initialize(int width, int height)
   paddle1RigidBody->setActivationState(DISABLE_DEACTIVATION);
 	paddle1RigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(paddle1RigidBody);
-	// Create paddle 2
+  // Create paddle 2
   btTriangleMesh* paddle2TriMesh = new btTriangleMesh();
   m_paddle2 = new Object("../objects/rightflipper.obj", "../objects/wood.jpg", paddle2TriMesh, 1);
   btCollisionShape *paddle2Shape = new btBvhTriangleMeshShape(paddle2TriMesh, true);
-  btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-1.25, 1, -13.8)));
+  //btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-1.25, 1, -13.8)));
+  btDefaultMotionState* paddle2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-2.25, 1, -13.8)));
 
   paddle2Shape->calculateLocalInertia(paddleMass, trianglesInertia);
   btRigidBody::btRigidBodyConstructionInfo paddle2RigidBodyCI(paddleMass, paddle2MotionState, paddle2Shape, trianglesInertia);
@@ -894,6 +878,7 @@ void Graphics::Update(unsigned int dt)
     cout << "Balls left: 3" << endl;
     endOfGame = false;
     reset = false;
+    score = 0;
   }
 }
 
@@ -1056,20 +1041,6 @@ void Graphics::UpdateShader(int newLightingType)
   m_spotLight = m_shader->GetUniformLocation("SpotLight");
 }
 
-void Graphics::ResetGame()
-{
-  btTransform trans;
-  btScalar m[16];
-  trans.setOrigin(btVector3(-10, 2, -6));
-  ballsLeft--;
-  ballRigidBody->setWorldTransform(trans);
-  ballRigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
-  m_ball->model = glm::make_mat4(m);
-  reset = false;
-  score = 0;
-}
-
 void Graphics::UpdateScore(){
   btVector3 tmp;
   tmp = ballRigidBody->getCenterOfMassPosition();
@@ -1135,8 +1106,8 @@ void Graphics::OutputTop10()
 {
   for(int i=0; i<10; i++)
   {
-    cout << top10[i].name << '\t' << '\t';
-    cout << top10[i].score << endl;
+    cout << top10[i].name;
+    cout << right << setw(50 - top10[i].name.length()) << setfill('.') << top10[i].score << endl;
   }
   cout << endl;
 }

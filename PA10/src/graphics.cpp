@@ -732,6 +732,7 @@ void Graphics::Update(unsigned int dt)
 	quat = paddle1RigidBody->getOrientation();
 	//quat.getEulerZYX(z,y,x);
 	//cout << z << " " << y << " " << x << endl;
+	//For paddles if statements are used to determine where the paddle should stop
 	y = quat.getAngle();
 	if((y < 2 && y > 1.2 && paddle1RigidBody->getAngularVelocity().getY() > 0) || (y < 3.2 && y > 3 && paddle1RigidBody->getAngularVelocity().getY() < 0))
 	{
@@ -910,6 +911,7 @@ void Graphics::Render()
   glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(ambientValue,ambientValue,ambientValue, 1))); 
   glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( cutOffAngle ) ) );
 
+	// Spotlights on cylinders
   glm::vec3 array[5];
   glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
   array[0] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
@@ -1035,6 +1037,7 @@ std::string Graphics::ErrorString(GLenum error)
   }
 }
 
+// Update the shader locations when switching shaders
 void Graphics::UpdateShader(int newLightingType)
 {
   m_shader->Initialize();

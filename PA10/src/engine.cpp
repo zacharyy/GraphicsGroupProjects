@@ -326,6 +326,7 @@ void Engine::Keyboard()
   }
   else if (m_event.type == SDL_KEYUP)
   {
+		// Handle the paddles coming back down from the top when the button is released
     if (m_event.key.keysym.sym == SDLK_LSHIFT)
     {
 			btQuaternion quat;

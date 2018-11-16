@@ -1041,6 +1041,7 @@ void Graphics::UpdateShader(int newLightingType)
   m_spotLight = m_shader->GetUniformLocation("SpotLight");
 }
 
+//score increases and spot light applied when the ball hits the bumpers
 void Graphics::UpdateScore(){
   btVector3 tmp;
   tmp = ballRigidBody->getCenterOfMassPosition();

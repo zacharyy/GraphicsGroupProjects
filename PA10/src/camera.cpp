@@ -25,17 +25,20 @@ bool Camera::Initialize(int w, int h)
                                  0.01f, //Distance to the near plane, normally a small value like this
                                  100.0f); //Distance to the far plane, 
 
+  //initialize current eye position and focus point
   currentEyePosition = glm::vec3(0.0, 30.0, -30.0);
   currentFocusPoint = glm::vec3(0.0, 0.0, 0.0);
 
   return true;
 }
+
 void Camera::UpdateView(glm::vec3 eyePosition, glm::vec3 focusPoint)
 {
   view = glm::lookAt(eyePosition, focusPoint, glm::vec3(0.0,1.0,0.0));
   currentEyePosition = eyePosition;
   currentFocusPoint = focusPoint;
 }
+
 glm::mat4 Camera::GetProjection()
 {
   return projection;

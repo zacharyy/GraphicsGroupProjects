@@ -12,22 +12,15 @@ Object::Object(std::string objectFileString, std::string textureFileString, btTr
   const char *input;
   input = objectFileString.c_str();
 	
-	textureFile = textureFileString;
+  textureFile = textureFileString;
 
 
   // Read our .obj file
   loadOBJ(input, triMesh, useTriMesh);
 
   angle = 0.0f;
-	speedScaler = 0.001;
-/*
-  glGenBuffers(1, &VB);
-  glBindBuffer(GL_ARRAY_BUFFER, VB);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
+  //speedScaler = 0.001;
 
-  glGenBuffers(1, &IB);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * Indices.size(), &Indices[0], GL_STATIC_DRAW);*/
 }
 Object::~Object()
 {
@@ -73,51 +66,29 @@ void Object::loadOBJ(const char * path, btTriangleMesh* triMesh, bool useTriMesh
     for (unsigned int j=0; j<mesh->mNumVertices; j++)
     {
       const aiVector3D* pPos = &(mesh->mVertices[j]);
-      //const aiVector3D* pNormal = &(mesh->mNormals[i]) : &Zero3D;
       const aiVector3D pTexCoord = mesh->mTextureCoords[0][j];
-
-      /*Vertex v(glm::vec3(pPos->x, pPos->y, pPos->z),
-               glm::vec2(pTexCoord->x, pTexCoord->y)
-               Vector3f(pNormal->x, pNormal->y, pNormal->z));*/
 
       aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
       aiColor3D diffuse;
-			aiColor3D ambient;
-			aiColor3D specular;
+      aiColor3D ambient;
+      aiColor3D specular;
+
       mtl->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
       mtl->Get(AI_MATKEY_COLOR_AMBIENT, ambient);
       mtl->Get(AI_MATKEY_COLOR_SPECULAR, specular);
-     /* if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
-      {
-        if(diffuse.r != 0.6f && diffuse.g != 0.6f && diffuse.b != 0.6f)
-        {
-          glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
-          Vertex *temp = new Vertex(vec, color);
-          Vertices.push_back(*temp);
-        }
-        else
-        {
-          glm::vec3 color;
-          color.x = double(rand()) / (double(RAND_MAX) + 1.0);
-          color.y = double(rand()) / (double(RAND_MAX) + 1.0);
-          color.z = double(rand()) / (double(RAND_MAX) + 1.0);*/
-          glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
+
+      glm::vec3 vec = glm::vec3(pPos->x, pPos->y, pPos->z);
 				
-					glm::vec3 normal = glm::vec3(mesh->mNormals[j].x,mesh->mNormals[j].y,mesh->mNormals[j].z);
-          Vertex *temp = new Vertex(vec, normal , glm::vec2(pTexCoord.x, pTexCoord.y), glm::vec3(diffuse.r, diffuse.g, diffuse.b), glm::vec3(ambient.r, ambient.g, ambient.b), glm::vec3(specular.r, specular.g, specular.b));
-          v.push_back(*temp);
-        /*}
-      }
-      else
-      {
-          std::cout << "Failed to load vertex." << std::endl;
-      }*/
+      glm::vec3 normal = glm::vec3(mesh->mNormals[j].x,mesh->mNormals[j].y,mesh->mNormals[j].z);
+      Vertex *temp = new Vertex(vec, normal , glm::vec2(pTexCoord.x, pTexCoord.y), glm::vec3(diffuse.r, diffuse.g, diffuse.b), glm::vec3(ambient.r, ambient.g, ambient.b), glm::vec3(specular.r, specular.g, specular.b));
+      v.push_back(*temp);
     }
 
     /*Make Faces*/
     for (unsigned int j=0; j < mesh->mNumFaces; j++) 
     {
       const aiFace& Face = mesh->mFaces[j];
+      //make bullet tri meshes
       if(useTriMesh)
       {
         for (int jindex = 0; jindex < 3; jindex++)

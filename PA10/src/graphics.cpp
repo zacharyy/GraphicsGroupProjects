@@ -4,50 +4,67 @@
 
 Graphics::Graphics()
 {
-	Magick::InitializeMagick(NULL);
-	ambientValue = .2;
-	bumperSpecular = .5;
-	flipperSpecular = .5;
-	ballSpecular = .5;
-	cutOffAngle = 5.0;
-	brightness[0] = 5;
-	for(int i = 1; i < 5; i++) brightness[i] = 1;
-	paddle1Rot = 3;
-	paddle2Rot = 3;
-	score = 0;
-	collides = false;
-	ballsLeft = 2;
-	endOfGame = false;
-	reset = false;
+  Magick::InitializeMagick(NULL);
 
-	frontView = true;
-	backView = false;
-	topDownView = false;
+  //initialize lighting variables
+  ambientValue = .2;
+  bumperSpecular = .5;
+  flipperSpecular = .5;
+  ballSpecular = .5;
+  cutOffAngle = 5.0;
+  brightness[0] = 5;
+  for(int i = 1; i < 5; i++) brightness[i] = 1;
 
-        UpdatedView = false;
-	moveCameraUp = false;
-	moveCameraDown = false;
-	moveCameraLeft = false;
-	moveCameraRight = false;
-	zoomInCamera = false;
-	zoomOutCamera = false;
-	std::ifstream inputStream;
-	inputStream.open("../config/top10.txt");
-	string name;
-	int score;
-	for(int i=0; i<10; i++)
-	{
-		inputStream >> name;
-		inputStream >> score;
-		top10[i].name = name;
-		top10[i].score = score;
-	}
-        inputStream.close();
-	//std::ifstream input("../config/top10.txt");
+  lightingType = 0;
+  newLightingType = 0;
+
+  //initialize paddle/flipper variables
+  paddle1Rot = 3;
+  paddle2Rot = 3;
+
+  // initialize plunger variables
+  basePlungerPower = 1.5;
+  plungerPowerMuliplier = 1.0;
+  usingPlunger = false;
+
+  //initialize scoring and game logic variables
+  score = 0;
+  collides = false;
+  ballsLeft = 2;
+  endOfGame = false;
+  reset = false;
+
+  //initialize camera variables
+  frontView = true;
+  backView = false;
+  topDownView = false;
+
+  UpdatedView = false;
+  moveCameraUp = false;
+  moveCameraDown = false;
+  moveCameraLeft = false;
+  moveCameraRight = false;
+  zoomInCamera = false;
+  zoomOutCamera = false;
+
+  //read top 10 scoreboard info from input file and store it in top10 array
+  std::ifstream inputStream;
+  inputStream.open("../config/top10.txt");
+  string name;
+  int score;
+  for(int i=0; i<10; i++)
+  {
+    inputStream >> name;
+    inputStream >> score;
+    top10[i].name = name;
+    top10[i].score = score;
+  }
+  inputStream.close();
 }
 
 Graphics::~Graphics()
 {
+  //delete bullet stuff and set pointers to null
   delete dynamicsWorld;
   delete solver;
   delete collisionConfiguration;
@@ -105,9 +122,9 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
   dynamicsWorld->setGravity(btVector3(0,-9.81,-0.1));
 
-  /*Create Objects*/
+  /*****Create Objects*****/
 
-  //Create Board
+  /*Create Board*/
   // Create the Front
   btTriangleMesh* objTriMeshF = new btTriangleMesh();
   m_front = new Object("../objects/front.obj", "../objects/wood.jpg", objTriMeshF, 1);
@@ -115,7 +132,6 @@ bool Graphics::Initialize(int width, int height)
   btDefaultMotionState* frontMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
   btScalar frontMass = 0; //setting mass to 0 makes it static
   btVector3 frontInertia(0, 0, 0);
-
 
   frontShape->calculateLocalInertia(frontMass, frontInertia);
   btRigidBody::btRigidBodyConstructionInfo frontRigidBodyCI(frontMass, frontMotionState, frontShape, frontInertia);
@@ -169,7 +185,6 @@ bool Graphics::Initialize(int width, int height)
   rightRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(rightRigidBody);
 
-
   //Create the bottom
   btTriangleMesh* objTriMeshBot = new btTriangleMesh();
   m_bottom = new Object("../objects/bottom.obj", "../objects/board.jpg", objTriMeshBot, 0);
@@ -181,7 +196,7 @@ bool Graphics::Initialize(int width, int height)
   bottomShape->calculateLocalInertia(bottomMass, bottomInertia);
   btRigidBody::btRigidBodyConstructionInfo bottomRigidBodyCI(bottomMass, bottomMotionState, 	bottomShape, bottomInertia);
   bottomRigidBody = new btRigidBody(bottomRigidBodyCI);
-	bottomRigidBody->setRestitution (0.5);
+  bottomRigidBody->setRestitution (0.5);
   bottomRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(bottomRigidBody);
 
@@ -245,7 +260,7 @@ bool Graphics::Initialize(int width, int height)
   trianglesRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(trianglesRigidBody);
 
-	// Create left divider
+  // Create left divider
   btTriangleMesh* leftDividerMesh = new btTriangleMesh();
   m_leftDivider = new Object("../objects/leftdivider.obj", "../objects/wood.jpg", leftDividerMesh, 1);
   btCollisionShape *leftDividerShape = new btBvhTriangleMeshShape(leftDividerMesh, true);
@@ -258,7 +273,7 @@ bool Graphics::Initialize(int width, int height)
   leftDividerRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(leftDividerRigidBody);
 
-	// Create right divider
+  // Create right divider
   btTriangleMesh* rightDividerMesh = new btTriangleMesh();
   m_rightDivider = new Object("../objects/rightdivider.obj", "../objects/wood.jpg", rightDividerMesh, 1);
   btCollisionShape *rightDividerShape = new btBvhTriangleMeshShape(rightDividerMesh, true);
@@ -271,7 +286,7 @@ bool Graphics::Initialize(int width, int height)
   rightDividerRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(rightDividerRigidBody);
 
-	// Create tail
+  // Create tail
   btTriangleMesh* tailDividerMesh = new btTriangleMesh();
   m_tail = new Object("../objects/tail.obj", "../objects/tail.jpg", tailDividerMesh, 1);
   btCollisionShape *tailShape = new btBvhTriangleMeshShape(tailDividerMesh, true);
@@ -284,11 +299,10 @@ bool Graphics::Initialize(int width, int height)
   tailRigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(tailRigidBody);
 
-  // Create the cylinder bumper cheek1
+  /*Create the cylinder bumper cheek1*/
   btTriangleMesh* objTriMesh3 = new btTriangleMesh();
   m_cheek1 = new Object("../objects/cheek.obj", "../objects/cheek2.jpg", objTriMesh3, 0);
   btCollisionShape *cylinderShape = new btCylinderShape(btVector3(1.5, 1.5, 1.5));
-  //btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh3, true);
   btDefaultMotionState* cylinderMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(7, 1, 2)));
   btScalar cylinderMass = 0; //setting mass to 0 makes it static
   btVector3 cylinderInertia(0, 0, 0);
@@ -300,11 +314,10 @@ bool Graphics::Initialize(int width, int height)
   cheek1RigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(cheek1RigidBody);
 
-  // Create the cylinder bumper cheek2
+  /*Create the cylinder bumper cheek2*/
   btTriangleMesh* objTriMesh5 = new btTriangleMesh();
   m_cheek2 = new Object("../objects/cheek.obj", "../objects/cheek2.jpg", objTriMesh5, 0);
   btCollisionShape *cylinderShape2 = new btCylinderShape(btVector3(1.5, 1.5, 1.5));
-  //btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh5, true);
   btDefaultMotionState* cylinderMotionState2 = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-4.5, 1, 2)));
   btScalar cylinderMass2 = 0; //setting mass to 0 makes it static
   btVector3 cylinderInertia2(0, 0, 0);
@@ -316,11 +329,10 @@ bool Graphics::Initialize(int width, int height)
   cheek2RigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(cheek2RigidBody);
 
-  // Create the cylinder bumper eye1
+  /*Create the cylinder bumper eye1*/
   btTriangleMesh* objTriMesh6 = new btTriangleMesh();
   m_eye1 = new Object("../objects/eye.obj", "../objects/eye.jpg", objTriMesh6, 0);
   btCollisionShape *cylinderShape3 = new btCylinderShape(btVector3(1, 1.5, 1));
-  //btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh6, true);
   btDefaultMotionState* cylinderMotionState3 = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(5.3, 1, 6)));
   btScalar cylinderMass3 = 0; //setting mass to 0 makes it static
   btVector3 cylinderInertia3(0, 0, 0);
@@ -332,11 +344,10 @@ bool Graphics::Initialize(int width, int height)
   eye1RigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(eye1RigidBody);
 
-  // Create the cylinder bumper eye2
+  /*Create the cylinder bumper eye2*/
   btTriangleMesh* objTriMesh7 = new btTriangleMesh();
   m_eye2 = new Object("../objects/eye.obj", "../objects/eye.jpg", objTriMesh7, 0);
   btCollisionShape *cylinderShape4 = new btCylinderShape(btVector3(1, 1.5, 1));
-  //btCollisionShape *cylinderShape = new btBvhTriangleMeshShape(objTriMesh7, true);
   btDefaultMotionState* cylinderMotionState4 = new btDefaultMotionState(btTransform(btQuaternion(0, 180, 0, 1), btVector3(-2.8, 1, 6)));
   btScalar cylinderMass4 = 0; //setting mass to 0 makes it static
   btVector3 cylinderInertia4(0, 0, 0);
@@ -348,7 +359,7 @@ bool Graphics::Initialize(int width, int height)
   eye2RigidBody->setActivationState(DISABLE_DEACTIVATION);
   dynamicsWorld->addRigidBody(eye2RigidBody);
 
-  //Create the ball
+  /*Create the ball*/
   btTriangleMesh* objTriMesh = new btTriangleMesh();
   m_ball = new Object("../objects/ball.obj", "../objects/ball.png", objTriMesh, 0);
   btCollisionShape *ballShape = new btSphereShape(.5); 
@@ -364,7 +375,7 @@ bool Graphics::Initialize(int width, int height)
   dynamicsWorld->addRigidBody(ballRigidBody);
 
   btScalar paddleMass = 1; 
-  // Create paddle 1
+  /*Create paddle/flipper 1*/
   btTriangleMesh* paddle1TriMesh = new btTriangleMesh();
   m_paddle1 = new Object("../objects/leftflipper.obj", "../objects/wood.jpg", paddle1TriMesh, 1);
   btCollisionShape *paddle1Shape = new btBvhTriangleMeshShape(paddle1TriMesh, true);
@@ -377,7 +388,7 @@ bool Graphics::Initialize(int width, int height)
   paddle1RigidBody->setActivationState(DISABLE_DEACTIVATION);
 	paddle1RigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(paddle1RigidBody);
-  // Create paddle 2
+  /*Create paddle/flipper 2*/
   btTriangleMesh* paddle2TriMesh = new btTriangleMesh();
   m_paddle2 = new Object("../objects/rightflipper.obj", "../objects/wood.jpg", paddle2TriMesh, 1);
   btCollisionShape *paddle2Shape = new btBvhTriangleMeshShape(paddle2TriMesh, true);
@@ -392,7 +403,7 @@ bool Graphics::Initialize(int width, int height)
 	paddle2RigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(paddle2RigidBody);
 
-	// Create plunger
+  /*Create plunger*/
   btTriangleMesh* plungerTriMesh = new btTriangleMesh();
   m_plunger = new Object("../objects/plunger.obj", "../objects/metalball.png", plungerTriMesh, 1);
   btCollisionShape *plungerShape = new btBvhTriangleMeshShape(plungerTriMesh, true);
@@ -407,7 +418,7 @@ bool Graphics::Initialize(int width, int height)
   plungerRigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(plungerRigidBody);
 
-  // Create splash board
+  /*Create splash board*/
   btTriangleMesh* splashboardTriMesh = new btTriangleMesh();
   m_splashboard = new Object("../objects/splashboard.obj", "../objects/splashboard.jpg", splashboardTriMesh, 1);
   btCollisionShape *splashShape = new btBvhTriangleMeshShape(splashboardTriMesh, true);
@@ -422,18 +433,12 @@ bool Graphics::Initialize(int width, int height)
   splashboardRigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(splashboardRigidBody);
 
-
-  basePlungerPower = 1.5;
-  plungerPowerMuliplier = 1.0;
-  usingPlunger = false;
-
+  //output high scores and starting number of balls
   cout << "High Scores: " << endl;
   OutputTop10();
   cout << "Balls left: 3" << endl;
 
   // Set up the shader
-  lightingType = 0;
-  newLightingType = 0;
 
   m_shader = new Shader();
   if(!m_shader->Initialize())
@@ -525,7 +530,7 @@ bool Graphics::Initialize(int width, int height)
 
 void Graphics::Update(unsigned int dt)
 {
-	// Camera update
+  // Camera update
   if(topDownView == true)
   {
     m_camera->UpdateView(glm::vec3(0.0, 50.0, -1.0), glm::vec3(0.0, 0.0, 0.0));
@@ -645,6 +650,7 @@ void Graphics::Update(unsigned int dt)
     UpdateShader(newLightingType);
   }
 
+  /*update models to be at same spot as rigid bodies*/
   btTransform trans;
   btScalar m[16];
   dynamicsWorld->stepSimulation(dt, 10);
@@ -762,10 +768,11 @@ void Graphics::Update(unsigned int dt)
   //m_cube->model = glm::make_mat4(m);
   //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
 
-
+  /*after plunger is released it will back to its original position at a certain velocity*/
   plungerPosition = plungerRigidBody->getCenterOfMassPosition();
   if(usingPlunger == false && plungerPosition.z() <= 0)
   {
+    //velocity is determined by the base power times the multiplier (+.5 to negate possible negative value)
     float z = basePlungerPower*plungerPowerMuliplier + 0.5;
     //sanity check to make sure z is not negative
     if(z < 0)
@@ -775,6 +782,7 @@ void Graphics::Update(unsigned int dt)
     //cout << z << endl;
     plungerRigidBody->setLinearVelocity(btVector3(0,0,z));
   }
+  //once it has reached its original position, its velocity is zero
   else if(usingPlunger == false && plungerPosition.z() >= 0)
   {
     //cout << plungerPosition.z()  << endl;
@@ -783,20 +791,22 @@ void Graphics::Update(unsigned int dt)
 
   ballPosition = ballRigidBody->getCenterOfMassPosition();
   UpdateScore();
+
   //cout << ballPosition.z() << endl;
+
   if(ballPosition.z() <= -18.8)
   {
+    //if ball is at bottom of board and there's more balls, decrease ball count and reset ball
     if(ballsLeft > 0)
     {
       trans.setOrigin(btVector3(-10, 2, -6));
-	ballsLeft--;
-        ballRigidBody->setWorldTransform(trans);
-        ballRigidBody->getMotionState()->getWorldTransform(trans);
-        trans.getOpenGLMatrix(m);
-        m_ball->model = glm::make_mat4(m);
-        //cout << ballsLeft << endl;
-        //ballRigidBody->setWorldTransform();
+      ballsLeft--;
+      ballRigidBody->setWorldTransform(trans);
+      ballRigidBody->getMotionState()->getWorldTransform(trans);
+      trans.getOpenGLMatrix(m);
+      m_ball->model = glm::make_mat4(m);
     }
+    //if ball is at bottom of board and there's no more balls go to game over state
     else if(endOfGame == false)
     {
       endOfGame = true;
@@ -809,11 +819,13 @@ void Graphics::Update(unsigned int dt)
 
       for(int i=0; i<10; i++)
       {
+        //if player gets top 10 score give them option to add to scoreboard
         if(score > top10[i].score)
 	{
           char answer;
 	  cout << "Add score to scoreboard? (Y/N): ";
           cin >> answer;
+          //if yes save player info in file containing scoreboard data and break from loop
           if(answer == 'Y' || answer == 'y')
           {
             std::ofstream outputStream;
@@ -829,7 +841,6 @@ void Graphics::Update(unsigned int dt)
               top10[i].name = name;
               name = tempName;
 
-
               tempScore = top10[i].score;
               top10[i].score = score;
               score = tempScore;
@@ -840,10 +851,6 @@ void Graphics::Update(unsigned int dt)
               outputStream << top10[i].name << " ";
               outputStream << top10[i].score << endl;
             }
-            /*inputStream >> name;
-            inputStream >> score;
-            top10[i].name = name;
-            top10[i].score = score;*/
             outputStream.close();
 
             cout << "New High Scores:" << endl;
@@ -851,10 +858,12 @@ void Graphics::Update(unsigned int dt)
 
             break;
           }
+          //if no the break out of loop
           else if(answer == 'N' || answer == 'n')
           {
             break;
           }
+          //case for invalid input, in which case i is decremented making it redo the loop iteration
           else
           {
             cout << "Invalid input, enter Y for yes or N for no." << endl;
@@ -867,6 +876,7 @@ void Graphics::Update(unsigned int dt)
     }
   }
 
+  //if player resets game, move ball to starting position, reset ball count, and set score to 0
   if(reset == true)
   {
     trans.setOrigin(btVector3(-10, 2, -6));
@@ -900,21 +910,21 @@ void Graphics::Render()
   glUniform4fv(m_shader->GetUniformLocation("AmbientProduct"),1,glm::value_ptr(glm::vec4(ambientValue,ambientValue,ambientValue, 1))); 
   glUniform1f(m_shader->GetUniformLocation("cutOff"), glm::tan( glm::radians( cutOffAngle ) ) );
 
-	glm::vec3 array[5];
+  glm::vec3 array[5];
   glm::vec4 tmpVec = m_ball->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
-	array[0] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
+  array[0] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
 
-	tmpVec = m_cheek1->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
-	array[1] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
+  tmpVec = m_cheek1->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+  array[1] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
 
-	tmpVec = m_cheek2->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
-	array[2] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
+  tmpVec = m_cheek2->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+  array[2] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
 
-	tmpVec = m_eye1->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
-	array[3] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
+  tmpVec = m_eye1->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+  array[3] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);
 
-	tmpVec = m_eye2->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
-	array[4] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);	
+  tmpVec = m_eye2->GetModel() * glm::vec4( 0.0, 0.0, 0.0, 1.0 );
+  array[4] = glm::vec3(tmpVec.x, tmpVec.y, tmpVec.z);	
 
   glUniform3fv( m_spotLight,5, glm::value_ptr(array[0]));
 
@@ -1103,6 +1113,8 @@ void Graphics::UpdateScore(){
   }
 }
 
+//function that outputs top ten players and their respective scores
+//uses iomanip library to right align the scores
 void Graphics::OutputTop10()
 {
   for(int i=0; i<10; i++)

@@ -136,7 +136,7 @@ void Engine::Run()
 
 void Engine::Keyboard()
 {
-	static bool ballLaunched = false;
+  static bool ballLaunched = false;
   if(m_event.type == SDL_QUIT)
   {
     m_running = false;
@@ -148,32 +148,25 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
-/*
-    if (m_event.key.keysym.sym == SDLK_w)
-    {
-			// Probably change this so its actually the plunger hitting the ball, maybe give plunger a linear velocity to push the ball and that linear velocity gets bigger the longer the button is held down
-      m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
-    }*/
 
+    //hold space to use plunger
     if (m_event.key.keysym.sym == SDLK_SPACE)
     {
-      //m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1));
-      //starts at z() = 0
-      //m_graphics->plungerPosition = m_graphics->plungerRigidBody->getCenterOfMassPosition();
-      //cout << m_graphics->plungerPosition.z()  << endl;
-      //m_graphics->ballRigidBody->applyCentralImpulse(btVector3(0,0,5));
+      //if the z position greater than a certain threshold, move it back by setting its velocity to a negative value
+      //also set the plunger multiplyer to the distance pulled back
       if( m_graphics->plungerPosition.z() >= -2.5)
       {
         m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,-.2));
         m_graphics->plungerPowerMuliplier = -1.0 * m_graphics->plungerPosition.z();
       }
+      //if the z position less than a certain threshold, stop moving it
       else
       {
         m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,0));
       }
       m_graphics->usingPlunger = true;
     }
-
+    //press left shift to use left flipper/bumper
     if (m_event.key.keysym.sym == SDLK_LSHIFT)
     {
 				//m_graphics->paddle1Rot += .3;
@@ -185,7 +178,7 @@ void Engine::Keyboard()
 				if(y > 3)
 					m_graphics->paddle1RigidBody->setAngularVelocity(btVector3(0,1,0));
     }
-
+    //press right shift to use right flipper/bumper
     if (m_event.key.keysym.sym == SDLK_RSHIFT)
     {
 			//m_graphics->paddle2Rot -= .3;
@@ -201,65 +194,75 @@ void Engine::Keyboard()
     {
       m_graphics->reset = true;
     }
+    //press r for per vertex lighting
     if (m_event.key.keysym.sym == SDLK_v)
     {
       m_graphics->newLightingType = 0;
     }
+    //press f for per fragment lighting
     if (m_event.key.keysym.sym == SDLK_f)
     {
       m_graphics->newLightingType = 1;
     }
+    //press n to increase ambient lighting
     if (m_event.key.keysym.sym == SDLK_n)
     {
-			m_graphics->ambientValue += .1;
+      m_graphics->ambientValue += .1;
     }
+    //press m to decrease ambient lighting
     if (m_event.key.keysym.sym == SDLK_m)
     {
-			m_graphics->ambientValue -= .1;
+      m_graphics->ambientValue -= .1;
     }
-		// ball specular
+    // press t to increase ball specular lighting
     if (m_event.key.keysym.sym == SDLK_t)
     {
-			m_graphics->ballSpecular += .1;
-    }    if (m_event.key.keysym.sym == SDLK_y)
-    {
-			m_graphics->ballSpecular -= .1;
+      m_graphics->ballSpecular += .1;
     }
-		// flipper specular
+    // press y to decrease ball specular lighting
+    if (m_event.key.keysym.sym == SDLK_y)
+    {
+      m_graphics->ballSpecular -= .1;
+    }
+    // press u to increase flipper specular lighting
     if (m_event.key.keysym.sym == SDLK_u)
     {
-			m_graphics->flipperSpecular += .1;
+      m_graphics->flipperSpecular += .1;
     } 
-		if (m_event.key.keysym.sym == SDLK_i)
+    // press i to decrease flipper specular lighting
+    if (m_event.key.keysym.sym == SDLK_i)
     {
-			m_graphics->flipperSpecular -= .1;
+      m_graphics->flipperSpecular -= .1;
     }	
-		// bumper specular
+    // press o to increase bumper specular lighting
     if (m_event.key.keysym.sym == SDLK_o)
     {
-			m_graphics->bumperSpecular += .1;
+      m_graphics->bumperSpecular += .1;
     }
+    // press p to decrease bumper specular lighting
     if (m_event.key.keysym.sym == SDLK_p)
     {
-			m_graphics->bumperSpecular -= .1;
+      m_graphics->bumperSpecular -= .1;
     }
-		//cut off angle of spot light
+    //press j to increase spotlight radius
     if (m_event.key.keysym.sym == SDLK_j)
     {
-			m_graphics->cutOffAngle += .5;
+      m_graphics->cutOffAngle += .5;
     }
+    //press k to decrease spotlight radius
     if (m_event.key.keysym.sym == SDLK_k)
     {
-			m_graphics->cutOffAngle -= .5;
+      m_graphics->cutOffAngle -= .5;
     }
-		//brightness of spot light
+    //press z to increase brightness spotlight
     if (m_event.key.keysym.sym == SDLK_z)
     {
-			m_graphics->brightness[0] += .2;
+      m_graphics->brightness[0] += .2;
     }
+    //press x to decrease brightness spotlight
     if (m_event.key.keysym.sym == SDLK_x)
     {
-			m_graphics->brightness[0] -= .2;
+      m_graphics->brightness[0] -= .2;
     }
 
     /*Camera Controls*/
@@ -299,18 +302,21 @@ void Engine::Keyboard()
         m_graphics->UpdatedView = true;
 	m_graphics->zoomOutCamera = true;
     }
+    //press , for top down view
     if (m_event.key.keysym.sym == SDLK_COMMA)
     {
 			m_graphics->topDownView = true;
 			m_graphics->frontView = false;
 			m_graphics->backView = false;
     }
+    //press . for front view
     if (m_event.key.keysym.sym == SDLK_PERIOD)
     {
 			m_graphics->topDownView = false;
 			m_graphics->frontView = true;
 			m_graphics->backView = false;
     }
+    //press / for back view
     if (m_event.key.keysym.sym == SDLK_SLASH)
     {
 			m_graphics->topDownView = false;
@@ -339,6 +345,7 @@ void Engine::Keyboard()
 			if(y < 3)
 				m_graphics->paddle2RigidBody->setAngularVelocity(btVector3(0,1,0));
     }
+    //release space to let plunger go, also displays ball count
     if (m_event.key.keysym.sym == SDLK_SPACE)
     {
       m_graphics->usingPlunger = false;

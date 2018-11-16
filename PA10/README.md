@@ -65,10 +65,10 @@ X 	- decrease the brightness of spotlight
 .	- front view  
 /	- back view  
 
-WASD	- move camera
-Q	- zoom out camera
-E	- zoom in camera
+WASD	- move camera  
+Q	- zoom out camera  
+E	- zoom in camera  
 
 # Extra Credit
-Plunger intensity changes depending on how far back it is pulled. A spotlight follows the ball with the ability to change its radius and intensity. The game keeps track of the top 10 scores with the option for the player to enter a new score into the database. The cylinders/bumbers light up when collided with.
+Plunger intensity changes depending on how far back it is pulled. A spotlight follows the ball with the ability to change its radius and intensity. The game keeps track of the top 10 scores with the option for the player to enter a new score into the database if it is higher than any of the 10 scores already in it. Spotlights light the cylinders/bumper when the ball collides with them. 
 

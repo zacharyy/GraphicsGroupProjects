@@ -17,9 +17,10 @@ class Graphics
     bool Initialize(int width, int height);
     void Update(unsigned int dt);
     void Render();
-    btTransform newtrans;
+    //btTransform newtrans;
     //string playerName;
 
+    //object rigid bodies
     btRigidBody *ballRigidBody;
     btRigidBody *boardRigidBody;
     btRigidBody *cheek1RigidBody;
@@ -45,38 +46,42 @@ class Graphics
     btRigidBody *tailRigidBody;
     btRigidBody *splashboardRigidBody;
 
-   void UpdateShader(int newLightingType);
-   void UpdateScore();
-   void OutputTop10();
+    //function that changes shader type (vertex or fragment)
+    void UpdateShader(int newLightingType);
+    void UpdateScore();
+    //function that displays top 10 players and their respective scores
+    void OutputTop10();
 
-   int lightingType;
-   int newLightingType;
-   float ambientValue;
-   float bumperSpecular;
-   float flipperSpecular;
-   float ballSpecular;
-   float cutOffAngle;
-   float brightness[5];
+    //variables for lighting
+    int lightingType;
+    int newLightingType;
+    float ambientValue;
+    float bumperSpecular;
+    float flipperSpecular;
+    float ballSpecular;
+    float cutOffAngle;
+    float brightness[5];
 
-		float paddle1Rot;
-		float paddle2Rot;
+    float paddle1Rot;
+    float paddle2Rot;
 
-  btVector3 ballPosition;
+    btVector3 ballPosition;
 
-  btVector3 plungerPosition;
-  float basePlungerPower;
-  float plungerPowerMuliplier;
-  bool usingPlunger;
-  bool setMultiplier;
+    //variables for plunger
+    btVector3 plungerPosition;
+    float basePlungerPower;
+    float plungerPowerMuliplier;
+    bool usingPlunger;
+    bool setMultiplier;
 
-  int ballsLeft;
-  bool endOfGame;
-  bool reset;
+    //variables for camera state
+    int ballsLeft;
+    bool endOfGame;
+    bool reset;
 
     bool topDownView;
     bool frontView;
     bool backView;
-
     bool UpdatedView;
     bool moveCameraUp;
     bool moveCameraDown;
@@ -86,16 +91,19 @@ class Graphics
     bool zoomOutCamera;
     bool reverseControls;
 
+    /*struct containing player information*/
     struct PlayerInfo
     {
       string name;
       int score;
     };
-
+    //array of PlayerInfo's that will contain top 10 player info
     PlayerInfo top10[10];
 
   private:
     std::string ErrorString(GLenum error);
+    
+    //variables for scoring
     int score;
     bool collides;
     Camera *m_camera;
@@ -108,6 +116,7 @@ class Graphics
     GLint m_cutOff;
     GLint m_spotLight;
 
+    //objects
     Object *m_ball;
     Object *m_front;
     Object *m_back;
@@ -131,6 +140,7 @@ class Graphics
     Object *m_tail;
     Object *m_splashboard;
 
+    //stuff for bullet initialization
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;
     btCollisionDispatcher *dispatcher;

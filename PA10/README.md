@@ -6,7 +6,7 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project builds off of previous projects and simulates a pinball table. Each game will have 3 balls, after which the player has the option of reseting the game. For each bumper the pinball hits, the player recieves 100 points. The power of the plugner changes depending on how far it is pulled back. The game also keeps track of the top 10 scores, with the option for the player to enter a new score into the database. The simulation has both per vertex and per fragment lighting with the option to swtich between them in real time. A spotlight was also added that follows the pinball and has controls that can change its size and brightness. Controls to adjust the ambient light as well as the specular light of the pinball, bumpers, and the flippers were added to the simulation. Finally, controls to change the camera to a top down, front, and back view were added. To run the appliction go to the PA10 directory, follow the build instructions, and enter ./PA10
+This project builds off of previous projects and simulates a pinball table. Each game will have 3 balls, after which the player has the option of reseting the game. For each bumper the pinball hits, the player recieves 100 points. The power of the plugner changes depending on how far it is pulled back. The game also keeps track of the top 10 scores, with the option for the player to enter a new score into the database. The simulation has both per vertex and per fragment lighting with the option to swtich between them in real time. A spotlight was also added that follows the pinball and has controls that can change its size and brightness. Controls to adjust the ambient light as well as the specular light of the pinball, bumpers, and the flippers were added to the simulation. Conntrols to change the camera to a top down, front, and back view were added. Finally, spotlights light the cylinders/bumpers when the ball collides with them. To run the appliction go to the PA10 directory, follow the build instructions, and enter ./PA10
 
 # Dependencies, Building, and Running
 
@@ -70,5 +70,4 @@ Q	- zoom out camera
 E	- zoom in camera  
 
 # Extra Credit
-Plunger intensity changes depending on how far back it is pulled. A spotlight follows the ball with the ability to change its radius and intensity. The game keeps track of the top 10 scores with the option for the player to enter a new score into the database if it is higher than any of the 10 scores already in it. Spotlights light the cylinders/bumper when the ball collides with them. 
-
+Plunger intensity changes depending on how far back it is pulled. A spotlight follows the ball with the ability to change its radius and intensity. The game keeps track of the top 10 scores with the option for the player to enter a new score into the database if it is higher than any of the 10 scores already in it. Spotlights light the cylinders/bumpers when the ball collides with them. 

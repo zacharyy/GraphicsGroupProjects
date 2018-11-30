@@ -28,6 +28,7 @@ class Graphics
     btRigidBody *leftRigidBody;
     btRigidBody *rightRigidBody;
     btRigidBody *bottomRigidBody;
+    btRigidBody *clubRigidBody;
 
    void UpdateShader(int newLightingType);
 
@@ -35,10 +36,17 @@ class Graphics
    int newLightingType;
    float ambientValue;
    float cubeSpecular;
-   float cylSpecular;
+   float clubSpecular;
    float ballSpecular;
    float cutOffAngle;
    float brightness;
+
+    //variables for club
+    btVector3 clubPosition;
+    float baseClubPower;
+    float clubPowerMuliplier;
+    bool usingClub;
+    bool setMultiplier;
 
   private:
     std::string ErrorString(GLenum error);
@@ -61,6 +69,7 @@ class Graphics
     Object *m_bottom;
     Object *m_cylinder;
     Object *m_cube;
+    Object *m_club;
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;
     btCollisionDispatcher *dispatcher;

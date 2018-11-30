@@ -87,7 +87,22 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
-
+		if (m_event.key.keysym.sym == SDLK_SPACE)
+    {
+      //if the z position greater than a certain threshold, move it back by setting its velocity to a negative value
+      //also set the plunger multiplyer to the distance pulled back
+     /* if( m_graphics->plungerPosition.z() >= -2.5)
+      {
+        m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,-.2));
+        m_graphics->plungerPowerMuliplier = -1.0 * m_graphics->plungerPosition.z();
+      }
+      //if the z position less than a certain threshold, stop moving it
+      else
+      {
+        m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,0));
+      }*/
+      m_graphics->usingClub = true;
+    }
     if (m_event.key.keysym.sym == SDLK_w)
     {
       m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,1));
@@ -143,11 +158,11 @@ void Engine::Keyboard()
 		// cylinder specular
     if (m_event.key.keysym.sym == SDLK_o)
     {
-			m_graphics->cylSpecular += .1;
+			m_graphics->clubSpecular += .1;
     }
     if (m_event.key.keysym.sym == SDLK_p)
     {
-			m_graphics->cylSpecular -= .1;
+			m_graphics->clubSpecular -= .1;
     }
 		//cut off angle of spot light
     if (m_event.key.keysym.sym == SDLK_j)
@@ -168,6 +183,13 @@ void Engine::Keyboard()
 			m_graphics->brightness -= .3;
     }
   }
+	else if (m_event.type == SDL_KEYUP)
+  {
+    if (m_event.key.keysym.sym == SDLK_SPACE)
+    {
+			m_graphics->usingClub = false;
+		}
+	}
 }
 
 unsigned int Engine::getDT()

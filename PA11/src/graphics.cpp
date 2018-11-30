@@ -6,10 +6,11 @@ Graphics::Graphics()
 
 	ambientValue = .2;
 	cubeSpecular = .5;
-	cylSpecular = .5;
+	clubSpecular = .5;
 	ballSpecular = .5;
 	cutOffAngle = 5.0;
 	brightness = 0;
+	usingClub = false;
 }
 
 Graphics::~Graphics()
@@ -166,6 +167,22 @@ rightRigidBody->setRestitution (0.5);
   ballRigidBody->setActivationState(DISABLE_DEACTIVATION);
 
   dynamicsWorld->addRigidBody(ballRigidBody);
+	
+	// Create the club
+	double clubMass = 5;
+  btTriangleMesh* clubTriMesh = new btTriangleMesh();
+  m_club = new Object("../objects/leftflipper.obj", "../objects/wood.jpg", clubTriMesh, 1);
+  btCollisionShape *clubShape = new btBvhTriangleMeshShape(clubTriMesh, true);
+  btDefaultMotionState* clubMotionState = new btDefaultMotionState(btTransform(btQuaternion(90, -90, 0, 1), btVector3(5, 2, -13.8)));
+	btVector3 clubInertia(0,0,0);
+
+  clubShape->calculateLocalInertia(clubMass, clubInertia);
+  btRigidBody::btRigidBodyConstructionInfo clubRigidBodyCI(clubMass, clubMotionState, clubShape, clubInertia);
+  clubRigidBody = new btRigidBody(clubRigidBodyCI);
+  clubRigidBody->setRestitution (0.5);
+  clubRigidBody->setActivationState(DISABLE_DEACTIVATION);
+	clubRigidBody->setLinearFactor(btVector3(0,0,0));
+  dynamicsWorld->addRigidBody(clubRigidBody);
 
   // Create the cube
   btTriangleMesh* objTriMesh4 = new btTriangleMesh();
@@ -289,10 +306,37 @@ void Graphics::Update(unsigned int dt)
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
-
+	cout << clubRigidBody->getOrientation().getAngle() << endl;
+  clubPosition = clubRigidBody->getCenterOfMassPosition();
+	if(usingClub && !(clubRigidBody->getOrientation().getAngle() <= 2.2 && clubRigidBody->getOrientation().getAngle() >= 2))
+	{
+		//cout << "club in use" << endl;
+		clubRigidBody->setAngularVelocity(btVector3(.2,0,0));
+	}
+  else if(usingClub == false && !(clubRigidBody->getOrientation().getAngle() <= 3.2 && clubRigidBody->getOrientation().getAngle() >= 3))
+  {
+    //velocity is determined by the base power times the multiplier (+.5 to negate possible negative value)
+    float z = 1;//baseClubPower*clubPowerMuliplier + 0.5;
+    //sanity check to make sure z is not negative
+    if(z < 0)
+    {
+      z *= -1.0;
+    }
+    //cout << z << endl;
+    clubRigidBody->setAngularVelocity(btVector3(-z,0,0));
+  }
+  //once it has reached its original position, its velocity is zero
+  else if(usingClub == false)
+  {
+		//cout << "club not in use" << endl;
+    //cout << plungerPosition.z()  << endl;
+    clubRigidBody->setAngularVelocity(btVector3(0,0,0));
+  }
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);
   //trans.getOrigin() += btVector3(0,0,0.1);
-  
+  clubRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_club->model = glm::make_mat4(m);
   //cubeRigidBody->applyCentralImpulse(btVector3(.4,0,0.4));
   cubeRigidBody->getMotionState()->getWorldTransform(trans);
 
@@ -327,6 +371,9 @@ void Graphics::Render()
   // Render the objects
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_ball->GetModel()));
   m_ball->Render(m_shader, ballSpecular);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_club->GetModel()));
+  m_club->Render(m_shader, clubSpecular);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render(m_shader, cubeSpecular);

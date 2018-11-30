@@ -11,6 +11,7 @@ Graphics::Graphics()
 	cutOffAngle = 5.0;
 	brightness = 0;
 	usingClub = false;
+	baseClubPower = 1;
 }
 
 Graphics::~Graphics()
@@ -308,15 +309,23 @@ void Graphics::Update(unsigned int dt)
   m_ball->model = glm::make_mat4(m);
 	cout << clubRigidBody->getOrientation().getAngle() << endl;
   clubPosition = clubRigidBody->getCenterOfMassPosition();
-	if(usingClub && !(clubRigidBody->getOrientation().getAngle() <= 2.2 && clubRigidBody->getOrientation().getAngle() >= 2))
+	if(usingClub)
 	{
 		//cout << "club in use" << endl;
-		clubRigidBody->setAngularVelocity(btVector3(.2,0,0));
+		if(!(clubRigidBody->getOrientation().getAngle() <= 2.2 && clubRigidBody->getOrientation().getAngle() >= 2))
+		{
+			clubRigidBody->setAngularVelocity(btVector3(.2,0,0));
+			clubPowerMuliplier += .02;
+		}
+		else
+		{
+			clubRigidBody->setAngularVelocity(btVector3(0,0,0));
+		}
 	}
-  else if(usingClub == false && !(clubRigidBody->getOrientation().getAngle() <= 3.2 && clubRigidBody->getOrientation().getAngle() >= 3))
+  else if(usingClub == false && !(clubRigidBody->getOrientation().getAngle() <= 3.3 && clubRigidBody->getOrientation().getAngle() >= 2.8))
   {
     //velocity is determined by the base power times the multiplier (+.5 to negate possible negative value)
-    float z = 1;//baseClubPower*clubPowerMuliplier + 0.5;
+    float z = baseClubPower*clubPowerMuliplier + 0.5;
     //sanity check to make sure z is not negative
     if(z < 0)
     {
@@ -328,6 +337,7 @@ void Graphics::Update(unsigned int dt)
   //once it has reached its original position, its velocity is zero
   else if(usingClub == false)
   {
+		clubPowerMuliplier = 0;
 		//cout << "club not in use" << endl;
     //cout << plungerPosition.z()  << endl;
     clubRigidBody->setAngularVelocity(btVector3(0,0,0));

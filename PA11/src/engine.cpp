@@ -105,22 +105,22 @@ void Engine::Keyboard()
     }
     if (m_event.key.keysym.sym == SDLK_w)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,1));
+      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,1.5));
     }
 
     if (m_event.key.keysym.sym == SDLK_s)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1));
+      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,-1.5));
     }
 
     if (m_event.key.keysym.sym == SDLK_a)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(1,0,0));
+      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(1.5,0,0));
     }
 
     if (m_event.key.keysym.sym == SDLK_d)
     {
-      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1,0,0));
+      m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1.5,0,0));
     }
     if (m_event.key.keysym.sym == SDLK_v)
     {

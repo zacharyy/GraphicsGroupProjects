@@ -1,4 +1,5 @@
 #include "graphics.h"
+#include <cmath> //using for absolute value calculations
 
 Graphics::Graphics()
 {
@@ -307,7 +308,43 @@ void Graphics::Update(unsigned int dt)
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
-	cout << clubRigidBody->getOrientation().getAngle() << endl;
+
+  /***Code for ball drag***/
+  btVector3 ballVelocity = ballRigidBody->getLinearVelocity();
+  //cout << ballVelocity.x() << "\t" << ballVelocity.y() << "\t" << ballVelocity.z() << endl;
+
+  if(abs(ballVelocity.x()) >= 0.015 ||
+     abs(ballVelocity.y()) >= 0.015 ||
+     abs(ballVelocity.z()) >= 0.015 )
+  {
+    ballIsMoving = true;
+    cout << "Ball is moving" << endl;
+  }
+  else
+  {
+    ballIsMoving = false;
+    cout << "Ball is not moving" << endl;
+  }
+
+  if(ballIsMoving)
+  {
+    ballRigidBody->setLinearVelocity(btVector3(ballVelocity.x()/1.005, 
+                                               ballVelocity.y()/1.005, 
+                                               ballVelocity.z()/1.005));
+  }
+  if(!ballIsMoving && 
+    //this will let the ball bounce off walls without stopping (may need some tuning)
+    (abs(previousBallVelocity.x() - ballVelocity.x()) <= .001 &&
+     abs(previousBallVelocity.y() - ballVelocity.y()) <= .001 &&
+     abs(previousBallVelocity.z() - ballVelocity.z()) <= .001 ))
+  {
+    ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
+  }
+  previousBallVelocity = ballVelocity;
+
+    /***Code for club movement***/
+
+	//cout << clubRigidBody->getOrientation().getAngle() << endl;
   clubPosition = clubRigidBody->getCenterOfMassPosition();
 	if(usingClub)
 	{
@@ -344,9 +381,21 @@ void Graphics::Update(unsigned int dt)
   }
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);
   //trans.getOrigin() += btVector3(0,0,0.1);
+
+  /***Moves club to ball when ball is stationary***/
+  if(!ballIsMoving)
+  {
+    ballPosition = ballRigidBody->getCenterOfMassPosition();
+    trans.setOrigin(btVector3(ballPosition.x(), ballPosition.y() + 3, ballPosition.z()));
+    trans.setRotation(clubRigidBody->getOrientation());
+
+    clubRigidBody->setWorldTransform(trans);
+  }
   clubRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_club->model = glm::make_mat4(m);
+
+
   //cubeRigidBody->applyCentralImpulse(btVector3(.4,0,0.4));
   cubeRigidBody->getMotionState()->getWorldTransform(trans);
 

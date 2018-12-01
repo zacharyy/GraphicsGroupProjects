@@ -43,6 +43,9 @@ class Graphics
 
     //variables for club
     btVector3 clubPosition;
+    btVector3 ballPosition;
+    btVector3 previousBallVelocity;
+    bool ballIsMoving;
     float baseClubPower;
     float clubPowerMuliplier;
     bool usingClub;

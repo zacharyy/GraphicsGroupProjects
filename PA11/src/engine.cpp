@@ -192,6 +192,16 @@ void Engine::Keyboard()
     {
       m_graphics->fanSpeed -= .02;
     }
+    //press q to turn camera left
+    if (m_event.key.keysym.sym == SDLK_q)
+    {
+      m_graphics->turnCameraLeft = true;
+    }
+    //press e to turn camera right
+    if (m_event.key.keysym.sym == SDLK_e)
+    {
+      m_graphics->turnCameraRight = true;
+    }
   }
   else if (m_event.type == SDL_KEYUP)
   {

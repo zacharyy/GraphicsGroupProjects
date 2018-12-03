@@ -15,6 +15,10 @@ Graphics::Graphics()
 	baseClubPower = 1;
 
         fanSpeed = 0.26;
+
+  cameraOrbitAngle = -1.575f; //will have to change depending on where we want the camera to face at the begining of the course
+  turnCameraLeft = false;
+  turnCameraRight = false;
 }
 
 Graphics::~Graphics()
@@ -349,6 +353,24 @@ void Graphics::Update(unsigned int dt)
     UpdateShader(newLightingType);
   }
 
+  ballPosition = ballRigidBody->getCenterOfMassPosition();
+
+  /*code for camera*/
+  if(turnCameraLeft == true)
+  {
+    cameraOrbitAngle -= ((M_PI)*dt/(1000));
+    turnCameraLeft = false;
+  }
+  if(turnCameraRight == true)
+  {
+    cameraOrbitAngle += ((M_PI)*dt/(1000));
+    turnCameraRight = false;
+  }
+
+  //cameraOrbitAngle += ((M_PI)*dt/(5000));
+  //cout << cameraOrbitAngle << endl;
+  m_camera->UpdateView(glm::vec3(ballPosition.x()+(10*cos(cameraOrbitAngle)), ballPosition.y()+5, ballPosition.z()+(10*sin(cameraOrbitAngle))), glm::vec3(ballPosition.x(), ballPosition.y(), ballPosition.z()));
+
   btTransform trans;
   btScalar m[16];
   dynamicsWorld->stepSimulation(dt, 10);
@@ -361,11 +383,22 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_windmill->model = glm::make_mat4(m);
 
+  //reset ball if it goes out of bounds
+  if(ballPosition.y() <= -10)
+  {
+    trans.setOrigin(btVector3(previousBallPosition.x(), previousBallPosition.y(), previousBallPosition.z()));
+
+    ballRigidBody->setWorldTransform(trans);
+    ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
+    ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
+    ballIsMoving = false;
+  }
+
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
 
-  cout << fanSpeed << endl;
+  //cout << fanSpeed << endl;
   fanRigidBody->setAngularVelocity(btVector3(0,0,fanSpeed));
   fanRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
@@ -445,19 +478,19 @@ void Graphics::Update(unsigned int dt)
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);
   //trans.getOrigin() += btVector3(0,0,0.1);
 
-  /***Moves club to ball when ball is stationary***/
+  /***Moves club to ball when ball is stationary and update previous position of ball***/
   if(!ballIsMoving)
   {
-    ballPosition = ballRigidBody->getCenterOfMassPosition();
     trans.setOrigin(btVector3(ballPosition.x(), ballPosition.y() + 3, ballPosition.z()));
     trans.setRotation(clubRigidBody->getOrientation());
 
     clubRigidBody->setWorldTransform(trans);
+
+    previousBallPosition = ballPosition;
   }
   clubRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_club->model = glm::make_mat4(m);
-
 
   //cubeRigidBody->applyCentralImpulse(btVector3(.4,0,0.4));
   cubeRigidBody->getMotionState()->getWorldTransform(trans);

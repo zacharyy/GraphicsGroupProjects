@@ -46,3 +46,7 @@ glm::mat4 Camera::GetView()
   return view;
 }
 
+void Camera::UpdateView(glm::vec3 eyePosition, glm::vec3 focusPoint)
+{
+  view = glm::lookAt(eyePosition, focusPoint, glm::vec3(0.0,1.0,0.0));
+}

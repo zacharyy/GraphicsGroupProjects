@@ -50,6 +50,7 @@ class Graphics
     btVector3 clubPosition;
     btVector3 ballPosition;
     btVector3 previousBallVelocity;
+    btVector3 previousBallPosition;
     bool ballIsMoving;
     float baseClubPower;
     float clubPowerMuliplier;
@@ -57,6 +58,10 @@ class Graphics
     bool setMultiplier;
 
     float fanSpeed;
+
+    float cameraOrbitAngle;
+    bool turnCameraLeft;
+    bool turnCameraRight;
 
   private:
     std::string ErrorString(GLenum error);

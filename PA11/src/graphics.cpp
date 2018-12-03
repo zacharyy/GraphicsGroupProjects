@@ -19,6 +19,9 @@ Graphics::Graphics()
   cameraOrbitAngle = -1.575f; //will have to change depending on where we want the camera to face at the begining of the course
   turnCameraLeft = false;
   turnCameraRight = false;
+
+  numberOfShots = 0;
+  addShot = false;
 }
 
 Graphics::~Graphics()
@@ -466,10 +469,17 @@ void Graphics::Update(unsigned int dt)
     }
     //cout << z << endl;
     clubRigidBody->setAngularVelocity(btVector3(-z,0,0));
+    addShot = true;
   }
   //once it has reached its original position, its velocity is zero
   else if(usingClub == false)
   {
+    if(addShot == true)
+    {
+      numberOfShots++;
+      cout << "Shots taken: " << numberOfShots << endl;
+      addShot = false;
+    }
 		clubPowerMuliplier = 0;
 		//cout << "club not in use" << endl;
     //cout << plungerPosition.z()  << endl;

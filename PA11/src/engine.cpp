@@ -87,7 +87,7 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
-		if (m_event.key.keysym.sym == SDLK_SPACE)
+    if (m_event.key.keysym.sym == SDLK_SPACE)
     {
       //if the z position greater than a certain threshold, move it back by setting its velocity to a negative value
       //also set the plunger multiplyer to the distance pulled back
@@ -101,7 +101,11 @@ void Engine::Keyboard()
       {
         m_graphics->plungerRigidBody->setLinearVelocity(btVector3(0,0,0));
       }*/
-      m_graphics->usingClub = true;
+      //makes sure club cant be used when ball is in motion (prevents shot counter from going off)
+      if(m_graphics->ballIsMoving == false)
+      {
+        m_graphics->usingClub = true;
+      }
     }
     if (m_event.key.keysym.sym == SDLK_w)
     {

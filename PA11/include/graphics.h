@@ -63,6 +63,9 @@ class Graphics
     bool turnCameraLeft;
     bool turnCameraRight;
 
+    int numberOfShots;
+    bool addShot;
+
   private:
     std::string ErrorString(GLenum error);
 

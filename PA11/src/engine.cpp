@@ -182,14 +182,24 @@ void Engine::Keyboard()
     {
 			m_graphics->brightness -= .3;
     }
+    //press +/= to increase fan speed
+    if (m_event.key.keysym.sym == SDLK_EQUALS)
+    {
+      m_graphics->fanSpeed += .02;
+    }
+    //press -/_ to decrease fan speed
+    if (m_event.key.keysym.sym == SDLK_MINUS)
+    {
+      m_graphics->fanSpeed -= .02;
+    }
   }
-	else if (m_event.type == SDL_KEYUP)
+  else if (m_event.type == SDL_KEYUP)
   {
     if (m_event.key.keysym.sym == SDLK_SPACE)
     {
-			m_graphics->usingClub = false;
-		}
-	}
+      m_graphics->usingClub = false;
+    }
+  }
 }
 
 unsigned int Engine::getDT()

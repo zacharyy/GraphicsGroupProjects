@@ -13,6 +13,8 @@ Graphics::Graphics()
 	brightness = 0;
 	usingClub = false;
 	baseClubPower = 1;
+
+        fanSpeed = 0.26;
 }
 
 Graphics::~Graphics()
@@ -76,7 +78,7 @@ bool Graphics::Initialize(int width, int height)
 
   /*Create Objects*/
 
-  //Create Board
+  /*//Create Board
   // Create the Front
   btTriangleMesh* objTriMeshF = new btTriangleMesh();
   m_front = new Object("../objects/front.obj", "../objects/red.png", objTriMeshF, 1);
@@ -152,13 +154,59 @@ rightRigidBody->setRestitution (0.5);
   bottomRigidBody = new btRigidBody(bottomRigidBodyCI);
 	bottomRigidBody->setRestitution (0.5);
   bottomRigidBody->setActivationState(DISABLE_DEACTIVATION);
-  dynamicsWorld->addRigidBody(bottomRigidBody);
+  dynamicsWorld->addRigidBody(bottomRigidBody);*/
+
+  //Create course
+  btTriangleMesh* objTriMeshCourse = new btTriangleMesh();
+  m_course = new Object("../objects/testpista.obj", "../objects/red.png", objTriMeshCourse, 1);
+  btCollisionShape *courseShape = new btBvhTriangleMeshShape(objTriMeshCourse, true);
+  btDefaultMotionState* courseMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 1, 0, 1), btVector3(0, 0, 0)));
+  btScalar courseMass = 0; //setting mass to 0 makes it static
+  btVector3 courseInertia(0, 0, 0);
+
+  courseShape->calculateLocalInertia(courseMass, courseInertia);
+  btRigidBody::btRigidBodyConstructionInfo courseRigidBodyCI(courseMass, courseMotionState, courseShape, courseInertia);
+  courseRigidBody = new btRigidBody(courseRigidBodyCI);
+courseRigidBody->setRestitution (0.5);
+  courseRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(courseRigidBody);
+
+  //Create windmill base
+  btTriangleMesh* objTriMeshWindmill = new btTriangleMesh();
+  m_windmill = new Object("../objects/windmill.obj", "../objects/granite.jpg", objTriMeshWindmill, 1);
+  btCollisionShape *windmillShape = new btBvhTriangleMeshShape(objTriMeshWindmill, true);
+  btDefaultMotionState* windmillMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 11, 37)));
+  btScalar windmillMass = 0; //setting mass to 0 makes it static
+  btVector3 windmillInertia(0, 0, 0);
+
+  windmillShape->calculateLocalInertia(windmillMass, windmillInertia);
+  btRigidBody::btRigidBodyConstructionInfo windmillRigidBodyCI(windmillMass, windmillMotionState, windmillShape, windmillInertia);
+  windmillRigidBody = new btRigidBody(windmillRigidBodyCI);
+windmillRigidBody->setRestitution (0.5);
+  windmillRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(windmillRigidBody);
+
+  // Create the fan
+  btTriangleMesh* fanTriMesh = new btTriangleMesh();
+  m_fan = new Object("../objects/fan.obj", "../objects/wood.jpg", fanTriMesh, 1);
+  btCollisionShape *fanShape = new btBvhTriangleMeshShape(fanTriMesh, true);
+  btDefaultMotionState* fanMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 11, 37)));
+  btVector3 fanInertia(0,0,0);
+  float fanMass = 5;
+
+  fanShape->calculateLocalInertia(fanMass, fanInertia);
+  btRigidBody::btRigidBodyConstructionInfo fanRigidBodyCI(fanMass, fanMotionState, fanShape, fanInertia);
+  fanRigidBody = new btRigidBody(fanRigidBodyCI);
+  fanRigidBody->setRestitution (0.5);
+  fanRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  fanRigidBody->setLinearFactor(btVector3(0,0,0));
+  dynamicsWorld->addRigidBody(fanRigidBody);
 
   //Create the ball
   btTriangleMesh* objTriMesh = new btTriangleMesh();
   m_ball = new Object("../objects/ball.obj", "../objects/metalball.png", objTriMesh, 0);
   btCollisionShape *ballShape = new btSphereShape(1); 
-  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, -4)));
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, 0)));
   btScalar ballMass = 1;
   btVector3 ballInertia(0, 0, 0);
 
@@ -305,9 +353,23 @@ void Graphics::Update(unsigned int dt)
   btScalar m[16];
   dynamicsWorld->stepSimulation(dt, 10);
 
+  courseRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_course->model = glm::make_mat4(m);
+
+  windmillRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_windmill->model = glm::make_mat4(m);
+
   ballRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_ball->model = glm::make_mat4(m);
+
+  cout << fanSpeed << endl;
+  fanRigidBody->setAngularVelocity(btVector3(0,0,fanSpeed));
+  fanRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_fan->model = glm::make_mat4(m);
 
   /***Code for ball drag***/
   btVector3 ballVelocity = ballRigidBody->getLinearVelocity();
@@ -318,12 +380,12 @@ void Graphics::Update(unsigned int dt)
      abs(ballVelocity.z()) >= 0.015 )
   {
     ballIsMoving = true;
-    cout << "Ball is moving" << endl;
+    //cout << "Ball is moving" << endl;
   }
   else
   {
     ballIsMoving = false;
-    cout << "Ball is not moving" << endl;
+    //cout << "Ball is not moving" << endl;
   }
 
   if(ballIsMoving)
@@ -339,6 +401,7 @@ void Graphics::Update(unsigned int dt)
      abs(previousBallVelocity.z() - ballVelocity.z()) <= .001 ))
   {
     ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
+    ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
   }
   previousBallVelocity = ballVelocity;
 
@@ -437,7 +500,7 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render(m_shader, cubeSpecular);
 
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
+  /*glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
   m_front->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_back->GetModel()));
@@ -450,7 +513,17 @@ void Graphics::Render()
   m_right->Render(m_shader, .5);
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_bottom->GetModel()));
-  m_bottom->Render(m_shader, .5);
+  m_bottom->Render(m_shader, .5);*/
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_course->GetModel()));
+  m_course->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_windmill->GetModel()));
+  m_windmill->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_fan->GetModel()));
+  m_fan->Render(m_shader, .5);
+
   // Get any errors from OpenGL
   auto error = glGetError();
   if ( error != GL_NO_ERROR )

@@ -20,26 +20,31 @@ class Graphics
     btTransform newtrans;
 
     btRigidBody *ballRigidBody;
-    btRigidBody *boardRigidBody;
+    //btRigidBody *boardRigidBody;
     btRigidBody *cylinderRigidBody;
     btRigidBody *cubeRigidBody;
-    btRigidBody *backRigidBody;
+    /*btRigidBody *backRigidBody;
     btRigidBody *frontRigidBody;
     btRigidBody *leftRigidBody;
     btRigidBody *rightRigidBody;
-    btRigidBody *bottomRigidBody;
+    btRigidBody *bottomRigidBody;*/
+
+    btRigidBody *courseRigidBody;
+    btRigidBody *windmillRigidBody;
+    btRigidBody *fanRigidBody;
+
     btRigidBody *clubRigidBody;
 
-   void UpdateShader(int newLightingType);
+    void UpdateShader(int newLightingType);
 
-   int lightingType;
-   int newLightingType;
-   float ambientValue;
-   float cubeSpecular;
-   float clubSpecular;
-   float ballSpecular;
-   float cutOffAngle;
-   float brightness;
+    int lightingType;
+    int newLightingType;
+    float ambientValue;
+    float cubeSpecular;
+    float clubSpecular;
+    float ballSpecular;
+    float cutOffAngle;
+    float brightness;
 
     //variables for club
     btVector3 clubPosition;
@@ -50,6 +55,8 @@ class Graphics
     float clubPowerMuliplier;
     bool usingClub;
     bool setMultiplier;
+
+    float fanSpeed;
 
   private:
     std::string ErrorString(GLenum error);
@@ -65,11 +72,16 @@ class Graphics
     GLint m_spotLight;
 
     Object *m_ball;
-    Object *m_front;
+    /*Object *m_front;
     Object *m_back;
     Object *m_left;
     Object *m_right;
-    Object *m_bottom;
+    Object *m_bottom;*/
+ 
+    Object *m_course;
+    Object *m_windmill;
+    Object *m_fan;
+
     Object *m_cylinder;
     Object *m_cube;
     Object *m_club;

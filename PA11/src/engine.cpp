@@ -184,9 +184,16 @@ void Engine::Keyboard()
     }
     if (m_event.key.keysym.sym == SDLK_x)
     {
-			//m_graphics->brightness -= .3;
-			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,0.1,0));
+			m_graphics->brightness -= .3;
     }
+		if(m_event.key.keysym.sym == SDLK_LEFT)
+		{
+			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,1,0));
+		}
+		if(m_event.key.keysym.sym == SDLK_RIGHT)
+		{
+			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,-1,0));
+		}
     //press +/= to increase fan speed
     if (m_event.key.keysym.sym == SDLK_EQUALS)
     {
@@ -214,6 +221,14 @@ void Engine::Keyboard()
     {
       m_graphics->usingClub = false;
     }
+		if(m_event.key.keysym.sym == SDLK_LEFT)
+		{
+			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,0,0));
+		}
+		if(m_event.key.keysym.sym == SDLK_RIGHT)
+		{
+			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,0,0));
+		}
   }
 }
 

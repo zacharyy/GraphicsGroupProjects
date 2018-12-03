@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a
+CMAKE_SOURCE_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA11
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build
+CMAKE_BINARY_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/PA11.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/PA11.dir/flags.make
 
 CMakeFiles/PA11.dir/src/camera.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/camera.cpp.o: ../src/camera.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PA11.dir/src/camera.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/camera.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PA11.dir/src/camera.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/camera.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/camera.cpp
 
 CMakeFiles/PA11.dir/src/camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/camera.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/camera.cpp > CMakeFiles/PA11.dir/src/camera.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/camera.cpp > CMakeFiles/PA11.dir/src/camera.cpp.i
 
 CMakeFiles/PA11.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/camera.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/camera.cpp -o CMakeFiles/PA11.dir/src/camera.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/camera.cpp -o CMakeFiles/PA11.dir/src/camera.cpp.s
 
 CMakeFiles/PA11.dir/src/camera.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/PA11.dir/src/camera.cpp.o.provides.build: CMakeFiles/PA11.dir/src/cam
 
 CMakeFiles/PA11.dir/src/engine.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/engine.cpp.o: ../src/engine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PA11.dir/src/engine.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/engine.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PA11.dir/src/engine.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/engine.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/engine.cpp
 
 CMakeFiles/PA11.dir/src/engine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/engine.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/engine.cpp > CMakeFiles/PA11.dir/src/engine.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/engine.cpp > CMakeFiles/PA11.dir/src/engine.cpp.i
 
 CMakeFiles/PA11.dir/src/engine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/engine.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/engine.cpp -o CMakeFiles/PA11.dir/src/engine.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/engine.cpp -o CMakeFiles/PA11.dir/src/engine.cpp.s
 
 CMakeFiles/PA11.dir/src/engine.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/PA11.dir/src/engine.cpp.o.provides.build: CMakeFiles/PA11.dir/src/eng
 
 CMakeFiles/PA11.dir/src/graphics.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/graphics.cpp.o: ../src/graphics.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PA11.dir/src/graphics.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/graphics.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/graphics.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PA11.dir/src/graphics.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/graphics.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/graphics.cpp
 
 CMakeFiles/PA11.dir/src/graphics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/graphics.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/graphics.cpp > CMakeFiles/PA11.dir/src/graphics.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/graphics.cpp > CMakeFiles/PA11.dir/src/graphics.cpp.i
 
 CMakeFiles/PA11.dir/src/graphics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/graphics.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/graphics.cpp -o CMakeFiles/PA11.dir/src/graphics.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/graphics.cpp -o CMakeFiles/PA11.dir/src/graphics.cpp.s
 
 CMakeFiles/PA11.dir/src/graphics.cpp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/PA11.dir/src/graphics.cpp.o.provides.build: CMakeFiles/PA11.dir/src/g
 
 CMakeFiles/PA11.dir/src/main.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PA11.dir/src/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/main.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PA11.dir/src/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/main.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/main.cpp
 
 CMakeFiles/PA11.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/main.cpp > CMakeFiles/PA11.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/main.cpp > CMakeFiles/PA11.dir/src/main.cpp.i
 
 CMakeFiles/PA11.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/main.cpp -o CMakeFiles/PA11.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/main.cpp -o CMakeFiles/PA11.dir/src/main.cpp.s
 
 CMakeFiles/PA11.dir/src/main.cpp.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/PA11.dir/src/main.cpp.o.provides.build: CMakeFiles/PA11.dir/src/main.
 
 CMakeFiles/PA11.dir/src/mesh.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/mesh.cpp.o: ../src/mesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PA11.dir/src/mesh.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/mesh.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/mesh.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PA11.dir/src/mesh.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/mesh.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/mesh.cpp
 
 CMakeFiles/PA11.dir/src/mesh.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/mesh.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/mesh.cpp > CMakeFiles/PA11.dir/src/mesh.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/mesh.cpp > CMakeFiles/PA11.dir/src/mesh.cpp.i
 
 CMakeFiles/PA11.dir/src/mesh.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/mesh.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/mesh.cpp -o CMakeFiles/PA11.dir/src/mesh.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/mesh.cpp -o CMakeFiles/PA11.dir/src/mesh.cpp.s
 
 CMakeFiles/PA11.dir/src/mesh.cpp.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/PA11.dir/src/mesh.cpp.o.provides.build: CMakeFiles/PA11.dir/src/mesh.
 
 CMakeFiles/PA11.dir/src/object.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/object.cpp.o: ../src/object.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PA11.dir/src/object.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/object.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/object.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PA11.dir/src/object.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/object.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/object.cpp
 
 CMakeFiles/PA11.dir/src/object.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/object.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/object.cpp > CMakeFiles/PA11.dir/src/object.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/object.cpp > CMakeFiles/PA11.dir/src/object.cpp.i
 
 CMakeFiles/PA11.dir/src/object.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/object.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/object.cpp -o CMakeFiles/PA11.dir/src/object.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/object.cpp -o CMakeFiles/PA11.dir/src/object.cpp.s
 
 CMakeFiles/PA11.dir/src/object.cpp.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/PA11.dir/src/object.cpp.o.provides.build: CMakeFiles/PA11.dir/src/obj
 
 CMakeFiles/PA11.dir/src/shader.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/shader.cpp.o: ../src/shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PA11.dir/src/shader.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/shader.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PA11.dir/src/shader.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/shader.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/shader.cpp
 
 CMakeFiles/PA11.dir/src/shader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/shader.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/shader.cpp > CMakeFiles/PA11.dir/src/shader.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/shader.cpp > CMakeFiles/PA11.dir/src/shader.cpp.i
 
 CMakeFiles/PA11.dir/src/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/shader.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/shader.cpp -o CMakeFiles/PA11.dir/src/shader.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/shader.cpp -o CMakeFiles/PA11.dir/src/shader.cpp.s
 
 CMakeFiles/PA11.dir/src/shader.cpp.o.requires:
 
@@ -227,16 +227,16 @@ CMakeFiles/PA11.dir/src/shader.cpp.o.provides.build: CMakeFiles/PA11.dir/src/sha
 
 CMakeFiles/PA11.dir/src/window.cpp.o: CMakeFiles/PA11.dir/flags.make
 CMakeFiles/PA11.dir/src/window.cpp.o: ../src/window.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PA11.dir/src/window.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/window.cpp.o -c /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/window.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PA11.dir/src/window.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PA11.dir/src/window.cpp.o -c /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/window.cpp
 
 CMakeFiles/PA11.dir/src/window.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PA11.dir/src/window.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/window.cpp > CMakeFiles/PA11.dir/src/window.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/window.cpp > CMakeFiles/PA11.dir/src/window.cpp.i
 
 CMakeFiles/PA11.dir/src/window.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PA11.dir/src/window.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/window.cpp -o CMakeFiles/PA11.dir/src/window.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/window.cpp -o CMakeFiles/PA11.dir/src/window.cpp.s
 
 CMakeFiles/PA11.dir/src/window.cpp.o.requires:
 
@@ -283,7 +283,7 @@ PA11: /usr/local/lib/libBulletCollision.a
 PA11: /usr/local/lib/libLinearMath.a
 PA11: /usr/local/lib/libBulletSoftBody.a
 PA11: CMakeFiles/PA11.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable PA11"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable PA11"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PA11.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -307,6 +307,6 @@ CMakeFiles/PA11.dir/clean:
 .PHONY : CMakeFiles/PA11.dir/clean
 
 CMakeFiles/PA11.dir/depend:
-	cd /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build /home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles/PA11.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zacharyy/Desktop/Graphics/cs480Park/PA11 /home/zacharyy/Desktop/Graphics/cs480Park/PA11 /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles/PA11.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PA11.dir/depend
 

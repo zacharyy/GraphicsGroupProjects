@@ -90,47 +90,47 @@ SDL2/SDL.h
 string
 -
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/camera.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/camera.cpp
 camera.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/camera.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/camera.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/engine.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/engine.cpp
 engine.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/engine.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/engine.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/graphics.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/graphics.cpp
 graphics.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/graphics.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/graphics.h
 cmath
 -
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/main.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/main.cpp
 iostream
 -
 engine.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/engine.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/engine.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/mesh.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/mesh.cpp
 mesh.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/mesh.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/mesh.h
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/object.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/object.cpp
 object.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/object.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/object.h
 shader.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/shader.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/shader.h
 cstdlib
 -
 ctime
 -
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/shader.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/shader.cpp
 shader.h
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/shader.h
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/shader.h
 fstream
 -
 
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/src/window.cpp
+/home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/window.cpp
 window.h
 -
 

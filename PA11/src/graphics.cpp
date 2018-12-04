@@ -22,6 +22,9 @@ Graphics::Graphics()
 
   numberOfShots = 0;
   addShot = false;
+
+  levelCleared = false;
+  restart = false;
 }
 
 Graphics::~Graphics()
@@ -197,7 +200,7 @@ windmillRigidBody->setRestitution (0.5);
   btTriangleMesh* fanTriMesh = new btTriangleMesh();
   m_fan = new Object("../objects/fan.obj", "../objects/wood.jpg", fanTriMesh, 1);
   btCollisionShape *fanShape = new btBvhTriangleMeshShape(fanTriMesh, true);
-  btDefaultMotionState* fanMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 11, 37)));
+  btDefaultMotionState* fanMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10.5, 37)));
   btVector3 fanInertia(0,0,0);
   float fanMass = 5;
 
@@ -212,8 +215,9 @@ windmillRigidBody->setRestitution (0.5);
   //Create the ball
   btTriangleMesh* objTriMesh = new btTriangleMesh();
   m_ball = new Object("../objects/ball.obj", "../objects/metalball.png", objTriMesh, 0);
-  btCollisionShape *ballShape = new btSphereShape(1); 
-  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, 0)));
+  //should be somewhere between .40 and .45 at the moment
+  btCollisionShape *ballShape = new btSphereShape(.45); 
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, 80)));
   btScalar ballMass = 1;
   btVector3 ballInertia(0, 0, 0);
 
@@ -387,7 +391,7 @@ void Graphics::Update(unsigned int dt)
   m_windmill->model = glm::make_mat4(m);
 
   //reset ball if it goes out of bounds
-  if(ballPosition.y() <= -10)
+  if(ballPosition.y()<=-10)
   {
     trans.setOrigin(btVector3(previousBallPosition.x(), previousBallPosition.y(), previousBallPosition.z()));
 
@@ -395,6 +399,42 @@ void Graphics::Update(unsigned int dt)
     ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
     ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
     ballIsMoving = false;
+  }
+
+  //if ball is in the hole display scorecard/go to win state
+  if(abs(0-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(80-ballPosition.z())<=2.0f &&
+     levelCleared == false)
+  {
+    cout << "Course Cleared!" << endl;
+    //will probably reformat this eventually to make it look nicer
+    cout << "Hole	1	2	3	4	5	6	7	8	9..." << endl;
+    cout << "Par	2	?	?	?	?	?	?	?	?..." << endl;
+    //if we end up doing multiple holes we could store shots per hole in an array
+    cout << "Shots" << "\t" << numberOfShots << "	0	0	0	0	0	0	0	0..." << endl;
+    cout << "Press R to Restart" << endl;
+    levelCleared = true;
+  }
+
+  //if level cleared make ball stay near hole entrance (will prevent ball/camera from free falling)
+  if(levelCleared == true)
+  {
+    trans.setOrigin(btVector3(0.0f, -2.0f, 80.0f));
+    ballRigidBody->setWorldTransform(trans);
+  }
+
+  if(restart == true)
+  {
+    levelCleared = false;
+    trans.setOrigin(btVector3(0, 2, 0));
+    ballRigidBody->setWorldTransform(trans);
+    ballRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_ball->model = glm::make_mat4(m);
+    ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
+    ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
+    ballIsMoving = false;
+    numberOfShots = 0;
+    restart = false;
   }
 
   ballRigidBody->getMotionState()->getWorldTransform(trans);
@@ -449,7 +489,7 @@ void Graphics::Update(unsigned int dt)
   clubPosition = clubRigidBody->getCenterOfMassPosition();
 	float xAxis, yAxis, zAxis;
 	clubRigidBody->getOrientation().getEulerZYX(zAxis,yAxis,xAxis);
-	cout << "x" << xAxis << " y" << yAxis << " z" << zAxis << endl;
+	//cout << "x" << xAxis << " y" << yAxis << " z" << zAxis << endl;
 	static int constant;
 
 	if(xAxis > 3.1 && !clubUsed)
@@ -526,6 +566,8 @@ void Graphics::Update(unsigned int dt)
   clubRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_club->model = glm::make_mat4(m);
+
+  //cout << ballPosition.x() << "\t" << ballPosition.y() << "\t" << ballPosition.z() << endl;
 
   //cubeRigidBody->applyCentralImpulse(btVector3(.4,0,0.4));
   cubeRigidBody->getMotionState()->getWorldTransform(trans);

@@ -4,7 +4,7 @@
 CMakeFiles/PA11.dir/src/camera.cpp.o
  ../include/camera.h
  ../include/graphics_headers.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/camera.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/camera.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -242,7 +242,7 @@ CMakeFiles/PA11.dir/src/engine.cpp.o
  ../include/object.h
  ../include/shader.h
  ../include/window.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/engine.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/engine.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -478,7 +478,7 @@ CMakeFiles/PA11.dir/src/graphics.cpp.o
  ../include/mesh.h
  ../include/object.h
  ../include/shader.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/graphics.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/graphics.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -716,7 +716,7 @@ CMakeFiles/PA11.dir/src/main.cpp.o
  ../include/object.h
  ../include/shader.h
  ../include/window.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/main.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/main.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -949,7 +949,7 @@ CMakeFiles/PA11.dir/src/mesh.cpp.o
  ../include/graphics_headers.h
  ../include/mesh.h
  ../include/shader.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/mesh.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/mesh.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -1183,7 +1183,7 @@ CMakeFiles/PA11.dir/src/object.cpp.o
  ../include/mesh.h
  ../include/object.h
  ../include/shader.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/object.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/object.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -1415,7 +1415,7 @@ CMakeFiles/PA11.dir/src/object.cpp.o
 CMakeFiles/PA11.dir/src/shader.cpp.o
  ../include/graphics_headers.h
  ../include/shader.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/shader.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/shader.cpp
  /usr/include/ImageMagick-6/Magick++.h
  /usr/include/ImageMagick-6/Magick++/Blob.h
  /usr/include/ImageMagick-6/Magick++/ChannelMoments.h
@@ -1646,4 +1646,4 @@ CMakeFiles/PA11.dir/src/shader.cpp.o
  /usr/local/include/bullet/btBulletDynamicsCommon.h
 CMakeFiles/PA11.dir/src/window.cpp.o
  ../include/window.h
- /home/zacharyy/Desktop/Graphics/cs480Park/PA11/src/window.cpp
+ /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/src/window.cpp

@@ -66,6 +66,9 @@ class Graphics
     int numberOfShots;
     bool addShot;
 
+    bool levelCleared;
+    bool restart;
+
   private:
     std::string ErrorString(GLenum error);
 

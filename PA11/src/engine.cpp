@@ -184,7 +184,8 @@ void Engine::Keyboard()
     }
     if (m_event.key.keysym.sym == SDLK_x)
     {
-			m_graphics->brightness -= .3;
+			//m_graphics->brightness -= .3;
+			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,0.1,0));
     }
 		if(m_event.key.keysym.sym == SDLK_LEFT)
 		{
@@ -213,6 +214,11 @@ void Engine::Keyboard()
     if (m_event.key.keysym.sym == SDLK_e)
     {
       m_graphics->turnCameraRight = true;
+    }
+    //press r to restart
+    if (m_event.key.keysym.sym == SDLK_r)
+    {
+      m_graphics->restart = true;
     }
   }
   else if (m_event.type == SDL_KEYUP)

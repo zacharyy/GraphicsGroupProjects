@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA11
+CMAKE_SOURCE_DIR = /home/ethanpark/Desktop/temp/computer-graphics-master/PA11
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build
+CMAKE_BINARY_DIR = /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/build
 
 # Utility rule file for PA11_SUCCESSFUL.
 
@@ -58,7 +58,7 @@ CMakeFiles/PA11_SUCCESSFUL: PA11
 	/usr/bin/cmake -E echo =====================
 	/usr/bin/cmake -E echo \ \ Compile\ complete!
 	/usr/bin/cmake -E echo =====================
-	/usr/bin/cmake -E echo /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build
+	/usr/bin/cmake -E echo /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/build
 
 PA11_SUCCESSFUL: CMakeFiles/PA11_SUCCESSFUL
 PA11_SUCCESSFUL: CMakeFiles/PA11_SUCCESSFUL.dir/build.make
@@ -75,6 +75,6 @@ CMakeFiles/PA11_SUCCESSFUL.dir/clean:
 .PHONY : CMakeFiles/PA11_SUCCESSFUL.dir/clean
 
 CMakeFiles/PA11_SUCCESSFUL.dir/depend:
-	cd /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zacharyy/Desktop/Graphics/cs480Park/PA11 /home/zacharyy/Desktop/Graphics/cs480Park/PA11 /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build /home/zacharyy/Desktop/Graphics/cs480Park/PA11/build/CMakeFiles/PA11_SUCCESSFUL.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ethanpark/Desktop/temp/computer-graphics-master/PA11 /home/ethanpark/Desktop/temp/computer-graphics-master/PA11 /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/build /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/build /home/ethanpark/Desktop/temp/computer-graphics-master/PA11/build/CMakeFiles/PA11_SUCCESSFUL.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PA11_SUCCESSFUL.dir/depend
 

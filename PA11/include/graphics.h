@@ -30,8 +30,13 @@ class Graphics
     btRigidBody *bottomRigidBody;*/
 
     btRigidBody *courseRigidBody;
+    btRigidBody *course2RigidBody;
     btRigidBody *windmillRigidBody;
+    btRigidBody *windmill2RigidBody;
     btRigidBody *fanRigidBody;
+    btRigidBody *fan2RigidBody;
+    btRigidBody *gateRigidBody;
+    btRigidBody *gate2RigidBody;
 
     btRigidBody *clubRigidBody;
 
@@ -67,7 +72,9 @@ class Graphics
     bool addShot;
 
     bool levelCleared;
-    bool restart;
+
+    int levelSelectionSwitch;
+    int currentLevel;
 
   private:
     std::string ErrorString(GLenum error);
@@ -90,8 +97,13 @@ class Graphics
     Object *m_bottom;*/
  
     Object *m_course;
+    Object *m_course2;
     Object *m_windmill;
+    Object *m_windmill2;
     Object *m_fan;
+    Object *m_fan2;
+    Object *m_gate;
+    Object *m_gate2;
 
     Object *m_cylinder;
     Object *m_cube;

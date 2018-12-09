@@ -24,7 +24,8 @@ Graphics::Graphics()
   addShot = false;
 
   levelCleared = false;
-  restart = false;
+  levelSelectionSwitch = 0;
+  currentLevel = 1;
 }
 
 Graphics::~Graphics()
@@ -88,87 +89,9 @@ bool Graphics::Initialize(int width, int height)
 
   /*Create Objects*/
 
-  /*//Create Board
-  // Create the Front
-  btTriangleMesh* objTriMeshF = new btTriangleMesh();
-  m_front = new Object("../objects/front.obj", "../objects/red.png", objTriMeshF, 1);
-  btCollisionShape *frontShape = new btBvhTriangleMeshShape(objTriMeshF, true);
-  btDefaultMotionState* frontMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  btScalar frontMass = 0; //setting mass to 0 makes it static
-  btVector3 frontInertia(0, 0, 0);
-
-
-  frontShape->calculateLocalInertia(frontMass, frontInertia);
-  btRigidBody::btRigidBodyConstructionInfo frontRigidBodyCI(frontMass, frontMotionState, frontShape, frontInertia);
-  frontRigidBody = new btRigidBody(frontRigidBodyCI);
-frontRigidBody->setRestitution (0.5);
-  frontRigidBody->setActivationState(DISABLE_DEACTIVATION);
-  dynamicsWorld->addRigidBody(frontRigidBody);
-
-  //Create the back
-  btTriangleMesh* objTriMeshB = new btTriangleMesh();
-  m_back = new Object("../objects/back.obj", "../objects/red.png", objTriMeshB, 1);
-  btCollisionShape *backShape = new btBvhTriangleMeshShape(objTriMeshB, true);
-  btDefaultMotionState* backMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  btScalar backMass = 0; //setting mass to 0 makes it static
-  btVector3 backInertia(0, 0, 0);
-
-  backShape->calculateLocalInertia(backMass, backInertia);
-  btRigidBody::btRigidBodyConstructionInfo backRigidBodyCI(backMass, backMotionState, backShape, backInertia);
-  backRigidBody = new btRigidBody(backRigidBodyCI);
-backRigidBody->setRestitution (0.5);
-  backRigidBody->setActivationState(DISABLE_DEACTIVATION);
-  dynamicsWorld->addRigidBody(backRigidBody);
-  
-  //Create the left
-  btTriangleMesh* objTriMeshL = new btTriangleMesh();
-  m_left = new Object("../objects/left.obj", "../objects/red.png", objTriMeshL, 1);
-  btCollisionShape *leftShape = new btBvhTriangleMeshShape(objTriMeshL, true);
-  btDefaultMotionState* leftMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  btScalar leftMass = 0; //setting mass to 0 makes it static
-  btVector3 leftInertia(0, 0, 0);
-
-  leftShape->calculateLocalInertia(leftMass, leftInertia);
-  btRigidBody::btRigidBodyConstructionInfo leftRigidBodyCI(leftMass, leftMotionState, leftShape, leftInertia);
-  leftRigidBody = new btRigidBody(leftRigidBodyCI);
-  leftRigidBody->setRestitution (0.5);
-  leftRigidBody->setActivationState(DISABLE_DEACTIVATION);
-  dynamicsWorld->addRigidBody(leftRigidBody);
-
-  //Create the right
-  btTriangleMesh* objTriMeshR = new btTriangleMesh();
-  m_right = new Object("../objects/right.obj", "../objects/red.png", objTriMeshR, 1);
-  btCollisionShape *rightShape = new btBvhTriangleMeshShape(objTriMeshR, true);
-  btDefaultMotionState* rightMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  btScalar rightMass = 0; //setting mass to 0 makes it static
-  btVector3 rightInertia(0, 0, 0);
-
-  rightShape->calculateLocalInertia(rightMass, rightInertia);
-  btRigidBody::btRigidBodyConstructionInfo rightRigidBodyCI(rightMass, rightMotionState, rightShape, rightInertia);
-  rightRigidBody = new btRigidBody(rightRigidBodyCI);
-rightRigidBody->setRestitution (0.5);
-  rightRigidBody->setActivationState(DISABLE_DEACTIVATION);
-  dynamicsWorld->addRigidBody(rightRigidBody);
-
-
-  //Create the bottom
-  btTriangleMesh* objTriMeshBot = new btTriangleMesh();
-  m_bottom = new Object("../objects/bottom.obj", "../objects/red.png", objTriMeshBot, 0);
-  btCollisionShape *bottomShape = new btBoxShape(btVector3(12,0.3,20));
-  btDefaultMotionState* bottomMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
-  btScalar bottomMass = 0; //setting mass to 0 makes it static
-  btVector3 bottomInertia(0, 0, 0);
-
-  bottomShape->calculateLocalInertia(bottomMass, bottomInertia);
-  btRigidBody::btRigidBodyConstructionInfo bottomRigidBodyCI(bottomMass, bottomMotionState, 	bottomShape, bottomInertia);
-  bottomRigidBody = new btRigidBody(bottomRigidBodyCI);
-	bottomRigidBody->setRestitution (0.5);
-  bottomRigidBody->setActivationState(DISABLE_DEACTIVATION);
-  dynamicsWorld->addRigidBody(bottomRigidBody);*/
-
-  //Create course
+  //Create test course
   btTriangleMesh* objTriMeshCourse = new btTriangleMesh();
-  m_course = new Object("../objects/testpista.obj", "../objects/red.png", objTriMeshCourse, 1);
+  m_course = new Object("../objects/Lshape.obj", "../objects/red.png", objTriMeshCourse, 1);
   btCollisionShape *courseShape = new btBvhTriangleMeshShape(objTriMeshCourse, true);
   btDefaultMotionState* courseMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 1, 0, 1), btVector3(0, 0, 0)));
   btScalar courseMass = 0; //setting mass to 0 makes it static
@@ -185,7 +108,8 @@ courseRigidBody->setRestitution (0.5);
   btTriangleMesh* objTriMeshWindmill = new btTriangleMesh();
   m_windmill = new Object("../objects/windmill.obj", "../objects/granite.jpg", objTriMeshWindmill, 1);
   btCollisionShape *windmillShape = new btBvhTriangleMeshShape(objTriMeshWindmill, true);
-  btDefaultMotionState* windmillMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 11, 37)));
+  btDefaultMotionState* windmillMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 11, 0)));
+  //btVector3(0, 11, 37)
   btScalar windmillMass = 0; //setting mass to 0 makes it static
   btVector3 windmillInertia(0, 0, 0);
 
@@ -200,7 +124,8 @@ windmillRigidBody->setRestitution (0.5);
   btTriangleMesh* fanTriMesh = new btTriangleMesh();
   m_fan = new Object("../objects/fan.obj", "../objects/wood.jpg", fanTriMesh, 1);
   btCollisionShape *fanShape = new btBvhTriangleMeshShape(fanTriMesh, true);
-  btDefaultMotionState* fanMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10.5, 37)));
+  btDefaultMotionState* fanMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10.5, 0)));
+  //btVector3(0, 10.5, 37)
   btVector3 fanInertia(0,0,0);
   float fanMass = 5;
 
@@ -216,8 +141,10 @@ windmillRigidBody->setRestitution (0.5);
   btTriangleMesh* objTriMesh = new btTriangleMesh();
   m_ball = new Object("../objects/ball.obj", "../objects/metalball.png", objTriMesh, 0);
   //should be somewhere between .40 and .45 at the moment
-  btCollisionShape *ballShape = new btSphereShape(.45); 
-  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 2, 80)));
+  btCollisionShape *ballShape = new btSphereShape(.43); 
+  btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -30)));
+  //btVector3(0, 1, -30)
+  //btVector3(0, 1, 0)
   btScalar ballMass = 1;
   btVector3 ballInertia(0, 0, 0);
 
@@ -232,9 +159,9 @@ windmillRigidBody->setRestitution (0.5);
 	// Create the club
 	double clubMass = 5;
   btTriangleMesh* clubTriMesh = new btTriangleMesh();
-  m_club = new Object("../objects/cube.obj", "../objects/wood.jpg", clubTriMesh, 1);
+  m_club = new Object("../objects/club.obj", "../objects/wood.jpg", clubTriMesh, 1);
   btCollisionShape *clubShape = new btBvhTriangleMeshShape(clubTriMesh, true);
-  btDefaultMotionState* clubMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 2, -13.8)));
+  btDefaultMotionState* clubMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, -13.8)));
 	btVector3 clubInertia(0,0,0);
 
   clubShape->calculateLocalInertia(clubMass, clubInertia);
@@ -250,7 +177,7 @@ windmillRigidBody->setRestitution (0.5);
   m_cube = new Object("../objects/cube.obj", "../objects/portalCube.jpeg", objTriMesh4, 0);
   btCollisionShape *cubeShape = new btBoxShape(btVector3(1, 1, 1));
   //btCollisionShape *cubeShape = new btBvhTriangleMeshShape(objTriMesh4, true);
-  btDefaultMotionState* cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -5)));
+  btDefaultMotionState* cubeMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -35)));
   btScalar cubeMass = 1; 
   btVector3 cubeInertia(0, 0, 0);
 
@@ -260,6 +187,88 @@ windmillRigidBody->setRestitution (0.5);
   cubeRigidBody->setActivationState(DISABLE_DEACTIVATION);
 
   dynamicsWorld->addRigidBody(cubeRigidBody);
+
+  /**********Create Course 2**********/
+  btTriangleMesh* objTriMeshCourse2 = new btTriangleMesh();
+  m_course2 = new Object("../objects/pista.obj", "../objects/red.png", objTriMeshCourse2, 1);
+  btCollisionShape *course2Shape = new btBvhTriangleMeshShape(objTriMeshCourse2, true);
+  btDefaultMotionState* course2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 0, 100)));
+  btScalar course2Mass = 0; //setting mass to 0 makes it static
+  btVector3 course2Inertia(0, 0, 0);
+
+  course2Shape->calculateLocalInertia(course2Mass, course2Inertia);
+  btRigidBody::btRigidBodyConstructionInfo course2RigidBodyCI(course2Mass, course2MotionState, course2Shape, course2Inertia);
+  course2RigidBody = new btRigidBody(course2RigidBodyCI);
+course2RigidBody->setRestitution (0.5);
+  course2RigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(course2RigidBody);
+
+  /*//Create windmill base 2
+  btTriangleMesh* objTriMeshWindmill2 = new btTriangleMesh();
+  m_windmill2 = new Object("../objects/windmill2.obj", "../objects/granite.jpg", objTriMeshWindmill2, 1);
+  btCollisionShape *windmill2Shape = new btBvhTriangleMeshShape(objTriMeshWindmill2, true);
+  btDefaultMotionState* windmill2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 11, 100)));
+  //btVector3(0, 11, 37)
+  btScalar windmill2Mass = 0; //setting mass to 0 makes it static
+  btVector3 windmill2Inertia(0, 0, 0);
+
+  windmill2Shape->calculateLocalInertia(windmill2Mass, windmill2Inertia);
+  btRigidBody::btRigidBodyConstructionInfo windmill2RigidBodyCI(windmill2Mass, windmill2MotionState, windmill2Shape, windmill2Inertia);
+  windmill2RigidBody = new btRigidBody(windmill2RigidBodyCI);
+windmill2RigidBody->setRestitution (0.5);
+  windmill2RigidBody->setActivationState(DISABLE_DEACTIVATION);
+  dynamicsWorld->addRigidBody(windmill2RigidBody);
+
+  // Create fan 2
+  btTriangleMesh* fan2TriMesh = new btTriangleMesh();
+  m_fan2 = new Object("../objects/fan2.obj", "../objects/wood.jpg", fan2TriMesh, 1);
+  btCollisionShape *fan2Shape = new btBvhTriangleMeshShape(fan2TriMesh, true);
+  btDefaultMotionState* fan2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 10.5, 100)));
+  //btVector3(0, 10.5, 37)
+  btVector3 fan2Inertia(0,0,0);
+  float fan2Mass = 5;
+
+  fan2Shape->calculateLocalInertia(fan2Mass, fan2Inertia);
+  btRigidBody::btRigidBodyConstructionInfo fan2RigidBodyCI(fan2Mass, fan2MotionState, fan2Shape, fan2Inertia);
+  fan2RigidBody = new btRigidBody(fan2RigidBodyCI);
+  fan2RigidBody->setRestitution (0.5);
+  fan2RigidBody->setActivationState(DISABLE_DEACTIVATION);
+  fan2RigidBody->setLinearFactor(btVector3(0,0,0));
+  dynamicsWorld->addRigidBody(fan2RigidBody);
+
+  // Create gate 1
+  btTriangleMesh* gateTriMesh = new btTriangleMesh();
+  m_gate = new Object("../objects/gate.obj", "../objects/wood.jpg", gateTriMesh, 1);
+  btCollisionShape *gateShape = new btBvhTriangleMeshShape(gateTriMesh, true);
+  btDefaultMotionState* gateMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 10.5, 100)));
+  //btVector3(0, 10.5, 37)
+  btVector3 gateInertia(0,0,0);
+  float gateMass = 5;
+
+  gateShape->calculateLocalInertia(gateMass, gateInertia);
+  btRigidBody::btRigidBodyConstructionInfo gateRigidBodyCI(gateMass, gateMotionState, gateShape, gateInertia);
+  gateRigidBody = new btRigidBody(gateRigidBodyCI);
+  gateRigidBody->setRestitution (0.5);
+  gateRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  gateRigidBody->setLinearFactor(btVector3(0,0,0));
+  dynamicsWorld->addRigidBody(gateRigidBody);
+
+  // Create gate 2
+  btTriangleMesh* gate2TriMesh = new btTriangleMesh();
+  m_gate2 = new Object("../objects/gate2.obj", "../objects/wood.jpg", gate2TriMesh, 1);
+  btCollisionShape *gate2Shape = new btBvhTriangleMeshShape(gate2TriMesh, true);
+  btDefaultMotionState* gate2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 10.5, 100)));
+  //btVector3(0, 10.5, 37)
+  btVector3 gate2Inertia(0,0,0);
+  float gate2Mass = 5;
+
+  gate2Shape->calculateLocalInertia(gate2Mass, gate2Inertia);
+  btRigidBody::btRigidBodyConstructionInfo gate2RigidBodyCI(gate2Mass, gate2MotionState, gate2Shape, gate2Inertia);
+  gate2RigidBody = new btRigidBody(gate2RigidBodyCI);
+  gate2RigidBody->setRestitution (0.5);
+  gate2RigidBody->setActivationState(DISABLE_DEACTIVATION);
+  gate2RigidBody->setLinearFactor(btVector3(0,0,0));
+  dynamicsWorld->addRigidBody(gate2RigidBody);*/
 
   // Set up the shader
   lightingType = 0;
@@ -386,6 +395,10 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_course->model = glm::make_mat4(m);
 
+  course2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_course2->model = glm::make_mat4(m);
+
   windmillRigidBody->getMotionState()->getWorldTransform(trans);
   trans.getOpenGLMatrix(m);
   m_windmill->model = glm::make_mat4(m);
@@ -402,30 +415,55 @@ void Graphics::Update(unsigned int dt)
   }
 
   //if ball is in the hole display scorecard/go to win state
-  if(abs(0-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(80-ballPosition.z())<=2.0f &&
-     levelCleared == false)
+  /*if(abs(0-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(80-ballPosition.z())<=2.0f &&
+     levelCleared == false)*/
+  if(abs(-25-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(35-ballPosition.z())<=2.0f &&
+     levelCleared == false && currentLevel == 2)
   {
     cout << "Course Cleared!" << endl;
     //will probably reformat this eventually to make it look nicer
-    cout << "Hole	1	2	3	4	5	6	7	8	9..." << endl;
-    cout << "Par	2	?	?	?	?	?	?	?	?..." << endl;
+    cout << "Hole: " << currentLevel << endl;
+    cout << "Par: 3" << endl;
     //if we end up doing multiple holes we could store shots per hole in an array
-    cout << "Shots" << "\t" << numberOfShots << "	0	0	0	0	0	0	0	0..." << endl;
-    cout << "Press R to Restart" << endl;
+    cout << "Shots: " << numberOfShots << endl;
+    cout << "Press 1 for Course 1, 2 for Course 2" << endl;
+    levelCleared = true;
+  }
+
+  if(abs(40-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(190-ballPosition.z())<=2.0f &&
+     levelCleared == false && currentLevel == 1)
+  {
+    cout << "Course Cleared!" << endl;
+    //will probably reformat this eventually to make it look nicer
+    cout << "Hole: " << currentLevel << endl;
+    cout << "Par: 7" << endl;
+    //if we end up doing multiple holes we could store shots per hole in an array
+    cout << "Shots: " << numberOfShots << endl;
+    cout << "Press 1 for Course 1, 2 for Course 2" << endl;
     levelCleared = true;
   }
 
   //if level cleared make ball stay near hole entrance (will prevent ball/camera from free falling)
   if(levelCleared == true)
   {
-    trans.setOrigin(btVector3(0.0f, -2.0f, 80.0f));
-    ballRigidBody->setWorldTransform(trans);
+    if(currentLevel == 1)
+    {
+      trans.setOrigin(btVector3(-25.0f, -2.0f, 35.0f));
+      ballRigidBody->setWorldTransform(trans);
+    }
+    else if(currentLevel == 2)
+    {
+      trans.setOrigin(btVector3(-25.0f, -2.0f, 35.0f));
+      ballRigidBody->setWorldTransform(trans);
+    }
   }
 
-  if(restart == true)
+
+  //for some reason switch wasnt working, had to use if statements
+  if(levelSelectionSwitch == 1)
   {
     levelCleared = false;
-    trans.setOrigin(btVector3(0, 2, 0));
+    trans.setOrigin(btVector3(0, 1, -30));
     ballRigidBody->setWorldTransform(trans);
     ballRigidBody->getMotionState()->getWorldTransform(trans);
     trans.getOpenGLMatrix(m);
@@ -434,12 +472,30 @@ void Graphics::Update(unsigned int dt)
     ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
     ballIsMoving = false;
     numberOfShots = 0;
-    restart = false;
+    levelSelectionSwitch = 0;
+    currentLevel = 1;
   }
-
-  ballRigidBody->getMotionState()->getWorldTransform(trans);
-  trans.getOpenGLMatrix(m);
-  m_ball->model = glm::make_mat4(m);
+  else if(levelSelectionSwitch == 2)
+  {
+    levelCleared = false;
+    trans.setOrigin(btVector3(100, 1, 100));
+    ballRigidBody->setWorldTransform(trans);
+    ballRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_ball->model = glm::make_mat4(m);
+    ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
+    ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
+    ballIsMoving = false;
+    numberOfShots = 0;
+    levelSelectionSwitch = 0;
+    currentLevel = 2;
+  }
+  else
+  {
+    ballRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_ball->model = glm::make_mat4(m);
+  }
 
   //cout << fanSpeed << endl;
   fanRigidBody->setAngularVelocity(btVector3(0,0,fanSpeed));
@@ -575,6 +631,29 @@ void Graphics::Update(unsigned int dt)
   trans.getOpenGLMatrix(m);
   m_cube->model = glm::make_mat4(m);
   //std::cout<<trans.getOrigin().getX() << " " << trans.getOrigin().getY()<< " " << trans.getOrigin().getZ() << std::endl;
+
+  course2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_course2->model = glm::make_mat4(m);
+
+  //cout << fanSpeed << endl;
+  /*fan2RigidBody->setAngularVelocity(btVector3(0,0,fanSpeed));
+  fan2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_fan2->model = glm::make_mat4(m);
+
+  windmill2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_windmill2->model = glm::make_mat4(m);
+
+  gateRigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_gate->model = glm::make_mat4(m);
+
+  gate2RigidBody->getMotionState()->getWorldTransform(trans);
+  trans.getOpenGLMatrix(m);
+  m_gate2->model = glm::make_mat4(m);*/
+
 }
 
 void Graphics::Render()
@@ -610,20 +689,6 @@ void Graphics::Render()
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
   m_cube->Render(m_shader, cubeSpecular);
 
-  /*glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_front->GetModel()));
-  m_front->Render(m_shader, .5);
-
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_back->GetModel()));
-  m_back->Render(m_shader, .5);
-
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_left->GetModel()));
-  m_left->Render(m_shader, .5);
-
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_right->GetModel()));
-  m_right->Render(m_shader, .5);
-
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_bottom->GetModel()));
-  m_bottom->Render(m_shader, .5);*/
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_course->GetModel()));
   m_course->Render(m_shader, .5);
@@ -633,6 +698,21 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_fan->GetModel()));
   m_fan->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_course2->GetModel()));
+  m_course2->Render(m_shader, .5);
+
+  /*glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_fan2->GetModel()));
+  m_fan2->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_gate->GetModel()));
+  m_gate->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_gate2->GetModel()));
+  m_gate2->Render(m_shader, .5);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_windmill2->GetModel()));
+  m_windmill2->Render(m_shader, .5);*/
 
   // Get any errors from OpenGL
   auto error = glGetError();

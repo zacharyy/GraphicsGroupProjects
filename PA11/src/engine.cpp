@@ -216,9 +216,17 @@ void Engine::Keyboard()
       m_graphics->turnCameraRight = true;
     }
     //press r to restart
-    if (m_event.key.keysym.sym == SDLK_r)
+    /*if (m_event.key.keysym.sym == SDLK_r)
     {
       m_graphics->restart = true;
+    }*/
+    if (m_event.key.keysym.sym == SDLK_1)
+    {
+      m_graphics->levelSelectionSwitch = 1;
+    }
+    if (m_event.key.keysym.sym == SDLK_2)
+    {
+      m_graphics->levelSelectionSwitch = 2;
     }
   }
   else if (m_event.type == SDL_KEYUP)

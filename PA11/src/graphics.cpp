@@ -145,7 +145,7 @@ windmillRigidBody->setRestitution (0.5);
   btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -30)));
   //btVector3(0, 1, -30)
   //btVector3(0, 1, 0)
-  btScalar ballMass = 1;
+  btScalar ballMass = 5;
   btVector3 ballInertia(0, 0, 0);
 
   ballShape->calculateLocalInertia(ballMass, ballInertia);
@@ -159,7 +159,7 @@ windmillRigidBody->setRestitution (0.5);
 	// Create the club
 	double clubMass = 5;
   btTriangleMesh* clubTriMesh = new btTriangleMesh();
-  m_club = new Object("../objects/club.obj", "../objects/wood.jpg", clubTriMesh, 1);
+  m_club = new Object("../objects/clubv4.obj", "../objects/wood.jpg", clubTriMesh, 1);
   btCollisionShape *clubShape = new btBvhTriangleMeshShape(clubTriMesh, true);
   btDefaultMotionState* clubMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, -13.8)));
 	btVector3 clubInertia(0,0,0);
@@ -547,7 +547,7 @@ void Graphics::Update(unsigned int dt)
 	clubRigidBody->getOrientation().getEulerZYX(zAxis,yAxis,xAxis);
 	//cout << "x" << xAxis << " y" << yAxis << " z" << zAxis << endl;
 	static int constant;
-
+	static bool doneUsingClub = true;
 	if(xAxis > 3.1 && !clubUsed)
 	{
 		//cout << "here" << endl;
@@ -556,7 +556,8 @@ void Graphics::Update(unsigned int dt)
 	else if(xAxis == 0 && !clubUsed)
 		constant = 1;
 	if(usingClub)
-	{
+	{	
+		doneUsingClub = false;
 		clubUsed = true;
 		//cout << "club in use" << endl;
 		if(true)
@@ -571,7 +572,7 @@ void Graphics::Update(unsigned int dt)
 			clubRigidBody->setAngularVelocity(btVector3(0,0,0));
 		}
 	}
-  else if(usingClub == false && !((xAxis >= -0.2 && xAxis <= 0.2 || xAxis >= 3.0) && (xAxis >= -0.2 && zAxis <= 0.2 || zAxis >= 3.0)))
+  else if(usingClub == false && !doneUsingClub/*!((xAxis >= -0.2 && xAxis <= 0.2 || xAxis >= 3.0) && (xAxis >= -0.2 && zAxis <= 0.2 || zAxis >= 3.0))*/)
   {
     //velocity is determined by the base power times the multiplier (+.5 to negate possible negative value)
     float z = baseClubPower*clubPowerMuliplier + 0.5;
@@ -604,6 +605,8 @@ void Graphics::Update(unsigned int dt)
     //cout << plungerPosition.z()  << endl;
     clubRigidBody->setAngularVelocity(btVector3(0,0,0));
   }
+	if(ballIsMoving)
+		doneUsingClub = true;
   //cubeRigidBody->getMotionState()->getWorldTransform(trans);
   //trans.getOrigin() += btVector3(0,0,0.1);
   /***Moves club to ball when ball is stationary and update previous position of ball***/
@@ -612,7 +615,7 @@ void Graphics::Update(unsigned int dt)
 		int yTemp = yAxis;
 		if(xAxis > 3)
 			yTemp = -yTemp;
-    trans.setOrigin(btVector3(ballPosition.x() + 3 * sin(yAxis), ballPosition.y() + 3, ballPosition.z() + constant * 3 * cos(yAxis)));
+    trans.setOrigin(btVector3(ballPosition.x() + 2 * sin(yAxis), ballPosition.y() + 5, ballPosition.z() + constant * 2 * cos(yAxis)));
     trans.setRotation(clubRigidBody->getOrientation());
 
     clubRigidBody->setWorldTransform(trans);

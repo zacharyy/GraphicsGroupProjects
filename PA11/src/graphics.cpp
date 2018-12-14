@@ -1,5 +1,6 @@
 #include "graphics.h"
 #include <cmath> //using for absolute value calculations
+#include <iomanip> //iomanip for scorecard formatting
 
 Graphics::Graphics()
 {
@@ -26,6 +27,11 @@ Graphics::Graphics()
   levelCleared = false;
   levelSelectionSwitch = 0;
   currentLevel = 1;
+
+  par[0] = 4;
+  par[1] = 7;
+  score[0] = 0;
+  score[1] = 0;
 }
 
 Graphics::~Graphics()
@@ -91,7 +97,7 @@ bool Graphics::Initialize(int width, int height)
 
   //Create test course
   btTriangleMesh* objTriMeshCourse = new btTriangleMesh();
-  m_course = new Object("../objects/Lshape.obj", "../objects/red.png", objTriMeshCourse, 1);
+  m_course = new Object("../objects/Lshape.obj", "../objects/green.png", objTriMeshCourse, 1);
   btCollisionShape *courseShape = new btBvhTriangleMeshShape(objTriMeshCourse, true);
   btDefaultMotionState* courseMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 1, 0, 1), btVector3(0, 0, 0)));
   btScalar courseMass = 0; //setting mass to 0 makes it static
@@ -139,10 +145,11 @@ windmillRigidBody->setRestitution (0.5);
 
   //Create the ball
   btTriangleMesh* objTriMesh = new btTriangleMesh();
-  m_ball = new Object("../objects/ball.obj", "../objects/metalball.png", objTriMesh, 0);
+  m_ball = new Object("../objects/ball.obj", "../objects/golfball.jpg", objTriMesh, 0);
   //should be somewhere between .40 and .45 at the moment
   btCollisionShape *ballShape = new btSphereShape(.43); 
   btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 1, -30)));
+  //btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-25, 1, 35)));
   //btVector3(0, 1, -30)
   //btVector3(0, 1, 0)
   btScalar ballMass = 5;
@@ -159,7 +166,7 @@ windmillRigidBody->setRestitution (0.5);
 	// Create the club
 	double clubMass = 5;
   btTriangleMesh* clubTriMesh = new btTriangleMesh();
-  m_club = new Object("../objects/clubv4.obj", "../objects/wood.jpg", clubTriMesh, 1);
+  m_club = new Object("../objects/clubv4.obj", "../objects/metalball.png", clubTriMesh, 1);
   btCollisionShape *clubShape = new btBvhTriangleMeshShape(clubTriMesh, true);
   btDefaultMotionState* clubMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, -13.8)));
 	btVector3 clubInertia(0,0,0);
@@ -190,7 +197,7 @@ windmillRigidBody->setRestitution (0.5);
 
   /**********Create Course 2**********/
   btTriangleMesh* objTriMeshCourse2 = new btTriangleMesh();
-  m_course2 = new Object("../objects/pista.obj", "../objects/red.png", objTriMeshCourse2, 1);
+  m_course2 = new Object("../objects/pista.obj", "../objects/green.png", objTriMeshCourse2, 1);
   btCollisionShape *course2Shape = new btBvhTriangleMeshShape(objTriMeshCourse2, true);
   btDefaultMotionState* course2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 0, 100)));
   btScalar course2Mass = 0; //setting mass to 0 makes it static
@@ -417,21 +424,22 @@ void Graphics::Update(unsigned int dt)
   //if ball is in the hole display scorecard/go to win state
   /*if(abs(0-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(80-ballPosition.z())<=2.0f &&
      levelCleared == false)*/
-  if(abs(-25-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(35-ballPosition.z())<=2.0f &&
-     levelCleared == false && currentLevel == 2)
+  if(abs(-25-ballPosition.x())<=2.0f && ballPosition.y() <= -.25f && abs(35-ballPosition.z())<=2.0f &&
+     levelCleared == false && currentLevel == 1)
   {
-    cout << "Course Cleared!" << endl;
+    OutputScorecard();
+    /*cout << "Course Cleared!" << endl;
     //will probably reformat this eventually to make it look nicer
     cout << "Hole: " << currentLevel << endl;
     cout << "Par: 3" << endl;
     //if we end up doing multiple holes we could store shots per hole in an array
     cout << "Shots: " << numberOfShots << endl;
-    cout << "Press 1 for Course 1, 2 for Course 2" << endl;
+    cout << "Press 1 for Course 1, 2 for Course 2" << endl;*/
     levelCleared = true;
   }
 
-  if(abs(40-ballPosition.x())<=2.0f && ballPosition.y() <= -2.0f && abs(190-ballPosition.z())<=2.0f &&
-     levelCleared == false && currentLevel == 1)
+  if(abs(40-ballPosition.x())<=2.0f && ballPosition.y() <= -.25f && abs(190-ballPosition.z())<=2.0f &&
+     levelCleared == false && currentLevel == 2)
   {
     cout << "Course Cleared!" << endl;
     //will probably reformat this eventually to make it look nicer
@@ -448,12 +456,12 @@ void Graphics::Update(unsigned int dt)
   {
     if(currentLevel == 1)
     {
-      trans.setOrigin(btVector3(-25.0f, -2.0f, 35.0f));
+      trans.setOrigin(btVector3(-25.0f, -.25f, 35.0f));
       ballRigidBody->setWorldTransform(trans);
     }
     else if(currentLevel == 2)
     {
-      trans.setOrigin(btVector3(-25.0f, -2.0f, 35.0f));
+      trans.setOrigin(btVector3(-25.0f, -.25f, 35.0f));
       ballRigidBody->setWorldTransform(trans);
     }
   }
@@ -522,9 +530,9 @@ void Graphics::Update(unsigned int dt)
 
   if(ballIsMoving)
   {
-    ballRigidBody->setLinearVelocity(btVector3(ballVelocity.x()/1.005, 
-                                               ballVelocity.y()/1.005, 
-                                               ballVelocity.z()/1.005));
+    ballRigidBody->setLinearVelocity(btVector3(ballVelocity.x()/1.05, 
+                                               ballVelocity.y()/1.05, 
+                                               ballVelocity.z()/1.05));
   }
   if(!ballIsMoving && 
     //this will let the ball bounce off walls without stopping (may need some tuning)
@@ -772,4 +780,42 @@ void Graphics::UpdateShader(int newLightingType)
   m_viewMatrix = m_shader->GetUniformLocation("viewMatrix");
   m_projectionMatrix = m_shader->GetUniformLocation("projectionMatrix");
   m_spotLight = m_shader->GetUniformLocation("SpotLight");
+}
+
+void Graphics::OutputScorecard()
+{
+  //cout << numberOfShots << endl;
+
+  score[currentLevel-1] = '0' + numberOfShots - 48;
+
+  cout << "Course Cleared!" << endl;
+
+  cout << "|HOLE |";
+  for(int i=0; i<numberOfPistas; i++)
+  {
+	cout << right << setw((i+1)*2) << setfill(' ') << i+1 << " |";
+  }
+  cout << endl;
+  cout << "|PAR  |";
+  for(int i=0; i<numberOfPistas; i++)
+  {
+	cout << right << setw((i+1)*2) << setfill(' ') << par[i] << " |";
+  }
+  cout << endl;
+  cout << "|SCORE|";
+  for(int i=0; i<numberOfPistas; i++)
+  {
+    if(score[i] == 0)
+    {
+	cout << right << setw((i+1)*2) << setfill(' ') << "- |";
+
+    }
+    else
+    {
+	cout << right << setw((i+1)*2) << setfill(' ') << score[i] << " |";
+    }
+  }
+  cout << endl;
+  cout << "Press 1-2 to select a cource or ~ to go to next course" << endl;
+  
 }

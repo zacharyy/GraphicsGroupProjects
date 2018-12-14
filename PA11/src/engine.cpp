@@ -228,6 +228,17 @@ void Engine::Keyboard()
     {
       m_graphics->levelSelectionSwitch = 2;
     }
+    if (m_event.key.keysym.sym == SDLK_BACKQUOTE)
+    {
+      if(m_graphics->currentLevel != m_graphics->numberOfPistas)
+      {
+        m_graphics->levelSelectionSwitch = m_graphics->currentLevel+1;
+      }
+      else
+      {
+        m_graphics->levelSelectionSwitch = 1;
+      }
+    }
   }
   else if (m_event.type == SDL_KEYUP)
   {

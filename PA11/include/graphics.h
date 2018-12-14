@@ -41,6 +41,7 @@ class Graphics
     btRigidBody *clubRigidBody;
 
     void UpdateShader(int newLightingType);
+    void OutputScorecard();
 
     int lightingType;
     int newLightingType;
@@ -76,6 +77,11 @@ class Graphics
     int levelSelectionSwitch;
     int currentLevel;
 
+     int numberOfPistas = 2;
+    /*2, 4, 7*/
+    int par[2];
+    /*0, 0, 0*/
+    int score[2];
   private:
     std::string ErrorString(GLenum error);
 

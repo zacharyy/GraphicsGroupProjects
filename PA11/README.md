@@ -1,4 +1,4 @@
-# PA9: Lighting
+# PA11: Mini Golf
 Group Members:  
 Dongjun Jia  
 Ethan Park  
@@ -27,29 +27,29 @@ brew install glew glm sdl2
 ```
 
 ## Building and Running
-This project was built and run using cmake in Linux/Ubuntu. To run the application enter the following in the PA9 directory:
+This project was built and run using cmake in Linux/Ubuntu. To run the application enter the following in the PA11 directory:
 
 mkdir build  
 cd build  
 cmake ..  
 make  
-./PA9 
+./PA11 
 
 ## Controls
-W	- move cube up  
-A	- move cube left  
-S	- move cube down  
-D	- move cube right  
+R/L arrow 	- aim club
+Spacebar(hold)	- use club
 
 F 	- use per fragment lighting  
 V 	- use per vertex lighting  
 
 T 	- increase specular light of the ball  
 Y 	- decrese specular light of the ball  
-U 	- increase specular light of the cube  
-I 	- decrease specular light of the cube  
-O 	- increase specular light of the cylinder  
-P 	- decrease specular light of the cylinder  
+U 	- increase specular light of the windmills  
+I 	- decrease specular light of the windmills  
+O 	- increase specular light of the club  
+P 	- decrease specular light of the club  
+g 	- increase specular light of the gates  
+h 	- decrease specular light of the gates  
 
 N 	- increase ambient light  
 M 	- decrease ambient light  

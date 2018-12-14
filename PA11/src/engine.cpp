@@ -107,7 +107,7 @@ void Engine::Keyboard()
         m_graphics->usingClub = true;
       }
     }
-    if (m_event.key.keysym.sym == SDLK_w)
+    /*if (m_event.key.keysym.sym == SDLK_w)
     {
       m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(0,0,1.5));
     }
@@ -125,7 +125,7 @@ void Engine::Keyboard()
     if (m_event.key.keysym.sym == SDLK_d)
     {
       m_graphics->cubeRigidBody->applyCentralImpulse(btVector3(-1.5,0,0));
-    }
+    }*/
     if (m_event.key.keysym.sym == SDLK_v)
     {
       m_graphics->newLightingType = 0;
@@ -142,24 +142,25 @@ void Engine::Keyboard()
     {
 			m_graphics->ambientValue -= .1;
     }
-		// ball specular
+    // ball specular
     if (m_event.key.keysym.sym == SDLK_t)
     {
 			m_graphics->ballSpecular += .1;
-    }    if (m_event.key.keysym.sym == SDLK_y)
+    }    
+    if (m_event.key.keysym.sym == SDLK_y)
     {
 			m_graphics->ballSpecular -= .1;
     }
-		// cube specular
+		// windmill specular
     if (m_event.key.keysym.sym == SDLK_u)
     {
-			m_graphics->cubeSpecular += .1;
+			m_graphics->windmillSpecular += .1;
     } 
-		if (m_event.key.keysym.sym == SDLK_i)
+    if (m_event.key.keysym.sym == SDLK_i)
     {
-			m_graphics->cubeSpecular -= .1;
+			m_graphics->windmillSpecular -= .1;
     }	
-		// cylinder specular
+		// club specular
     if (m_event.key.keysym.sym == SDLK_o)
     {
 			m_graphics->clubSpecular += .1;
@@ -167,6 +168,14 @@ void Engine::Keyboard()
     if (m_event.key.keysym.sym == SDLK_p)
     {
 			m_graphics->clubSpecular -= .1;
+    }
+    if (m_event.key.keysym.sym == SDLK_g)
+    {
+			m_graphics->gateSpecular += .1;
+    }
+    if (m_event.key.keysym.sym == SDLK_h)
+    {
+			m_graphics->gateSpecular -= .1;
     }
 		//cut off angle of spot light
     if (m_event.key.keysym.sym == SDLK_j)
@@ -187,14 +196,14 @@ void Engine::Keyboard()
 			m_graphics->brightness -= .3;
 			//m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,0.1,0));
     }
-		if(m_event.key.keysym.sym == SDLK_LEFT)
-		{
-			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,.3,0));
-		}
-		if(m_event.key.keysym.sym == SDLK_RIGHT)
-		{
-			m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,-.3,0));
-		}
+    if(m_event.key.keysym.sym == SDLK_LEFT)
+    {
+      m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,.3,0));
+    }
+    if(m_event.key.keysym.sym == SDLK_RIGHT)
+    {
+      m_graphics->clubRigidBody->setAngularVelocity(btVector3(0,-.3,0));
+    }
     //press +/= to increase fan speed
     if (m_event.key.keysym.sym == SDLK_EQUALS)
     {
@@ -228,6 +237,10 @@ void Engine::Keyboard()
     {
       m_graphics->levelSelectionSwitch = 2;
     }
+    if (m_event.key.keysym.sym == SDLK_3)
+    {
+      m_graphics->levelSelectionSwitch = 3;
+    }
     if (m_event.key.keysym.sym == SDLK_BACKQUOTE)
     {
       if(m_graphics->currentLevel != m_graphics->numberOfPistas)
@@ -238,6 +251,16 @@ void Engine::Keyboard()
       {
         m_graphics->levelSelectionSwitch = 1;
       }
+    }
+    if (m_event.key.keysym.sym == SDLK_r && m_graphics->levelCleared == true)
+    {
+      for(int i=0; i<m_graphics->numberOfPistas; i++)
+      {
+        m_graphics->score[i] = 0;
+      }
+      cout << endl;
+      m_graphics->numberOfShots = 0;
+      m_graphics->OutputScorecard();
     }
   }
   else if (m_event.type == SDL_KEYUP)

@@ -20,21 +20,18 @@ class Graphics
     btTransform newtrans;
 
     btRigidBody *ballRigidBody;
-    //btRigidBody *boardRigidBody;
-    btRigidBody *cylinderRigidBody;
-    btRigidBody *cubeRigidBody;
-    /*btRigidBody *backRigidBody;
-    btRigidBody *frontRigidBody;
-    btRigidBody *leftRigidBody;
-    btRigidBody *rightRigidBody;
-    btRigidBody *bottomRigidBody;*/
+    //btRigidBody *cylinderRigidBody;
+    //btRigidBody *cubeRigidBody;
 
-    btRigidBody *courseRigidBody;
-    btRigidBody *course2RigidBody;
+    btRigidBody *courseRigidBody; //second level
+    btRigidBody *course2RigidBody; //third level
+    btRigidBody *course3RigidBody; //first level
+
     btRigidBody *windmillRigidBody;
     btRigidBody *windmill2RigidBody;
     btRigidBody *fanRigidBody;
     btRigidBody *fan2RigidBody;
+    btRigidBody *fan3RigidBody;
     btRigidBody *gateRigidBody;
     btRigidBody *gate2RigidBody;
 
@@ -46,9 +43,10 @@ class Graphics
     int lightingType;
     int newLightingType;
     float ambientValue;
-    float cubeSpecular;
+    float windmillSpecular;
     float clubSpecular;
     float ballSpecular;
+    float gateSpecular;
     float cutOffAngle;
     float brightness;
 
@@ -77,11 +75,11 @@ class Graphics
     int levelSelectionSwitch;
     int currentLevel;
 
-     int numberOfPistas = 2;
+     int numberOfPistas = 3;
     /*2, 4, 7*/
-    int par[2];
+    int par[3];
     /*0, 0, 0*/
-    int score[2];
+    int score[3];
   private:
     std::string ErrorString(GLenum error);
 
@@ -96,23 +94,21 @@ class Graphics
     GLint m_spotLight;
 
     Object *m_ball;
-    /*Object *m_front;
-    Object *m_back;
-    Object *m_left;
-    Object *m_right;
-    Object *m_bottom;*/
  
-    Object *m_course;
-    Object *m_course2;
+    Object *m_course;  //second level
+    Object *m_course2;  //third level
+    Object *m_course3;  //first level
+
     Object *m_windmill;
     Object *m_windmill2;
+    Object *m_windmill3;
     Object *m_fan;
     Object *m_fan2;
     Object *m_gate;
     Object *m_gate2;
 
-    Object *m_cylinder;
-    Object *m_cube;
+    //Object *m_cylinder;
+    //Object *m_cube;
     Object *m_club;
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;

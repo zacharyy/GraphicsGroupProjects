@@ -6,7 +6,7 @@ Zachary Young
 
 The code for this project should be taken from THIS repository. 
 
-This project builds off of the previous project, PA8, and adds lighting to the simulation. This project as a result also fixes many issues that PA8 had such as the cube not being a dynamic object, the ball not rolling properly, and the colliders for objects being inaccurate. Features added to PA9 were per vertex and per fragement lighting with the option to swtich between them in real time. A spotlight was also added that follows the sphere and has controls that can change its size and brightness. It should be noted that for per vertex lighting, the bottom of the board only consists of 2 triange meshes, meaning that spotlight lighting for the board only occurs at the board's corners when using per vertex lighting. Finally, controls to adjust the ambient light as well as the specular light of each individual object on the board were added to the simulation. To run the appliction enter ./PA9
+For this final project my team, Team Gourand, decided to make a mini golf course. The course currently has 3 holes which increase in difficulty. Lighting options are similar to the previous project in that the game can switch between per vertex and per fragment lighting in real time. Similarly there are also options to increase or decrease the ambient lighting and options to increase or decrease the specular lighting of some objects. A spotlight is also cast on the ball with options to adjust its size and intensity. Q and E are used to rotate the camera and the right and left arror are used to rotate the club. Holding space will pull the club back and releasing space will release the club. When the player finishes a hole a scorecard will appear that shows the holes, par for the holes, the number of shots the player took on each hole (- if zero i.e. no score yet), and the total points that the player has. During this time the player can reset their score. Players can swtich between courses by pressing keys 1-3 with each key corresponding to a hole or can press ~ to go to the next hole. The speed of the rotating fans can be increased using the + and - keys. To run the appliction enter ./PA11
 
 # Dependencies, Building, and Running
 
@@ -39,6 +39,10 @@ make
 R/L arrow 	- aim club
 Spacebar(hold)	- use club
 
+1-3	- press to go to corresponding hole
+~	- go to next course
+R	- reset score (only available when hole is cleared)
+
 F 	- use per fragment lighting  
 V 	- use per vertex lighting  
 
@@ -58,6 +62,9 @@ J 	- increase the size of spotlight
 K 	- decrease the size of spotlight  
 Z 	- increase the brightness of spotlight  
 X 	- decrease the brightness of spotlight  
+
+'+'	- increase fan speed  
+'-'	- decrease fan speed  
 
 # Extra Credit
 No extra credit was given for this project.

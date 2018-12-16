@@ -39,3 +39,6 @@ This is the simulation from PA8, now with lighting.  To run this project ```cd P
 ## PA10: Pinball
 This is the simulation of a pinball table with options to adjust the lighting and camera.  To run this project ```cd PA10``` then follow the instructions in the README.md.
 
+## PA11: Mini Golf
+This is the simulation of a mini golf course with options to adjust the lighting and camera.  To run this project ```cd PA11``` then follow the instructions in the README.md.
+

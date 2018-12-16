@@ -37,6 +37,8 @@ class Graphics
 
     btRigidBody *clubRigidBody;
 
+    btRigidBody *flagRigidBody;
+
     void UpdateShader(int newLightingType);
     void OutputScorecard();
 
@@ -110,6 +112,9 @@ class Graphics
     //Object *m_cylinder;
     //Object *m_cube;
     Object *m_club;
+
+    Object *m_flag;
+
     btBroadphaseInterface *broadphase;
     btDefaultCollisionConfiguration *collisionConfiguration;
     btCollisionDispatcher *dispatcher;

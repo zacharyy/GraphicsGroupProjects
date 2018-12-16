@@ -100,7 +100,7 @@ bool Graphics::Initialize(int width, int height)
 
   /**********Create Course 1**********/
   btTriangleMesh* objTriMeshCourse3 = new btTriangleMesh();
-  m_course3 = new Object("../objects/testpista.obj", "../objects/green.png", objTriMeshCourse3, 1);
+  m_course3 = new Object("../objects/testpista.obj", "../objects/testpista.png", objTriMeshCourse3, 1);
   btCollisionShape *course3Shape = new btBvhTriangleMeshShape(objTriMeshCourse3, true);
   btDefaultMotionState* course3MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 1, 0, 1), btVector3(-100, 0, -100)));
   btScalar course3Mass = 0; //setting mass to 0 makes it static
@@ -130,7 +130,7 @@ courseRigidBody->setRestitution (0.5);
 
   /**********Create Course 3**********/
   btTriangleMesh* objTriMeshCourse2 = new btTriangleMesh();
-  m_course2 = new Object("../objects/pista.obj", "../objects/green.png", objTriMeshCourse2, 1);
+  m_course2 = new Object("../objects/pista.obj", "../objects/pista.png", objTriMeshCourse2, 1);
   btCollisionShape *course2Shape = new btBvhTriangleMeshShape(objTriMeshCourse2, true);
   btDefaultMotionState* course2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 0, 100)));
   btScalar course2Mass = 0; //setting mass to 0 makes it static
@@ -145,7 +145,7 @@ course2RigidBody->setRestitution (0.5);
 
   //Create windmill base
   btTriangleMesh* objTriMeshWindmill = new btTriangleMesh();
-  m_windmill = new Object("../objects/windmill.obj", "../objects/granite.jpg", objTriMeshWindmill, 1);
+  m_windmill = new Object("../objects/windmill.obj", "../objects/windmill.png", objTriMeshWindmill, 1);
   btCollisionShape *windmillShape = new btBvhTriangleMeshShape(objTriMeshWindmill, true);
   btDefaultMotionState* windmillMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-100, 11, -100+37)));
   //btVector3(0, 11, 37)
@@ -161,7 +161,7 @@ windmillRigidBody->setRestitution (0.5);
 
   //Create windmill base 2
   btTriangleMesh* objTriMeshWindmill2 = new btTriangleMesh();
-  m_windmill2 = new Object("../objects/windmill.obj", "../objects/granite.jpg", objTriMeshWindmill2, 1);
+  m_windmill2 = new Object("../objects/windmill.obj", "../objects/windmill.png", objTriMeshWindmill2, 1);
   btCollisionShape *windmill2Shape = new btBvhTriangleMeshShape(objTriMeshWindmill2, true);
   btDefaultMotionState* windmill2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 11, 0)));
   //btVector3(0, 11, 37)
@@ -177,7 +177,7 @@ windmill2RigidBody->setRestitution (0.5);
 
   // Create the fan
   btTriangleMesh* fanTriMesh = new btTriangleMesh();
-  m_fan = new Object("../objects/fan.obj", "../objects/wood.jpg", fanTriMesh, 1);
+  m_fan = new Object("../objects/fan.obj", "../objects/fan.png", fanTriMesh, 1);
   btCollisionShape *fanShape = new btBvhTriangleMeshShape(fanTriMesh, true);
   btDefaultMotionState* fanMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-100, 10.5, -100+37)));
   //btVector3(0, 10.5, 37)
@@ -194,7 +194,7 @@ windmill2RigidBody->setRestitution (0.5);
 
   // Create fan 2
   btTriangleMesh* fan2TriMesh = new btTriangleMesh();
-  m_fan2 = new Object("../objects/fan.obj", "../objects/wood.jpg", fan2TriMesh, 1);
+  m_fan2 = new Object("../objects/fan.obj", "../objects/fan.png", fan2TriMesh, 1);
   btCollisionShape *fan2Shape = new btBvhTriangleMeshShape(fan2TriMesh, true);
   btDefaultMotionState* fan2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 10.5, 0)));
   //btVector3(0, 10.5, 37)
@@ -213,7 +213,7 @@ windmill2RigidBody->setRestitution (0.5);
   btTriangleMesh* objTriMesh = new btTriangleMesh();
   m_ball = new Object("../objects/ball.obj", "../objects/golfball.jpg", objTriMesh, 0);
   //should be somewhere between .40 and .45 at the moment
-  btCollisionShape *ballShape = new btSphereShape(.43); 
+  btCollisionShape *ballShape = new btSphereShape(.40); 
   btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-100, 1, -100)));
   //btDefaultMotionState* ballMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-25, 1, 35)));
   //btVector3(0, 1, -30)
@@ -232,7 +232,7 @@ windmill2RigidBody->setRestitution (0.5);
 	// Create the club
 	double clubMass = 5;
   btTriangleMesh* clubTriMesh = new btTriangleMesh();
-  m_club = new Object("../objects/clubv4.obj", "../objects/metalball.png", clubTriMesh, 1);
+  m_club = new Object("../objects/clubv4.obj", "../objects/club.png", clubTriMesh, 1);
   btCollisionShape *clubShape = new btBvhTriangleMeshShape(clubTriMesh, true);
   btDefaultMotionState* clubMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(5, 0, -13.8)));
 	btVector3 clubInertia(0,0,0);
@@ -263,7 +263,7 @@ windmill2RigidBody->setRestitution (0.5);
 
   // Create gate 1
   btTriangleMesh* gateTriMesh = new btTriangleMesh();
-  m_gate = new Object("../objects/gate.obj", "../objects/granite.jpg", gateTriMesh, 1);
+  m_gate = new Object("../objects/gate.obj", "../objects/gate1.png", gateTriMesh, 1);
   btCollisionShape *gateShape = new btBvhTriangleMeshShape(gateTriMesh, true);
   btDefaultMotionState* gateMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 0, 100)));
   //btVector3(0, 10.5, 37)
@@ -280,7 +280,7 @@ windmill2RigidBody->setRestitution (0.5);
 
   // Create gate 2
   btTriangleMesh* gate2TriMesh = new btTriangleMesh();
-  m_gate2 = new Object("../objects/gate2.obj", "../objects/granite.jpg", gate2TriMesh, 1);
+  m_gate2 = new Object("../objects/gate2.obj", "../objects/gate2.png", gate2TriMesh, 1);
   btCollisionShape *gate2Shape = new btBvhTriangleMeshShape(gate2TriMesh, true);
   btDefaultMotionState* gate2MotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(100, 0, 104.5)));
   //btVector3(0, 10.5, 37)
@@ -294,6 +294,28 @@ windmill2RigidBody->setRestitution (0.5);
   gate2RigidBody->setActivationState(DISABLE_DEACTIVATION);
   gate2RigidBody->setLinearFactor(btVector3(0,0,0));
   dynamicsWorld->addRigidBody(gate2RigidBody);
+
+  // Create flag
+  btTriangleMesh* flagTriMesh = new btTriangleMesh();
+  m_flag = new Object("../objects/flag.obj", "../objects/flag.png", flagTriMesh, 1);
+  btCollisionShape *flagShape = new btBvhTriangleMeshShape(flagTriMesh, true);
+  btDefaultMotionState* flagMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-100.0f, 0.0f, -100.0f+80.0f)));
+  //btVector3(0, 10.5, 37)
+  btVector3 flagInertia(0,0,0);
+  float flagMass = 100;
+
+  flagShape->calculateLocalInertia(flagMass, flagInertia);
+  btRigidBody::btRigidBodyConstructionInfo flagRigidBodyCI(flagMass, flagMotionState, flagShape, flagInertia);
+  flagRigidBody = new btRigidBody(flagRigidBodyCI);
+  flagRigidBody->setRestitution (0.5);
+  flagRigidBody->setActivationState(DISABLE_DEACTIVATION);
+  flagRigidBody->setLinearFactor(btVector3(0,0,0));
+  dynamicsWorld->addRigidBody(flagRigidBody);
+  /*btTransform trans;
+  btScalar m[16];
+  trans.setOrigin(btVector3(-100.0f, -.15f, -100.0f+80.0f));
+  trans.getOpenGLMatrix(m);
+  m_flag->model = glm::make_mat4(m);*/
 
   // Set up the shader
   lightingType = 0;
@@ -502,6 +524,13 @@ void Graphics::Update(unsigned int dt)
   if(levelSelectionSwitch == 1)
   {
     levelCleared = false;
+
+    trans.setOrigin(btVector3(-100.0f, 0.0f, -100.0f+80.0f));
+    flagRigidBody->setWorldTransform(trans);
+    flagRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_flag->model = glm::make_mat4(m);
+
     trans.setOrigin(btVector3(-100, 1, -100));
     ballRigidBody->setWorldTransform(trans);
     ballRigidBody->getMotionState()->getWorldTransform(trans);
@@ -510,6 +539,7 @@ void Graphics::Update(unsigned int dt)
     ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
     ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
     ballIsMoving = false;
+
     numberOfShots = 0;
     levelSelectionSwitch = 0;
     currentLevel = 1;
@@ -517,6 +547,13 @@ void Graphics::Update(unsigned int dt)
   if(levelSelectionSwitch == 2)
   {
     levelCleared = false;
+
+    trans.setOrigin(btVector3(-26.5f, 0.0f, 35.0f));
+    flagRigidBody->setWorldTransform(trans);
+    flagRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_flag->model = glm::make_mat4(m);
+
     trans.setOrigin(btVector3(0, 1, -30));
     ballRigidBody->setWorldTransform(trans);
     ballRigidBody->getMotionState()->getWorldTransform(trans);
@@ -525,6 +562,7 @@ void Graphics::Update(unsigned int dt)
     ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
     ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
     ballIsMoving = false;
+
     numberOfShots = 0;
     levelSelectionSwitch = 0;
     currentLevel = 2;
@@ -532,6 +570,13 @@ void Graphics::Update(unsigned int dt)
   else if(levelSelectionSwitch == 3)
   {
     levelCleared = false;
+
+    trans.setOrigin(btVector3(40.0f, 0.0f, 190.0f));
+    flagRigidBody->setWorldTransform(trans);
+    flagRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_flag->model = glm::make_mat4(m);
+
     trans.setOrigin(btVector3(100, 1, 100));
     ballRigidBody->setWorldTransform(trans);
     ballRigidBody->getMotionState()->getWorldTransform(trans);
@@ -540,6 +585,7 @@ void Graphics::Update(unsigned int dt)
     ballRigidBody->setLinearVelocity(btVector3(0.0, 0.0, 0.0));
     ballRigidBody->setAngularVelocity(btVector3(0.0, 0.0, 0.0));
     ballIsMoving = false;
+
     numberOfShots = 0;
     levelSelectionSwitch = 0;
     currentLevel = 3;
@@ -549,6 +595,11 @@ void Graphics::Update(unsigned int dt)
     ballRigidBody->getMotionState()->getWorldTransform(trans);
     trans.getOpenGLMatrix(m);
     m_ball->model = glm::make_mat4(m);
+
+    flagRigidBody->getMotionState()->getWorldTransform(trans);
+    trans.getOpenGLMatrix(m);
+    m_flag->model = glm::make_mat4(m);
+
   }
 
   //cout << fanSpeed << endl;
@@ -765,6 +816,9 @@ void Graphics::Render()
 
   glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_gate2->GetModel()));
   m_gate2->Render(m_shader, gateSpecular);
+
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_flag->GetModel()));
+  m_flag->Render(m_shader, gateSpecular);
 
   // Get any errors from OpenGL
   auto error = glGetError();

@@ -1,4 +1,0 @@
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles/edit_cache.dir
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles/rebuild_cache.dir
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles/PA11_SUCCESSFUL.dir
-/home/ethanpark/Desktop/temp/computer-graphics-master/PA11a/build/CMakeFiles/PA11.dir
